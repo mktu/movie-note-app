@@ -1,5 +1,5 @@
 import { Authenticator } from "remix-auth";
-import * as sessionStorage from "@utils/session";
+import * as sessionStorage from "@utils/auth/session";
 
 
 const authenticator = new Authenticator(sessionStorage)
