@@ -25,7 +25,7 @@
     "remix-auth-google": "1.1.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "3.10.0",
+    "@cloudflare/workers-types": "3.11.0",
     "@playwright/test": "1.22.2",
     "@remix-run/dev": "1.4.3",
     "@remix-run/eslint-config": "1.4.3",
