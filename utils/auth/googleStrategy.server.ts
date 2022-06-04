@@ -1,9 +1,11 @@
 import { GoogleStrategy } from "remix-auth-google";
 import type { GoogleProfile } from "remix-auth-google";
+import { getSession, commitSession } from '@utils/auth/session'
 
-import authenticator from './auth.server'
+import __authenticator from './auth.server'
 
 let googleStrategy : GoogleStrategy<GoogleProfile> | null = null
+type AuthenticatorType = typeof __authenticator
 
 const getAuthenticator = ({
   clientID,
@@ -16,7 +18,7 @@ const getAuthenticator = ({
 }) => {
 
   if (googleStrategy) {
-    return authenticator
+    return __authenticator
   }
   googleStrategy = new GoogleStrategy(
     {
@@ -30,8 +32,8 @@ const getAuthenticator = ({
       return profile
     }
   );
-  authenticator.use(googleStrategy);
-  return authenticator
+  __authenticator.use(googleStrategy);
+  return __authenticator
 }
 
 const getAuthenticatorFromContext = (context : any) => {
@@ -47,20 +49,29 @@ const getAuthenticatorFromContext = (context : any) => {
     })
 }
 
-const authenticate  = async (context : any, request : Parameters<typeof authenticator.authenticate>[1],
+const authenticate  = async (authenticator : AuthenticatorType, request : Parameters<typeof authenticator.authenticate>[1],
      options ?: Parameters<typeof authenticator.authenticate>[2])=>{
-    const authenticator = getAuthenticatorFromContext(context)
     return await authenticator.authenticate('google', request, options)
 }
 
-const isAuthenticated = async (context : any, request : Parameters<typeof authenticator.isAuthenticated>[0]) => {
-    const authenticator = getAuthenticatorFromContext(context)
+const isAuthenticated = async (authenticator : AuthenticatorType, request : Parameters<typeof authenticator.isAuthenticated>[0]) => {
     return await authenticator.isAuthenticated(request)
+}
+
+const saveSession = async (user:any, authenticator : AuthenticatorType, request : Parameters<typeof authenticator.isAuthenticated>[0])=>{
+  let session = await getSession(request.headers.get("Cookie"));
+  // if we do have a successRedirect, we redirect to it and set the user
+  // in the session sessionKey
+  session.set(authenticator.sessionKey, user);
+  session.set(authenticator.sessionStrategyKey || "strategy", googleStrategy?.name);
+  return await commitSession(session)
 }
 
 
 
 export {
     authenticate,
-    isAuthenticated
+    isAuthenticated,
+    saveSession,
+    getAuthenticatorFromContext
 } 
