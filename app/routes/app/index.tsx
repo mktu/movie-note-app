@@ -1,7 +1,11 @@
+import { useContext } from "react";
+import { UserContext } from "~/providers/user";
+
 export default function Index() {
+    const { name } = useContext(UserContext)
     return (
         <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-            <h1 className="text-2xl">Welcome to Remix</h1>
+            <h1 className="text-2xl">Welcome {name}. You are sigined in</h1>
             <ul>
                 <li>
                     <a
