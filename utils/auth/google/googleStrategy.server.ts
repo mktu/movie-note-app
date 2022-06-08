@@ -2,7 +2,7 @@ import { GoogleStrategy } from "remix-auth-google";
 import type { GoogleProfile } from "remix-auth-google";
 import { getSession, commitSession } from '@utils/auth/session'
 
-import __authenticator from './auth.server'
+import __authenticator from '../auth.server'
 
 let googleStrategy : GoogleStrategy<GoogleProfile> | null = null
 type AuthenticatorType = typeof __authenticator
