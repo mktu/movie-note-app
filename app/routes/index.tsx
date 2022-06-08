@@ -1,6 +1,6 @@
 import type { LoaderFunction } from "@remix-run/cloudflare";
 import { redirect } from "@remix-run/cloudflare";
-import { isAuthenticated, getAuthenticatorFromContext } from '@utils/auth/googleStrategy.server'
+import { isAuthenticated, getAuthenticatorFromContext } from '@utils/auth/google'
 
 export const loader: LoaderFunction = async ({ request, context }) => {
   const auth = getAuthenticatorFromContext(context)
