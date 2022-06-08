@@ -1,6 +1,6 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
-import { isAuthenticated, getAuthenticatorFromContext } from '@utils/auth/googleStrategy.server'
+import { isAuthenticated, getAuthenticatorFromContext } from '@utils/auth/google'
 import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
 import { Form, useActionData } from "@remix-run/react";
 

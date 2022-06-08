@@ -2,7 +2,7 @@ import type { LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import type { User } from "@type-defs/index";
-import { isAuthenticated, getAuthenticatorFromContext } from '@utils/auth/googleStrategy.server'
+import { isAuthenticated, getAuthenticatorFromContext } from '@utils/auth/google'
 import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
 import UserProvider from '~/providers/user'
 

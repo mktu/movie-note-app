@@ -2,7 +2,7 @@
 import { Form } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
-import { getAuthenticatorFromContext, isAuthenticated } from '@utils/auth/googleStrategy.server'
+import { getAuthenticatorFromContext, isAuthenticated } from '@utils/auth/google'
 
 export const loader: LoaderFunction = async ({ request, context }) => {
   const auth = getAuthenticatorFromContext(context)
