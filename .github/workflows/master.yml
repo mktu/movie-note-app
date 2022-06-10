@@ -60,7 +60,13 @@ jobs:
       - name: install deps
         run: npx playwright install-deps
       
-      - run: npm run build
+      - run: NODE_ENV=test npm run build
+
+      - name: Create dot env file
+        run: |
+          touch .env
+          echo "APP_SUPABASE_URL=${{ secrets.APP_SUPABASE_URL }}" >> .env
+          echo "APP_SUPABASE_ANON_KEY=${{ secrets.APP_SUPABASE_ANON_KEY }}" >> .env
 
       - name: run playwright test
         run: npm run test:playwright

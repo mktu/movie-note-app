@@ -1,8 +1,8 @@
 import type { LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
-import { Outlet, useLoaderData } from "@remix-run/react";
+import { Form, Outlet, useLoaderData } from "@remix-run/react";
 import type { User } from "@type-defs/index";
-import { isAuthenticated, getAuthenticatorFromContext } from '@utils/auth/google'
+import authenticator from '@utils/auth/auth.server'
 import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
 import UserProvider from '~/providers/user'
 
@@ -11,8 +11,7 @@ type LoaderData = {
 }
 
 export const loader: LoaderFunction = async ({ request, context }) => {
-    const auth = getAuthenticatorFromContext(context)
-    const authUser = await isAuthenticated(auth, request)
+    const authUser = await authenticator.isAuthenticated(request)
 
     if (!authUser) {
         return redirect('/login')
@@ -33,6 +32,9 @@ export const App: React.FC = () => {
     return (
         <UserProvider user={user}>
             <Outlet />
+            <Form action='/logout' method='post'>
+                <button>Logout</button>
+            </Form>
         </UserProvider>
     )
 }

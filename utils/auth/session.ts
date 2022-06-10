@@ -12,7 +12,7 @@ const { getSession, commitSession, destroySession } =
       maxAge: 600,
       path: "/",
       sameSite: "lax",
-      secure: true,
+      secure: process.env.NODE_ENV === 'production',
     },
   });
 

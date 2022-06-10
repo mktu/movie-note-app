@@ -1,6 +1,6 @@
 import type { UserView } from '@type-defs/index'
 import { v4 as uuidv4 } from 'uuid';
-import type { AdminClientType } from './supabaseAdmin.server'
+import type { AdminClientType } from '../../supabaseAdmin.server'
 
 const registerUser = async (supabaseAdmin : AdminClientType, user_id : string, name : string) => {
     const uuid = uuidv4()
