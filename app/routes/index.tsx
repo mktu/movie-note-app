@@ -1,10 +1,9 @@
 import type { LoaderFunction } from "@remix-run/cloudflare";
 import { redirect } from "@remix-run/cloudflare";
-import { isAuthenticated, getAuthenticatorFromContext } from '@utils/auth/google'
+import authenticator from '@utils/auth/auth.server'
 
-export const loader: LoaderFunction = async ({ request, context }) => {
-  const auth = getAuthenticatorFromContext(context)
-  const user = await isAuthenticated(auth, request)
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await authenticator.isAuthenticated(request)
   if(user){
     return redirect('/app')
   }

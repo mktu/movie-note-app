@@ -1,6 +1,6 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
-import { isAuthenticated, getAuthenticatorFromContext } from '@utils/auth/google'
+import authenticator from '@utils/auth/auth.server'
 import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
 import { Form, useActionData } from "@remix-run/react";
 
@@ -8,9 +8,8 @@ interface ActionData {
     error?: string
   }
 
-export const loader: LoaderFunction = async ({ request, context }) => {
-    const auth = getAuthenticatorFromContext(context)
-    const user = await isAuthenticated(auth, request)
+export const loader: LoaderFunction = async ({ request }) => {
+    const user = await authenticator.isAuthenticated(request)
     if (user) {
         return json({})
     }
@@ -21,8 +20,7 @@ export const action: ActionFunction = async ({ request, context }) => {
     const formData = await request.formData()
     const adminDb = getSupabaseAdmin(context)
     const name = formData.get("name") as string || ''
-    const auth = getAuthenticatorFromContext(context)
-    const user = await isAuthenticated(auth, request)
+    const user = await authenticator.isAuthenticated(request)
 
     if (!user) {
         return redirect('/login')
