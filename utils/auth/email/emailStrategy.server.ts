@@ -73,9 +73,7 @@ const saveSession = async (user: any, authenticator: AuthenticatorType, request:
     // in the session sessionKey
     session.set(authenticator.sessionKey, user);
     session.set(authenticator.sessionStrategyKey || "strategy", signinStrategy?.name);
-    return await commitSession(session, {
-        maxAge : 600
-    })
+    return await commitSession(session)
 }
 
 export {

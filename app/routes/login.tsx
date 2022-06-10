@@ -1,11 +1,10 @@
 
-import { Form } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
 import authenticator from '@utils/auth/auth.server'
 import { login, initEmailAuthenticator, saveSession } from "@utils/auth/email";
 import { getSupabaseAdmin } from "@utils/supabaseAdmin.server";
-import { Link } from "react-router-dom";
 import { hasAuth } from "@utils/db/server/auth.server";
 
 export const loader: LoaderFunction = async ({ request, context }) => {

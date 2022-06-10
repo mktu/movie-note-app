@@ -60,7 +60,7 @@ jobs:
       - name: install deps
         run: npx playwright install-deps
       
-      - run: npm run build
+      - run: NODE_ENV=test npm run build
 
       - name: Create dot env file
         run: |
