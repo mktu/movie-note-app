@@ -4,6 +4,7 @@ import SignupStrategy from './signup.server'
 import SigninStrategy from './signin.server'
 
 import __authenticator from '../auth.server'
+import { NotFound } from '@utils/exceptions'
 
 type AuthenticatorType = typeof __authenticator
 
@@ -19,9 +20,10 @@ const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
                 const { user, error } = await supabaseAdmin.auth.signUp({ email, password })
                 if(error){
                     console.error(error)
+                    throw Error('Something happened in signin process')
                 }
                 if(!user){
-                    throw Error('failed to signup')
+                    throw new NotFound(404, 'failed to signup')
                 }
                 return {
                     password,
@@ -39,9 +41,10 @@ const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
                 const { user, error } = await supabaseAdmin.auth.signIn({ email, password })
                 if(error){
                     console.error(error)
+                    throw Error('Something happened in signin process')
                 }
                 if(!user){
-                    throw Error('failed to signin')
+                    throw new NotFound(404, 'failed to signin')
                 }
                 return {
                     password,

@@ -2,7 +2,11 @@ import type { Auth } from '@type-defs/index'
 import type { AdminClientType } from '../../supabaseAdmin.server'
 
 const getAuth = async (supabaseAdmin : AdminClientType, id:string)=> {
-    const { data } = await supabaseAdmin.from<Auth>('auth').select('id').eq('id', id)
+    const { data, error } = await supabaseAdmin.from<Auth>('auth').select('id')
+    if(error){
+        console.error(error)
+        throw Error('Something happened in get auth from db')
+    }
     return data
 }
 
