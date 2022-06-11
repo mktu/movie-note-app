@@ -10,9 +10,8 @@ const getSupabaseAdmin = (context: any) => {
         return supabaseAdmin
     }
     const supabaseUrl = context.APP_SUPABASE_URL
-    const supabaseAnonKey = context.APP_SUPABASE_ANON_KEY
-    console.log(supabaseUrl)
-    supabaseAdmin = createClient(supabaseUrl, supabaseAnonKey, {
+    const supabaseSecretKey = context.APP_SUPABASE_SECRET_KEY
+    supabaseAdmin = createClient(supabaseUrl, supabaseSecretKey, {
         fetch: (req,init,...args) => {
             return fetch(req, init, ...args)
         },
