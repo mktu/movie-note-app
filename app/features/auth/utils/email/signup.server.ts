@@ -1,7 +1,7 @@
 import type { SessionStorage } from "@remix-run/server-runtime"
 import { Strategy } from "remix-auth"
 import type { AuthenticateOptions } from "remix-auth"
-import type { AuthUserType } from "../auth.server"
+import type { AuthUserType } from "@utils/auth/auth.server"
 
 
 type VerifyParams = {
@@ -9,8 +9,8 @@ type VerifyParams = {
     password: string
 }
 
-export default class EmailSigninStrategy extends Strategy<AuthUserType, VerifyParams> {
-    name: string = 'email-signin'
+export default class EmailSignupStrategy extends Strategy<AuthUserType, VerifyParams> {
+    name: string = 'email-signup'
     async authenticate(request: Request, sessionStorage: SessionStorage, options: AuthenticateOptions) {
         let _a;
         const session = await sessionStorage.getSession(request.headers.get("Cookie"));
@@ -22,10 +22,14 @@ export default class EmailSigninStrategy extends Strategy<AuthUserType, VerifyPa
         const formData = await request.formData();
         const email = (formData.get("email") || '') as string;
         const password = (formData.get("password") || '') as string;
-        const user = await this.verify({ email, password })
-        if(user){
+        //const { user } = await this.supabaseAdmin.auth.signUp({ email, password })
+        try {
+            const user = await this.verify({ email, password })
             return await this.success(user, request, sessionStorage, options);
+        }catch(e){
+            console.error(e)
+            return this.failure('failed to signup', request, sessionStorage, options)
         }
-        return this.failure('failed to signin', request, sessionStorage, options)
+        
     }
 }
