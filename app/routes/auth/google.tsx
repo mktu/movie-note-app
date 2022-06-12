@@ -1,6 +1,6 @@
 import { redirect } from '@remix-run/cloudflare'
 import type { ActionFunction, LoaderFunction } from '@remix-run/cloudflare'
-import { authenticate, initGoogleAuthenticator } from '@utils/auth/google'
+import { authenticate, initGoogleAuthenticator } from '~/features/auth/utils/google'
 
 export let loader: LoaderFunction = () => redirect('/login')
 

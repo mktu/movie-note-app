@@ -3,7 +3,7 @@ import type { AdminClientType } from "@utils/supabaseAdmin.server"
 import SignupStrategy from './signup.server'
 import SigninStrategy from './signin.server'
 
-import __authenticator from '../auth.server'
+import __authenticator from '@utils/auth/auth.server'
 import { NotFound } from '@utils/exceptions'
 
 type AuthenticatorType = typeof __authenticator

@@ -3,7 +3,7 @@ import { Form, Link } from "@remix-run/react";
 import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
 import authenticator from '@utils/auth/auth.server'
-import { login, initEmailAuthenticator, saveSession } from "@utils/auth/email";
+import { login, initEmailAuthenticator, saveSession } from "~/features/auth/utils/email";
 import { getSupabaseAdmin } from "@utils/supabaseAdmin.server";
 import { hasAuth } from "@utils/db/server/auth.server";
 
