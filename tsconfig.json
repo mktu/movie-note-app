@@ -7,6 +7,7 @@
     "jsx": "react-jsx",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "module": "esnext",
     "target": "ES2019",
     "strict": true,
     "allowJs": true,
@@ -15,6 +16,7 @@
     "paths": {
       "~/*": ["./app/*"],
       "@utils/*": ["./utils/*"],
+      "@public/*": ["./public/*"],
       "@type-defs/*": ["type-defs/*"],
     },
 

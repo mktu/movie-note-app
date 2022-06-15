@@ -22,10 +22,16 @@
     "@supabase/supabase-js": "^1.35.3",
     "@types/uuid": "^8.3.4",
     "cross-env": "7.0.3",
+    "i18next": "^21.8.9",
+    "i18next-browser-languagedetector": "^6.1.4",
+    "i18next-http-backend": "^1.4.1",
+    "i18next-resources-to-backend": "^1.0.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-i18next": "^11.17.1",
     "remix-auth": "3.2.2",
     "remix-auth-google": "1.1.0",
+    "remix-i18next": "^4.1.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

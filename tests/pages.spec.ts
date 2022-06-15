@@ -1,9 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-test('basic test', async ({ page }) => {
-    await page.goto('http://localhost:8788/');
+test.use({ locale: 'ja' });
+test('basic test', async ({ page } ) => {
+    await page.goto('http://localhost:8788');
     page.waitForURL('http://localhost:8788/login')
-    expect(await page.textContent('button')).toBe('Login with Google');
+    await page.waitForTimeout(500) // wait for webkit i18n render
+    expect(await page.textContent('#login')).toBe('ログイン');
 
     await page.fill('#email', 'example@test.gmail.com')
     await page.fill('#password', '123456')
