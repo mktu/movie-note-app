@@ -1,5 +1,6 @@
 
 import { Form, Link } from "@remix-run/react";
+import { useTranslation } from "react-i18next";
 import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
 import authenticator from '@utils/auth/auth.server'
@@ -13,10 +14,10 @@ export const loader: LoaderFunction = async ({ request, context }) => {
     return json({})
   }
   const supabaseAdmin = getSupabaseAdmin(context)
-  if( await hasAuth(supabaseAdmin, user.id) ) {
+  if (await hasAuth(supabaseAdmin, user.id)) {
     return redirect('/app')
   }
-  
+
   return redirect('/register')
 };
 
@@ -30,7 +31,7 @@ export const action: ActionFunction = async ({ request, context }) => {
   }
 
   const supabaseAdmin = getSupabaseAdmin(context)
-  if( await hasAuth(supabaseAdmin, user.id) ) {
+  if (await hasAuth(supabaseAdmin, user.id)) {
     return redirect('/app', redirextOption)
   }
 
@@ -39,17 +40,18 @@ export const action: ActionFunction = async ({ request, context }) => {
 
 
 export const LoginPage: React.FC = () => {
+  const { t } = useTranslation('common')
   return (
     <>
       <Form action="/auth/google" method="post">
-        <button>Login with Google</button>
+        <button>{t('login-with-google')}</button>
       </Form>
       <Form method="post">
         <label htmlFor='email'>Email</label>
         <input id='email' name='email' />
         <label htmlFor='password'>Password</label>
-        <input id='password' name='password'/>
-        <button id='login' name='login'>Login</button>
+        <input id='password' name='password' />
+        <button id='login' name='login'>{t('login')}</button>
       </Form>
       <Link to='/signup'>Signup</Link>
     </>
