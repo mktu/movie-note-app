@@ -29,7 +29,7 @@
     "i18next-resources-to-backend": "^1.0.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-i18next": "^11.17.1",
+    "react-i18next": "11.17.2",
     "remix-auth": "3.2.2",
     "remix-auth-google": "1.1.0",
     "remix-i18next": "^4.1.1",
