@@ -36,7 +36,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "3.11.0",
+    "@cloudflare/workers-types": "3.13.0",
     "@playwright/test": "1.22.2",
     "@remix-run/dev": "1.5.1",
     "@remix-run/eslint-config": "1.5.1",
