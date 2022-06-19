@@ -7,6 +7,7 @@
   "scripts": {
     "build": "npm run build:css && remix build",
     "build:css": "tailwindcss -m -i ./styles/app.css -o app/styles/app.css",
+    "lint": "eslint app/features/** --ext .ts,.tsx",
     "test": "vitest run",
     "dev:remix": "remix watch",
     "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
