@@ -1,12 +1,12 @@
 
-import { Form, Link } from "@remix-run/react";
-import { useTranslation } from "react-i18next";
 import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
 import authenticator from '@utils/auth/auth.server'
 import { login, initEmailAuthenticator, saveSession } from "~/features/auth/utils/email";
 import { getSupabaseAdmin } from "@utils/supabaseAdmin.server";
 import { hasAuth } from "@utils/db/server/auth.server";
+import Login from '~/features/auth/components/login'
+import Layout from '~/features/auth/components/Layout'
 
 export const loader: LoaderFunction = async ({ request, context }) => {
   const user = await authenticator.isAuthenticated(request)
@@ -40,21 +40,10 @@ export const action: ActionFunction = async ({ request, context }) => {
 
 
 export const LoginPage: React.FC = () => {
-  const { t } = useTranslation('common')
   return (
-    <>
-      <Form action="/auth/google" method="post">
-        <button>{t('login-with-google')}</button>
-      </Form>
-      <Form method="post">
-        <label htmlFor='email'>Email</label>
-        <input id='email' name='email' />
-        <label htmlFor='password'>Password</label>
-        <input id='password' name='password' />
-        <button id='login' name='login'>{t('login')}</button>
-      </Form>
-      <Link to='/signup'>Signup</Link>
-    </>
+    <Layout>
+      <Login />
+    </Layout>
   )
 }
 

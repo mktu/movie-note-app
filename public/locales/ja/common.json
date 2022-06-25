@@ -1,4 +1,11 @@
 {
     "login": "ログイン",
-    "login-with-google":"Googleでログイン"
+    "login-with-google":"Googleでログイン",
+    "login-title-message":"好きな映画やドラマの情報を書き溜め自分だけのコレクションを作成しよう！",
+    "input-email":"メールアドレスを入力",
+    "input-password":"パスワードを入力",
+    "register":"新規登録する",
+    "has-no-account":"アカウントを持っていない場合",
+    "mail-validation":"メールアドレス形式で入力してください",
+    "required":"入力が必要です"
 }

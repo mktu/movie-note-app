@@ -6,7 +6,12 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          main : '#6123DC',
+          main : '#000000',
+          disabled : '#EDEDEC',
+          border : '#CCCCCC',
+        },
+        onprimary: {
+          main : '#FFFFFF'
         },
         secondary: {
           main : '#90EE02'
@@ -23,6 +28,7 @@ module.exports = {
         text : {
           main : '#37352F',
           dark : '#111111',
+          label : '#7A828B',
           disabled : '#7A828B'
         },
         border : {
@@ -32,6 +38,7 @@ module.exports = {
         surface : {
           main : '#F7F7F7'
         },
+        focus : 'blue',
         bg : {
           main : '#FFFFFF'
         }
