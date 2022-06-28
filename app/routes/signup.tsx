@@ -1,11 +1,13 @@
 
-import { Form } from "@remix-run/react";
-import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
+import type { ActionFunction, ErrorBoundaryComponent, LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
 import authenticator from '@utils/auth/auth.server'
+import { useCatch } from "@remix-run/react";
 import { signup, initEmailAuthenticator, saveSession } from "~/features/auth/utils/email";
 import { getSupabaseAdmin } from "@utils/supabaseAdmin.server";
 import { hasAuth } from "@utils/db/server/auth.server";
+import SignUp from '~/features/auth/components/sign-up'
+import Layout from '~/features/auth/components/Layout'
 
 export const loader: LoaderFunction = async ({ request, context }) => {
   const user = await authenticator.isAuthenticated(request)
@@ -34,16 +36,28 @@ export const action: ActionFunction = async ({ request, context }) => {
 
 export const SignupPage: React.FC = () => {
   return (
-    <>
-      <Form method="post">
-        <label htmlFor='email'>Email</label>
-        <input id='email' name='email'/>
-        <label htmlFor='password'>Password</label>
-        <input id='password' name='password'/>
-        <button>Submit</button>
-      </Form>
-    </>
+    <Layout>
+      <SignUp />
+    </Layout>
   )
 }
+
+export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
+  return (
+    <Layout>
+      <SignUp errorKey={error.message}/>
+    </Layout>
+  )
+}
+
+export const CatchBoundary = () => {
+  const caught = useCatch();
+  return (
+    <Layout>
+      <SignUp errorKey={caught.data}/>
+    </Layout>
+  )
+}
+
 
 export default SignupPage

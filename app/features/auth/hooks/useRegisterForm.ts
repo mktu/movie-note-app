@@ -1,30 +1,32 @@
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 const useRegisterForm = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { t } = useTranslation('common')
+    const { register, watch, formState: { errors } } = useForm({ mode: 'onBlur' });
     const email = register('email', {
-        required: "required",
+        required: t('required'),
         pattern: {
             value: /\S+@\S+\.\S+/,
-            message: "Entered value does not match email format"
+            message: t('email-validation'),
         }
     })
     const password = register('password', {
-        required: "required",
+        required: t('required'),
         minLength: {
-            value: 5,
-            message: "min length is 5"
+            value: 6,
+            message: t('password-length-validation')
         }
 
     })
-    const onSubmit = handleSubmit(()=>{})
+    const valid = watch('email') && watch('password') && Object.keys(errors).length === 0
     return {
         register,
         watch,
         errors,
         email,
         password,
-        onSubmit
+        valid,
     }
 }
 

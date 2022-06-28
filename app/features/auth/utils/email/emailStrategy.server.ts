@@ -4,7 +4,7 @@ import SignupStrategy from './signup.server'
 import SigninStrategy from './signin.server'
 
 import __authenticator from '@utils/auth/auth.server'
-import { NotFound } from '@utils/exceptions'
+import { AuthError } from '@utils/exceptions'
 
 type AuthenticatorType = typeof __authenticator
 
@@ -14,44 +14,55 @@ let signinStrategy: SigninStrategy | null = null
 
 const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
 
-    if(!signupStrategy){
+    if (!signupStrategy) {
         signupStrategy = new SignupStrategy(
             async ({ email, password }) => {
-                const { user, error } = await supabaseAdmin.auth.signUp({ email, password })
-                if(error){
-                    console.error(error)
-                    throw Error('Something happened in signin process')
+                const { data } : any = await supabaseAdmin.rpc('is_user_exists', {target_email : email})
+                const isExists = data as boolean
+                if(isExists){
+                    throw new AuthError('already-registered', 'user-already-registered', 400)
                 }
-                if(!user){
-                    throw new NotFound(404, 'failed to signup')
+                const { user, error } = await supabaseAdmin.auth.signUp({ email, password })
+                
+                if (error) {
+                    console.error(error)
+                    throw Error('invalid-email-or-pass')
+                }
+                if (!user) {
+                    throw new AuthError('not-found', 'user-not-found', 404)
                 }
                 return {
-                    password,
                     email,
-                    id : user.id,
-                    provider : 'email'
+                    id: user.id,
+                    provider: 'email',
+                    confirmed: false
                 }
             }
         );
         __authenticator.use(signupStrategy);
     }
-    if(!signinStrategy){
+    if (!signinStrategy) {
         signinStrategy = new SigninStrategy(
             async ({ email, password }) => {
                 const { user, error } = await supabaseAdmin.auth.signIn({ email, password })
-                if(error){
+                if (error) {
                     console.error(error)
-                    throw Error('Something happened in signin process')
+                    if(error.status === 404){
+                        throw new AuthError('not-found', 'user-not-found', 404)
+                    }
+                    if(error.status === 400 && error.message === 'Email not confirmed'){
+                        throw new AuthError('not-confirmed', 'email-not-confirmed', 400)
+                    }
+                    throw Error('invalid-email-or-pass')
                 }
-                if(!user){
-                    throw new NotFound(404, 'failed to signin')
+                if (!user) {
+                    throw new AuthError('not-found', 'user-not-found', 404)
                 }
                 return {
-                    password,
                     email,
-                    id : user.id,
-                    provider : 'email'
-                    
+                    id: user.id,
+                    provider: 'email',
+                    confirmed: true
                 }
             }
         );

@@ -20,7 +20,7 @@ const useRegisterForm = () => {
         errors,
         email,
         password,
-        valid
+        valid,
     }
 }
 

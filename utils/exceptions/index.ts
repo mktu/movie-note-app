@@ -1,1 +1,1 @@
-export * from './notfound'
+export * from './authError'

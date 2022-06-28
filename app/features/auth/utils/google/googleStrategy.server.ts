@@ -30,7 +30,7 @@ const getAuthenticator = ({
       return {
         name : profile.displayName,
         email : profile.emails.length > 0 ? profile.emails[0].value : '',
-        provider : profile.provider,
+        provider : 'google',
         id: profile.id,
         photos: profile.photos
       } 
