@@ -1,5 +1,5 @@
 
-import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
+import type { ActionFunction, LoaderFunction, ErrorBoundaryComponent } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
 import authenticator from '@utils/auth/auth.server'
 import { login, initEmailAuthenticator, saveSession } from "~/features/auth/utils/email";
@@ -11,6 +11,9 @@ import Layout from '~/features/auth/components/Layout'
 export const loader: LoaderFunction = async ({ request, context }) => {
   const user = await authenticator.isAuthenticated(request)
   if (!user) {
+    return json({})
+  }
+  if(user.provider === 'email' && !user.confirmed){
     return json({})
   }
   const supabaseAdmin = getSupabaseAdmin(context)
@@ -43,6 +46,14 @@ export const LoginPage: React.FC = () => {
   return (
     <Layout>
       <Login />
+    </Layout>
+  )
+}
+
+export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
+  return (
+    <Layout>
+      <Login errorKey={error.message}/>
     </Layout>
   )
 }

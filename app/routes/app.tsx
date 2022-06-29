@@ -19,7 +19,7 @@ export const loader: LoaderFunction = async ({ request, context }) => {
     const dbAdmin = getSupabaseAdmin(context)
     const user = await userDb.getUser(dbAdmin, authUser.id)
     if (!user) {
-        return redirect('/login') // TBD
+        return redirect('/register') // TBD
     }
     return json<LoaderData>({
         user

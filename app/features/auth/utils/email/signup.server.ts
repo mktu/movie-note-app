@@ -2,6 +2,7 @@ import type { SessionStorage } from "@remix-run/server-runtime"
 import { Strategy } from "remix-auth"
 import type { AuthenticateOptions } from "remix-auth"
 import type { AuthUserType } from "@utils/auth/auth.server"
+import { AuthError } from "@utils/exceptions"
 
 
 type VerifyParams = {
@@ -27,6 +28,9 @@ export default class EmailSignupStrategy extends Strategy<AuthUserType, VerifyPa
             const user = await this.verify({ email, password })
             return await this.success(user, request, sessionStorage, options);
         }catch(e){
+            if(e instanceof AuthError){
+                throw e
+            }
             console.error(e)
             return this.failure('failed to signup', request, sessionStorage, options)
         }
