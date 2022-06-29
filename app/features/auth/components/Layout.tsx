@@ -3,10 +3,13 @@ import { useTranslation } from "react-i18next";
 import Stars from '~/components/icons/Stars'
 
 type Props = {
-    children: ReactNode
+    children: ReactNode,
+    titleMessage?:string
 }
 
-const Layout: FC<Props> = ({ children }) => {
+const Layout: FC<Props> = ({ children, 
+    titleMessage = 'login-title-message'
+ }) => {
     const { t } = useTranslation('common')
     return (
         <div className='w-screen h-screen flex'>
@@ -17,7 +20,7 @@ const Layout: FC<Props> = ({ children }) => {
                         <div className=' text-4xl font-bold'>Movie Note App</div>
                     </div>
                     <div className='mt-5 px-2'>
-                        <div>{t('login-title-message')}</div>
+                        <div>{t(titleMessage)}</div>
                     </div>
                 </div>
             </div>

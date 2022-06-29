@@ -11,7 +11,6 @@ export type AuthUserType = {
     provider: 'email',
     id: string,
     email : string,
-    confirmed : boolean
 }
 
 const authenticator = new Authenticator<AuthUserType>(sessionStorage)
