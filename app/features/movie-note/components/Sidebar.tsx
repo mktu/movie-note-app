@@ -18,7 +18,6 @@ const Sidebar: FC = () => {
     ]
 
     return (
-
         <div className='flex w-full flex-col divide-y divide-border-dark'>
             <Menu as='div'>
                 <Menu.Button className='flex w-full items-center p-2 focus:bg-sidebar-focus focus:outline-none'>

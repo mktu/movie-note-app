@@ -13,9 +13,8 @@ const GoogleLogin = forwardRef<HTMLButtonElement, Props>(({
 }) => (
     <Base className={clsx(className,
         'flex items-center',
-        'rounded',
         paddings,
-        'border border-primary-border rounded')} {...props} >
+        'rounded border border-primary-border')} {...props} >
             <img src='/GoogleSignin.svg' alt='google-sign-in'/>
             <span className='inline-block text-text-label' style={{
                  fontFamily : 'Roboto'
