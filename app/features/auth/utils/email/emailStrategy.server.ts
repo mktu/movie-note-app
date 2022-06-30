@@ -52,7 +52,7 @@ const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
                     if(error.status === 400 && error.message === 'Email not confirmed'){
                         throw new AuthError('email-not-confirmed', 400)
                     }
-                    throw Error('invalid-email-or-pass')
+                    throw new AuthError('invalid-email-or-pass', 400)
                 }
                 if (!user) {
                     throw new AuthError('user-not-found', 404)

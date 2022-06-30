@@ -1,4 +1,8 @@
-type ErrorKey = 'email-not-confirmed' | 'user-not-found' | 'user-already-registered'
+type ErrorKey = 
+'email-not-confirmed' | 
+'user-not-found' | 
+'user-already-registered' |
+'invalid-email-or-pass'
 export class AuthError extends Error {
     code ?:number
     constructor(e?: ErrorKey, code?:number) {
