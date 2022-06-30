@@ -7,7 +7,7 @@ const { getSession, commitSession, destroySession } =
       name: "__movie-note-app-session",
 
       // all of these are optional
-      expires: new Date(Date.now() + 60_000),
+      expires: new Date(Date.now() + 600_000),
       httpOnly: true,
       maxAge: 600,
       path: "/",

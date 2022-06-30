@@ -5,6 +5,7 @@ import type { User } from "@type-defs/index";
 import authenticator from '@utils/auth/auth.server'
 import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
 import UserProvider from '~/providers/user'
+import Layout from '~/features/movie-note/components/Layout'
 
 type LoaderData = {
     user: User
@@ -31,10 +32,12 @@ export const App: React.FC = () => {
     const { user } = useLoaderData() as LoaderData;
     return (
         <UserProvider user={user}>
-            <Outlet />
-            <Form action='/logout' method='post'>
-                <button>Logout</button>
-            </Form>
+            <Layout>
+                <Outlet />
+                <Form action='/logout' method='post'>
+                    <button>Logout</button>
+                </Form>
+            </Layout>
         </UserProvider>
     )
 }
