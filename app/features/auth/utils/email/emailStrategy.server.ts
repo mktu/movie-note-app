@@ -20,7 +20,7 @@ const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
                 const { data } : any = await supabaseAdmin.rpc('is_user_exists', {target_email : email})
                 const isExists = data as boolean
                 if(isExists){
-                    throw new AuthError('already-registered', 'user-already-registered', 400)
+                    throw new AuthError('user-already-registered', 400)
                 }
                 const { user, error } = await supabaseAdmin.auth.signUp({ email, password })
                 
@@ -29,13 +29,12 @@ const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
                     throw Error('invalid-email-or-pass')
                 }
                 if (!user) {
-                    throw new AuthError('not-found', 'user-not-found', 404)
+                    throw new AuthError('user-not-found', 404)
                 }
                 return {
                     email,
                     id: user.id,
                     provider: 'email',
-                    confirmed: false
                 }
             }
         );
@@ -48,21 +47,20 @@ const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
                 if (error) {
                     console.error(error)
                     if(error.status === 404){
-                        throw new AuthError('not-found', 'user-not-found', 404)
+                        throw new AuthError( 'user-not-found', 404)
                     }
                     if(error.status === 400 && error.message === 'Email not confirmed'){
-                        throw new AuthError('not-confirmed', 'email-not-confirmed', 400)
+                        throw new AuthError('email-not-confirmed', 400)
                     }
-                    throw Error('invalid-email-or-pass')
+                    throw new AuthError('invalid-email-or-pass', 400)
                 }
                 if (!user) {
-                    throw new AuthError('not-found', 'user-not-found', 404)
+                    throw new AuthError('user-not-found', 404)
                 }
                 return {
                     email,
                     id: user.id,
                     provider: 'email',
-                    confirmed: true
                 }
             }
         );

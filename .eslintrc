@@ -1,4 +1,5 @@
 {
-  "extends": ["@remix-run/eslint-config"],
+  "extends": ["@remix-run/eslint-config",
+    "plugin:tailwindcss/recommended"],
   "ignorePatterns": ["functions/*.js", "functions/*.js.map", "app/styles/*.css", "server.js"]
 }

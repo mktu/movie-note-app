@@ -11,10 +11,10 @@ const Outlined = forwardRef<HTMLButtonElement, Props>(({
     className,
     ...props
 }) => (
-    <Base className={clsx(className, 
+    <Base className={clsx(className,
         'rounded',
         paddings,
-        'border border-primary-border rounded')} {...props} />
+        'border border-primary-border')} {...props} />
 ))
 
 Outlined.displayName = 'contained-button'

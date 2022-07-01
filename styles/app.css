@@ -10,14 +10,16 @@
     a {
         color : #1B72E8;
     }
+    label {
+        @apply text-text-label;
+    }
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px white inset;
+    }
     body { 
         font-family: "Helvetica Neue",
         "Hiragino Sans",
         Meiryo,
         sans-serif;
     }
-    input:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0px 1000px white inset;
-    }
-    
 }

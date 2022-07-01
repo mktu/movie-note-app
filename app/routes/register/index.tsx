@@ -1,25 +1,45 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
+import { useLoaderData } from "@remix-run/react";
 import authenticator from '@utils/auth/auth.server'
+import { hasAuth } from "@utils/db/server/auth.server";
 import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
-import { Form, useActionData } from "@remix-run/react";
+import Layout from "~/features/auth/components/Layout";
+import Register from '~/features/auth/components/register'
 
 interface ActionData {
     error?: string
-  }
+}
 
-export const loader: LoaderFunction = async ({ request }) => {
+interface LorderData {
+    confirmed: boolean
+}
+
+export const loader: LoaderFunction = async ({ request, context }) => {
     const user = await authenticator.isAuthenticated(request)
-    if (user) {
-        return json({})
+    if (!user) {
+        return redirect('/login')
     }
-    return redirect('/login')
+    const adminDb = getSupabaseAdmin(context)
+    if (await hasAuth(adminDb, user.id)) {
+        return redirect('/app')
+    }
+    if(user.provider === 'email'){
+        const dbUser = await adminDb.auth.api.getUserById(user.id)
+        return json<LorderData>({
+            confirmed :  Boolean(dbUser.data?.email_confirmed_at || dbUser.data?.confirmed_at)
+        })
+    }
+    return json<LorderData>({
+        confirmed: true
+    })
+   
 }
 
 export const action: ActionFunction = async ({ request, context }) => {
     const formData = await request.formData()
     const adminDb = getSupabaseAdmin(context)
-    const name = formData.get("name") as string || ''
+    const name = formData.get("nickname") as string || ''
     const user = await authenticator.isAuthenticated(request)
 
     if (!user) {
@@ -31,23 +51,15 @@ export const action: ActionFunction = async ({ request, context }) => {
     } catch (e) {
         return json<ActionData>({
             error: (e as Error).message
-        },{ status: 400 })
+        }, { status: 400 })
     }
 };
 
 export default function Index() {
-    const actionData = useActionData() as ActionData
+    const { confirmed } = useLoaderData<LorderData>()
     return (
-        <>
-            {actionData?.error && (
-                <p className="text-red-500">{actionData?.error}</p>
-            )}
-            <Form method='post' style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }} noValidate>
-                <h1 className="text-2xl">Register</h1>
-                <label htmlFor="name">Name</label>
-                <input id='name' name="name" />
-                <button type='submit'>SUBMIT</button>
-            </Form>
-        </>
+        <Layout titleMessage="register-title-message">
+            <Register confirmed={confirmed} />
+        </Layout>
     );
 }

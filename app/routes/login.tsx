@@ -13,9 +13,6 @@ export const loader: LoaderFunction = async ({ request, context }) => {
   if (!user) {
     return json({})
   }
-  if(user.provider === 'email' && !user.confirmed){
-    return json({})
-  }
   const supabaseAdmin = getSupabaseAdmin(context)
   if (await hasAuth(supabaseAdmin, user.id)) {
     return redirect('/app')

@@ -29,14 +29,14 @@ const TextInput = forwardRef<HTMLInputElement, Props>(({
     }
     return (
         <div className={clsx(
-            'flex items-center border border-primary-border rounded',
+            'flex items-center rounded border border-primary-border',
             paddings,
-            focus && ' outline-focus outline',
+            focus && ' outline outline-focus',
             className
         )}>
             {addonLeft}
             <Base className={clsx(
-                'focus:outline-none focus:shadow-outline',
+                'focus:outline-none',
                 'focus:bg-white focus:drop-shadow-none',
                 addonLeft && 'ml-2',
                 addonRight && 'mr-2',
