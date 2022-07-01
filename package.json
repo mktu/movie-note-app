@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "3.14.0",
-    "@playwright/test": "1.22.2",
+    "@playwright/test": "1.23.1",
     "@remix-run/dev": "1.6.3",
     "@remix-run/eslint-config": "1.6.3",
     "@types/react": "18.0.14",
