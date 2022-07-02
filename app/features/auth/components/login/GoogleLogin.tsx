@@ -10,15 +10,15 @@ const GoogleLogin = forwardRef<HTMLButtonElement, Props>(({
     paddings = 'pr-4',
     className,
     ...props
-}) => (
+}, ref) => (
     <Base className={clsx(className,
         'flex items-center',
         paddings,
-        'rounded border border-primary-border')} {...props} >
-            <img src='/GoogleSignin.svg' alt='google-sign-in'/>
-            <span className='inline-block text-text-label' style={{
-                 fontFamily : 'Roboto'
-            }}>Sign in with Google</span>
+        'rounded border border-primary-border')} {...props} ref={ref}>
+        <img src='/GoogleSignin.svg' alt='google-sign-in' />
+        <span className='inline-block text-text-label' style={{
+            fontFamily: 'Roboto'
+        }}>Sign in with Google</span>
     </Base>
 ))
 

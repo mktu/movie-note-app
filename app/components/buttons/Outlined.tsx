@@ -10,11 +10,11 @@ const Outlined = forwardRef<HTMLButtonElement, Props>(({
     paddings = 'py-2 px-4',
     className,
     ...props
-}) => (
+}, ref) => (
     <Base className={clsx(className,
         'rounded',
         paddings,
-        'border border-primary-border')} {...props} />
+        'border border-primary-border')} {...props} ref={ref} />
 ))
 
 Outlined.displayName = 'contained-button'
