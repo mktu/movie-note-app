@@ -6,13 +6,6 @@ on:
   pull_request:
     branches: [main]
 
-env:
-  GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-  GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-  GOOGLE_CALLBACK_URL: ${{ secrets.GOOGLE_CALLBACK_URL }}
-  APP_SUPABASE_URL: ${{ secrets.APP_SUPABASE_URL }}
-  APP_SUPABASE_SECRET_KEY: ${{ secrets.APP_SUPABASE_SECRET_KEY }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,7 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
 
       - run: npm install
 
@@ -50,7 +43,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
 
       - run: npm install
 
@@ -59,7 +52,7 @@ jobs:
 
       - name: install deps
         run: npx playwright install-deps
-      
+
       - run: NODE_ENV=test npm run build
 
       - name: Create dot env file
@@ -67,6 +60,7 @@ jobs:
           touch .env
           echo "APP_SUPABASE_URL=${{ secrets.APP_SUPABASE_URL }}" >> .env
           echo "APP_SUPABASE_SECRET_KEY=${{ secrets.APP_SUPABASE_SECRET_KEY }}" >> .env
+          echo "COOKIE_SECRETS=${{ secrets.COOKIE_SECRETS }}" >> .env
 
       - name: run playwright test
         run: npm run test:playwright
@@ -85,22 +79,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
 
       - run: npm install && npm run build
-      
+
       - name: Publish
         uses: cloudflare/pages-action@1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 'movie-note-app'
-          directory: 'public'
+          projectName: "movie-note-app"
+          directory: "public"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
-

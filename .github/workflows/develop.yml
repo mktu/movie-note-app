@@ -6,13 +6,6 @@ on:
   pull_request:
     branches: [develop]
 
-env:
-  GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-  GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-  GOOGLE_CALLBACK_URL: ${{ secrets.GOOGLE_CALLBACK_URL }}
-  APP_SUPABASE_URL: ${{ secrets.APP_SUPABASE_URL }}
-  APP_SUPABASE_SECRET_KEY: ${{ secrets.APP_SUPABASE_SECRET_KEY }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,7 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
 
       - run: npm install
 
@@ -36,5 +29,3 @@ jobs:
         run: npm run test
 
       - run: npm run build
-
-
