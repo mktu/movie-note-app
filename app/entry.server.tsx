@@ -18,12 +18,12 @@ export default async function handleRequest(
   let ns = i18next.getRouteNamespaces(remixContext);
 
   await instance
-    .use(initReactI18next) 
-    .use(resourcesToBackend(lngs)) 
+    .use(initReactI18next)
+    .use(resourcesToBackend(lngs))
     .init({
-      ...i18n, 
-      lng, 
-      ns, 
+      ...i18n,
+      lng,
+      ns,
     });
 
   let markup = renderToString(

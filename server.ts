@@ -1,5 +1,7 @@
 import { createPagesFunctionHandler } from "@remix-run/cloudflare-pages";
 import * as build from "@remix-run/dev/server-build";
+import { initSessionStorage } from "@utils/auth/session";
+
 
 const handleRequest = createPagesFunctionHandler({
   build,
@@ -7,6 +9,7 @@ const handleRequest = createPagesFunctionHandler({
   getLoadContext: (context) => context.env,
 });
 
-export function onRequest(context) {
+export function onRequest(context: any) {
+  initSessionStorage(context.env)
   return handleRequest(context);
 }

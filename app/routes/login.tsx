@@ -50,7 +50,7 @@ export const LoginPage: React.FC = () => {
 export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
   return (
     <Layout>
-      <Login errorKey={error.message}/>
+      <Login errorKey={error.message} />
     </Layout>
   )
 }

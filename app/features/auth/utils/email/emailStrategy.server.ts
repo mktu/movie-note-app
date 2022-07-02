@@ -1,4 +1,4 @@
-import { getSession, commitSession } from '@utils/auth/session'
+import { getSession, commitSession, getExpires } from '@utils/auth/session'
 import type { AdminClientType } from "@utils/supabaseAdmin.server"
 import SignupStrategy from './signup.server'
 import SigninStrategy from './signin.server'
@@ -17,13 +17,13 @@ const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
     if (!signupStrategy) {
         signupStrategy = new SignupStrategy(
             async ({ email, password }) => {
-                const { data } : any = await supabaseAdmin.rpc('is_user_exists', {target_email : email})
+                const { data }: any = await supabaseAdmin.rpc('is_user_exists', { target_email: email })
                 const isExists = data as boolean
-                if(isExists){
+                if (isExists) {
                     throw new AuthError('user-already-registered', 400)
                 }
                 const { user, error } = await supabaseAdmin.auth.signUp({ email, password })
-                
+
                 if (error) {
                     console.error(error)
                     throw Error('invalid-email-or-pass')
@@ -46,10 +46,10 @@ const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
                 const { user, error } = await supabaseAdmin.auth.signIn({ email, password })
                 if (error) {
                     console.error(error)
-                    if(error.status === 404){
-                        throw new AuthError( 'user-not-found', 404)
+                    if (error.status === 404) {
+                        throw new AuthError('user-not-found', 404)
                     }
-                    if(error.status === 400 && error.message === 'Email not confirmed'){
+                    if (error.status === 400 && error.message === 'Email not confirmed') {
                         throw new AuthError('email-not-confirmed', 400)
                     }
                     throw new AuthError('invalid-email-or-pass', 400)
@@ -85,7 +85,9 @@ const saveSession = async (user: any, authenticator: AuthenticatorType, request:
     // in the session sessionKey
     session.set(authenticator.sessionKey, user);
     session.set(authenticator.sessionStrategyKey || "strategy", signinStrategy?.name);
-    return await commitSession(session)
+    return await commitSession(session, {
+        expires: getExpires(),
+    })
 }
 
 export {
