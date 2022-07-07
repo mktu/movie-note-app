@@ -18,7 +18,7 @@ const Sidebar: FC = () => {
     ]
 
     return (
-        <div className='flex w-full flex-col divide-y divide-border-dark'>
+        <div className='flex w-full flex-col divide-y divide-border-main'>
             <Menu as='div'>
                 <Menu.Button className='flex w-full items-center p-2 focus:bg-sidebar-focus focus:outline-none'>
                     <UserIcon className='mr-2 h-5 w-5 fill-text-main' />
@@ -41,7 +41,7 @@ const Sidebar: FC = () => {
                     </Menu.Item>
                 </Menu.Items>
             </Menu>
-            <ul className="divide-y divide-border-main">
+            <ul className="">
                 {links.map(l => (
                     <li key={l.name} className='p-2'>
                         <Link to={l.link} className='flex items-center text-text-main'>
