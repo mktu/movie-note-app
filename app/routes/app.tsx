@@ -1,14 +1,18 @@
 import type { LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
-import { Form, Outlet, useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import type { User } from "@type-defs/index";
 import authenticator from '@utils/auth/auth.server'
 import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
 import UserProvider from '~/providers/user'
+import TmdbProvider from '~/providers/tmdb'
 import Layout from '~/features/movie-note/components/Layout'
+import Tmdb, { setTmdbData } from "~/features/movie-note/utils/tmdb";
+
 
 type LoaderData = {
-    user: User
+    user: User,
+    tmdbData: ReturnType<typeof setTmdbData>
 }
 
 export const loader: LoaderFunction = async ({ request, context }) => {
@@ -22,22 +26,24 @@ export const loader: LoaderFunction = async ({ request, context }) => {
     if (!user) {
         return redirect('/register') // TBD
     }
+    const tmdbData = setTmdbData(context)
     return json<LoaderData>({
-        user
+        user,
+        tmdbData
     })
 };
 
 
 export const App: React.FC = () => {
-    const { user } = useLoaderData() as LoaderData;
+    const { user, tmdbData } = useLoaderData() as LoaderData;
+    console.log(tmdbData)
     return (
         <UserProvider user={user}>
-            <Layout>
-                <Outlet />
-                <Form action='/logout' method='post'>
-                    <button>Logout</button>
-                </Form>
-            </Layout>
+            <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey)}>
+                <Layout>
+                    <Outlet />
+                </Layout>
+            </TmdbProvider>
         </UserProvider>
     )
 }

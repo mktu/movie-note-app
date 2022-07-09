@@ -36,13 +36,15 @@ module.exports = {
           dark : '#CCCCCC'
         },
         surface : {
-          main : '#F7F7F7',
+          main : '#FFFFFF',
+          hover : 'rgba(0,0,0,0.05)',
+          selected : 'rgba(0,0,0,0.05)',
         },
         sidebar : {
           main : '#F7F7F7',
           focus : '#e5e5e5'
         },
-        focus : 'blue',
+        focus : '#90AFFF',
         bg : {
           main : '#FFFFFF',
         }
