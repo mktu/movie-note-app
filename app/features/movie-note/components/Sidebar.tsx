@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Menu } from '@headlessui/react'
 import { UserContext } from "~/providers/user";
 import UserIcon from '~/components/icons/User'
-import { Link, useSubmit } from "@remix-run/react";
+import { Link, NavLink, useSubmit } from "@remix-run/react";
 import HomeIcon from '~/components/icons/Home'
 import SearchIcon from '~/components/icons/Search'
 import clsx from "clsx";
@@ -44,10 +44,10 @@ const Sidebar: FC = () => {
             <ul className="">
                 {links.map(l => (
                     <li key={l.name} className='p-2'>
-                        <Link to={l.link} className='flex items-center text-text-main'>
+                        <NavLink to={l.link} className='flex items-center text-text-main'>
                             {l.icon}
                             <span className="ml-2">{l.name}</span>
-                        </Link>
+                        </NavLink>
                     </li>
                 ))}
             </ul>

@@ -1,0 +1,19 @@
+{
+    "React FC": {
+        "scope": "typescriptreact",
+        "prefix": "fc",
+        "body": [
+          "import type { FC } from 'react'",
+          "const ${1:$TM_FILENAME_BASE}: FC = () => {",
+          "  return (",
+          "    <div className=''>",
+          "    </div>",
+          "  );",
+          "};\n",
+          "export default ${1:$TM_FILENAME_BASE};"
+        ],
+        "description": "React関数コンポーネントの雛形"
+      }
+    }
+
+    

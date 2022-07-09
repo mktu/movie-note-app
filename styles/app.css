@@ -9,6 +9,11 @@
     }
     a {
         color : #1B72E8;
+        @apply focus:outline-none;
+        @apply focus-visible:ring-2;
+        @apply focus-visible:ring-offset-2;
+        @apply focus-visible:rounded-sm;
+        @apply focus-visible:ring-focus;
     }
     label {
         @apply text-text-label;

@@ -37,7 +37,6 @@ const TextInput = forwardRef<HTMLInputElement, Props>(({
             {addonLeft}
             <Base className={clsx(
                 'focus:outline-none',
-                'focus:bg-white focus:drop-shadow-none',
                 addonLeft && 'ml-2',
                 addonRight && 'mr-2',
                 'w-full')}

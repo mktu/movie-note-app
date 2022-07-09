@@ -11,7 +11,7 @@ const Layout: FC<Props> = ({ children }) => {
         <Split className='flex h-screen w-screen flex-row ' gutterAlign="center" sizes={[20, 80]} minSize={[256, 512]}
             gutter={(_, direction) => {
                 const gutterElement = document.createElement('div')
-                gutterElement.className = `gutter gutter-${direction} w-[1px] bg-border-main hover:cursor-col-resize hover:w-4 hover:border-x hover:border-border-main transition-all delay-300 duration-300 ease-in-out`
+                gutterElement.className = `gutter gutter-${direction} w-[1px] bg-border-main hover:cursor-col-resize hover:w-2 hover:border-x hover:border-border-main transition-all delay-300 duration-300 ease-in-out`
                 return gutterElement
             }}
             gutterStyle={() => ({})}
