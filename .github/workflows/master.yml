@@ -61,6 +61,7 @@ jobs:
           echo "APP_SUPABASE_URL=${{ secrets.APP_SUPABASE_URL }}" >> .env
           echo "APP_SUPABASE_SECRET_KEY=${{ secrets.APP_SUPABASE_SECRET_KEY }}" >> .env
           echo "COOKIE_SECRETS=${{ secrets.COOKIE_SECRETS }}" >> .env
+          echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" >> .env
 
       - name: run playwright test
         run: npm run test:playwright
