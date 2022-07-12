@@ -39,6 +39,7 @@ module.exports = {
           main : '#FFFFFF',
           hover : 'rgba(0,0,0,0.05)',
           selected : 'rgba(0,0,0,0.05)',
+          placeholder : '#F7F7F7'
         },
         sidebar : {
           main : '#F7F7F7',

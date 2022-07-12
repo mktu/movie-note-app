@@ -3,8 +3,9 @@ import type { FC } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import XIcon from "~/components/icons/X";
 import ButtonBase from '~/components/buttons/Base'
-import { useTmdbSearch } from "../hooks/useTmdb";
+import { useTmdbSearch } from "../../hooks/useTmdb";
 import clsx from "clsx";
+import SearchOptionItem from "./SearchOptionItem";
 
 type Props = {
     selected: string,
@@ -57,23 +58,7 @@ const Search: FC<Props> = ({
                                 </div>
                             ) : (
                                 searchResult.results.slice(0, 10).map((result) => (
-                                    <Combobox.Option
-                                        key={result.id}
-                                        className={({ active }) =>
-                                            `relative cursor-default select-none py-2 px-2 ${active ? 'bg-surface-hover' : 'bg-surface-main'
-                                            }`
-                                        }
-                                        value={result.id}
-                                    >
-                                        {() => (
-                                            <div className='flex items-center'>
-                                                {result.poster_path && <img className='mr-2 rounded-sm' width={32} height={32} src={`${imageBasePath}/${result.poster_path}`} alt={result.title} />}
-                                                <span className='block truncate font-normal'  >
-                                                    {result.title} ({result.release_date})
-                                                </span>
-                                            </div>
-                                        )}
-                                    </Combobox.Option>
+                                    <SearchOptionItem key={result.id} result={result} imageBasePath={imageBasePath} />
                                 ))
                             )}
                     </Combobox.Options>
