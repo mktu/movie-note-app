@@ -18,9 +18,9 @@ const Login: FC<{ errorKey?: string }> = ({ errorKey }) => {
             <h1 className='text-text-main'>Log In</h1>
             <div className='my-4' />
             <Form className='flex w-[50%] flex-col items-center' method='post'>
-            <ValidationTransition className='mt-2 w-full text-sm text-error-main' show={Boolean(errorKey)}>
-                {errorKey && t(errorKey)}
-            </ValidationTransition>
+                <ValidationTransition className='mt-2 w-full text-sm text-error-main' show={Boolean(errorKey)}>
+                    {errorKey && t(errorKey)}
+                </ValidationTransition>
                 <TextInput
                     title="must be alphanumeric in 6-12 chars"
                     addonLeft={<UserIcon className='h-4 w-4 fill-text-label' />}

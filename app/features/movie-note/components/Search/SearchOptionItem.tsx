@@ -23,7 +23,7 @@ const SearchOptionItem: FC<Props> = ({
                 <div className='flex items-center'>
                     <span className='mr-2 h-[48px] w-[32px] overflow-hidden rounded-sm bg-surface-placeholder'>
                         {result.poster_path ? <img width={32} height={48} src={`${imageBasePath}/${result.poster_path}`} alt={result.title} /> : (
-                            <svg className='h-full w-full border border-red-300 stroke-red-300'>
+                            <svg className='h-full w-full border border-border-dark stroke-border-dark'>
                                 <line stroke="4, 4" x1="0" y1="100%" x2="100%" y2="0" strokeWidth={1} />
                             </svg>
                         )}

@@ -36,7 +36,6 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 
 export const App: React.FC = () => {
     const { user, tmdbData } = useLoaderData() as LoaderData;
-    console.log(tmdbData)
     return (
         <UserProvider user={user}>
             <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey)}>
