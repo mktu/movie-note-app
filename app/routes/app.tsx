@@ -8,6 +8,7 @@ import UserProvider from '~/providers/user'
 import TmdbProvider from '~/providers/tmdb'
 import Layout from '~/features/movie-note/components/Layout'
 import Tmdb, { setTmdbData } from "~/features/movie-note/utils/tmdb";
+import { useTranslation } from "react-i18next";
 
 
 type LoaderData = {
@@ -36,9 +37,10 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 
 export const App: React.FC = () => {
     const { user, tmdbData } = useLoaderData() as LoaderData;
+    const { i18n } = useTranslation('common')
     return (
         <UserProvider user={user}>
-            <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey)}>
+            <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey, i18n.language)}>
                 <Layout>
                     <Outlet />
                 </Layout>
