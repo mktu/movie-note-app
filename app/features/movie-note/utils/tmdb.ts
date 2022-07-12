@@ -25,16 +25,21 @@ export type MovieDetail = {
 
 }
 
+type Lng = 'ja' | 'en'
+
 export default class Tmdb {
     apiKey: string = ''
-    constructor(apiKey: string) {
+    lng: Lng = 'ja'
+    constructor(apiKey: string, lng: Lng) {
         this.apiKey = apiKey
+        this.lng = lng
     }
     search = async (query: string) => {
         const searchParams = new URLSearchParams({
             api_key: this.apiKey,
             query,
-            page: '1'
+            page: '1',
+            language: this.lng
         });
         const response = await fetch(`${searchBasePath}?${searchParams}`)
         const json = await response.json<SearchResult>()
@@ -43,6 +48,7 @@ export default class Tmdb {
     getDetail = async (id: string) => {
         const searchParams = new URLSearchParams({
             api_key: this.apiKey,
+            language: this.lng
         });
         const response = await fetch(`${detailBasePath}/${id}?${searchParams}`)
         const json = await response.json<MovieDetail>()

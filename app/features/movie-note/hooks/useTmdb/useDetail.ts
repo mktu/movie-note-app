@@ -6,6 +6,9 @@ const useDetail = () => {
     const tmdb = useContext(TmdbContext)
     const [detail, setDetail] = useState<MovieDetail | null>(null)
     const requestDetail = useCallback(async (id: string) => {
+        if (!id) {
+            return
+        }
         const d = await tmdb.getDetail(id)
         setDetail(d)
     }, [tmdb])
