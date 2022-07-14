@@ -40,7 +40,7 @@ export const App: React.FC = () => {
     const { i18n } = useTranslation('common')
     return (
         <UserProvider user={user}>
-            <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey, i18n.language)}>
+            <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey, i18n.language === 'ja' ? 'ja' : 'en')}>
                 <Layout>
                     <Outlet />
                 </Layout>

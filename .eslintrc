@@ -1,5 +1,10 @@
 {
   "extends": ["@remix-run/eslint-config",
-    "plugin:tailwindcss/recommended"],
-  "ignorePatterns": ["functions/*.js", "functions/*.js.map", "app/styles/*.css", "server.js"]
+    "plugin:tailwindcss/recommended",
+    "plugin:jsx-a11y/recommended"],
+  "plugins": ["jsx-a11y"],
+  "ignorePatterns": ["functions/*.js", "functions/*.js.map", "app/styles/*.css", "server.js"],
+  "parserOptions": {
+    "warnOnUnsupportedTypeScriptVersion" : false
+  }
 }
