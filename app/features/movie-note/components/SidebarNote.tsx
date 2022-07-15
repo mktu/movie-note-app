@@ -13,8 +13,9 @@ const SidebarNote: FC = () => {
                 <NoteIcon className='mr-2 h-6 w-6 stroke-text-main' />
                 <span>Notes</span>
                 <div className="ml-auto">
-                    <IconButton><MenuVertical className='mr-1 h-5 w-5 stroke-text-main' /></IconButton>
+                    <IconButton name='menu'><MenuVertical className='mr-1 h-5 w-5 stroke-text-main' /></IconButton>
                     <IconButton
+                        name='new-note'
                         onClick={() => {
                             nav('/app/new-note')
                         }}
