@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { FC } from "react";
-import Search from "./search";
+import Search from "./search-title";
 import useDetail from "../hooks/useTmdb/useDetail";
 import MetaInfo from './meta'
 
