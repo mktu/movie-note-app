@@ -17,6 +17,7 @@
     "please-confirm-email":"登録用リンクを送信しました、メールを確認し、登録処理を進めてください",
     "invalid-email-or-pass":"メールアドレスもしくはパスワードが正しくありません",
     "user-not-found":"ユーザが存在しません",
-    "user-already-registered":"既に登録されているユーザです"
+    "user-already-registered":"既に登録されているユーザです",
+    "release" : "公開"
 
 }
