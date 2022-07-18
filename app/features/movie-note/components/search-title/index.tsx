@@ -6,6 +6,7 @@ import ButtonBase from '~/components/buttons/Base'
 import { useTmdbSearch } from "../../hooks/useTmdb";
 import clsx from "clsx";
 import SearchOptionItem from "./SearchOptionItem";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     selected: string,
@@ -16,6 +17,7 @@ const Search: FC<Props> = ({
     selected,
     setSelected
 }) => {
+    const { t } = useTranslation()
     const { query, setQuery, searchResult, count, imageBasePath } = useTmdbSearch()
     const selectedText = searchResult?.results?.find(v => v.id === selected)?.title || ''
     return (
@@ -37,6 +39,8 @@ const Search: FC<Props> = ({
                     </ButtonBase>) : (
                         <Combobox.Input
                             autoComplete='off'
+                            name='search-title'
+                            placeholder={t('search-title')}
                             className="w-full border-none py-2 pl-3 pr-10 outline-none focus:ring-0"
                             onChange={(event) => setQuery(event.target.value)}
                         />

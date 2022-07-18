@@ -11,7 +11,7 @@ const Index: FC<Props> = ({ movieDetail }) => {
     const { t } = useTranslation('common')
     return (
         <div className=''>
-            <div className='my-1 px-2 text-text-label'>{movieDetail.release_date} {t('release')}</div>
+            <div id='release-date' className='my-1 px-2 text-text-label'>{movieDetail.release_date} {t('release')}</div>
             <div>
                 <Genres genres={movieDetail.genres.map(v => ({ tmdbId: String(v.id), name: v.name }))} />
             </div>
