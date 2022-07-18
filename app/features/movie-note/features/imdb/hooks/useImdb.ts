@@ -1,32 +1,36 @@
 import { useCallback, useEffect, useState } from "react"
-
-type ImdbRate = {
-    rate: string,
-    denominator: string,
-    parameter: string
-}
+import { useTranslation } from "react-i18next"
+import type { ImdbRate } from "../types"
 
 const root = '/api/imdb/'
 
 const useImdb = (imdbId?: string) => {
     const [rateInfo, setRateInfo] = useState<ImdbRate>()
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
+    const { t } = useTranslation('common')
     const fetcher = useCallback(async () => {
         if (!imdbId) {
             return
         }
+        setLoading(true)
         const res = await fetch(root + imdbId)
         if (!res.ok) {
             console.error(res.text)
+            setError(t('failed-get-imdb'))
             return
         }
         const rate = await res.json() as ImdbRate
         setRateInfo(rate)
-    }, [imdbId])
+        setLoading(false)
+    }, [imdbId, t])
     useEffect(() => {
         fetcher()
     }, [fetcher])
     return {
-        rateInfo
+        rateInfo,
+        loading,
+        error
     }
 }
 
