@@ -3,6 +3,7 @@ import type { FC } from "react";
 import Search from "./search-title";
 import useDetail from "../hooks/useTmdb/useDetail";
 import MetaInfo from './meta'
+import Imdb from "../features/imdb";
 
 const MovieNote: FC = () => {
     const [selected, setSelectedBase] = useState('')
@@ -16,8 +17,9 @@ const MovieNote: FC = () => {
             <div className='flex w-full items-center'>
                 <Search {...{ selected, setSelected }} />
             </div>
-            <div>
-                {detail && (<MetaInfo movieDetail={detail} />)}
+            <div className='flex w-full items-center'>
+                <MetaInfo movieDetail={detail || undefined} />
+                <Imdb className='ml-auto' imdbId={detail?.imdb_id} />
             </div>
         </div>
     )

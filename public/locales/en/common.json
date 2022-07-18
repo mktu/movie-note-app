@@ -18,5 +18,7 @@
     "invalid-email-or-pass":"メールアドレスもしくはパスワードが正しくありません",
     "user-not-found":"ユーザが存在しません",
     "user-already-registered":"既に登録されているユーザです",
-    "release" : "公開"
+    "release" : "公開",
+    "search-title" : "作品のタイトルを検索",
+    "failed-get-imdb" : "取得に失敗"
 }
