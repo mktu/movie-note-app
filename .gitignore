@@ -9,5 +9,6 @@ node_modules
 /playwright-report/
 /playwright/.cache/
 /app/styles/app.css
+.mf/**
 
 state.json
