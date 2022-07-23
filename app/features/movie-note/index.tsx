@@ -1,0 +1,1 @@
+export { NewMovieNote } from './components'

@@ -4,6 +4,8 @@ import Search from "./search-title";
 import useDetail from "../hooks/useTmdb/useDetail";
 import MetaInfo from './meta'
 import Imdb from "../features/imdb";
+import Detail from "./detail";
+import { Transition } from "@headlessui/react";
 
 const MovieNote: FC = () => {
     const [selected, setSelectedBase] = useState('')
@@ -17,10 +19,25 @@ const MovieNote: FC = () => {
             <div className='flex w-full items-center'>
                 <Search {...{ selected, setSelected }} />
             </div>
-            <div className='flex w-full items-center'>
-                <MetaInfo movieDetail={detail || undefined} />
-                <Imdb className='ml-auto' imdbId={detail?.imdb_id} />
-            </div>
+            <Transition
+                className='w-full'
+                show={Boolean(detail)}
+                enter="transition-opacity duration-75"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="transition-opacity duration-150"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+            >
+
+                <div className='flex w-full items-center'>
+                    <MetaInfo movieDetail={detail} />
+                    <Imdb className='ml-auto' imdbId={detail?.imdb_id} />
+                </div>
+                <div className='mt-4 flex w-full items-center'>
+                    <Detail detail={detail} />
+                </div>
+            </Transition>
         </div>
     )
 }
