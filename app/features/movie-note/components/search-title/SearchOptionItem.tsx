@@ -1,15 +1,16 @@
 import { Combobox } from '@headlessui/react';
+import { TmdbmageBasePath } from '@utils/constants';
 import type { FC } from 'react'
 import type { SearchResult } from '../../utils/tmdb';
 
+const imageBasePath = `${TmdbmageBasePath}/w200`
+
 type Props = {
     result: SearchResult['results'][0],
-    imageBasePath: string
 }
 
 const SearchOptionItem: FC<Props> = ({
-    result,
-    imageBasePath
+    result
 }) => {
     return (
         <Combobox.Option

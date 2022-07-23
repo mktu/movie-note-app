@@ -2,8 +2,6 @@ import { useContext, useEffect, useState } from "react"
 import TmdbContext from '~/providers/tmdb/Context'
 import type { SearchResult } from "../../utils/tmdb"
 
-const imageBasePath = 'https://image.tmdb.org/t/p/w200'
-
 const useTmdb = () => {
     const [query, setQuery] = useState('')
     const [count, setCount] = useState(0)
@@ -36,8 +34,7 @@ const useTmdb = () => {
         query,
         setQuery,
         searchResult,
-        count,
-        imageBasePath
+        count
     }
 }
 

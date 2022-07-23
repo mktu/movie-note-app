@@ -1,0 +1,1 @@
+export const TmdbmageBasePath = 'https://image.tmdb.org/t/p'

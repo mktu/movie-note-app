@@ -18,7 +18,7 @@ const Search: FC<Props> = ({
     setSelected
 }) => {
     const { t } = useTranslation()
-    const { query, setQuery, searchResult, count, imageBasePath } = useTmdbSearch()
+    const { query, setQuery, searchResult, count } = useTmdbSearch()
     const selectedText = searchResult?.results?.find(v => v.id === selected)?.title || ''
     return (
         <Combobox value={selected} onChange={setSelected}>
@@ -62,7 +62,7 @@ const Search: FC<Props> = ({
                                 </div>
                             ) : (
                                 searchResult.results.slice(0, 10).map((result) => (
-                                    <SearchOptionItem key={result.id} result={result} imageBasePath={imageBasePath} />
+                                    <SearchOptionItem key={result.id} result={result} />
                                 ))
                             )}
                     </Combobox.Options>
