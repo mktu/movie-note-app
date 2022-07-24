@@ -17,6 +17,6 @@ const Outlined = forwardRef<HTMLButtonElement, Props>(({
         'border border-primary-border')} {...props} ref={ref} />
 ))
 
-Outlined.displayName = 'contained-button'
+Outlined['displayName'] = 'contained-button'
 
 export default Outlined

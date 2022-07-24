@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import { forwardRef } from "react"
-import Base from './Base'
+import Base from '../Base'
 
 type Props = Parameters<typeof Base>[0] & {
     paddings?: string
@@ -12,13 +12,13 @@ const Contained = forwardRef<HTMLButtonElement, Props>(({
     disabled,
     ...props
 }, ref) => (
-    <Base ref={ref} className={clsx(className, 
+    <Base ref={ref} className={clsx(className,
         'rounded',
-        paddings, 
+        paddings,
         disabled ? 'bg-primary-disabled text-text-disabled' :
-        'bg-primary-main text-onprimary-main')} disabled={disabled} disabledStyle='cursor-default' {...props} />
+            'bg-primary-main text-onprimary-main')} disabled={disabled} disabledStyle='cursor-default' {...props} />
 ))
 
-Contained.displayName = 'contained-button'
+Contained['displayName'] = 'contained-button'
 
 export default Contained
