@@ -4,7 +4,7 @@ import type { MovieDetail } from '../../utils/tmdb';
 import Genres from './Genres';
 
 type Props = {
-    movieDetail: MovieDetail | null,
+    movieDetail: Pick<MovieDetail, 'genres'> | null,
     className?: string
 }
 

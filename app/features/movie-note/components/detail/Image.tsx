@@ -1,5 +1,6 @@
+import clsx from 'clsx';
 import { forwardRef, useState } from 'react'
-import ImgPlaceholder from '~/components/icons/ImgPlaceholder'
+import Img from 'public/ImgPlaceholder.svg'
 
 type Props = React.ImgHTMLAttributes<HTMLImageElement>
 
@@ -18,7 +19,10 @@ const Image = forwardRef<HTMLButtonElement, Props>(({
 
     if (error || !src) {
         return (
-            <ImgPlaceholder className={className} width={width} height={height} />
+            <div className={clsx('bg-red-200', className)} style={{
+                width, height,
+                backgroundImage: `url(${Img})`,
+            }} />
         )
     }
     return (
