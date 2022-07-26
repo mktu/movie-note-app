@@ -9,21 +9,23 @@ const useImdb = (imdbId?: string) => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const { t } = useTranslation('common')
+    const failedGetImdbMessage = t('failed-get-imdb')
     const fetcher = useCallback(async () => {
         if (!imdbId) {
             return
         }
+        console.log(imdbId)
         setLoading(true)
         const res = await fetch(root + imdbId)
         if (!res.ok) {
             console.error(res.text)
-            setError(t('failed-get-imdb'))
+            setError(failedGetImdbMessage)
             return
         }
         const rate = await res.json() as ImdbRate
         setRateInfo(rate)
         setLoading(false)
-    }, [imdbId, t])
+    }, [imdbId, failedGetImdbMessage])
     useEffect(() => {
         fetcher()
     }, [fetcher])
