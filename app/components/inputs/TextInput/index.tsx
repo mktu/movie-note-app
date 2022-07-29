@@ -1,6 +1,6 @@
 import { forwardRef, useState } from 'react'
 import type { ReactNode } from 'react'
-import Base from './Base'
+import Base from '../Base'
 import clsx from 'clsx'
 
 type Props = Parameters<typeof Base>[0] & {
@@ -35,11 +35,13 @@ const TextInput = forwardRef<HTMLInputElement, Props>(({
             className
         )}>
             {addonLeft}
-            <Base className={clsx(
-                'focus:outline-none',
-                addonLeft && 'ml-2',
-                addonRight && 'mr-2',
-                'w-full')}
+            <Base
+                disabled={disabled}
+                className={clsx(
+                    'focus:outline-none',
+                    addonLeft && 'ml-2',
+                    addonRight && 'mr-2',
+                    'w-full')}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 {...props} ref={ref} />
@@ -48,6 +50,6 @@ const TextInput = forwardRef<HTMLInputElement, Props>(({
     )
 })
 
-TextInput.displayName = 'text-input'
+TextInput['displayName'] = 'text-input'
 
 export default TextInput

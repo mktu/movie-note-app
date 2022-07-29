@@ -15,6 +15,6 @@ const Icon = forwardRef<HTMLButtonElement, Props>(({
     <Base aria-label={name} ref={ref} className={clsx(className)} disabled={disabled} disabledStyle='cursor-default' {...props} />
 ))
 
-Icon.displayName = 'contained-button'
+Icon['displayName'] = 'contained-button'
 
 export default Icon

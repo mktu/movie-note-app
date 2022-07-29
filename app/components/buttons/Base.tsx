@@ -11,6 +11,6 @@ const Base = forwardRef<HTMLButtonElement, Props>(({ className, disabled, disabl
         'focus:outline-none focus-visible:ring-2 focus-visible:ring-focus',
         disabled && disabledStyle)} {...props} ref={ref} />
 ))
-Base.displayName = 'base-button'
+Base['displayName'] = 'base-button'
 
 export default Base
