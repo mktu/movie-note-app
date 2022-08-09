@@ -11,23 +11,20 @@ const Template: ComponentStory<typeof Meta> = (args) => <Meta {...args} />;
 
 export const Default = Template.bind({});
 
-const detailBase = {
-    genres: [
-        {
-            "id": 28,
-            "name": "アクション"
-        },
-        {
-            "id": 53,
-            "name": "スリラー"
-        },
-        {
-            "id": 878,
-            "name": "サイエンスフィクション"
-        }
-    ],
-}
-
+const genres = [
+    {
+        "id": 28,
+        "name": "アクション"
+    },
+    {
+        "id": 53,
+        "name": "スリラー"
+    },
+    {
+        "id": 878,
+        "name": "サイエンスフィクション"
+    }
+]
 Default.args = {
-    movieDetail: detailBase
+    genres: genres
 };

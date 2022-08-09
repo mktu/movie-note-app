@@ -38,6 +38,7 @@ const Search: FC<Props> = ({
                         <XIcon className='ml-2 h-5 w-5 stroke-text-main' aria-label='clear' />
                     </ButtonBase>) : (
                         <Combobox.Input
+                            data-testid='search-title'
                             autoComplete='off'
                             name='search-title'
                             placeholder={t('search-title')}
@@ -61,8 +62,8 @@ const Search: FC<Props> = ({
                                     {searchResult ? 'Nothing found' : 'Loading...'}
                                 </div>
                             ) : (
-                                searchResult.results.slice(0, 10).map((result) => (
-                                    <SearchOptionItem key={result.id} result={result} />
+                                searchResult.results.slice(0, 10).map((result, idx) => (
+                                    <SearchOptionItem idx={idx} key={result.id} result={result} />
                                 ))
                             )}
                     </Combobox.Options>

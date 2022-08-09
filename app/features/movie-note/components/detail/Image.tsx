@@ -26,15 +26,16 @@ const Image = forwardRef<HTMLButtonElement, Props>(({
         )
     }
     return (
-        <img className={className} src={src} alt={alt} loading='lazy' onError={(e) => {
+        <img className={className} src={src} alt={alt} width={width} height={height} loading='lazy' onError={(e) => {
             setError(true)
             setLoading(false)
             onError && onError(e)
         }} style={{
-            width, height,
             backgroundImage: loading ? 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPMkwQAAPsAiUBY9G8AAAAASUVORK5CYII=)' : 'none',
             objectFit: 'cover',
             objectPosition: '50% 50%',
+            width, height,
+            maxWidth: 'none',
             ...style
         }} onLoad={() => {
             setLoading(false)

@@ -4,17 +4,17 @@ import type { MovieDetail } from '../../utils/tmdb';
 import Genres from './Genres';
 
 type Props = {
-    movieDetail: Pick<MovieDetail, 'genres'> | null,
+    genres: MovieDetail['genres'],
     className?: string
 }
 
-const Index: FC<Props> = ({ movieDetail, className }) => {
+const Index: FC<Props> = ({ genres, className }) => {
     return (
         <div className={clsx('flex min-h-[64px] items-center', className)}>
-            {movieDetail && (
+            {genres.length > 0 && (
                 <>
                     <div className='my-1 px-2 text-text-label'>
-                        <Genres genres={movieDetail ? movieDetail.genres.map(v => ({ tmdbId: String(v.id), name: v.name })) : []} />
+                        <Genres genres={genres.map(v => ({ tmdbId: String(v.id), name: v.name }))} />
                     </div>
                 </>
             )}
