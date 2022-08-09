@@ -8,7 +8,7 @@ type Props = {
 
 const Layout: FC<Props> = ({ children }) => {
     return (
-        <Split className='flex h-screen w-screen' sizes={[20, 80]} minSize={[256, 512]}
+        <Split className='flex h-full w-screen' sizes={[20, 80]} minSize={[256, 512]}
             gutter={(_, direction) => {
                 const gutterElement = document.createElement('div')
                 gutterElement.className = `gutter gutter-${direction} w-[1px] bg-border-main hover:cursor-col-resize hover:w-2 hover:border-x hover:border-border-main transition-all delay-300 duration-300 ease-in-out`
@@ -16,7 +16,7 @@ const Layout: FC<Props> = ({ children }) => {
             }}
             gutterStyle={() => ({})}
         >
-            <div className={`h-full w-full bg-sidebar-main`}>
+            <div className={`min-h-screen w-full bg-sidebar-main`}>
                 <Sidebar />
             </div>
             <div className={`h-full w-full border-border-main`}>{children}</div>

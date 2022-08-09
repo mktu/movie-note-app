@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import MovieNote from "./MovieNote";
+import MovieNote from "./movie-note";
 
 const EditNote: FC = () => {
     return (

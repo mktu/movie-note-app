@@ -1,4 +1,5 @@
 import '../styles/app.css';
+import i18n from './i18next'
 import { initialize, mswDecorator } from 'msw-storybook-addon'
 
 // Initialize MSW
@@ -8,6 +9,12 @@ initialize();
 export const decorators = [mswDecorator]
 
 export const parameters = {
+  i18n,
+  locale: 'en',
+  locales: {
+    en: 'English',
+    ja: '日本語',    
+  },
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
