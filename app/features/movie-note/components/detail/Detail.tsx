@@ -5,7 +5,13 @@ import type { Credits as CreditsType, MovieDetail } from '../../utils/tmdb';
 import Image from './Image'
 import Credits from './Credits'
 
+///t/p/w300_and_h450_bestv2/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg 1x, /t/p/w600_and_h900_bestv2/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg 2x
+
 const imageBasePath = `${TmdbmageBasePath}/w600_and_h900_bestv2`
+const imageBasePaths = [
+    `${TmdbmageBasePath}/w300_and_h450_bestv2`,
+    imageBasePath,
+]
 
 type Props = {
     detail: MovieDetail | null,
@@ -23,7 +29,14 @@ const Detail: FC<Props> = ({ detail, credits }) => {
     return (
         <div className='flex w-full'>
             <div>
-                <Image className='overflow-hidden rounded-xl' key={src} src={src && `${imageBasePath}/${src}`} width={300} height={450} />
+                <Image
+                    alt={detail?.title || 'Error'}
+                    className='overflow-hidden rounded-xl'
+                    key={src}
+                    src={src && `${imageBasePath}/${src}`}
+                    srcSet={imageBasePaths.map((path, idx) => `${path}/${src} ${idx + 1}x`).join(',')}
+                    width={300}
+                    height={450} />
             </div>
             <div className='ml-4 flex w-full flex-1 flex-col gap-4 overflow-hidden text-text-label'>
                 <div>

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { forwardRef, useState } from 'react'
 import Img from 'public/ImgPlaceholder.svg'
 
-type Props = React.ImgHTMLAttributes<HTMLImageElement>
+type Props = React.ImgHTMLAttributes<HTMLImageElement> & { alt: string }
 
 const Image = forwardRef<HTMLButtonElement, Props>(({
     className,
@@ -19,10 +19,10 @@ const Image = forwardRef<HTMLButtonElement, Props>(({
 
     if (error || !src) {
         return (
-            <div className={clsx('bg-red-200', className)} style={{
+            <div className={clsx('flex items-center justify-center', className)} style={{
                 width, height,
                 backgroundImage: `url(${Img})`,
-            }} />
+            }} >{alt}</div>
         )
     }
     return (
