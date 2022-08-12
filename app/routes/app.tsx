@@ -6,7 +6,8 @@ import authenticator from '@utils/auth/auth.server'
 import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
 import UserProvider from '~/providers/user'
 import TmdbProvider from '~/providers/tmdb'
-import Layout from '~/features/movie-note/components/Layout'
+import Layout from '~/features/movie-note/components/layout'
+import Sidebar from '~/features/movie-note/components/Sidebar'
 import Tmdb, { setTmdbData } from "~/features/movie-note/utils/tmdb";
 import { useTranslation } from "react-i18next";
 
@@ -41,7 +42,7 @@ export const App: React.FC = () => {
     return (
         <UserProvider user={user}>
             <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey, i18n.language === 'ja' ? 'ja' : 'en')}>
-                <Layout>
+                <Layout sidebar={<Sidebar />}>
                     <Outlet />
                 </Layout>
             </TmdbProvider>
