@@ -7,7 +7,7 @@ import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
 import UserProvider from '~/providers/user'
 import TmdbProvider from '~/providers/tmdb'
 import Layout from '~/features/movie-note/components/layout'
-import Sidebar from '~/features/movie-note/components/Sidebar'
+import Sidebar from '~/features/movie-note/components/sidebar'
 import Tmdb, { setTmdbData } from "~/features/movie-note/utils/tmdb";
 import { useTranslation } from "react-i18next";
 
