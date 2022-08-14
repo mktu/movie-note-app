@@ -18,6 +18,18 @@
         "request": "attach",
         "skipFiles": ["<node_internals>/**"],
         "type": "pwa-node",
+      },
+      {
+        "name": "Storybook Debug",
+        "type": "node-terminal",
+        "request": "launch",
+        "command": "npm run storybook",
+        "internalConsoleOptions": "openOnFirstSessionStart",
+        "serverReadyAction": {
+          "pattern": "Local:.+(https?://[^:]+:[0-9]+)",
+          "uriFormat": "%s",
+          "action": "debugWithChrome"
+        }
       }
     ]
   }

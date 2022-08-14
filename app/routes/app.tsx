@@ -10,6 +10,7 @@ import Layout from '~/features/movie-note/components/layout'
 import Sidebar from '~/features/movie-note/components/sidebar'
 import Tmdb, { setTmdbData } from "~/features/movie-note/utils/tmdb";
 import { useTranslation } from "react-i18next";
+import styles from 'styles/lexical.css'
 
 
 type LoaderData = {
@@ -34,6 +35,10 @@ export const loader: LoaderFunction = async ({ request, context }) => {
         tmdbData
     })
 };
+
+export function links() {
+    return [{ rel: "stylesheet", href: styles }]
+}
 
 
 export const App: React.FC = () => {

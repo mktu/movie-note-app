@@ -1,4 +1,5 @@
 import '../styles/app.css';
+import '../styles/lexical.css';
 import i18n from './i18next'
 import { initialize, mswDecorator } from 'msw-storybook-addon'
 
