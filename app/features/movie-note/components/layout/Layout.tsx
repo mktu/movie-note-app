@@ -1,7 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useLayoutEffect } from "react";
 import type { FC, ReactNode } from "react";
 import { IconButton } from "~/components/buttons";
 import AnglesRight from "~/components/icons/AnglesRight";
+import AnglesLeft from "~/components/icons/AnglesLeft";
+import { getSidebarWidth, getVisibleSidebarWidth, saveSidebarWidth, saveVisibleSidebarWidth } from "@utils/localstorage";
 
 
 type Props = {
@@ -10,13 +12,15 @@ type Props = {
 }
 
 const useSplit = ({
-    min,
-    onMinReached,
-    onDragStart
+    onDragEnd,
+    onDragStart,
+    minWidth,
+    widthClosed
 }: {
-    min: number,
-    onMinReached?: (width: number) => void,
-    onDragStart?: (e: MouseEvent) => void
+    onDragEnd?: (lastWidth: number) => void,
+    onDragStart?: (startWidth: number) => void,
+    minWidth?: number,
+    widthClosed?: number
 }) => {
     const [root, setRoot] = useState<HTMLElement | null>(null)
     const [gutter, setGutter] = useState<HTMLElement | null>(null)
@@ -30,39 +34,43 @@ const useSplit = ({
             console.error('child nodes must be 3 or more')
             return
         }
-        let dragStarted = false
-        const dragstart = (e: MouseEvent) => {
-            e.preventDefault()
-            dragStarted = true
-            setMoving(true)
-            onDragStart && onDragStart(e)
+        let unregisters: VoidFunction[] = []
+        const clear = () => {
+            unregisters.forEach(f => f())
+            unregisters = []
         }
-        const stop = () => {
-            dragStarted = false
+        const stop = (e: MouseEvent) => {
             setMoving(false)
+            const w = (minWidth && minWidth >= e.clientX) ? widthClosed || minWidth : e.clientX
+            root.children[0].setAttribute('style', `width:${w}px`)
+            onDragEnd && onDragEnd(w)
+            clear()
         }
         const move = (e: MouseEvent) => {
-            if (!dragStarted) {
-                return
-            }
-            if (e.clientX <= min) {
-                stop()
-                onMinReached && onMinReached(e.clientX)
+            if (unregisters.length === 0) {
                 return
             }
             root.children[0].setAttribute('style', `width:${e.clientX}px`);
         }
+        const dragstart = (e: MouseEvent) => {
+            e.preventDefault()
+            setMoving(true)
+            onDragStart && onDragStart(e.clientX)
+            window.addEventListener('mousemove', move)
+            window.addEventListener('mouseup', stop)
+            unregisters.push(
+                () => { window.removeEventListener('mousemove', move) },
+                () => { window.removeEventListener('mouseup', stop) }
+            )
+        }
 
         gutter.addEventListener('mousedown', dragstart)
-        window.addEventListener('mousemove', move)
-        window.addEventListener('mouseup', stop)
 
         return () => {
             gutter.removeEventListener('mousedown', dragstart)
-            window.removeEventListener('mousemove', move)
-            window.removeEventListener('mouseup', stop)
+            clear()
         }
-    }, [root, gutter, min, onMinReached, onDragStart])
+    }, [root, gutter, onDragEnd, onDragStart, widthClosed, minWidth])
     return {
         setRoot,
         setGutter,
@@ -70,24 +78,57 @@ const useSplit = ({
     }
 }
 
+const MinWidth = 200
+const WidthClosed = 50
+const InitialSidebarWidth = 250
+
 const Layout: FC<Props> = ({ sidebar, children }) => {
-    const [hideSidebar, setHideSidebar] = useState(false)
-    const onMinReached = useCallback(() => { setHideSidebar(true) }, [])
-    const { setGutter, setRoot, moving } = useSplit({ min: 200, onMinReached })
+    const [savedWidth, setSavedWidth] = useState(0)
+    const hideSidebar = savedWidth === WidthClosed
+    const updateWidth = useCallback((width: number, visibleWidth?: number) => {
+        if (hideSidebar && MinWidth >= width) {
+            return // remain hidden
+        }
+        setSavedWidth(width)
+        visibleWidth && saveVisibleSidebarWidth(visibleWidth)
+        saveSidebarWidth(width)
+    }, [hideSidebar])
+    const onDragEnd = useCallback((lastWidth: number) => {
+        const hide = lastWidth <= MinWidth
+        if (hide) {
+            updateWidth(WidthClosed);
+        } else {
+            updateWidth(lastWidth, lastWidth);
+        }
+    }, [updateWidth])
+    useLayoutEffect(() => {
+        setSavedWidth(getSidebarWidth() || InitialSidebarWidth)
+    }, [])
+
+    const { setGutter, setRoot, moving } = useSplit({ onDragEnd, minWidth: MinWidth, widthClosed: WidthClosed })
     return (
         <div ref={setRoot} className='flex h-full w-screen overflow-x-hidden'>
-            <div className={`relative min-h-screen bg-sidebar-main ${(!moving) && 'transition-all ease-in-out'}`} style={{ width: hideSidebar ? 50 : 250 }}>
+            <div className={`min-h-screen bg-sidebar-main ${(!moving) && 'transition-all ease-in-out'} overflow-x-hidden`} style={{ width: savedWidth }}>
                 {!hideSidebar && sidebar}
-                {hideSidebar && (
-                    <IconButton name='open-sidebar'
-                        onClick={() => { setHideSidebar(false) }}
-                        className='absolute right-1/2 top-5 translate-x-1/2 rounded border border-border-dark bg-surface-main p-1' >
-                        <AnglesRight className='h-5 w-5 fill-border-dark' />
-                    </IconButton>
-                )}
             </div>
-            <div className={`min-h-screen ${hideSidebar ? 'w-0' : 'w-1'} cursor-move bg-sidebar-main transition-all ease-in-out hover:w-2 hover:bg-border-main`}
-                ref={setGutter} />
+            <div className={`relative min-h-screen w-1 cursor-move bg-sidebar-main transition-all ease-in-out hover:w-2 hover:bg-border-main`}
+                ref={setGutter} >
+                <IconButton name='toggle-sidebar'
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        if (hideSidebar) {
+                            const w = getVisibleSidebarWidth() || InitialSidebarWidth
+                            updateWidth(w, w)
+                        } else {
+                            updateWidth(WidthClosed)
+                        }
+                    }}
+                    className='absolute right-1/2 top-2 translate-x-1/2 rounded-full border border-border-dark bg-surface-main p-1' >
+                    {hideSidebar ? <AnglesRight name="open-sidebar" className='h-5 w-5 fill-border-dark' /> :
+                        <AnglesLeft name="close-sidebar" className='h-5 w-5 fill-border-dark' />
+                    }
+                </IconButton>
+            </div>
             <div className={`h-full min-h-screen w-full flex-1 overflow-x-hidden border-border-main`}>{children}</div>
         </div>
     )

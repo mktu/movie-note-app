@@ -20,6 +20,6 @@ const Outlined = forwardRef<HTMLButtonElement, Props>(({
         'border border-primary-border')} {...props} ref={ref} />
 ))
 
-Outlined['displayName'] = 'contained-button'
+Outlined['displayName'] = 'outlined-button'
 
 export default Outlined
