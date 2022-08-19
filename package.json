@@ -35,7 +35,7 @@
     "lexical": "0.3.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "7.34.0",
+    "react-hook-form": "7.34.2",
     "react-i18next": "11.18.3",
     "remix-auth": "3.2.2",
     "remix-auth-google": "1.1.0",
