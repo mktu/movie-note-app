@@ -36,7 +36,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "7.34.2",
-    "react-i18next": "11.18.3",
+    "react-i18next": "11.18.4",
     "remix-auth": "3.2.2",
     "remix-auth-google": "1.1.0",
     "remix-i18next": "4.1.1",
