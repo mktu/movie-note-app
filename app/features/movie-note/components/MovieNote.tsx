@@ -1,6 +1,5 @@
 import { useState } from "react";
 import type { FC } from "react";
-import Search from "./search-title";
 import useDetail from "../hooks/useTmdb/useDetail";
 import MetaInfo from './meta'
 import Imdb from "../features/imdb";
@@ -8,6 +7,7 @@ import Detail from "./detail";
 import { Transition } from "@headlessui/react";
 import useCredits from "../hooks/useTmdb/useCredits";
 import Note from "./note";
+import { NewHeader } from "./header";
 
 const MovieNote: FC = () => {
     const [selected, setSelectedBase] = useState('')
@@ -20,8 +20,12 @@ const MovieNote: FC = () => {
     }
     return (
         <div className='w-full p-5'>
-            <div className='flex w-full items-center'>
-                <Search {...{ selected, setSelected }} />
+            <div>
+                <NewHeader
+                    canSave={Boolean(detail)}
+                    onClickSave={() => {
+
+                    }} {...{ selected, setSelected }} />
             </div>
             <Transition
                 className='flex w-full flex-col gap-2'
@@ -40,7 +44,7 @@ const MovieNote: FC = () => {
                 <div className='flex w-full items-center'>
                     <Detail detail={detail} credits={credits} />
                 </div>
-                <div className='rounded-lg border border-dashed p-6'>
+                <div className='rounded-lg border border-dashed border-border-dark p-6'>
                     <div className='min-h-[256px]'>
                         <Note />
                     </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useLayoutEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import type { FC, ReactNode } from "react";
 import { IconButton } from "~/components/buttons";
 import AnglesRight from "~/components/icons/AnglesRight";

@@ -22,7 +22,7 @@ const Search: FC<Props> = ({
     const selectedText = searchResult?.results?.find(v => v.id === selected)?.title || ''
     return (
         <Combobox value={selected} onChange={setSelected}>
-            <div className="relative mt-1 w-full">
+            <div className="relative mt-1 w-full bg-white">
                 <div className={clsx(
                     "relative flex w-full cursor-default items-center overflow-hidden rounded border border-border-main text-left shadow-sm",
                     !selectedText && 'focus-within:ring-2 focus-within:ring-focus'
