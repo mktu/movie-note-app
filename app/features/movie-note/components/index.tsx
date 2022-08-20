@@ -1,1 +1,1 @@
-export { default as NewMovieNote } from './NewMovieNote'
+export { default as MovieNote } from './MovieNote'

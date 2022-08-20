@@ -1,6 +1,6 @@
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Note from './Note';
+import Note from '.';
 
 export default {
     title: 'app/movie-note/Note',

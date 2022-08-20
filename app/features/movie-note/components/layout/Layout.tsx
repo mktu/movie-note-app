@@ -101,7 +101,7 @@ const Layout: FC<Props> = ({ sidebar, children }) => {
             updateWidth(lastWidth, lastWidth);
         }
     }, [updateWidth])
-    useLayoutEffect(() => {
+    useEffect(() => {
         setSavedWidth(getSidebarWidth() || InitialSidebarWidth)
     }, [])
 

@@ -1,20 +1,18 @@
 import { useState } from "react";
 import type { FC } from "react";
-import Search from "../search-title";
-import useDetail from "../../hooks/useTmdb/useDetail";
-import MetaInfo from '../meta'
-import Imdb from "../../features/imdb";
-import Detail from "../detail";
+import Search from "./search-title";
+import useDetail from "../hooks/useTmdb/useDetail";
+import MetaInfo from './meta'
+import Imdb from "../features/imdb";
+import Detail from "./detail";
 import { Transition } from "@headlessui/react";
-import useCredits from "../../hooks/useTmdb/useCredits";
-import AddNoteAction from "./note/AddNoteAction";
-import Note from "./note/Note";
+import useCredits from "../hooks/useTmdb/useCredits";
+import Note from "./note";
 
 const MovieNote: FC = () => {
     const [selected, setSelectedBase] = useState('')
     const { requestDetail, detail } = useDetail()
     const { requestCredits, credits } = useCredits()
-    const [showNote, setShowNote] = useState(false)
     const setSelected = async (id: string) => {
         setSelectedBase(id)
         await requestDetail(id)

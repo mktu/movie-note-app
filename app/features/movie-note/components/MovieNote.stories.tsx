@@ -5,8 +5,8 @@ import { screen, userEvent } from '@storybook/testing-library'
 import { detail, credits } from '~/features/movie-note/components/detail/mocks'
 
 import MovieNote from './MovieNote';
-import type { SearchResult } from '../../utils/tmdb';
-import type { ImdbRate } from '../../features/imdb/types';
+import type { SearchResult } from '../utils/tmdb';
+import type { ImdbRate } from '../features/imdb/types';
 
 export default {
     title: 'app/movie-note/MovieNote',

@@ -1,8 +1,8 @@
 import type { FC } from "react";
-import { NewMovieNote } from "~/features/movie-note/";
+import { MovieNote } from "~/features/movie-note/";
 
 const NewNote: FC = () => {
-    return (<NewMovieNote />)
+    return (<MovieNote />)
 }
 
 export default NewNote
