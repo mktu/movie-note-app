@@ -1,9 +1,16 @@
+import clsx from 'clsx';
 import type { FC } from 'react'
 import Editor from './lexical'
 
-const Note: FC = () => {
+type Props = {
+    className?: string
+}
+
+const Note: FC<Props> = ({
+    className
+}) => {
     return (
-        <div className=''>
+        <div className={clsx('relative', className)}>
             <Editor />
         </div>)
 };

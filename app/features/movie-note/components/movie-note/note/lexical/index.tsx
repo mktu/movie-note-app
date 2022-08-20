@@ -1,6 +1,4 @@
 import type { FC } from 'react'
-import { $getRoot, $getSelection } from 'lexical';
-import type { EditorState } from 'lexical'
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
@@ -19,8 +17,8 @@ const Editor: FC = () => {
     return (
         <LexicalComposer initialConfig={initialConfig}>
             <RichTextPlugin
-                contentEditable={<ContentEditable className='p-2 outline-none' />}
-                placeholder={<div className='pointer-events-none absolute top-6 left-6 select-none text-text-label'>{t('add-note')}...✍️</div>}
+                contentEditable={<ContentEditable className='text-text-main outline-none' />}
+                placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
             />
             <HistoryPlugin />
             <MarkdownShortcutPlugin transformers={TRANSFORMERS} />

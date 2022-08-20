@@ -1,19 +1,21 @@
-.lexical-ul { 
-    list-style-type: disc; 
-    list-style-position: inside; 
- }
- .lexical-ol { 
-    list-style-type: decimal; 
-    list-style-position: inside; 
- }
- .lexical-ul .lexical-ul, .lexical-ol .lexical-ol { 
-    list-style-type: circle; 
-    list-style-position: inside; 
-    margin-left: 15px; 
- }
+.lexical-ul {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+.lexical-ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+.lexical-ul .lexical-ul,
+.lexical-ol .lexical-ol {
+  list-style-type: circle;
+  list-style-position: inside;
+  margin-left: 15px;
+}
 
- .lexical-ul .lexical-ul .lexical-ul, .lexical-ol .lexical-ol .lexical-ol { 
-    list-style-type: disc; 
-    list-style-position: inside; 
-    margin-left: 15px; 
- }
+.lexical-ul .lexical-ul .lexical-ul,
+.lexical-ol .lexical-ol .lexical-ol {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-left: 15px;
+}

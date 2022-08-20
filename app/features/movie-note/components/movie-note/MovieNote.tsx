@@ -35,15 +35,17 @@ const MovieNote: FC = () => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
             >
-                <div className='mt-4'>
-                    <Note />
-                </div>
                 <div className='flex w-full items-center'>
                     <MetaInfo genres={detail?.genres || []} />
                     <Imdb className='ml-auto' imdbId={detail?.imdb_id} />
                 </div>
                 <div className='flex w-full items-center'>
                     <Detail detail={detail} credits={credits} />
+                </div>
+                <div className='rounded-lg border border-dashed p-6'>
+                    <div className='min-h-[256px]'>
+                        <Note />
+                    </div>
                 </div>
             </Transition>
         </div>
