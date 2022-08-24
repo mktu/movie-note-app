@@ -1,7 +1,7 @@
 import type { LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
 import { Outlet, useLoaderData } from "@remix-run/react";
-import type { User } from "@type-defs/index";
+import type { User } from "@type-defs/backend/index";
 import authenticator from '@utils/auth/auth.server'
 import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
 import UserProvider from '~/providers/user'

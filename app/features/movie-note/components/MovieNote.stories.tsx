@@ -69,8 +69,7 @@ Default.parameters = {
 }
 
 Default.args = {
-    selected: '',
-    setSelected: action("selected")
+    onSubmit: action("onSubmit"),
 };
 
 function sleep(ms: number) {

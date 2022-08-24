@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import type { FC } from "react";
 import useDetail from "../hooks/useTmdb/useDetail";
 import MetaInfo from './meta'
@@ -8,9 +8,20 @@ import { Transition } from "@headlessui/react";
 import useCredits from "../hooks/useTmdb/useCredits";
 import Note from "./note";
 import { NewHeader } from "./header";
+import type { AddMovieNote } from "@type-defs/frontend";
 
-const MovieNote: FC = () => {
+type Props = {
+    onSubmit: (note: AddMovieNote) => void
+}
+
+const MovieNote: FC<Props> = ({
+    onSubmit
+}) => {
     const [selected, setSelectedBase] = useState('')
+    const [content, setContent] = useState<{ get: () => string }>()
+    const setContentGetter = useCallback((getContent: () => string) => {
+        setContent({ get: getContent })
+    }, [])
     const { requestDetail, detail } = useDetail()
     const { requestCredits, credits } = useCredits()
     const setSelected = async (id: string) => {
@@ -24,7 +35,11 @@ const MovieNote: FC = () => {
                 <NewHeader
                     canSave={Boolean(detail)}
                     onClickSave={() => {
-
+                        detail && onSubmit({
+                            title: detail.title,
+                            tmdbId: detail.id,
+                            movieMemo: content ? content.get() : ''
+                        })
                     }} {...{ selected, setSelected }} />
             </div>
             <Transition
@@ -46,7 +61,7 @@ const MovieNote: FC = () => {
                 </div>
                 <div className='rounded-lg border border-dashed border-border-dark p-6'>
                     <div className='min-h-[256px]'>
-                        <Note />
+                        <Note setContentGetter={setContentGetter} />
                     </div>
                 </div>
             </Transition>
