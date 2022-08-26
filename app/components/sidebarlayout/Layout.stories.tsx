@@ -3,7 +3,7 @@ import type { ComponentStory, ComponentMeta } from '@storybook/react';
 import Layout from '.';
 
 export default {
-    title: 'app/movie-note/Layout',
+    title: 'Common/SidebarLayout',
     component: Layout,
 } as ComponentMeta<typeof Layout>;
 
