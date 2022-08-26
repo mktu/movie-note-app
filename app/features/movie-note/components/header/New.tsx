@@ -4,11 +4,13 @@ import { ContainedButton } from '~/components/buttons';
 import Search from '../search-title';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
+import Error from './Error'
 
 type Props = {
     onClickSave: () => void,
     className?: string,
     canSave?: boolean
+    error?: string
 } & ComponentProps<typeof Search>
 
 const New = forwardRef<HTMLDivElement, Props>(({
@@ -16,16 +18,22 @@ const New = forwardRef<HTMLDivElement, Props>(({
     className,
     selected,
     setSelected,
-    canSave
+    canSave,
+    error
 }, ref) => {
     const { t } = useTranslation('common')
     return (
-        <div ref={ref} className={clsx(className, 'flex items-center gap-2 py-2')}>
-            <div className='flex w-full flex-1 items-center'>
-                <Search {...{ selected, setSelected }} />
+        <>
+            <div ref={ref} className={clsx(className, 'flex items-center gap-2 py-2')}>
+                <div className='flex w-full flex-1 items-center'>
+                    <Search {...{ selected, setSelected }} />
+                </div>
+                <ContainedButton disabled={!canSave} className='ml-auto' onClick={onClickSave}>{t('save')}</ContainedButton>
             </div>
-            <ContainedButton disabled={!canSave} className='ml-auto' onClick={onClickSave}>{t('save')}</ContainedButton>
-        </div>
+            {error && (
+                <Error error={t(error)} />
+            )}
+        </>
     );
 });
 

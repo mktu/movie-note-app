@@ -38,6 +38,7 @@
     "react-hook-form": "7.34.2",
     "react-i18next": "11.18.5",
     "react-intersection-observer": "9.4.0",
+    "react-toastify": "^9.0.8",
     "remix-auth": "3.2.2",
     "remix-auth-google": "1.1.0",
     "remix-i18next": "4.1.1",

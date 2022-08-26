@@ -11,11 +11,13 @@ import { NewHeader } from "./header";
 import type { AddMovieNote } from "@type-defs/frontend";
 
 type Props = {
-    onSubmit: (note: AddMovieNote) => void
+    onSubmit: (note: AddMovieNote) => void,
+    error?: string
 }
 
 const MovieNote: FC<Props> = ({
-    onSubmit
+    onSubmit,
+    error
 }) => {
     const [selected, setSelectedBase] = useState('')
     const [content, setContent] = useState<{ get: () => string }>()
@@ -31,17 +33,16 @@ const MovieNote: FC<Props> = ({
     }
     return (
         <div className='w-full p-5'>
-            <div>
-                <NewHeader
-                    canSave={Boolean(detail)}
-                    onClickSave={() => {
-                        detail && onSubmit({
-                            title: detail.title,
-                            tmdbId: detail.id,
-                            movieMemo: content ? content.get() : ''
-                        })
-                    }} {...{ selected, setSelected }} />
-            </div>
+            <NewHeader
+                error={error}
+                canSave={Boolean(detail)}
+                onClickSave={() => {
+                    detail && onSubmit({
+                        title: detail.title,
+                        tmdbId: detail.id,
+                        movieMemo: content ? content.get() : ''
+                    })
+                }} {...{ selected, setSelected }} />
             <Transition
                 className='flex w-full flex-col gap-2'
                 show={Boolean(detail)}

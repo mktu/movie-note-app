@@ -27,5 +27,9 @@
     "writer" : "脚本",
     "casts" : "キャスト",
     "add-note" : "感想やメモを自由に記入してください",
-    "save" : "保存する"
+    "save" : "保存する",
+    "movie-note-already-registered" : "既にノートに登録されています",
+    "movie-note-not-found" : "ノートが存在しません",
+    "invalid-movie-note" : "不正なノートです",
+    "backend-error" : "サーバーエラーが発生しました"
 }
