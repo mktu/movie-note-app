@@ -1,7 +1,7 @@
 import { json, redirect } from "@remix-run/cloudflare";
 import type { ActionArgs } from "@remix-run/cloudflare";
-import authenticator from "@utils/auth/auth.server";
-import { getSupabaseAdmin } from '@utils/db/server/index.server'
+import authenticator from "~/features/auth/server/auth.server";
+import { getSupabaseAdmin } from '@utils/server/db/index.server'
 import type { FC } from "react";
 import { MovieNote } from "~/features/movie-note/";
 import { registerMovieNote } from "~/features/movie-note/utils/db.server";

@@ -1,11 +1,11 @@
 
 import type { ActionFunction, ErrorBoundaryComponent, LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
-import authenticator from '@utils/auth/auth.server'
+import authenticator from '~/features/auth/server/auth.server'
 import { useCatch } from "@remix-run/react";
-import { signup, initEmailAuthenticator, saveSession } from "~/features/auth/utils/email";
+import { signup, initEmailAuthenticator, saveSession } from "~/features/auth/server/email";
 import { getSupabaseAdmin } from "@utils/supabaseAdmin.server";
-import { hasAuth } from "@utils/db/server/auth.server";
+import { hasAuth } from "~/features/auth/server/db";
 import SignUp from '~/features/auth/components/sign-up'
 import Layout from '~/features/auth/components/Layout'
 
@@ -15,10 +15,10 @@ export const loader: LoaderFunction = async ({ request, context }) => {
     return json({});
   }
   const supabaseAdmin = getSupabaseAdmin(context)
-  if( await hasAuth(supabaseAdmin, user.id) ) {
+  if (await hasAuth(supabaseAdmin, user.id)) {
     return redirect('/app')
   }
-  
+
   return redirect('/register')
 };
 
@@ -45,7 +45,7 @@ export const SignupPage: React.FC = () => {
 export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
   return (
     <Layout>
-      <SignUp errorKey={error.message}/>
+      <SignUp errorKey={error.message} />
     </Layout>
   )
 }
@@ -54,7 +54,7 @@ export const CatchBoundary = () => {
   const caught = useCatch();
   return (
     <Layout>
-      <SignUp errorKey={caught.data}/>
+      <SignUp errorKey={caught.data} />
     </Layout>
   )
 }

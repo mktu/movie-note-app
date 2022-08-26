@@ -1,7 +1,7 @@
 import type { SessionStorage } from "@remix-run/server-runtime"
 import { Strategy } from "remix-auth"
 import type { AuthenticateOptions } from "remix-auth"
-import type { AuthUserType } from "@utils/auth/auth.server"
+import type { AuthUserType } from "~/features/auth/server/auth.server"
 
 
 type VerifyParams = {
@@ -23,7 +23,7 @@ export default class EmailSigninStrategy extends Strategy<AuthUserType, VerifyPa
         const email = (formData.get("email") || '') as string;
         const password = (formData.get("password") || '') as string;
         const user = await this.verify({ email, password })
-        if(user){
+        if (user) {
             return await this.success(user, request, sessionStorage, options);
         }
         return this.failure('failed to signin', request, sessionStorage, options)

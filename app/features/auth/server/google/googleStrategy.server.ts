@@ -1,7 +1,7 @@
 import { GoogleStrategy } from "remix-auth-google";
-import { getSession, commitSession, getExpires } from '@utils/auth/session'
-import __authenticator from '@utils/auth/auth.server'
-import type { AuthUserType } from '@utils/auth/auth.server'
+import { getSession, commitSession, getExpires } from '~/features/auth/server/session'
+import __authenticator from '~/features/auth/server/auth.server'
+import type { AuthUserType } from '~/features/auth/server/auth.server'
 
 let googleStrategy: GoogleStrategy<AuthUserType> | null = null
 type AuthenticatorType = typeof __authenticator

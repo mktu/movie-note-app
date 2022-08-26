@@ -3,8 +3,8 @@ import { redirect, json } from "@remix-run/cloudflare";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { ToastContainer } from 'react-toastify';
 import type { User } from "@type-defs/backend/index";
-import authenticator from '@utils/auth/auth.server'
-import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
+import authenticator from '~/features/auth/server/auth.server'
+import { getSupabaseAdmin, userDb } from '@utils/server/db/index.server'
 import UserProvider from '~/providers/user'
 import TmdbProvider from '~/providers/tmdb'
 import Layout from '~/features/movie-note/components/layout'

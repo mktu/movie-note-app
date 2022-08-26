@@ -1,5 +1,5 @@
 import { Authenticator } from "remix-auth";
-import * as sessionStorage from "@utils/auth/session";
+import * as sessionStorage from "~/features/auth/server/session";
 
 export type AuthUserType = {
     provider: 'google',
@@ -10,7 +10,7 @@ export type AuthUserType = {
 } | {
     provider: 'email',
     id: string,
-    email : string,
+    email: string,
 }
 
 const authenticator = new Authenticator<AuthUserType>(sessionStorage)

@@ -1,10 +1,10 @@
-import { getSession, commitSession, getExpires } from '@utils/auth/session'
+import { getSession, commitSession, getExpires } from '~/features/auth/server/session'
 import type { AdminClientType } from "@utils/supabaseAdmin.server"
 import SignupStrategy from './signup.server'
 import SigninStrategy from './signin.server'
 
-import __authenticator from '@utils/auth/auth.server'
-import { AuthError } from '@utils/exceptions'
+import __authenticator from '~/features/auth/server/auth.server'
+import { AuthError } from '../error.server'
 
 type AuthenticatorType = typeof __authenticator
 
