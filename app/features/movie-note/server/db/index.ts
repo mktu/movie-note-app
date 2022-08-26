@@ -1,6 +1,6 @@
 import type { AddMovieNote, MovieNoteTable } from '@type-defs/backend';
 import type { AdminClientType } from '@utils/supabaseAdmin.server'
-import { fromCode } from './error';
+import { fromCode } from '../../utils/error';
 
 const registerMovieNote = async (supabaseAdmin: AdminClientType, movieNote: AddMovieNote) => {
     const { error } = await supabaseAdmin.from<MovieNoteTable>('movie_note').insert({
