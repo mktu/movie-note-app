@@ -4,11 +4,11 @@ import useDetail from "../hooks/useTmdb/useDetail";
 import MetaInfo from './meta'
 import Imdb from "../features/imdb";
 import Detail from "./detail";
-import { Transition } from "@headlessui/react";
 import useCredits from "../hooks/useTmdb/useCredits";
 import Note from "./note";
 import { NewHeader } from "./header";
 import type { AddMovieNote } from "@type-defs/frontend";
+import Layout from './layout'
 
 type Props = {
     onSubmit: (note: AddMovieNote) => void,
@@ -24,16 +24,22 @@ const MovieNote: FC<Props> = ({
     const setContentGetter = useCallback((getContent: () => string) => {
         setContent({ get: getContent })
     }, [])
-    const { requestDetail, detail } = useDetail()
-    const { requestCredits, credits } = useCredits()
+    const { requestDetail, detail, resetDetail } = useDetail()
+    const { requestCredits, credits, resetCredit } = useCredits()
     const setSelected = async (id: string) => {
-        setSelectedBase(id)
-        await requestDetail(id)
-        await requestCredits(id)
+        if (id) {
+            setSelectedBase(id)
+            await requestDetail(id)
+            await requestCredits(id)
+        } else {
+            setSelectedBase('')
+            resetDetail()
+            resetCredit()
+        }
     }
     return (
-        <div className='w-full p-5'>
-            <NewHeader
+        <Layout
+            header={<NewHeader
                 error={error}
                 canSave={Boolean(detail)}
                 onClickSave={() => {
@@ -42,31 +48,14 @@ const MovieNote: FC<Props> = ({
                         tmdbId: detail.id,
                         movieMemo: content ? content.get() : ''
                     })
-                }} {...{ selected, setSelected }} />
-            <Transition
-                className='flex w-full flex-col gap-2'
-                show={Boolean(detail)}
-                enter="transition-opacity duration-75"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity duration-150"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-            >
-                <div className='flex w-full items-center'>
-                    <MetaInfo genres={detail?.genres || []} />
-                    <Imdb className='ml-auto' imdbId={detail?.imdb_id} />
-                </div>
-                <div className='flex w-full items-center'>
-                    <Detail detail={detail} credits={credits} />
-                </div>
-                <div className='rounded-lg border border-dashed border-border-dark p-6'>
-                    <div className='min-h-[256px]'>
-                        <Note setContentGetter={setContentGetter} />
-                    </div>
-                </div>
-            </Transition>
-        </div>
+                }} {...{ selected, setSelected }} />}
+            movieInfo={detail && {
+                detail: <Detail detail={detail} credits={credits} />,
+                metaInfo: <MetaInfo genres={detail?.genres || []} />,
+                imdb: <Imdb imdbId={detail?.imdb_id} />
+            }}
+            note={detail && <Note setContentGetter={setContentGetter} />}
+        />
     )
 }
 
