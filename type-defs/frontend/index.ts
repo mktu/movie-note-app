@@ -1,5 +1,9 @@
 export type AddMovieNote = {
     tmdbId: string,
-    title?: string,
-    movieMemo?: string
+    stars: number,
+    title: string,
+    lng: string,
+    movieMemo?: string,
+    thumbnail?: string
+    admirationDate?: string
 }

@@ -1,14 +1,18 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
+
+import Imdb from '../features/imdb';
+import { useReview } from '../hooks/useMovie';
+import useCredits from '../hooks/useTmdb/useCredits';
+import useDetail from '../hooks/useTmdb/useDetail';
+import Detail from './detail';
+import { NewHeader } from './header';
+import Layout from './layout';
+import MetaInfo from './meta';
+import Note from './note';
+import Review from './review';
+
 import type { FC } from "react";
-import useDetail from "../hooks/useTmdb/useDetail";
-import MetaInfo from './meta'
-import Imdb from "../features/imdb";
-import Detail from "./detail";
-import useCredits from "../hooks/useTmdb/useCredits";
-import Note from "./note";
-import { NewHeader } from "./header";
 import type { AddMovieNote } from "@type-defs/frontend";
-import Layout from './layout'
 
 type Props = {
     onSubmit: (note: AddMovieNote) => void,
@@ -26,6 +30,7 @@ const MovieNote: FC<Props> = ({
     }, [])
     const { requestDetail, detail, resetDetail } = useDetail()
     const { requestCredits, credits, resetCredit } = useCredits()
+    const { setStars, setAdmirationDate, stars, formattedWatchDate, admirationDate } = useReview()
     const setSelected = async (id: string) => {
         if (id) {
             setSelectedBase(id)
@@ -45,8 +50,12 @@ const MovieNote: FC<Props> = ({
                 onClickSave={() => {
                     detail && onSubmit({
                         title: detail.title,
+                        thumbnail: detail.poster_path || detail.backdrop_path,
                         tmdbId: detail.id,
-                        movieMemo: content ? content.get() : ''
+                        movieMemo: content ? content.get() : '',
+                        admirationDate: formattedWatchDate,
+                        stars,
+                        lng: detail.lng
                     })
                 }} {...{ selected, setSelected }} />}
             movieInfo={detail && {
@@ -55,6 +64,7 @@ const MovieNote: FC<Props> = ({
                 imdb: <Imdb imdbId={detail?.imdb_id} />
             }}
             note={detail && <Note setContentGetter={setContentGetter} />}
+            review={detail && <Review admirationDate={admirationDate} stars={stars} setAdmirationDate={setAdmirationDate} setStars={setStars} />}
         />
     )
 }

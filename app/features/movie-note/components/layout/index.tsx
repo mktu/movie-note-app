@@ -10,6 +10,7 @@ type MovieInfo = {
 type Props = {
     header: ReactNode,
     note?: ReactNode,
+    review?: ReactNode,
     movieInfo?: MovieInfo | null
 }
 
@@ -17,6 +18,7 @@ const Layout: FC<Props> = ({
     header,
     movieInfo,
     note,
+    review
 }) => {
     return (
         <div className='w-full p-5'>
@@ -37,6 +39,9 @@ const Layout: FC<Props> = ({
                 </div>
                 <div className='flex w-full items-center'>
                     {movieInfo?.detail}
+                </div>
+                <div>
+                    {review}
                 </div>
                 <div className='rounded-lg border border-dashed border-border-dark p-6'>
                     <div className='min-h-[256px]'>

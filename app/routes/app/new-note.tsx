@@ -8,6 +8,7 @@ import { registerMovieNote } from "~/features/movie-note/server/db";
 import { useActionData, useSubmit } from "@remix-run/react";
 import { MovieNoteError } from "~/features/movie-note/utils/error";
 import { parseAddNoteParam } from "~/features/movie-note/server/parser";
+import { getFormData } from "@utils/form";
 
 type ActionData = {
     error?: string
@@ -44,10 +45,7 @@ const NewNote: FC = () => {
     const actionData = useActionData<typeof action>()
 
     return (<MovieNote onSubmit={(addMovieNote) => {
-        const formData = new FormData()
-        formData.set("tmdbId", addMovieNote.tmdbId || '')
-        formData.set("movieMemo", addMovieNote.movieMemo || '')
-        submit(formData, { method: 'post' })
+        submit(getFormData(addMovieNote), { method: 'post' })
     }} error={actionData?.error} />)
 }
 
