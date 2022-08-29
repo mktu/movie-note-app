@@ -50,10 +50,10 @@ const MovieNote: FC<Props> = ({
                 onClickSave={() => {
                     detail && onSubmit({
                         title: detail.title,
-                        thumbnail: detail.poster_path || detail.backdrop_path,
+                        thumbnail: detail.poster_path || detail.backdrop_path || '',
                         tmdbId: detail.id,
                         movieMemo: content ? content.get() : '',
-                        admirationDate: formattedWatchDate,
+                        admirationDate: formattedWatchDate || '',
                         stars,
                         lng: detail.lng
                     })

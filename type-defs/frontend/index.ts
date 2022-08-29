@@ -3,7 +3,7 @@ export type AddMovieNote = {
     stars: number,
     title: string,
     lng: string,
-    movieMemo?: string,
-    thumbnail?: string
-    admirationDate?: string
+    movieMemo: string,
+    thumbnail: string
+    admirationDate: string
 }

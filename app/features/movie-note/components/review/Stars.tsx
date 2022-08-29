@@ -28,16 +28,16 @@ const Stars: FC<Props> = ({
             {[...Array(10)].map((_, i) => (
                 <IconButton key={i} name='star'
                     onClick={() => {
-                        onSetStar(i)
+                        onSetStar(i + 1)
                     }}
                     className={clsx(starSize)}
                     onMouseLeave={() => {
                         setHoverPos(-1)
                     }}
                     onMouseOver={() => {
-                        setHoverPos(i)
+                        setHoverPos(i + 1)
                     }}>
-                    <Star className={`${isColored(hoverPos, stars, i) ? 'fill-yellow-400' : 'fill-gray-400'}`} />
+                    <Star className={`${isColored(hoverPos, stars, i + 1) ? 'fill-yellow-400' : 'fill-gray-400'}`} />
                 </IconButton>
             ))}
         </div>

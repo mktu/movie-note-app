@@ -7,8 +7,8 @@ import { MovieNote } from "~/features/movie-note/";
 import { registerMovieNote } from "~/features/movie-note/server/db";
 import { useActionData, useSubmit } from "@remix-run/react";
 import { MovieNoteError } from "~/features/movie-note/utils/error";
-import { parseAddNoteParam } from "~/features/movie-note/server/parser";
 import { getFormData } from "@utils/form";
+import { parseAddNote } from "~/features/movie-note/server/validation";
 
 type ActionData = {
     error?: string
@@ -21,14 +21,12 @@ export async function action({ request, context }: ActionArgs) {
     if (!user) {
         return redirect('/login')
     }
-
     const supabaseAdmin = getSupabaseAdmin(context)
-
     try {
-        await registerMovieNote(supabaseAdmin, await parseAddNoteParam(request, user.id))
+        const data = parseAddNote(await request.formData())
+        await registerMovieNote(supabaseAdmin, data, user.id)
         return redirect('/app')
     } catch (e) {
-
         if (e instanceof MovieNoteError) {
             return json<ActionData>({
                 error: e.message

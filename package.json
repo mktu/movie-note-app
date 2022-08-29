@@ -43,7 +43,8 @@
     "remix-auth": "3.2.2",
     "remix-auth-google": "1.1.0",
     "remix-i18next": "4.1.1",
-    "uuid": "8.3.2"
+    "uuid": "8.3.2",
+    "zod-form-data": "^1.2.1"
   },
   "devDependencies": {
     "@babel/core": "7.18.13",

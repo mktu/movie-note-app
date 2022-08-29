@@ -24,7 +24,7 @@ const Review: FC<Props> = ({
                 }} id='admiration-date' type={'date'} className='w-[256px] text-text-label' />
             </div>
             <div className='ml-auto'>
-                <Stars stars={stars || -1} onSetStar={setStars} />
+                <Stars stars={stars || 0} onSetStar={setStars} />
             </div>
         </div>
     );
