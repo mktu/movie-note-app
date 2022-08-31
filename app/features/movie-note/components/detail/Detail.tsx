@@ -43,10 +43,10 @@ const Detail: FC<Props> = ({ detail, credits }) => {
                     <h3 className='mb-2 text-lg'>{t('over-view')}</h3>
                     <p id='detail' className='overflow-y-auto'>
                         {detail?.overview}
+                        <span id='release-date'>({release_date} {t('release')})</span>
                     </p>
                 </div>
                 <Credits credits={credits} />
-                <div id='release-date' className='ml-auto'>{release_date} {t('release')}</div>
             </div>
         </div>
     );

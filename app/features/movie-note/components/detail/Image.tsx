@@ -4,7 +4,7 @@ import Img from 'public/ImgPlaceholder.svg'
 
 type Props = React.ImgHTMLAttributes<HTMLImageElement> & { alt: string }
 
-const Image = forwardRef<HTMLButtonElement, Props>(({
+const Image = forwardRef<HTMLImageElement, Props>(({
     className,
     width,
     height,
@@ -13,7 +13,7 @@ const Image = forwardRef<HTMLButtonElement, Props>(({
     onError,
     style,
     ...props
-}) => {
+}, ref) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
@@ -26,7 +26,7 @@ const Image = forwardRef<HTMLButtonElement, Props>(({
         )
     }
     return (
-        <img className={className} src={src} alt={alt} width={width} height={height} loading='lazy' onError={(e) => {
+        <img ref={ref} className={className} src={src} alt={alt} width={width} height={height} loading='lazy' onError={(e) => {
             setError(true)
             setLoading(false)
             onError && onError(e)

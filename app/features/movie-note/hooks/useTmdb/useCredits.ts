@@ -12,9 +12,13 @@ const useCredits = () => {
         const d = await tmdb.getCredits(id)
         setCredits(d)
     }, [tmdb])
+    const resetCredit = () => {
+        setCredits(null)
+    }
     return {
         requestCredits,
-        credits
+        credits,
+        resetCredit
     }
 }
 

@@ -16,6 +16,7 @@ export type MovieDetail = {
     id: string,
     title: string,
     release_date: string,
+    lng: string
     status: string,
     overview?: string,
     poster_path?: string,
@@ -85,8 +86,8 @@ export default class Tmdb {
             language: this.lng
         });
         const response = await fetch(`${detailBasePath}/${id}?${searchParams}`)
-        const json = await response.json<MovieDetail>()
-        return json
+        const json = await response.json<Omit<MovieDetail, 'lng'>>()
+        return { ...json, lng: this.lng }
     }
 }
 

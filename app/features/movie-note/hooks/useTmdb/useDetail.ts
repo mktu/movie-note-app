@@ -12,9 +12,13 @@ const useDetail = () => {
         const d = await tmdb.getDetail(id)
         setDetail(d)
     }, [tmdb])
+    const resetDetail = () => {
+        setDetail(null)
+    }
     return {
         requestDetail,
-        detail
+        detail,
+        resetDetail
     }
 }
 

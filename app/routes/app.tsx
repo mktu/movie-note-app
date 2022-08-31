@@ -1,16 +1,18 @@
 import type { LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
 import { Outlet, useLoaderData } from "@remix-run/react";
-import type { User } from "@type-defs/index";
-import authenticator from '@utils/auth/auth.server'
-import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
+import { ToastContainer } from 'react-toastify';
+import type { User } from "@type-defs/backend/index";
+import authenticator from '~/features/auth/server/auth.server'
+import { getSupabaseAdmin, userDb } from '@utils/server/db/index.server'
 import UserProvider from '~/providers/user'
 import TmdbProvider from '~/providers/tmdb'
-import Layout from '~/features/movie-note/components/layout'
+import Layout from '~/components/sidebarlayout'
 import Sidebar from '~/features/movie-note/components/sidebar'
 import Tmdb, { setTmdbData } from "~/features/movie-note/utils/tmdb";
 import { useTranslation } from "react-i18next";
 import styles from 'styles/lexical.css'
+import toastStyles from 'react-toastify/dist/ReactToastify.css';
 
 
 type LoaderData = {
@@ -37,7 +39,7 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 };
 
 export function links() {
-    return [{ rel: "stylesheet", href: styles }]
+    return [{ rel: "stylesheet", href: styles }, { rel: "stylesheet", href: toastStyles }]
 }
 
 
@@ -50,6 +52,7 @@ export const App: React.FC = () => {
                 <Layout sidebar={<Sidebar />}>
                     <Outlet />
                 </Layout>
+                <ToastContainer />
             </TmdbProvider>
         </UserProvider>
     )

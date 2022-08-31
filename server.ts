@@ -1,6 +1,6 @@
 import { createPagesFunctionHandler } from "@remix-run/cloudflare-pages";
 import * as build from "@remix-run/dev/server-build";
-import { initSessionStorage } from "@utils/auth/session";
+import { initSessionStorage } from "~/features/auth/server/session";
 
 
 const handleRequest = createPagesFunctionHandler({

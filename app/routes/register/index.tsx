@@ -1,9 +1,9 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
-import authenticator from '@utils/auth/auth.server'
-import { hasAuth } from "@utils/db/server/auth.server";
-import { getSupabaseAdmin, userDb } from '@utils/db/server/index.server'
+import authenticator from '~/features/auth/server/auth.server'
+import { hasAuth } from "~/features/auth/server/db";
+import { getSupabaseAdmin, userDb } from '@utils/server/db/index.server'
 import Layout from "~/features/auth/components/Layout";
 import Register from '~/features/auth/components/register'
 
