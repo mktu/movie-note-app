@@ -26,6 +26,14 @@ export type MovieNoteTable = {
     admiration_date: string | null
 }
 
+export type MovieNoteListViewItem = {
+    stars: number,
+    user_id: string,
+    thumbnail?: string,
+    title?: string,
+    admiration_date?: string
+}
+
 export type MovieInfoTable = {
     tmdb_id: string,
     title: string,

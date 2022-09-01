@@ -1,4 +1,4 @@
-import type { MovieInfoTable, MovieNoteTable } from '@type-defs/backend';
+import type { MovieInfoTable, MovieNoteListViewItem, MovieNoteTable } from '@type-defs/backend';
 import type { AdminClientType } from '@utils/supabaseAdmin.server'
 import type { AddMovieNote } from '../types'
 import { fromCode } from '../../utils/error';
@@ -32,6 +32,15 @@ const registerMovieNote = async (supabaseAdmin: AdminClientType, movieNote: AddM
     }
 }
 
+const listMovieNote = async (supabaseAdmin: AdminClientType, userId: string) => {
+    const { data, error } = await supabaseAdmin.from<MovieNoteListViewItem>('movie_note_list_view').select('*').eq('user_id', userId)
+    if (error || !data) {
+        // return
+    }
+    return data!
+}
+
 export {
-    registerMovieNote
+    registerMovieNote,
+    listMovieNote
 }
