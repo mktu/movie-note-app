@@ -12,7 +12,7 @@ import TmdbProvider from '~/providers/tmdb';
 import UserProvider from '~/providers/user';
 
 import { json, redirect } from '@remix-run/cloudflare';
-import { Outlet, useLoaderData, useNavigate, useSubmit } from '@remix-run/react';
+import { Outlet, useLoaderData, useSubmit } from '@remix-run/react';
 import { getSupabaseAdmin, userDb } from '@utils/server/db/index.server';
 
 import type { MovieNoteListViewItem, User } from "@type-defs/backend/index";
@@ -50,13 +50,10 @@ export function links() {
 }
 
 
-
-
 export const App: React.FC = () => {
     const { user, tmdbData, movieNoteList } = useLoaderData() as LoaderData;
     const { i18n } = useTranslation('common')
     const submit = useSubmit()
-    const nav = useNavigate()
     return (
         <UserProvider user={user}>
             <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey, i18n.language === 'ja' ? 'ja' : 'en')}>
@@ -66,9 +63,6 @@ export const App: React.FC = () => {
                         submit(null, { action: 'logout', method: 'post' })
                     }} />}
                     noteList={<NoteList
-                        onClickNewNote={() => {
-                            nav('/app/new-note')
-                        }}
                         movieNoteList={movieNoteList} />}
                 />}>
                     <Outlet />
