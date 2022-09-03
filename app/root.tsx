@@ -1,19 +1,16 @@
-import styles from "./styles/app.css"
-import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
-import { json } from "@remix-run/cloudflare";
-import { useChangeLanguage } from "remix-i18next";
-import { useTranslation } from "react-i18next";
-import i18next from "~/i18next.server";
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLoaderData,
-} from "@remix-run/react";
+import { useTranslation } from 'react-i18next';
+import { useChangeLanguage } from 'remix-i18next';
+import i18next from '~/i18next.server';
+import { RemixProvider } from '~/providers/navigator';
 
+import { json } from '@remix-run/cloudflare';
+import {
+  Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData
+} from '@remix-run/react';
+
+import styles from './styles/app.css';
+
+import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
 type LoaderData = { locale: string };
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -59,7 +56,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <RemixProvider>
+          <Outlet />
+        </RemixProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
