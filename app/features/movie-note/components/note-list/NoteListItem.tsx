@@ -1,9 +1,11 @@
-import type { FC } from 'react'
+import type { FC } from 'react';
+import { useContext } from 'react'
 import { TmdbmageBasePath } from '@utils/constants';
 
 import type { MovieNoteListViewItem } from '@type-defs/backend';
 import Image from '../detail/Image';
 import Star from '~/components/icons/Star'
+import NavigatorContext from '~/providers/navigator/Context'
 
 const imageBasePath = `${TmdbmageBasePath}/w200`
 
@@ -14,8 +16,9 @@ type Props = {
 const NoteListItem: FC<Props> = ({
     movieNoteListViewItem
 }) => {
+    const { navigator: Navigator } = useContext(NavigatorContext)
     return (
-        <a className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' href='/' >
+        <Navigator className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' to='/' >
             <Image className='overflow-hidden rounded' width={32} height={48}
                 src={`${imageBasePath}${movieNoteListViewItem.thumbnail}`} alt={movieNoteListViewItem.title || ''} />
             <div className='flex w-full flex-1 items-center overflow-hidden'>
@@ -32,7 +35,7 @@ const NoteListItem: FC<Props> = ({
                     )}
                 </div>
             </div>
-        </a >
+        </Navigator >
     );
 };
 
