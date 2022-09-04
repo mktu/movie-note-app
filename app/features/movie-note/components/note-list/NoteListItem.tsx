@@ -17,10 +17,11 @@ const NoteListItem: FC<Props> = ({
     movieNoteListViewItem
 }) => {
     const { navigator: Navigator } = useContext(NavigatorContext)
+    const path = movieNoteListViewItem.thumbnail ? `${imageBasePath}${movieNoteListViewItem.thumbnail}` : undefined
     return (
-        <Navigator className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' to='/' >
+        <Navigator className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' to={`/app/notes/${movieNoteListViewItem.tmdb_id}`} >
             <Image className='overflow-hidden rounded' width={32} height={48}
-                src={`${imageBasePath}${movieNoteListViewItem.thumbnail}`} alt={movieNoteListViewItem.title || ''} />
+                src={path} alt={movieNoteListViewItem.title || ''} />
             <div className='flex w-full flex-1 items-center overflow-hidden'>
                 <div className='ml-2 block overflow-hidden'>
                     <div className='overflow-hidden text-ellipsis whitespace-nowrap text-sm'>{movieNoteListViewItem.title}</div>

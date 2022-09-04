@@ -2,9 +2,9 @@ import { useCallback, useContext, useState } from "react"
 import TmdbContext from '~/providers/tmdb/Context'
 import type { MovieDetail } from "../../utils/tmdb"
 
-const useDetail = () => {
+const useDetail = (init?: MovieDetail) => {
     const tmdb = useContext(TmdbContext)
-    const [detail, setDetail] = useState<MovieDetail | null>(null)
+    const [detail, setDetail] = useState<MovieDetail | null>(init || null)
     const requestDetail = useCallback(async (id: string) => {
         if (!id) {
             return

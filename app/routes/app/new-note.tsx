@@ -3,7 +3,7 @@ import type { ActionArgs } from "@remix-run/cloudflare";
 import authenticator from "~/features/auth/server/auth.server";
 import { getSupabaseAdmin } from '@utils/server/db/index.server'
 import type { FC } from "react";
-import { MovieNote } from "~/features/movie-note/";
+import { NewMovieNote } from "~/features/movie-note/";
 import { registerMovieNote } from "~/features/movie-note/server/db";
 import { useActionData, useSubmit } from "@remix-run/react";
 import { MovieNoteError } from "~/features/movie-note/utils/error";
@@ -42,7 +42,7 @@ const NewNote: FC = () => {
     const submit = useSubmit()
     const actionData = useActionData<typeof action>()
 
-    return (<MovieNote onSubmit={(addMovieNote) => {
+    return (<NewMovieNote onSubmit={(addMovieNote) => {
         submit(getFormData(addMovieNote), { method: 'post' })
     }} error={actionData?.error} />)
 }

@@ -1,1 +1,1 @@
-export { MovieNote } from './components'
+export { NewMovieNote, EditMovieNote } from './pages'

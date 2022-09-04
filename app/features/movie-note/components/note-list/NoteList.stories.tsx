@@ -17,16 +17,19 @@ export const Default = Template.bind({});
 
 Default.args = {
     movieNoteList: [{
+        tmdb_id: '1',
         title: 'test1',
         stars: 5,
         user_id: '1',
         admiration_date: '2020-10-21',
         thumbnail: '/ghKQ6it5j7KjdYghT5EDthVNXlD.jpg'
     }, {
+        tmdb_id: '2',
         title: 'test2',
         stars: 5,
         user_id: '1'
     }, {
+        tmdb_id: '3',
         title: 'すごおおおおおおおおおおおおおおおおおおおおおおく長いタイトル',
         stars: 0,
         user_id: '1'
