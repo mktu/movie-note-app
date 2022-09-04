@@ -2,50 +2,45 @@ import { useCallback, useState } from 'react';
 
 import Imdb from '../features/imdb';
 import { useReview } from '../hooks/useMovie';
-import useCredits from '../hooks/useTmdb/useCredits';
-import useDetail from '../hooks/useTmdb/useDetail';
-import Detail from './detail';
-import { NewHeader } from './header';
-import Layout from './layout';
-import MetaInfo from './meta';
-import Note from './note';
-import Review from './review';
+import Detail from '../components/detail';
+import { EditHeader } from '../components/header';
+import Layout from '../components/layout';
+import MetaInfo from '../components/meta';
+import Note from '../components/note';
+import Review from '../components/review';
 
 import type { FC } from "react";
 import type { AddMovieNote } from "@type-defs/frontend";
+import type { MovieNoteDetail } from '@type-defs/backend';
+import type { Credits, MovieDetail } from '../utils/tmdb';
 
 type Props = {
     onSubmit: (note: AddMovieNote) => void,
-    error?: string
+    error?: string,
+    movieNoteDetail?: MovieNoteDetail,
+    tmdbDetail?: MovieDetail
+    tmdbCredits?: Credits
 }
 
-const MovieNote: FC<Props> = ({
+const Edit: FC<Props> = ({
     onSubmit,
-    error
+    error,
+    movieNoteDetail,
+    tmdbDetail,
+    tmdbCredits
 }) => {
-    const [selected, setSelectedBase] = useState('')
     const [content, setContent] = useState<{ get: () => string }>()
     const setContentGetter = useCallback((getContent: () => string) => {
         setContent({ get: getContent })
     }, [])
-    const { requestDetail, detail, resetDetail } = useDetail()
-    const { requestCredits, credits, resetCredit } = useCredits()
-    const { setStars, setAdmirationDate, stars, formattedWatchDate, admirationDate } = useReview()
-    const setSelected = async (id: string) => {
-        if (id) {
-            setSelectedBase(id)
-            await requestDetail(id)
-            await requestCredits(id)
-        } else {
-            setSelectedBase('')
-            resetDetail()
-            resetCredit()
-        }
-    }
+    const detail = tmdbDetail
+    const credits = tmdbCredits || null
+    const { setStars, setAdmirationDate, stars, formattedWatchDate, admirationDate } = useReview(movieNoteDetail?.stars, movieNoteDetail?.admiration_date)
     return (
         <Layout
-            header={<NewHeader
+            header={<EditHeader
                 error={error}
+                title={movieNoteDetail?.title || ''}
                 canSave={Boolean(detail)}
                 onClickSave={() => {
                     detail && onSubmit({
@@ -57,7 +52,7 @@ const MovieNote: FC<Props> = ({
                         stars,
                         lng: detail.lng
                     })
-                }} {...{ selected, setSelected }} />}
+                }} />}
             movieInfo={detail && {
                 detail: <Detail detail={detail} credits={credits} />,
                 metaInfo: <MetaInfo genres={detail?.genres || []} />,
@@ -69,4 +64,4 @@ const MovieNote: FC<Props> = ({
     )
 }
 
-export default MovieNote
+export default Edit

@@ -2,9 +2,9 @@ import { useCallback, useContext, useState } from "react"
 import TmdbContext from '~/providers/tmdb/Context'
 import type { Credits } from "../../utils/tmdb"
 
-const useCredits = () => {
+const useCredits = (init?: Credits) => {
     const tmdb = useContext(TmdbContext)
-    const [credits, setCredits] = useState<Credits | null>(null)
+    const [credits, setCredits] = useState<Credits | null>(init || null)
     const requestCredits = useCallback(async (id: string) => {
         if (!id) {
             return
