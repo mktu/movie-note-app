@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from "react"
 import TmdbContext from '~/providers/tmdb/Context'
 import type { SearchResult } from "../../utils/tmdb"
 
-const useTmdb = () => {
+const useTmdb = (init?: SearchResult) => {
     const [query, setQuery] = useState('')
-    const [count, setCount] = useState(0)
-    const [searchResult, setSearchResult] = useState<SearchResult | null>(null)
+    const [count, setCount] = useState(0) // this is for debug
+    const [searchResult, setSearchResult] = useState<SearchResult | null>(init || null)
     const tmdb = useContext(TmdbContext)
     useEffect(() => {
         let ignore = false

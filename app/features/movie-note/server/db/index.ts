@@ -1,4 +1,4 @@
-import type { MovieInfoTable, MovieNoteTable } from '@type-defs/backend';
+import type { MovieInfoTable, MovieNoteDetail, MovieNoteListViewItem, MovieNoteTable } from '@type-defs/backend';
 import type { AdminClientType } from '@utils/supabaseAdmin.server'
 import type { AddMovieNote } from '../types'
 import { fromCode } from '../../utils/error';
@@ -32,6 +32,26 @@ const registerMovieNote = async (supabaseAdmin: AdminClientType, movieNote: AddM
     }
 }
 
+const listMovieNote = async (supabaseAdmin: AdminClientType, userId: string) => {
+    const { data, error } = await supabaseAdmin.from<MovieNoteListViewItem>('movie_note_list_view')
+        .select('tmdb_id,user_id,stars,title,admiration_date,thumbnail').eq('user_id', userId)
+    if (error || !data) {
+        return []
+    }
+    return data!
+}
+
+const loadMovieNote = async (supabaseAdmin: AdminClientType, userId: string, tmdbId: string) => {
+    const { data, error } = await supabaseAdmin.from<MovieNoteDetail>('movie_note_list_view')
+        .select('*').eq('user_id', userId).eq('tmdb_id', tmdbId).limit(1)
+    if (error || !data || data.length === 0) {
+        // // TODO fix it!
+    }
+    return data![0]
+}
+
 export {
-    registerMovieNote
+    registerMovieNote,
+    listMovieNote,
+    loadMovieNote
 }

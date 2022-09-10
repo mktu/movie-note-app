@@ -1,12 +1,15 @@
-import { Fragment } from "react";
+import clsx from 'clsx';
+import { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
+import ButtonBase from '~/components/buttons/Base';
+import XIcon from '~/components/icons/X';
+
+import { Combobox, Transition } from '@headlessui/react';
+
+import { useTmdbSearch } from '../../hooks/useTmdb';
+import SearchOptionItem from './SearchOptionItem';
+
 import type { FC } from "react";
-import { Combobox, Transition } from "@headlessui/react";
-import XIcon from "~/components/icons/X";
-import ButtonBase from '~/components/buttons/Base'
-import { useTmdbSearch } from "../../hooks/useTmdb";
-import clsx from "clsx";
-import SearchOptionItem from "./SearchOptionItem";
-import { useTranslation } from "react-i18next";
 
 type Props = {
     selected: string,
