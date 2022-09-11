@@ -1,9 +1,15 @@
-import { TmdbmageBasePath } from '@utils/constants';
 import clsx from 'clsx';
-import type { FC } from 'react'
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { TextButton } from '~/components/buttons';
+
+import { TmdbmageBasePath } from '@utils/constants';
+
+import Image from './Image';
+
+import type { FC } from 'react';
 import type { Credits } from '../../utils/tmdb';
-import Image from './Image'
+
 
 const imageBasePath = `${TmdbmageBasePath}/w276_and_h350_face`
 const imageBasePaths = [
@@ -26,8 +32,10 @@ const CreditsComp: FC<Props> = ({
     credits,
     clasName
 }) => {
+    const [showAll, setShowAll] = useState(false)
     const { cast, crew } = credits || { cast: [], crew: [] }
     const { t } = useTranslation('common')
+    const target = showAll ? cast : cast.slice(0, 8)
     return (
         <div className={clsx('flex w-full flex-col gap-4', clasName)}>
             <div>
@@ -45,7 +53,7 @@ const CreditsComp: FC<Props> = ({
             <div>
                 <h3 className='mb-2 text-lg'>キャスト</h3>
                 <div className='flex w-full overflow-x-auto py-2'>
-                    {cast.map((cast) => {
+                    {target.map((cast) => {
                         return (
                             <div key={cast.id} className='mr-2'>
                                 <Image
@@ -59,6 +67,9 @@ const CreditsComp: FC<Props> = ({
                             </div>
                         )
                     })}
+                    {!showAll && (
+                        <TextButton onClick={() => { setShowAll(true) }} theme='label'>全て表示</TextButton>
+                    )}
                 </div>
             </div>
         </div>
