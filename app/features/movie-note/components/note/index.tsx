@@ -1,16 +1,19 @@
 import type { FC } from 'react'
-import { useRef, useEffect } from 'react'
+import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
-import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
-import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
-import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { ListPlugin } from '@lexical/react/LexicalListPlugin';
+import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
-import { useTranslation } from 'react-i18next';
-import { TRANSFORMERS } from "@lexical/markdown";
-import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
-import initialConfig from './initialConfig'
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+
+import initialConfig from './initialConfig';
+import { transformers } from './nodes';
+
 import type { EditorState } from 'lexical';
 
 type Props = {
@@ -35,7 +38,7 @@ const Editor: FC<Props> = ({
                     placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
                 />
                 <HistoryPlugin />
-                <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+                <MarkdownShortcutPlugin transformers={transformers} />
                 <ListPlugin />
                 <CheckListPlugin />
                 <OnChangePlugin onChange={(editorState) => {

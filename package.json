@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@headlessui/react": "1.7.0",
-    "@lexical/react": "0.3.11",
+    "@lexical/react": "0.4.1",
     "@remix-run/cloudflare": "1.7.0",
     "@remix-run/cloudflare-pages": "1.7.0",
     "@remix-run/react": "1.7.0",
@@ -33,7 +33,7 @@
     "i18next-browser-languagedetector": "6.1.5",
     "i18next-http-backend": "1.4.1",
     "i18next-resources-to-backend": "1.0.0",
-    "lexical": "0.3.11",
+    "lexical": "0.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "7.34.2",
