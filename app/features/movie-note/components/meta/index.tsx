@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import type { FC } from 'react'
-import type { MovieDetail } from '../../utils/tmdb';
+import type { TmdbDetail } from '../../utils/tmdb';
 import Genres from './Genres';
 
 type Props = {
-    genres: MovieDetail['genres'],
+    genres: TmdbDetail['genres'],
     className?: string
 }
 
