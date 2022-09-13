@@ -13,14 +13,15 @@ import { getSupabaseAdmin } from '@utils/server/db/index.server';
 import type { ActionArgs, LoaderArgs } from "@remix-run/cloudflare";
 import type { FC } from "react";
 import type { MovieNoteDetail } from "@type-defs/backend";
-import type { Credits, MovieDetail } from '~/features/movie-note/utils/tmdb';
+import type { Credits, TmdbDetail } from '~/features/movie-note/utils/tmdb';
+import { getTmdbInfo, putTmdbInfo } from '~/features/movie-note/server/kv';
 type ActionData = {
     error?: string
 }
 
 type LorderData = {
     movieDetail: MovieNoteDetail,
-    tmdbDetail: MovieDetail,
+    tmdbDetail: TmdbDetail,
     tmdbCredits: Credits
 }
 // TODO update
@@ -60,11 +61,16 @@ export async function loader({ request, context, params }: LoaderArgs) {
 
 
     const note = await loadMovieNote(dbAdmin, user.id, noteId)
+    const lng = note.lng === 'ja' ? 'ja' : 'en'
 
     const tmdbData = setTmdbData(context)
-    const tmdb = new Tmdb(tmdbData.apiKey, note.lng === 'ja' ? 'ja' : 'en')
-    const tmdbDetail = await tmdb.getDetail(note.tmdb_id)
+    const tmdb = new Tmdb(tmdbData.apiKey, lng)
+    const tmdbDetailKv = await getTmdbInfo(context.TmdbInfo as KVNamespace, note.tmdb_id, lng)
+    const tmdbDetail = tmdbDetailKv || await tmdb.getDetail(note.tmdb_id)
     const tmdbCredits = await tmdb.getCredits(note.tmdb_id)
+    if (!tmdbDetailKv) {
+        await putTmdbInfo(context.TmdbInfo as KVNamespace, tmdbDetail)
+    }
 
     return json<LorderData>({
         movieDetail: note,

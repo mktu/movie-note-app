@@ -12,13 +12,13 @@ import Review from '../components/review';
 import type { FC } from "react";
 import type { AddMovieNote } from "@type-defs/frontend";
 import type { MovieNoteDetail } from '@type-defs/backend';
-import type { Credits, MovieDetail } from '../utils/tmdb';
+import type { Credits, TmdbDetail } from '../utils/tmdb';
 
 type Props = {
     onSubmit: (note: AddMovieNote) => void,
     error?: string,
     movieNoteDetail?: MovieNoteDetail,
-    tmdbDetail?: MovieDetail
+    tmdbDetail?: TmdbDetail
     tmdbCredits?: Credits
 }
 

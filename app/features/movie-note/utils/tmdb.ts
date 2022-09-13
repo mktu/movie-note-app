@@ -12,11 +12,13 @@ export type SearchResult = {
     }[]
 }
 
-export type MovieDetail = {
+export type TmdbLng = 'ja' | 'en'
+
+export type TmdbDetail = {
     id: string,
     title: string,
     release_date: string,
-    lng: string
+    lng: TmdbLng
     status: string,
     overview?: string,
     poster_path?: string,
@@ -51,12 +53,10 @@ export type Credits = {
     crew: Crew[]
 }
 
-type Lng = 'ja' | 'en'
-
 export default class Tmdb {
     apiKey: string = ''
-    lng: Lng = 'ja'
-    constructor(apiKey: string, lng: Lng) {
+    lng: TmdbLng = 'ja'
+    constructor(apiKey: string, lng: TmdbLng) {
         this.apiKey = apiKey
         this.lng = lng
     }
@@ -86,7 +86,7 @@ export default class Tmdb {
             language: this.lng
         });
         const response = await fetch(`${detailBasePath}/${id}?${searchParams}`)
-        const json = await response.json<Omit<MovieDetail, 'lng'>>()
+        const json = await response.json<Omit<TmdbDetail, 'lng'>>()
         return { ...json, lng: this.lng }
     }
 }

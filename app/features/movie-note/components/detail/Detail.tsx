@@ -1,7 +1,7 @@
 import { TmdbmageBasePath } from '@utils/constants';
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next';
-import type { Credits as CreditsType, MovieDetail } from '../../utils/tmdb';
+import type { Credits as CreditsType, TmdbDetail } from '../../utils/tmdb';
 import Image from './Image'
 import Credits from './Credits'
 
@@ -14,7 +14,7 @@ const imageBasePaths = [
 ]
 
 type Props = {
-    detail: MovieDetail | null,
+    detail: TmdbDetail | null,
     credits: CreditsType | null
 }
 
