@@ -10,7 +10,7 @@ import { useActionData, useLoaderData, useSubmit } from '@remix-run/react';
 import { getFormData } from '@utils/form';
 import { getSupabaseAdmin } from '@utils/server/db/index.server';
 
-import type { ActionArgs, LoaderArgs } from "@remix-run/cloudflare";
+import type { ActionArgs, LoaderArgs, HeadersFunction } from "@remix-run/cloudflare";
 import type { FC } from "react";
 import type { MovieNoteDetail } from "@type-defs/backend";
 import type { Credits, TmdbDetail } from '~/features/movie-note/utils/tmdb';
@@ -47,6 +47,16 @@ export async function action({ request, context }: ActionArgs) {
             error: (e as Error).message
         }, { status: 400 })
     }
+};
+
+// stale-while-revalidateの設定
+export const headers: HeadersFunction = ({ loaderHeaders }) => {
+    const cacheControl =
+        loaderHeaders.get('Cache-Control') ??
+        'max-age=0, s-maxage=86400, stale-while-revalidate=3600';
+    return {
+        'Cache-Control': cacheControl,
+    };
 };
 
 export async function loader({ request, context, params }: LoaderArgs) {
