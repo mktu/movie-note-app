@@ -19,7 +19,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@headlessui/react": "1.7.0",
+    "@headlessui/react": "1.7.2",
     "@lexical/react": "0.4.1",
     "@remix-run/cloudflare": "1.7.0",
     "@remix-run/cloudflare-pages": "1.7.0",
