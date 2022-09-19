@@ -14,7 +14,11 @@ import type { ActionArgs, LoaderArgs, HeadersFunction } from "@remix-run/cloudfl
 import type { FC } from "react";
 import type { MovieNoteDetail } from "@type-defs/backend";
 import type { Credits, TmdbDetail } from '~/features/movie-note/utils/tmdb';
-import { getTmdbInfo, putTmdbInfo } from '~/features/movie-note/server/kv';
+import { getTmdbKv, putTmdbInfo } from '~/features/movie-note/server/kv';
+import { PerformanceCounter } from '@utils/performance';
+import Performance from '~/components/develop/performance'
+import { getSearchParamAsBoolean } from '@utils/searchparam.server';
+
 type ActionData = {
     error?: string
 }
@@ -22,7 +26,8 @@ type ActionData = {
 type LorderData = {
     movieDetail: MovieNoteDetail,
     tmdbDetail: TmdbDetail,
-    tmdbCredits: Credits
+    tmdbCredits: Credits,
+    performanceData: { [k: string]: number }
 }
 // TODO update
 export async function action({ request, context }: ActionArgs) {
@@ -65,27 +70,36 @@ export async function loader({ request, context, params }: LoaderArgs) {
     if (!user || !noteId) {
         return redirect('/login') // TODO fix it!
     }
+    const disableKv = getSearchParamAsBoolean(request, 'disableKv')
 
     const dbAdmin = getSupabaseAdmin(context)
+    const counter = new PerformanceCounter()
 
-
-
+    const t1 = counter.start('loadMovieNote')
     const note = await loadMovieNote(dbAdmin, user.id, noteId)
     const lng = note.lng === 'ja' ? 'ja' : 'en'
+    t1.finish()
 
     const tmdbData = setTmdbData(context)
     const tmdb = new Tmdb(tmdbData.apiKey, lng)
-    const tmdbDetailKv = await getTmdbInfo(context.TmdbInfo as KVNamespace, note.tmdb_id, lng)
+
+    const t2 = counter.start('tmdbDetail')
+    const tmdbDetailKv = disableKv ? null : await getTmdbKv(context.TmdbInfo as KVNamespace, note.tmdb_id, lng)
     const tmdbDetail = tmdbDetailKv || await tmdb.getDetail(note.tmdb_id)
+    t2.finish(`kv=${Boolean(tmdbDetailKv)}`)
+
+    const t3 = counter.start('tmdbDetail')
     const tmdbCredits = await tmdb.getCredits(note.tmdb_id)
     if (!tmdbDetailKv) {
         await putTmdbInfo(context.TmdbInfo as KVNamespace, tmdbDetail)
     }
+    t3.finish()
 
     return json<LorderData>({
         movieDetail: note,
         tmdbDetail,
-        tmdbCredits
+        tmdbCredits,
+        performanceData: counter.getResults()
     })
 }
 
@@ -93,15 +107,17 @@ const Note: FC = () => {
     const submit = useSubmit()
     const actionData = useActionData<typeof action>()
     const loaderData = useLoaderData<typeof loader>()
-
-    return (<EditMovieNote
-        key={loaderData.movieDetail.tmdb_id || ''}
-        movieNoteDetail={loaderData.movieDetail}
-        tmdbDetail={loaderData.tmdbDetail}
-        tmdbCredits={loaderData.tmdbCredits}
-        onSubmit={(addMovieNote) => {
-            submit(getFormData(addMovieNote), { method: 'post' })
-        }} error={actionData?.error} />)
+    return (<>
+        <Performance counters={loaderData.performanceData} />
+        <EditMovieNote
+            key={loaderData.movieDetail.tmdb_id || ''}
+            movieNoteDetail={loaderData.movieDetail}
+            tmdbDetail={loaderData.tmdbDetail}
+            tmdbCredits={loaderData.tmdbCredits}
+            onSubmit={(addMovieNote) => {
+                submit(getFormData(addMovieNote), { method: 'post' })
+            }} error={actionData?.error} />
+    </>)
 }
 
 export default Note
