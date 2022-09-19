@@ -3,7 +3,7 @@ import { GeneralError } from '~/components/error';
 import authenticator from '~/features/auth/server/auth.server';
 import { EditMovieNote } from '~/features/movie-note/';
 import { loadMovieNote, registerMovieNote } from '~/features/movie-note/server/db';
-import { getTmdbKv, putTmdbInfo } from '~/features/movie-note/server/kv';
+import { tmdbKv } from '~/features/movie-note/server/kv';
 import { parseAddNote } from '~/features/movie-note/server/validation';
 import { MovieNoteError } from '~/features/movie-note/utils/error';
 import Tmdb, { setTmdbData } from '~/features/movie-note/utils/tmdb';
@@ -97,14 +97,14 @@ export async function loader({ request, context, params }: LoaderArgs) {
     const tmdb = new Tmdb(tmdbData.apiKey, lng)
 
     const t2 = counter.start('tmdbDetail')
-    const tmdbDetailKv = disableKv ? null : await getTmdbKv(context.TmdbInfo as KVNamespace, note.tmdb_id, lng)
+    const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(context.TmdbInfo as KVNamespace, note.tmdb_id, lng)
     const tmdbDetail = tmdbDetailKv || await tmdb.getDetail(note.tmdb_id)
     t2.finish(`disableKv=${disableKv},hit=${Boolean(tmdbDetailKv)}`)
 
     const t3 = counter.start('tmdbCredits')
     const tmdbCredits = await tmdb.getCredits(note.tmdb_id)
     if (!tmdbDetailKv) {
-        await putTmdbInfo(context.TmdbInfo as KVNamespace, tmdbDetail)
+        await tmdbKv.putTmdbInfo(context.TmdbInfo as KVNamespace, tmdbDetail)
     }
     t3.finish()
 
