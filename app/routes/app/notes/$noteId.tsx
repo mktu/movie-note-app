@@ -59,6 +59,7 @@ export const headers: HeadersFunction = ({ loaderHeaders }) => {
     const cacheControl =
         loaderHeaders.get('Cache-Control') ??
         'max-age=0, s-maxage=86400, stale-while-revalidate=3600';
+    // 1day
     return {
         'Cache-Control': cacheControl,
     };
@@ -86,9 +87,9 @@ export async function loader({ request, context, params }: LoaderArgs) {
     const t2 = counter.start('tmdbDetail')
     const tmdbDetailKv = disableKv ? null : await getTmdbKv(context.TmdbInfo as KVNamespace, note.tmdb_id, lng)
     const tmdbDetail = tmdbDetailKv || await tmdb.getDetail(note.tmdb_id)
-    t2.finish(`kv=${Boolean(tmdbDetailKv)}`)
+    t2.finish(`kv=${disableKv},hit=${Boolean(tmdbDetailKv)}`)
 
-    const t3 = counter.start('tmdbDetail')
+    const t3 = counter.start('tmdbCredits')
     const tmdbCredits = await tmdb.getCredits(note.tmdb_id)
     if (!tmdbDetailKv) {
         await putTmdbInfo(context.TmdbInfo as KVNamespace, tmdbDetail)
