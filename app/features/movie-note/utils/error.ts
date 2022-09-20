@@ -1,4 +1,4 @@
-type ErrorKey =
+export type ErrorKey =
     'movie-note-already-registered' |
     'movie-note-not-found' |
     'invalid-movie-note' |
