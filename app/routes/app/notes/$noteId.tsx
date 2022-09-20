@@ -2,7 +2,7 @@ import Performance from '~/components/develop/performance';
 import { GeneralError } from '~/components/error';
 import authenticator from '~/features/auth/server/auth.server';
 import { EditMovieNote } from '~/features/movie-note/';
-import { loadMovieNote, registerMovieNote } from '~/features/movie-note/server/db';
+import { loadMovieNote, registerMovieNote, updateMovieNote } from '~/features/movie-note/server/db';
 import { tmdbKv } from '~/features/movie-note/server/kv';
 import { parseAddNote } from '~/features/movie-note/server/validation';
 import { MovieNoteError } from '~/features/movie-note/utils/error';
@@ -20,13 +20,14 @@ import type { ActionArgs, LoaderArgs, HeadersFunction } from "@remix-run/cloudfl
 import type { FC } from "react";
 import type { MovieNoteDetail } from "@type-defs/backend";
 import type { Credits, TmdbDetail } from '~/features/movie-note/utils/tmdb';
+import { parseUpdateNote } from '~/features/movie-note/server/validation/updateNote';
 
 type ActionData = {
     error?: string
 }
 
 type ContentData = {
-    movieDetail: MovieNoteDetail,
+    movieNoteDetail: MovieNoteDetail,
     tmdbDetail: TmdbDetail,
     tmdbCredits: Credits,
     performanceData: { [k: string]: number }
@@ -46,8 +47,8 @@ export async function action({ request, context }: ActionArgs) {
     }
     const supabaseAdmin = getSupabaseAdmin(context)
     try {
-        const data = parseAddNote(await request.formData())
-        await registerMovieNote(supabaseAdmin, data, user.id)
+        const data = parseUpdateNote(await request.formData())
+        await updateMovieNote(supabaseAdmin, data, user.id)
         return redirect('/app')
     } catch (e) {
         if (e instanceof MovieNoteError) {
@@ -97,20 +98,40 @@ export async function loader({ request, context, params }: LoaderArgs) {
     const tmdb = new Tmdb(tmdbData.apiKey, lng)
 
     const t2 = counter.start('tmdbDetail')
-    const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(context.TmdbInfo as KVNamespace, note.tmdb_id, lng)
-    const tmdbDetail = tmdbDetailKv || await tmdb.getDetail(note.tmdb_id)
-    t2.finish(`disableKv=${disableKv},hit=${Boolean(tmdbDetailKv)}`)
-
     const t3 = counter.start('tmdbCredits')
-    const tmdbCredits = await tmdb.getCredits(note.tmdb_id)
-    if (!tmdbDetailKv) {
-        await tmdbKv.putTmdbInfo(context.TmdbInfo as KVNamespace, tmdbDetail)
+    const t2_3 = counter.start('tmdb Detail-Credits')
+
+    const getTmdbDetail_ = async () => {
+        const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(context.TmdbInfo as KVNamespace, note.tmdb_id, tmdb.lng)
+        const tmdbDetail = tmdbDetailKv || await tmdb.getDetail(note.tmdb_id)
+        const hitKv = Boolean(tmdbDetailKv)
+        if (!hitKv) {
+            await tmdbKv.putTmdbInfo(context.TmdbInfo as KVNamespace, tmdbDetail)
+        }
+        t2.comment(`disableKv=${disableKv},hit=${Boolean(tmdbDetailKv)}`)
+        t2.stop()
+        return tmdbDetail
     }
+
+    const getTmdbCredits_ = async () => {
+        const credits = await tmdb.getCredits(note.tmdb_id)
+        t3.stop()
+        return credits
+    }
+
+    // const getImdbRate_ = async ()=>{
+    //     const cache = await getImdbRateKv(context.ImdbInfo as KVNamespace, note.)
+    // }
+
+    const [tmdbDetail, tmdbCredits] = await Promise.all([getTmdbDetail_(), getTmdbCredits_()])
+
+    t2.finish()
     t3.finish()
+    t2_3.finish()
 
     return json<LorderData>({
         content: {
-            movieDetail: note,
+            movieNoteDetail: note,
             tmdbDetail,
             tmdbCredits,
             performanceData: counter.getResults()
@@ -132,12 +153,12 @@ const Note: FC = () => {
             <>
                 <Performance counters={content.performanceData} />
                 <EditMovieNote
-                    key={content.movieDetail.tmdb_id || ''}
-                    movieNoteDetail={content.movieDetail}
+                    key={content.movieNoteDetail.tmdb_id || ''}
+                    movieNoteDetail={content.movieNoteDetail}
                     tmdbDetail={content.tmdbDetail}
                     tmdbCredits={content.tmdbCredits}
-                    onSubmit={(addMovieNote) => {
-                        submit(getFormData(addMovieNote), { method: 'post' })
+                    onSubmit={(updateMovieNote) => {
+                        submit(getFormData(updateMovieNote), { method: 'post' })
                     }} error={actionData?.error} />
             </>
         )}

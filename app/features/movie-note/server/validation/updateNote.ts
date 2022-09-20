@@ -22,15 +22,15 @@ const schema = zfd.formData({
         .text(z.string().min(1, { message: "lng-validation-error" })),
 })
 
-export const addNoteSchema = schema
+export const updateNoteSchema = schema
 
-export const parseAddNote = (formData: FormData) => {
+export const parseUpdateNote = (formData: FormData) => {
     try {
-        return addNoteSchema.parse(formData)
+        return updateNoteSchema.parse(formData)
     } catch (e) {
         console.error(e)
         throw Error((e as ZodError).errors[0].message)
     }
 }
 
-export type AddMovieNote = z.infer<typeof schema>;
+export type UpdateMovieNote = z.infer<typeof schema>;

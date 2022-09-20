@@ -2,6 +2,8 @@ class PerformanceTimer {
     key = ''
     _comment: string[] = []
     start = 0
+    stoped = false
+    time = 0
     pc: PerformanceCounter
     constructor(key: string, pc: PerformanceCounter) {
         this.key = key
@@ -12,9 +14,16 @@ class PerformanceTimer {
         this._comment.push(c)
     }
     stop = () => {
+        if (this.stoped) {
+            return
+        }
+        this.time = Date.now() - this.start
+        this.stoped = true
+    }
+    result = () => {
         return {
             key: this._comment.length > 0 ? `${this.key}(${this._comment.join(',')})` : this.key,
-            time: Date.now() - this.start
+            time: this.time
         }
     }
     finish = (comment?: string) => {
@@ -44,7 +53,8 @@ export class PerformanceCounter {
         return new PerformanceTimer(key, this)
     }
     finish = (timer: PerformanceTimer) => {
-        const ret = timer.stop()
+        timer.stop()
+        const ret = timer.result()
         this.results[ret.key] = ret.time
     }
 }

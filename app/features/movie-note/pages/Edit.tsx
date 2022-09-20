@@ -10,12 +10,12 @@ import Note from '../components/note';
 import Review from '../components/review';
 
 import type { FC } from "react";
-import type { AddMovieNote } from "@type-defs/frontend";
+import type { UpdateMovieNote } from "@type-defs/frontend";
 import type { MovieNoteDetail } from '@type-defs/backend';
 import type { Credits, TmdbDetail } from '../utils/tmdb';
 
 type Props = {
-    onSubmit: (note: AddMovieNote) => void,
+    onSubmit: (note: UpdateMovieNote) => void,
     error?: string,
     movieNoteDetail?: MovieNoteDetail,
     tmdbDetail?: TmdbDetail
@@ -47,6 +47,7 @@ const Edit: FC<Props> = ({
                         title: detail.title,
                         thumbnail: detail.poster_path || detail.backdrop_path || '',
                         tmdbId: detail.id,
+                        imdbId: detail.imdb_id,
                         movieMemo: content ? content.get() : '',
                         admirationDate: formattedWatchDate || '',
                         stars,
@@ -58,7 +59,7 @@ const Edit: FC<Props> = ({
                 metaInfo: <MetaInfo genres={detail?.genres || []} />,
                 imdb: <Imdb imdbId={detail?.imdb_id} />
             }}
-            note={detail && <Note setContentGetter={setContentGetter} />}
+            note={detail && <Note setContentGetter={setContentGetter} init={movieNoteDetail?.memo} />}
             review={detail && <Review admirationDate={admirationDate} stars={stars} setAdmirationDate={setAdmirationDate} setStars={setStars} />}
         />
     )

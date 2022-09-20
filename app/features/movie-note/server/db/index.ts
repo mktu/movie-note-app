@@ -11,7 +11,8 @@ const registerMovieNote = async (supabaseAdmin: AdminClientType, movieNote: AddM
             tmdb_id: movieNote.tmdbId,
             title: movieNote.title,
             thumbnail: movieNote.thumbnail,
-            lng: movieNote.lng
+            lng: movieNote.lng,
+            imdb_id: movieNote.imdbId
         })
         if (infoError) {
             console.error(infoError)
@@ -24,6 +25,35 @@ const registerMovieNote = async (supabaseAdmin: AdminClientType, movieNote: AddM
         user_id: userId,
         admiration_date: movieNote.admirationDate || null,
         stars: movieNote.stars,
+        lng: movieNote.lng
+    })
+    if (noteError) {
+        console.error(noteError)
+        throw fromCode(noteError.code)
+    }
+}
+
+const updateMovieNote = async (supabaseAdmin: AdminClientType, movieNote: AddMovieNote, userId: string) => {
+    const { error: infoError } = await supabaseAdmin.from<MovieInfoTable>('movie_info').update({
+        title: movieNote.title,
+        thumbnail: movieNote.thumbnail,
+        imdb_id: movieNote.imdbId
+    }).match({
+        tmdb_id: movieNote.tmdbId,
+        lng: movieNote.lng,
+    })
+    if (infoError) {
+        console.error(infoError)
+        throw fromCode(infoError.code)
+    }
+    const { error: noteError } = await supabaseAdmin.from<MovieNoteTable>('movie_note').update({
+        memo: movieNote.movieMemo,
+        user_id: userId,
+        admiration_date: movieNote.admirationDate || null,
+        stars: movieNote.stars,
+
+    }).match({
+        tmdb_id: movieNote.tmdbId,
         lng: movieNote.lng
     })
     if (noteError) {
@@ -52,6 +82,7 @@ const loadMovieNote = async (supabaseAdmin: AdminClientType, userId: string, tmd
 
 export {
     registerMovieNote,
+    updateMovieNote,
     listMovieNote,
     loadMovieNote
 }

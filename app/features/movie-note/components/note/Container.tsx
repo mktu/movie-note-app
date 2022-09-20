@@ -1,11 +1,9 @@
-import type { FC } from 'react';
+import type { ComponentProps, FC } from 'react';
 import { lazy, Suspense } from 'react'
 
 const Editor = lazy(() => import('./Editor'));
 
-type Props = {
-    setContentGetter: (fun: () => string) => void
-}
+type Props = ComponentProps<typeof Editor>
 
 const Container: FC<Props> = (props) => {
     return (

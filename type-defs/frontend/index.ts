@@ -4,6 +4,9 @@ export type AddMovieNote = {
     title: string,
     lng: string,
     movieMemo: string,
-    thumbnail: string
+    thumbnail: string,
+    imdbId?: string,
     admirationDate: string
 }
+
+export type UpdateMovieNote = AddMovieNote

@@ -17,11 +17,13 @@ import { transformers } from './nodes';
 import type { EditorState } from 'lexical';
 
 type Props = {
-    setContentGetter: (fun: () => string) => void
+    setContentGetter: (fun: () => string) => void,
+    init?: string
 }
 
 const Editor: FC<Props> = ({
-    setContentGetter
+    setContentGetter,
+    init
 }) => {
     const { t } = useTranslation('common')
     const editorStateRef = useRef<EditorState>();
@@ -32,7 +34,10 @@ const Editor: FC<Props> = ({
     }, [setContentGetter])
     return (
         <div className='relative'>
-            <LexicalComposer initialConfig={initialConfig}>
+            <LexicalComposer initialConfig={{
+                editorState: init,
+                ...initialConfig
+            }}>
                 <RichTextPlugin
                     contentEditable={<ContentEditable className='text-text-main outline-none' />}
                     placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
