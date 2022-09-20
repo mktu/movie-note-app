@@ -2,7 +2,7 @@ import Performance from '~/components/develop/performance';
 import { GeneralError } from '~/components/error';
 import authenticator from '~/features/auth/server/auth.server';
 import { EditMovieNote } from '~/features/movie-note/';
-import { loadMovieNote, registerMovieNote } from '~/features/movie-note/server/db';
+import { loadMovieNote, registerMovieNote, updateMovieNote } from '~/features/movie-note/server/db';
 import { tmdbKv } from '~/features/movie-note/server/kv';
 import { parseAddNote } from '~/features/movie-note/server/validation';
 import { MovieNoteError } from '~/features/movie-note/utils/error';
@@ -20,13 +20,14 @@ import type { ActionArgs, LoaderArgs, HeadersFunction } from "@remix-run/cloudfl
 import type { FC } from "react";
 import type { MovieNoteDetail } from "@type-defs/backend";
 import type { Credits, TmdbDetail } from '~/features/movie-note/utils/tmdb';
+import { parseUpdateNote } from '~/features/movie-note/server/validation/updateNote';
 
 type ActionData = {
     error?: string
 }
 
 type ContentData = {
-    movieDetail: MovieNoteDetail,
+    movieNoteDetail: MovieNoteDetail,
     tmdbDetail: TmdbDetail,
     tmdbCredits: Credits,
     performanceData: { [k: string]: number }
@@ -46,8 +47,8 @@ export async function action({ request, context }: ActionArgs) {
     }
     const supabaseAdmin = getSupabaseAdmin(context)
     try {
-        const data = parseAddNote(await request.formData())
-        await registerMovieNote(supabaseAdmin, data, user.id)
+        const data = parseUpdateNote(await request.formData())
+        await updateMovieNote(supabaseAdmin, data, user.id)
         return redirect('/app')
     } catch (e) {
         if (e instanceof MovieNoteError) {
@@ -130,7 +131,7 @@ export async function loader({ request, context, params }: LoaderArgs) {
 
     return json<LorderData>({
         content: {
-            movieDetail: note,
+            movieNoteDetail: note,
             tmdbDetail,
             tmdbCredits,
             performanceData: counter.getResults()
@@ -152,12 +153,12 @@ const Note: FC = () => {
             <>
                 <Performance counters={content.performanceData} />
                 <EditMovieNote
-                    key={content.movieDetail.tmdb_id || ''}
-                    movieNoteDetail={content.movieDetail}
+                    key={content.movieNoteDetail.tmdb_id || ''}
+                    movieNoteDetail={content.movieNoteDetail}
                     tmdbDetail={content.tmdbDetail}
                     tmdbCredits={content.tmdbCredits}
-                    onSubmit={(addMovieNote) => {
-                        submit(getFormData(addMovieNote), { method: 'post' })
+                    onSubmit={(updateMovieNote) => {
+                        submit(getFormData(updateMovieNote), { method: 'post' })
                     }} error={actionData?.error} />
             </>
         )}

@@ -55,6 +55,7 @@ const New: FC<Props> = ({
                         movieMemo: content ? content.get() : '',
                         admirationDate: formattedWatchDate || '',
                         stars,
+                        imdbId: detail.imdb_id,
                         lng: detail.lng
                     })
                 }} {...{ selected, setSelected }} />}

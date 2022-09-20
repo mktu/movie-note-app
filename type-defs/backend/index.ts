@@ -42,7 +42,7 @@ export type MovieNoteDetail = {
     stars: number,
     thumbnail?: string,
     title?: string,
-    note?: string,
+    memo?: string,
     admiration_date?: string
 }
 
@@ -51,4 +51,5 @@ export type MovieInfoTable = {
     title: string,
     lng: string,
     thumbnail: string | null,
+    imdb_id: string | null
 }
