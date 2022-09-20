@@ -47,6 +47,7 @@ const Edit: FC<Props> = ({
                         title: detail.title,
                         thumbnail: detail.poster_path || detail.backdrop_path || '',
                         tmdbId: detail.id,
+                        imdbId: detail.imdb_id,
                         movieMemo: content ? content.get() : '',
                         admirationDate: formattedWatchDate || '',
                         stars,
