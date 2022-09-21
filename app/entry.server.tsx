@@ -1,7 +1,7 @@
 import { RemixServer } from "@remix-run/react";
 import type { EntryContext } from "@remix-run/server-runtime";
 import { createInstance } from "i18next";
-import { renderToReadableStream } from "react-dom/server";
+import { renderToString } from "react-dom/server";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import i18next, { lngs } from "./i18next.server";
 import i18n from './i18n'; // your i18n configuration file
@@ -26,7 +26,7 @@ export default async function handleRequest(
       ns,
     });
 
-  let markup = await renderToReadableStream(
+  let markup = renderToString(
     <I18nextProvider i18n={instance}>
       <RemixServer context={remixContext} url={request.url} />
     </I18nextProvider>
@@ -34,7 +34,7 @@ export default async function handleRequest(
 
   responseHeaders.set("Content-Type", "text/html");
 
-  return new Response(markup, {
+  return new Response("<!DOCTYPE html>" + markup, {
     status: responseStatusCode,
     headers: responseHeaders,
   });
