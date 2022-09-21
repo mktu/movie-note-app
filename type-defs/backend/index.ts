@@ -43,7 +43,8 @@ export type MovieNoteDetail = {
     thumbnail?: string,
     title?: string,
     memo?: string,
-    admiration_date?: string
+    admiration_date?: string,
+    imdb_id: string | null
 }
 
 export type MovieInfoTable = {
