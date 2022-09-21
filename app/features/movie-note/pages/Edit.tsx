@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import Imdb from '../features/imdb';
+import Imdb, { ImdbRateLabel } from '../features/imdb';
 import { useReview } from '../hooks/useMovie';
 import Detail from '../components/detail';
 import { EditHeader } from '../components/header';
@@ -13,13 +13,15 @@ import type { FC } from "react";
 import type { UpdateMovieNote } from "@type-defs/frontend";
 import type { MovieNoteDetail } from '@type-defs/backend';
 import type { Credits, TmdbDetail } from '../utils/tmdb';
+import type { ImdbRate } from '../features/imdb/types';
 
 type Props = {
     onSubmit: (note: UpdateMovieNote) => void,
     error?: string,
     movieNoteDetail?: MovieNoteDetail,
     tmdbDetail?: TmdbDetail
-    tmdbCredits?: Credits
+    tmdbCredits?: Credits,
+    imdbRate: ImdbRate | null
 }
 
 const Edit: FC<Props> = ({
@@ -27,7 +29,8 @@ const Edit: FC<Props> = ({
     error,
     movieNoteDetail,
     tmdbDetail,
-    tmdbCredits
+    tmdbCredits,
+    imdbRate
 }) => {
     const [content, setContent] = useState<{ get: () => string }>()
     const setContentGetter = useCallback((getContent: () => string) => {
@@ -57,7 +60,7 @@ const Edit: FC<Props> = ({
             movieInfo={detail && {
                 detail: <Detail detail={detail} credits={credits} />,
                 metaInfo: <MetaInfo genres={detail?.genres || []} />,
-                imdb: <Imdb imdbId={detail?.imdb_id} />
+                imdb: imdbRate ? <ImdbRateLabel imdbId={detail.imdb_id!} {...imdbRate} /> : <Imdb imdbId={detail?.imdb_id} />
             }}
             note={detail && <Note setContentGetter={setContentGetter} init={movieNoteDetail?.memo} />}
             review={detail && <Review admirationDate={admirationDate} stars={stars} setAdmirationDate={setAdmirationDate} setStars={setStars} />}

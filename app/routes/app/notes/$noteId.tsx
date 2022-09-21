@@ -2,9 +2,10 @@ import Performance from '~/components/develop/performance';
 import { GeneralError } from '~/components/error';
 import authenticator from '~/features/auth/server/auth.server';
 import { EditMovieNote } from '~/features/movie-note/';
-import { loadMovieNote, registerMovieNote, updateMovieNote } from '~/features/movie-note/server/db';
+import { getImdbRateKv } from '~/features/movie-note/features/imdb/server/kv';
+import { loadMovieNote, updateMovieNote } from '~/features/movie-note/server/db';
 import { tmdbKv } from '~/features/movie-note/server/kv';
-import { parseAddNote } from '~/features/movie-note/server/validation';
+import { parseUpdateNote } from '~/features/movie-note/server/validation/updateNote';
 import { MovieNoteError } from '~/features/movie-note/utils/error';
 import Tmdb, { setTmdbData } from '~/features/movie-note/utils/tmdb';
 
@@ -20,7 +21,7 @@ import type { ActionArgs, LoaderArgs, HeadersFunction } from "@remix-run/cloudfl
 import type { FC } from "react";
 import type { MovieNoteDetail } from "@type-defs/backend";
 import type { Credits, TmdbDetail } from '~/features/movie-note/utils/tmdb';
-import { parseUpdateNote } from '~/features/movie-note/server/validation/updateNote';
+import type { ImdbRate } from '~/features/movie-note/features/imdb/types';
 
 type ActionData = {
     error?: string
@@ -30,6 +31,7 @@ type ContentData = {
     movieNoteDetail: MovieNoteDetail,
     tmdbDetail: TmdbDetail,
     tmdbCredits: Credits,
+    imdbRate: ImdbRate | null,
     performanceData: { [k: string]: number }
 }
 
@@ -99,7 +101,8 @@ export async function loader({ request, context, params }: LoaderArgs) {
 
     const t2 = counter.start('tmdbDetail')
     const t3 = counter.start('tmdbCredits')
-    const t2_3 = counter.start('tmdb Detail-Credits')
+    const t4 = counter.start('imdbInfoKv')
+    const t2_4 = counter.start('tmdb Detail-Credits')
 
     const getTmdbDetail_ = async () => {
         const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(context.TmdbInfo as KVNamespace, note.tmdb_id, tmdb.lng)
@@ -119,21 +122,25 @@ export async function loader({ request, context, params }: LoaderArgs) {
         return credits
     }
 
-    // const getImdbRate_ = async ()=>{
-    //     const cache = await getImdbRateKv(context.ImdbInfo as KVNamespace, note.)
-    // }
+    const getImdbRate_ = async () => {
+        const imdbRate = note.imdb_id ? await getImdbRateKv(context.ImdbInfo as KVNamespace, note.imdb_id) : null
+        t4.stop()
+        return imdbRate
+    }
 
-    const [tmdbDetail, tmdbCredits] = await Promise.all([getTmdbDetail_(), getTmdbCredits_()])
+    const [tmdbDetail, tmdbCredits, imdbRate] = await Promise.all([getTmdbDetail_(), getTmdbCredits_(), getImdbRate_()])
 
     t2.finish()
     t3.finish()
-    t2_3.finish()
+    t4.finish()
+    t2_4.finish()
 
     return json<LorderData>({
         content: {
             movieNoteDetail: note,
             tmdbDetail,
             tmdbCredits,
+            imdbRate,
             performanceData: counter.getResults()
         }
     })
@@ -156,6 +163,7 @@ const Note: FC = () => {
                     key={content.movieNoteDetail.tmdb_id || ''}
                     movieNoteDetail={content.movieNoteDetail}
                     tmdbDetail={content.tmdbDetail}
+                    imdbRate={content.imdbRate}
                     tmdbCredits={content.tmdbCredits}
                     onSubmit={(updateMovieNote) => {
                         submit(getFormData(updateMovieNote), { method: 'post' })
