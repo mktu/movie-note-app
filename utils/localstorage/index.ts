@@ -1,6 +1,7 @@
 const SIDEBAR_WIDTH_KEY = 'sidebar-width'
 const VISIBLE_SIDEBAR_WIDTH_KEY = 'visible-sidebar-width'
 const IS_NOTE_KV_DISABLED = 'note-kv-disabled'
+const VISIBLE_PERFORMANCE_KEY = 'visible-performance'
 
 function isNumeric(n: string) {
     return !isNaN(parseFloat(n)) && isFinite(Number(n));
@@ -8,7 +9,7 @@ function isNumeric(n: string) {
 
 export const getSidebarWidth = () => {
     const ret = localStorage.getItem(SIDEBAR_WIDTH_KEY)
-    return (ret && isNumeric(ret)) ? Number(ret) : null
+    return (ret && isNumeric(ret)) ? Number(ret) : 0
 }
 
 export const saveSidebarWidth = (width: number) => {
@@ -20,7 +21,7 @@ export const saveVisibleSidebarWidth = (width: number) => {
 
 export const getVisibleSidebarWidth = () => {
     const ret = localStorage.getItem(VISIBLE_SIDEBAR_WIDTH_KEY)
-    return (ret && isNumeric(ret)) ? Number(ret) : null
+    return (ret && isNumeric(ret)) ? Number(ret) : 0
 }
 
 export const isKvDisabled = () => {
@@ -30,4 +31,13 @@ export const isKvDisabled = () => {
 
 export const setKvDisabled = (disabled: boolean) => {
     localStorage.setItem(IS_NOTE_KV_DISABLED, String(disabled))
+}
+
+export const saveVisiblePerformance = (show: boolean) => {
+    localStorage.setItem(VISIBLE_PERFORMANCE_KEY, String(show))
+}
+
+export const getVisiblePerformance = () => {
+    const ret = localStorage.getItem(VISIBLE_PERFORMANCE_KEY)
+    return ret ? ret.toLowerCase() === 'true' : false
 }

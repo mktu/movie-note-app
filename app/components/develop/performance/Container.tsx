@@ -1,8 +1,10 @@
 import type { FC } from 'react';
-import { useState } from 'react'
+import { useContext } from 'react';
+import LocalStorageContext from '~/providers/localstorage/Context';
+
 import { TextButton } from '../../buttons';
-import X from '../../icons/X';
 import AngleDown from '../../icons/AngleDown';
+import X from '../../icons/X';
 import Settings from './Settings';
 
 type Props = {
@@ -12,10 +14,10 @@ type Props = {
 const Performance: FC<Props> = ({
     counters
 }) => {
-    const [show, setShow] = useState(true)
+    const { saveVisiblePerformance, getVisiblePerformance } = useContext(LocalStorageContext)
     return (
         <div className='fixed top-0 right-0 flex flex-col gap-2 rounded-bl bg-slate-500 p-3 opacity-90'>
-            {show ? (
+            {getVisiblePerformance() ? (
                 <>
                     <h3 className='text-onprimary-main'>Performances</h3>
                     <hr className='w-full border-b' />
@@ -29,13 +31,13 @@ const Performance: FC<Props> = ({
                             </div>
                         ))}
                     </div>
-                    <TextButton onClick={() => { setShow(false) }} className='flex items-center font-semibold text-onprimary-main' paddings='px-0'>
+                    <TextButton onClick={() => { saveVisiblePerformance(false) }} className='flex items-center font-semibold text-onprimary-main' paddings='px-0'>
                         <X className='mr-2 h-5 w-5 fill-onprimary-main' />
                         <span>Hide</span>
                     </TextButton>
                 </>
             ) : (
-                <TextButton onClick={() => { setShow(true) }} className='flex items-center font-semibold text-onprimary-main' paddings='px-0'>
+                <TextButton onClick={() => { saveVisiblePerformance(true) }} className='flex items-center font-semibold text-onprimary-main' paddings='px-0'>
                     <AngleDown className='h-5 w-5 fill-onprimary-main' />
                 </TextButton>
             )}
