@@ -1,7 +1,11 @@
 import React from "react";
+import type useLocalstorage from './useLocalstorage';
 import * as localstorage from "@utils/localstorage";
 
-export type LocalstorageType = typeof localstorage
-const context = React.createContext<LocalstorageType>(localstorage);
+export type LocalstorageType = ReturnType<typeof useLocalstorage>
+const context = React.createContext<LocalstorageType>({
+    ...localstorage,
+    localstorageLoaded: false
+});
 
 export default context;

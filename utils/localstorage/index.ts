@@ -9,7 +9,7 @@ function isNumeric(n: string) {
 
 export const getSidebarWidth = () => {
     const ret = localStorage.getItem(SIDEBAR_WIDTH_KEY)
-    return (ret && isNumeric(ret)) ? Number(ret) : null
+    return (ret && isNumeric(ret)) ? Number(ret) : 0
 }
 
 export const saveSidebarWidth = (width: number) => {
@@ -21,7 +21,7 @@ export const saveVisibleSidebarWidth = (width: number) => {
 
 export const getVisibleSidebarWidth = () => {
     const ret = localStorage.getItem(VISIBLE_SIDEBAR_WIDTH_KEY)
-    return (ret && isNumeric(ret)) ? Number(ret) : null
+    return (ret && isNumeric(ret)) ? Number(ret) : 0
 }
 
 export const isKvDisabled = () => {
