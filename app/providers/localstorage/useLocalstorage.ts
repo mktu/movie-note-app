@@ -1,21 +1,28 @@
-import { useEffect, useMemo, useState } from "react";
+import { useLayoutEffect, useMemo, useState } from "react";
+import { useCookies } from "react-cookie"
 import type * as localstorage from "@utils/localstorage";
+import { SIDEBAR_WIDTH_KEY } from "@utils/cookie/constants";
+import { InitialSidebarWidth } from "@utils/constants";
 
 type LocalstorageType = typeof localstorage
-const InitialSidebarWidth = 250
+
+const useBrowserLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : () => { };
+
 
 const useLocalstorage = (localstorage: LocalstorageType) => {
+    const [cookies, setCookie] = useCookies([SIDEBAR_WIDTH_KEY]);
 
     const [localstorageLoaded, setLocalstorageLoaded] = useState(false)
     const [sidebarWidth, setSidebarWidth] = useState<number>(InitialSidebarWidth)
-    const [visibleSidebarWidth, setVisibleSidebarWidth] = useState<number>(InitialSidebarWidth)
+    const [lastSidebarWidth, setLastSidebarWidth] = useState<number>(InitialSidebarWidth)
     const [isKvDisabled, setKvDisabled] = useState(false)
     const [visiblePerformance, setVisiblePerformance] = useState(false)
 
     // localstorage only works on the client side 
-    useEffect(() => {
-        setSidebarWidth(localstorage.getSidebarWidth())
-        setVisibleSidebarWidth(localstorage.getVisibleSidebarWidth() || InitialSidebarWidth)
+    useBrowserLayoutEffect(() => {
+        setSidebarWidth(cookies[SIDEBAR_WIDTH_KEY] ?
+            Number(cookies[SIDEBAR_WIDTH_KEY]) : InitialSidebarWidth)
+        setLastSidebarWidth(localstorage.getLastSidebarWidth() || InitialSidebarWidth)
         setKvDisabled(localstorage.isKvDisabled)
         setVisiblePerformance(localstorage.getVisiblePerformance())
         setLocalstorageLoaded(true)
@@ -26,13 +33,13 @@ const useLocalstorage = (localstorage: LocalstorageType) => {
             getSidebarWidth: () => sidebarWidth,
             saveSidebarWidth: (w: number) => {
                 setSidebarWidth(w)
-                localstorage.saveSidebarWidth(w)
+                setCookie(SIDEBAR_WIDTH_KEY, w)
             },
-            saveVisibleSidebarWidth: (w: number) => {
-                setVisibleSidebarWidth(w)
-                localstorage.saveVisibleSidebarWidth(w)
+            saveLastSidebarWidth: (w: number) => {
+                setLastSidebarWidth(w)
+                localstorage.saveLastSidebarWidth(w)
             },
-            getVisibleSidebarWidth: () => visibleSidebarWidth,
+            getLastSidebarWidth: () => lastSidebarWidth,
             isKvDisabled: () => isKvDisabled,
             setKvDisabled: (b: boolean) => {
                 setKvDisabled(b)
@@ -45,7 +52,7 @@ const useLocalstorage = (localstorage: LocalstorageType) => {
             getVisiblePerformance: () => visiblePerformance,
             localstorageLoaded
         }
-    }, [sidebarWidth, visibleSidebarWidth, isKvDisabled, localstorage, visiblePerformance, localstorageLoaded])
+    }, [sidebarWidth, lastSidebarWidth, isKvDisabled, localstorage, visiblePerformance, localstorageLoaded, setCookie])
 
     return methods
 }

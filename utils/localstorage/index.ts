@@ -1,5 +1,5 @@
-const SIDEBAR_WIDTH_KEY = 'sidebar-width'
-const VISIBLE_SIDEBAR_WIDTH_KEY = 'visible-sidebar-width'
+import { LAST_SIDEBAR_WIDTH_KEY } from "@utils/cookie/constants";
+
 const IS_NOTE_KV_DISABLED = 'note-kv-disabled'
 const VISIBLE_PERFORMANCE_KEY = 'visible-performance'
 
@@ -7,20 +7,12 @@ function isNumeric(n: string) {
     return !isNaN(parseFloat(n)) && isFinite(Number(n));
 }
 
-export const getSidebarWidth = () => {
-    const ret = localStorage.getItem(SIDEBAR_WIDTH_KEY)
-    return (ret && isNumeric(ret)) ? Number(ret) : 0
+export const saveLastSidebarWidth = (width: number) => {
+    localStorage.setItem(LAST_SIDEBAR_WIDTH_KEY, String(width))
 }
 
-export const saveSidebarWidth = (width: number) => {
-    localStorage.setItem(SIDEBAR_WIDTH_KEY, String(width))
-}
-export const saveVisibleSidebarWidth = (width: number) => {
-    localStorage.setItem(VISIBLE_SIDEBAR_WIDTH_KEY, String(width))
-}
-
-export const getVisibleSidebarWidth = () => {
-    const ret = localStorage.getItem(VISIBLE_SIDEBAR_WIDTH_KEY)
+export const getLastSidebarWidth = () => {
+    const ret = localStorage.getItem(LAST_SIDEBAR_WIDTH_KEY)
     return (ret && isNumeric(ret)) ? Number(ret) : 0
 }
 
