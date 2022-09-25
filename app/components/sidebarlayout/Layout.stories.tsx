@@ -16,6 +16,7 @@ Default.args = {
     children: (
         <div>content</div>
     ),
+    initialSidebarWidth: 250,
     sidebar: (
         <Sidebar
             staticLinks={<div>links</div>}

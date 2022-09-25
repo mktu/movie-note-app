@@ -8,16 +8,17 @@ import LocalStorageContext from '~/providers/localstorage/Context';
 
 type Props = {
     sidebar: ReactNode,
-    children: ReactNode
+    children: ReactNode,
+    initialSidebarWidth: number,
 }
 
 const MinWidth = 200
 const WidthClosed = 50
 
 
-const Layout: FC<Props> = ({ sidebar, children }) => {
-    const { getSidebarWidth, getVisibleSidebarWidth, saveSidebarWidth, saveVisibleSidebarWidth, localstorageLoaded } = useContext(LocalStorageContext)
-    const savedWidth = getSidebarWidth()
+const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
+    const { getSidebarWidth, getLastSidebarWidth: getVisibleSidebarWidth, saveSidebarWidth, saveLastSidebarWidth: saveVisibleSidebarWidth, localstorageLoaded } = useContext(LocalStorageContext)
+    const savedWidth = localstorageLoaded ? getSidebarWidth() : initialSidebarWidth
     const hideSidebar = savedWidth === WidthClosed
     const updateWidth = useCallback((width: number, visibleWidth?: number) => {
         if (hideSidebar && MinWidth >= width) {
@@ -36,11 +37,6 @@ const Layout: FC<Props> = ({ sidebar, children }) => {
     }, [updateWidth])
 
     const { setGutter, setRoot, moving } = useSplit({ onDragEnd, minWidth: MinWidth, widthClosed: WidthClosed })
-
-    if (!localstorageLoaded) {
-        // Don't draw in ssr to avoid cls
-        return null
-    }
 
     return (
         <div ref={setRoot} className='flex h-full w-screen overflow-x-hidden'>
