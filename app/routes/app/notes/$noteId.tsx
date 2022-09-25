@@ -14,7 +14,7 @@ import type { FC } from "react";
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
     const cacheControl =
         loaderHeaders.get('Cache-Control') ??
-        'max-age=0, s-maxage=86400, stale-while-revalidate=3600';
+        's-maxage=86400, stale-while-revalidate=3600';
     // 1day
     return {
         'Cache-Control': cacheControl,
