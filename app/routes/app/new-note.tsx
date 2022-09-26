@@ -4,7 +4,7 @@ import { NewMovieNote } from '~/features/movie-note/';
 import { useActionData, useSubmit } from '@remix-run/react';
 import { getFormData } from '@utils/form';
 
-import type { action } from "~/features/movie-note/server/actions/new-note.server";
+import { action } from "~/features/movie-note/server/actions/new-note.server";
 
 export { action }
 

@@ -25,6 +25,9 @@ module.exports = {
         info : {
           main : '#2AB5F6'
         },
+        destructive : {
+          main : '#CE3E34'
+        },
         text : {
           main : '#37352F',
           dark : '#111111',

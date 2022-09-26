@@ -29,7 +29,6 @@ Default.args = {
         stars: 6,
         thumbnail: detail.poster_path || detail.backdrop_path,
         title: detail.title,
-        memo: 'test',
         admiration_date: '2020-02-02',
         imdb_id: 'a'
     },

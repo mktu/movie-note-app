@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import NoteList from './NoteList';
@@ -16,6 +17,7 @@ const Template: ComponentStory<typeof NoteList> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
+    onRemoveNote: action('onRemoveNote'),
     movieNoteList: [{
         tmdb_id: '1',
         title: 'test1',
