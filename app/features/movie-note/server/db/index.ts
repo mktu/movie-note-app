@@ -62,6 +62,17 @@ const updateMovieNote = async (supabaseAdmin: AdminClientType, movieNote: AddMov
     }
 }
 
+const deleteNote = async (supabaseAdmin: AdminClientType, tmdbId: string, userId: string) => {
+    const { error: noteError } = await supabaseAdmin.from<MovieNoteTable>('movie_note').delete().match({
+        tmdb_id: tmdbId,
+        user_id: userId
+    })
+    if (noteError) {
+        console.error(noteError)
+        throw fromCode(noteError.code)
+    }
+}
+
 const listMovieNote = async (supabaseAdmin: AdminClientType, userId: string) => {
     const { data, error } = await supabaseAdmin.from<MovieNoteListViewItem>('movie_note_list_view')
         .select('tmdb_id,user_id,stars,title,admiration_date,thumbnail').eq('user_id', userId)
@@ -84,5 +95,6 @@ export {
     registerMovieNote,
     updateMovieNote,
     listMovieNote,
-    loadMovieNote
+    loadMovieNote,
+    deleteNote
 }
