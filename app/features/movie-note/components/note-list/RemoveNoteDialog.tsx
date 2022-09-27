@@ -1,5 +1,6 @@
 import { Dialog } from '@headlessui/react';
 import type { FC } from 'react'
+import { useTranslation } from 'react-i18next';
 import { TextButton } from '~/components/buttons';
 
 type Props = {
@@ -15,14 +16,14 @@ const RemoveNoteDialog: FC<Props> = ({
     onRemove,
     title
 }) => {
+    const { t } = useTranslation('common')
     return (
         <Dialog open={open} onClose={onClose}>
             <div className='fixed inset-0 flex items-center justify-center '>
                 <Dialog.Panel className="w-full max-w-sm rounded border border-border-main bg-white p-4 text-text-main shadow">
-                    <Dialog.Title className='' as='h4'>ノートを削除</Dialog.Title>
+                    <Dialog.Title className='' as='h4'>{t('remove-note')}</Dialog.Title>
                     <Dialog.Description className='my-2'>
-                        <span className='mr-2'>"{title}"</span>
-                        <span>を削除します。一度削除したノートは元に戻すことはできません</span>
+                        {t('remove-note-description', { title })}
                     </Dialog.Description>
                     <hr className='my-1' />
                     <div className='flex items-center justify-end'>
