@@ -1,6 +1,6 @@
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Detail from '.';
+import Detail from './Container';
 import { detail, credits } from './mocks'
 
 export default {
