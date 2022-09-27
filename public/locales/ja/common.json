@@ -32,5 +32,7 @@
     "movie-note-already-registered" : "既にノートに登録されています",
     "movie-note-not-found" : "ノートが存在しません",
     "invalid-movie-note" : "不正なノートです",
-    "backend-error" : "サーバーエラーが発生しました"
+    "backend-error" : "サーバーエラーが発生しました",
+     "remove-note" : "ノートを削除",
+    "remove-note-description" : "\"{{title}}\" を削除します。一度削除したノートは元に戻すことはできません"
 }
