@@ -16,7 +16,7 @@ const Performance: FC<Props> = ({
 }) => {
     const { saveVisiblePerformance, getVisiblePerformance } = useContext(LocalStorageContext)
     return (
-        <div className='fixed top-0 right-0 flex flex-col gap-2 rounded-bl bg-slate-500 p-3 opacity-90'>
+        <div className='fixed top-0 right-0 z-20 flex flex-col gap-2 rounded-bl bg-slate-500 p-3 opacity-90'>
             {getVisiblePerformance() ? (
                 <>
                     <h3 className='text-onprimary-main'>Performances</h3>
