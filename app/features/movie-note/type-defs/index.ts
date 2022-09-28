@@ -1,0 +1,1 @@
+export type MovieDetailType = 'summary' | 'detail'
