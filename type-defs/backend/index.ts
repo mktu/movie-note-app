@@ -23,7 +23,7 @@ export type MovieNoteTable = {
     lng: string,
     memo: string | null,
     stars: number,
-    admiration_date: string | null
+    admiration_date: string | null,
 }
 
 export type MovieNoteListViewItem = {
@@ -38,6 +38,7 @@ export type MovieNoteListViewItem = {
 export type MovieNoteDetail = {
     user_id: string,
     tmdb_id: string,
+    updated_at?: string,
     lng: string,
     stars: number,
     thumbnail?: string,
