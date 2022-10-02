@@ -12,7 +12,7 @@ const StorableEditor: FC<Props> = ({
 }) => {
     const { saveMovieNoteState, stored } = useMovieNoteStore({ noteId, init, lastupdated })
     return (
-        <Container saveStateInStore={(data) => {
+        <Container monitorCurrentState={(data) => {
             data !== init && saveMovieNoteState({
                 date: new Date().toISOString(),
                 note: data,
