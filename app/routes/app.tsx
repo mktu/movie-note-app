@@ -12,8 +12,10 @@ import { loader } from '~/features/movie-note/server/loaders/app.server';
 import Tmdb from '~/features/movie-note/utils/tmdb';
 import TmdbProvider from '~/providers/tmdb';
 import UserProvider from '~/providers/user';
+import { RecoilRoot } from 'recoil';
 
 import { Outlet, useLoaderData, useSubmit } from '@remix-run/react';
+import { movieDetailType } from '~/features/movie-note/store/cookie/movieDetailType';
 
 export { loader }
 
@@ -26,30 +28,34 @@ export const App: React.FC = () => {
     const { i18n } = useTranslation('common')
     const submit = useSubmit()
     return (
-        <UserProvider user={user}>
-            <LocalStorageProvider init={movieNoteType}>
-                <CookiesProvider>
-                    <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey, i18n.language === 'ja' ? 'ja' : 'en')}>
-                        <Layout
-                            initialSidebarWidth={sidebarSettings.sidebarWidth}
-                            sidebar={<Sidebar
-                                staticLinks={<StaticLinks />}
-                                userMenu={<UserMenu user={user} onLogout={() => {
-                                    submit(null, { action: 'logout', method: 'post' })
-                                }} />}
-                                noteList={<NoteList
-                                    onRemoveNote={(noteId) => {
-                                        submit({ noteId }, { action: 'app/delete-note', method: 'post' })
-                                    }}
-                                    movieNoteList={movieNoteList} />}
-                            />}>
-                            <Outlet />
-                        </Layout>
-                        <ToastContainer />
-                    </TmdbProvider>
-                </CookiesProvider>
-            </LocalStorageProvider>
-        </UserProvider>
+        <RecoilRoot initializeState={({ set }) => {
+            set(movieDetailType, movieNoteType.movieNoteType)
+        }}>
+            <UserProvider user={user}>
+                <LocalStorageProvider init={movieNoteType}>
+                    <CookiesProvider>
+                        <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey, i18n.language === 'ja' ? 'ja' : 'en')}>
+                            <Layout
+                                initialSidebarWidth={sidebarSettings.sidebarWidth}
+                                sidebar={<Sidebar
+                                    staticLinks={<StaticLinks />}
+                                    userMenu={<UserMenu user={user} onLogout={() => {
+                                        submit(null, { action: 'logout', method: 'post' })
+                                    }} />}
+                                    noteList={<NoteList
+                                        onRemoveNote={(noteId) => {
+                                            submit({ noteId }, { action: 'app/delete-note', method: 'post' })
+                                        }}
+                                        movieNoteList={movieNoteList} />}
+                                />}>
+                                <Outlet />
+                            </Layout>
+                            <ToastContainer />
+                        </TmdbProvider>
+                    </CookiesProvider>
+                </LocalStorageProvider>
+            </UserProvider>
+        </RecoilRoot>
     )
 }
 

@@ -1,12 +1,12 @@
 import type { ComponentProps, FC } from 'react';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { IconButton } from '~/components/buttons';
 import Expand from '~/components/icons/Expand';
 import Minimize from '~/components/icons/Minimize';
 
 import { Transition } from '@headlessui/react';
 
-import LocalstorageContext from '../../providers/localstorage/Context';
+import { useMovieDetailType } from '../../store/cookie/movieDetailType';
 import Detail from './Detail';
 import Summary from './Summary';
 
@@ -14,14 +14,14 @@ type Props = ComponentProps<typeof Detail>
 
 const Container: FC<Props> = (props) => {
     const [hover, setHover] = useState(false)
-    const { saveMovieDetailType, getMovieDetailType } = useContext(LocalstorageContext)
-    const showSummary = getMovieDetailType() === 'summary'
+    const { setMovieDetailType, movieDetailType } = useMovieDetailType()
+    const showSummary = movieDetailType === 'summary'
     return (
         <div className={`relative w-full rounded-xl p-2 ${hover ? ' bg-surface-hover' : ''}`}>
             <div onMouseLeave={() => { setHover(false) }} onFocus={() => { setHover(true) }} onMouseOver={() => { setHover(true) }}
                 className='absolute right-1 top-1 z-10'>
                 <IconButton onClick={() => {
-                    saveMovieDetailType(showSummary ? 'detail' : 'summary')
+                    setMovieDetailType(showSummary ? 'detail' : 'summary')
                 }} name='minimize' className='p-1'>
                     {
                         showSummary ?

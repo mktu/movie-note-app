@@ -7,9 +7,7 @@ const context = React.createContext<LocalstorageType>({
         getMovieNoteState: () => null,
         saveMovieNoteState: () => { },
         removeMovieNoteState: () => { }
-    },
-    saveMovieDetailType: () => { },
-    getMovieDetailType: () => 'detail',
+    }
 });
 
 export default context;
