@@ -15,7 +15,6 @@ const useLocalstorage = (localstorage: LocalstorageType) => {
     const [localstorageLoaded, setLocalstorageLoaded] = useState(false)
     const [sidebarWidth, setSidebarWidth] = useState<number>(InitialSidebarWidth)
     const [lastSidebarWidth, setLastSidebarWidth] = useState<number>(InitialSidebarWidth)
-    const [isKvDisabled, setKvDisabled] = useState(false)
     const [visiblePerformance, setVisiblePerformance] = useState(false)
 
     // localstorage only works on the client side 
@@ -23,7 +22,6 @@ const useLocalstorage = (localstorage: LocalstorageType) => {
         setSidebarWidth(cookies[SIDEBAR_WIDTH_KEY] ?
             Number(cookies[SIDEBAR_WIDTH_KEY]) : InitialSidebarWidth)
         setLastSidebarWidth(localstorage.getLastSidebarWidth() || InitialSidebarWidth)
-        setKvDisabled(localstorage.isKvDisabled)
         setVisiblePerformance(localstorage.getVisiblePerformance())
         setLocalstorageLoaded(true)
     }, [localstorage])
@@ -40,11 +38,6 @@ const useLocalstorage = (localstorage: LocalstorageType) => {
                 localstorage.saveLastSidebarWidth(w)
             },
             getLastSidebarWidth: () => lastSidebarWidth,
-            isKvDisabled: () => isKvDisabled,
-            setKvDisabled: (b: boolean) => {
-                setKvDisabled(b)
-                localstorage.setKvDisabled(b)
-            },
             saveVisiblePerformance: (b: boolean) => {
                 setVisiblePerformance(b)
                 localstorage.saveVisiblePerformance(b)
@@ -52,7 +45,7 @@ const useLocalstorage = (localstorage: LocalstorageType) => {
             getVisiblePerformance: () => visiblePerformance,
             localstorageLoaded
         }
-    }, [sidebarWidth, lastSidebarWidth, isKvDisabled, localstorage, visiblePerformance, localstorageLoaded, setCookie])
+    }, [sidebarWidth, lastSidebarWidth, localstorage, visiblePerformance, localstorageLoaded, setCookie])
 
     return methods
 }

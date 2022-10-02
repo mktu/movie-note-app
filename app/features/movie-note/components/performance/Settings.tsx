@@ -1,21 +1,14 @@
 import type { FC } from 'react';
-import { useContext } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react'
 import Switch from '~/components/switch/Switch';
-import LocalStorageContext from '~/providers/localstorage/Context'
+
+import { useMovieNoteKvDisabled } from '../../store/localstorage/movieNoteKvDisabled';
 
 const Settings: FC = () => {
-    const [kvDisabled_, setKvDisabled_] = useState(false)
-    const { isKvDisabled, setKvDisabled } = useContext(LocalStorageContext)
-    useEffect(() => {
-        setKvDisabled_(isKvDisabled())
-    }, [isKvDisabled])
+    const { setMovieNoteKvDisabled, isMovieNoteKvDisabled } = useMovieNoteKvDisabled()
     return (
         <div className=''>
-            <Switch label='Disable KV' labelClass='text-onprimary-main' enabled={kvDisabled_} setEnabled={(checked) => {
-                setKvDisabled_(checked)
-                setKvDisabled(checked)
+            <Switch label='Disable KV' labelClass='text-onprimary-main' enabled={isMovieNoteKvDisabled} setEnabled={(checked) => {
+                setMovieNoteKvDisabled(checked)
             }} />
         </div>
     );
