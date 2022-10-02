@@ -12,12 +12,3 @@ export const useReview = (initStar?: number, initAdmirationDate?: string) => {
         formattedWatchDate
     }
 }
-
-const useMovie = () => {
-
-    return {
-
-    }
-}
-
-export default useMovie

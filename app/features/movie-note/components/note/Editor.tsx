@@ -1,4 +1,4 @@
-import type { FC } from 'react'
+import type { FC } from 'react';
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -18,20 +18,35 @@ import type { EditorState } from 'lexical';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
+    saveStateInStore?: (data: string) => void
     init?: string
 }
 
 const Editor: FC<Props> = ({
     setContentGetter,
+    saveStateInStore,
     init
 }) => {
     const { t } = useTranslation('common')
+
     const editorStateRef = useRef<EditorState>();
     useEffect(() => {
         setContentGetter(() => {
             return editorStateRef.current ? JSON.stringify(editorStateRef.current) : ''
         })
     }, [setContentGetter])
+
+    useEffect(() => {
+        if (!saveStateInStore) {
+            return
+        }
+        const id = setInterval(() => {
+            editorStateRef.current && saveStateInStore(JSON.stringify(editorStateRef.current))
+        }, 5000);
+        return () => {
+            clearInterval(id)
+        }
+    }, [saveStateInStore])
     return (
         <div className='relative'>
             <LexicalComposer initialConfig={{
