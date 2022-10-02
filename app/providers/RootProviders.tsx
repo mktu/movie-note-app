@@ -1,6 +1,9 @@
 import type { FC, ReactNode } from 'react'
-import RemixProvider from './navigator/RemixProvider';
+import { RecoilRoot } from 'recoil';
+
 import LocalstorageProvider from './localstorage';
+import RemixProvider from './navigator/RemixProvider';
+
 type Props = {
     children: ReactNode
 }
@@ -8,9 +11,11 @@ type Props = {
 const RootProviders: FC<Props> = ({ children }) => {
     return (
         <RemixProvider>
-            <LocalstorageProvider>
-                {children}
-            </LocalstorageProvider>
+            <RecoilRoot>
+                <LocalstorageProvider>
+                    {children}
+                </LocalstorageProvider>
+            </RecoilRoot>
         </RemixProvider>
     );
 };

@@ -10,6 +10,7 @@ import NoteListMenu from './NoteListMenu';
 import RemoveNoteDialog from './RemoveNoteDialog';
 
 import type { MovieNoteListViewItem } from '@type-defs/backend';
+import { useMovieNoteKvDisabled } from '../../store/localstorage/movieNoteKvDisabled';
 
 const imageBasePath = `${TmdbmageBasePath}/w200`
 
@@ -25,6 +26,8 @@ const NoteListItem: FC<Props> = ({
     const { navigator: Navigator } = useContext(NavigatorContext)
     const path = movieNoteListViewItem.thumbnail ? `${imageBasePath}${movieNoteListViewItem.thumbnail}` : undefined
     const [deleting, setDeleting] = useState(false)
+    const { isMovieNoteKvDisabled } = useMovieNoteKvDisabled()
+    const to = isMovieNoteKvDisabled ? `/app/notes/${movieNoteListViewItem.tmdb_id}?disableKv=true` : `/app/notes/${movieNoteListViewItem.tmdb_id}`
     return (
         <>
             {deleting && (<RemoveNoteDialog title={movieNoteListViewItem.title || ''} onClose={() => {
@@ -33,7 +36,7 @@ const NoteListItem: FC<Props> = ({
                 onRemoveNote(movieNoteListViewItem.tmdb_id)
             }} />)}
             <div className='flex w-full items-center'>
-                <Navigator className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' to={`/app/notes/${movieNoteListViewItem.tmdb_id}`} >
+                <Navigator className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' to={to} >
                     <Image className='overflow-hidden rounded' width={32} height={48}
                         src={path} alt={movieNoteListViewItem.title || ''} />
                     <div className='flex w-full flex-1 items-center overflow-hidden'>

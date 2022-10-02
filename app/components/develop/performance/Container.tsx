@@ -1,18 +1,19 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 import { useContext } from 'react';
 import LocalStorageContext from '~/providers/localstorage/Context';
 
 import { TextButton } from '../../buttons';
 import AngleDown from '../../icons/AngleDown';
 import X from '../../icons/X';
-import Settings from './Settings';
 
 type Props = {
-    counters: { [k: string]: number }
+    counters: { [k: string]: number },
+    customSetting: ReactNode
 }
 
 const Performance: FC<Props> = ({
-    counters
+    counters,
+    customSetting
 }) => {
     const { saveVisiblePerformance, getVisiblePerformance } = useContext(LocalStorageContext)
     return (
@@ -21,7 +22,7 @@ const Performance: FC<Props> = ({
                 <>
                     <h3 className='text-onprimary-main'>Performances</h3>
                     <hr className='w-full border-b' />
-                    <Settings />
+                    {customSetting}
                     <hr className='w-full border-b' />
                     <div>
                         {Object.keys(counters).map(key => (
