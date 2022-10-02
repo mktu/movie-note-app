@@ -13,6 +13,7 @@ import Review from '../components/review';
 
 import type { FC } from "react";
 import type { AddMovieNote } from "@type-defs/frontend";
+import { useMovieNoteChangeMonitor } from '../hooks/useMovieNoteChangeMonitor';
 
 type Props = {
     onSubmit: (note: AddMovieNote) => void,
@@ -42,12 +43,14 @@ const New: FC<Props> = ({
             resetCredit()
         }
     }
+    const { unblock, setDirty } = useMovieNoteChangeMonitor()
     return (
         <Layout
             header={<NewHeader
                 error={error}
                 canSave={Boolean(detail)}
                 onClickSave={() => {
+                    unblock()
                     detail && onSubmit({
                         title: detail.title,
                         thumbnail: detail.poster_path || detail.backdrop_path || '',
@@ -64,7 +67,11 @@ const New: FC<Props> = ({
                 metaInfo: <MetaInfo genres={detail?.genres || []} />,
                 imdb: <Imdb imdbId={detail?.imdb_id} />
             }}
-            note={detail && <Note setContentGetter={setContentGetter} />}
+            note={detail && <Note
+                setContentGetter={setContentGetter}
+                monitorCurrentState={(state) => {
+                    setDirty(Boolean(state))
+                }} />}
             review={detail && <Review admirationDate={admirationDate} stars={stars} setAdmirationDate={setAdmirationDate} setStars={setStars} />}
         />
     )

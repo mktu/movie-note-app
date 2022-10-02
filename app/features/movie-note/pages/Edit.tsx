@@ -14,6 +14,7 @@ import type { UpdateMovieNote } from "@type-defs/frontend";
 import type { MovieNoteDetail } from '@type-defs/backend';
 import type { Credits, TmdbDetail } from '../utils/tmdb';
 import type { ImdbRate } from '../features/imdb/types';
+import { useMovieNoteChangeMonitor } from '../hooks/useMovieNoteChangeMonitor';
 
 type Props = {
     onSubmit: (note: UpdateMovieNote) => void,
@@ -39,6 +40,7 @@ const Edit: FC<Props> = ({
     const detail = tmdbDetail
     const credits = tmdbCredits || null
     const { setStars, setAdmirationDate, stars, formattedWatchDate, admirationDate } = useReview(movieNoteDetail?.stars, movieNoteDetail?.admiration_date)
+    const { unblock, setDirty } = useMovieNoteChangeMonitor()
     return (
         <Layout
             header={<EditHeader
@@ -46,6 +48,7 @@ const Edit: FC<Props> = ({
                 title={movieNoteDetail?.title || ''}
                 canSave={Boolean(detail)}
                 onClickSave={() => {
+                    unblock()
                     detail && onSubmit({
                         title: detail.title,
                         thumbnail: detail.poster_path || detail.backdrop_path || '',
@@ -62,7 +65,17 @@ const Edit: FC<Props> = ({
                 metaInfo: <MetaInfo genres={detail?.genres || []} />,
                 imdb: imdbRate ? <ImdbRateLabel imdbId={detail.imdb_id!} {...imdbRate} /> : <Imdb imdbId={detail?.imdb_id} />
             }}
-            note={detail && <Note setContentGetter={setContentGetter} init={movieNoteDetail?.memo} />}
+            note={detail && <Note
+                setContentGetter={setContentGetter}
+                init={movieNoteDetail?.memo}
+                monitorCurrentState={(state) => {
+                    if (movieNoteDetail?.memo) {
+                        setDirty(state !== movieNoteDetail?.memo)
+                    } else {
+                        setDirty(Boolean(state))
+                    }
+                }}
+            />}
             review={detail && <Review admirationDate={admirationDate} stars={stars} setAdmirationDate={setAdmirationDate} setStars={setStars} />}
         />
     )

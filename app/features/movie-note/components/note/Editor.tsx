@@ -18,13 +18,13 @@ import type { EditorState } from 'lexical';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
-    saveStateInStore?: (data: string) => void
+    monitorCurrentState?: (data: string) => void
     init?: string
 }
 
 const Editor: FC<Props> = ({
     setContentGetter,
-    saveStateInStore,
+    monitorCurrentState,
     init
 }) => {
     const { t } = useTranslation('common')
@@ -37,16 +37,16 @@ const Editor: FC<Props> = ({
     }, [setContentGetter])
 
     useEffect(() => {
-        if (!saveStateInStore) {
+        if (!monitorCurrentState) {
             return
         }
         const id = setInterval(() => {
-            editorStateRef.current && saveStateInStore(JSON.stringify(editorStateRef.current))
+            editorStateRef.current && monitorCurrentState(JSON.stringify(editorStateRef.current))
         }, 5000);
         return () => {
             clearInterval(id)
         }
-    }, [saveStateInStore])
+    }, [monitorCurrentState])
     return (
         <div className='relative'>
             <LexicalComposer initialConfig={{
