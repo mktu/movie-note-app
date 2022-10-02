@@ -1,4 +1,5 @@
-import { useCallback, useLayoutEffect } from 'react';
+import { useBrowserLayoutEffect } from '@utils/hooks';
+import { useCallback } from 'react';
 import { atom, useSetRecoilState, useRecoilValue } from 'recoil';
 import * as localstorage from '~/features/movie-note/utils/localstorage'
 
@@ -15,7 +16,7 @@ const useMovieNoteKvDisabled = () => {
         setMovieNoteKvDisabled_(disabled)
         localstorage.setMovieNoteKvDisabled(disabled)
     }, [setMovieNoteKvDisabled_])
-    useLayoutEffect(() => {
+    useBrowserLayoutEffect(() => {
         if (!init) {
             setMovieNoteKvDisabled_(localstorage.isMovieNoteKvDisabled())
             init = true

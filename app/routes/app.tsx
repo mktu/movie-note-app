@@ -14,6 +14,7 @@ import TmdbProvider from '~/providers/tmdb';
 import UserProvider from '~/providers/user';
 
 import { Outlet, useLoaderData, useSubmit } from '@remix-run/react';
+import { initializeMovieDetailType } from '~/features/movie-note/store/cookie/movieDetailType';
 
 export { loader }
 
@@ -25,6 +26,7 @@ export const App: React.FC = () => {
     const { user, tmdbData, movieNoteList, sidebarSettings, movieNoteType } = useLoaderData<typeof loader>()
     const { i18n } = useTranslation('common')
     const submit = useSubmit()
+    initializeMovieDetailType(movieNoteType.movieNoteType)
     return (
         <UserProvider user={user}>
             <LocalStorageProvider init={movieNoteType}>
