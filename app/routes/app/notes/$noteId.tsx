@@ -1,6 +1,7 @@
 import Performance from '~/components/develop/performance';
 import { GeneralError } from '~/components/error';
 import { EditMovieNote } from '~/features/movie-note/';
+import Settings from '~/features/movie-note/components/performance/Settings';
 import { action } from '~/features/movie-note/server/actions/note.server';
 import { loader } from '~/features/movie-note/server/loaders/note.server';
 
@@ -37,7 +38,9 @@ const Note: FC = () => {
         )}
         {content && (
             <>
-                <Performance counters={content.performanceData} />
+                <Performance counters={content.performanceData}
+                    customSetting={<Settings />}
+                />
                 <EditMovieNote
                     key={content.movieNoteDetail.tmdb_id || ''}
                     movieNoteDetail={content.movieNoteDetail}
