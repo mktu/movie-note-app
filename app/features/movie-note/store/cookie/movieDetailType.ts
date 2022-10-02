@@ -8,16 +8,11 @@ import type { MovieDetailType } from '../../type-defs';
 import { useBrowserLayoutEffect } from '@utils/hooks';
 
 let initMovieDetailType = false
-let defaultMovieDetailType: MovieDetailType = 'detail'
 
-let movieDetailType = atom<MovieDetailType>({
+export const movieDetailType = atom<MovieDetailType>({
     key: 'movieDetailType',
-    default: defaultMovieDetailType
+    default: 'detail'
 });
-
-const initializeMovieDetailType = (movieNoteType: MovieDetailType) => {
-    defaultMovieDetailType = movieNoteType
-}
 
 const useMovieDetailType = () => {
     const [cookies, setCookie] = useCookies([MOVIE_DETAIL_TYPE]);
@@ -34,10 +29,9 @@ const useMovieDetailType = () => {
         }
     }, [setMovieDetailType_, cookies])
     const movieDetailTypeValue = useRecoilValue(movieDetailType)
-    return { setMovieDetailType, movieDetailType: initMovieDetailType ? movieDetailTypeValue : defaultMovieDetailType }
+    return { setMovieDetailType, movieDetailType: movieDetailTypeValue }
 }
 
 export {
-    useMovieDetailType,
-    initializeMovieDetailType
+    useMovieDetailType
 }
