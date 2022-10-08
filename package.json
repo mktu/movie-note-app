@@ -19,7 +19,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@headlessui/react": "1.7.2",
+    "@headlessui/react": "1.7.3",
     "@lexical/react": "0.5.0",
     "@remix-run/cloudflare": "1.7.2",
     "@remix-run/cloudflare-pages": "1.7.2",
@@ -30,24 +30,24 @@
     "clsx": "1.2.1",
     "cross-env": "7.0.3",
     "date-fns": "2.29.3",
-    "i18next": "21.9.2",
-    "i18next-browser-languagedetector": "6.1.5",
+    "i18next": "21.10.0",
+    "i18next-browser-languagedetector": "6.1.8",
     "i18next-http-backend": "1.4.4",
     "i18next-resources-to-backend": "1.0.0",
     "lexical": "0.5.0",
     "react": "18.2.0",
     "react-cookie": "4.1.1",
     "react-dom": "18.2.0",
-    "react-hook-form": "7.36.1",
+    "react-hook-form": "7.37.0",
     "react-i18next": "11.18.6",
     "react-intersection-observer": "9.4.0",
     "react-toastify": "9.0.8",
-    "recoil": "^0.7.5",
+    "recoil": "0.7.5",
     "remix-auth": "3.3.0",
     "remix-auth-google": "1.1.0",
     "remix-i18next": "4.1.1",
     "uuid": "9.0.0",
-    "zod-form-data": "1.2.1"
+    "zod-form-data": "1.2.2"
   },
   "devDependencies": {
     "@babel/core": "7.19.3",
@@ -73,7 +73,7 @@
     "eslint": "8.24.0",
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-tailwindcss": "3.6.2",
-    "msw": "0.47.3",
+    "msw": "0.47.4",
     "msw-storybook-addon": "1.6.3",
     "npm-run-all": "4.1.5",
     "postcss": "8.4.17",
@@ -82,7 +82,7 @@
     "tsconfig-paths-webpack-plugin": "4.0.0",
     "typescript": "4.8.4",
     "vitest": "0.23.4",
-    "wrangler": "2.1.9"
+    "wrangler": "2.1.10"
   },
   "engines": {
     "node": ">=14"
