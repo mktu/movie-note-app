@@ -1,14 +1,12 @@
 import type { ComponentProps, FC } from 'react';
 import { useState } from 'react';
-import { IconButton } from '~/components/buttons';
-import Expand from '~/components/icons/Expand';
-import Minimize from '~/components/icons/Minimize';
 
 import { Transition } from '@headlessui/react';
 
 import { useMovieDetailType } from '../../store/cookie/movieDetailType';
 import Detail from './Detail';
 import Summary from './Summary';
+import ViewSwitcher from './ViewSwitcher'
 
 type Props = ComponentProps<typeof Detail>
 
@@ -17,17 +15,15 @@ const Container: FC<Props> = (props) => {
     const { setMovieDetailType, movieDetailType } = useMovieDetailType()
     const showSummary = movieDetailType === 'summary'
     return (
-        <div className={`relative w-full rounded-xl p-2 ${hover ? ' bg-surface-hover' : ''}`}>
+        <div className={`relative w-full rounded-xl p-2 ${hover ? ' bg-surface-hover' : ''}`} onMouseLeave={() => { setHover(false) }}>
             <div onMouseLeave={() => { setHover(false) }} onFocus={() => { setHover(true) }} onMouseOver={() => { setHover(true) }}
                 className='absolute right-1 top-1 z-10'>
-                <IconButton onClick={() => {
-                    setMovieDetailType(showSummary ? 'detail' : 'summary')
-                }} name='minimize' className='p-1'>
-                    {
-                        showSummary ?
-                            <Expand className={`h-5 w-5  ${hover ? 'fill-border-dark' : 'fill-border-main'}`} />
-                            : <Minimize className={`h-5 w-5  ${hover ? 'fill-border-dark' : 'fill-border-main'}`} />}
-                </IconButton>
+                <ViewSwitcher
+                    onSwitch={(showSummary) => {
+                        setMovieDetailType(showSummary ? 'summary' : 'detail')
+                    }}
+                    showSummary={showSummary}
+                />
             </div>
             <Transition
                 show={showSummary}

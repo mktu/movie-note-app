@@ -35,5 +35,7 @@
     "backend-error" : "サーバーエラーが発生しました",
     "remove-note" : "ノートを削除",
     "remove-note-description" : "{{title}} を削除します。一度削除したノートは元に戻すことはできません",
-    "leave-screen" : "保存されていない変更があります。ページを離れますか?"
+    "leave-screen" : "保存されていない変更があります。ページを離れますか?",
+    "show-detail" : "作品情報を詳細表示します",
+    "show-summary" : "作品情報を簡易表示します"
 }
