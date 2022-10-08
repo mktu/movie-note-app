@@ -9,7 +9,7 @@ type Props = {
     onLogout: () => void,
     user: User
 }
-
+// TODO : move to user feature
 const UserMenu: FC<Props> = ({
     onLogout,
     user

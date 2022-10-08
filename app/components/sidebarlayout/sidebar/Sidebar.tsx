@@ -1,14 +1,13 @@
 import type { FC, ReactNode } from "react";
+import StaticLinks from './StaticLinks'
 
 type Props = {
     noteList: ReactNode,
-    staticLinks: ReactNode,
     userMenu: ReactNode
 }
 
 const Sidebar: FC<Props> = ({
     noteList,
-    staticLinks,
     userMenu
 }) => {
     return (
@@ -17,7 +16,7 @@ const Sidebar: FC<Props> = ({
                 {userMenu}
             </div>
             <div>
-                {staticLinks}
+                <StaticLinks />
             </div>
             <div>
                 {noteList}

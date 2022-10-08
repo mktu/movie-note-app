@@ -1,7 +1,6 @@
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Layout from './Layout';
-import Sidebar from './sidebar'
+import Layout from './Container';
 
 export default {
     title: 'Common/SidebarLayout',
@@ -17,10 +16,6 @@ Default.args = {
         <div>content</div>
     ),
     initialSidebarWidth: 250,
-    sidebar: (
-        <Sidebar
-            staticLinks={<div>links</div>}
-            userMenu={<div>usermenu</div>}
-            noteList={[]} />
-    )
+    userMenu: (<div>usermenu</div>),
+    noteList: []
 };
