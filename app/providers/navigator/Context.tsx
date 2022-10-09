@@ -1,6 +1,6 @@
-import { createContext, useContext } from 'react';
+import { createContext, forwardRef, useContext } from 'react';
 
-import type { FC, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export type NavigatorProps = {
     children: ReactNode,
@@ -8,9 +8,9 @@ export type NavigatorProps = {
     className?: string
 }
 
-export const Navigator: FC<NavigatorProps> = ({ children, to, className }) => (
-    <a href={to} className={className} >{children}</a>
-)
+export const Navigator = forwardRef<HTMLAnchorElement, NavigatorProps>(({ children, to, className }, ref) => (
+    <a href={to} ref={ref} className={className} >{children}</a>
+))
 Navigator.displayName = 'navigator'
 
 export const useNavigator = () => {
