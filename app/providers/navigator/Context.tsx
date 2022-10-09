@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
 import type { FC, ReactNode } from "react";
 
@@ -28,5 +28,7 @@ const context = createContext<ContextType>({
     navigator: Navigator,
     useNavigator
 });
+
+export const useNavigatorContext = () => useContext(context)
 
 export default context;
