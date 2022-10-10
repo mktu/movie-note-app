@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 import toastStyles from 'react-toastify/dist/ReactToastify.css';
 import styles from 'styles/lexical.css';
-import { UserMenu } from '~/components/remix-routes/sidebar-items';
+import { UserMenu } from '~/features/profile/components/user-menu';
 import SidebarLayout from '~/components/sidebarlayout';
 import NoteList from '~/features/movie-note/components/note-list';
 import LocalStorageProvider from '~/features/movie-note/providers/localstorage';
