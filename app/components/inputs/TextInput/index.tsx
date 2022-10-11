@@ -1,6 +1,6 @@
 import { forwardRef, useState } from 'react'
 import type { ReactNode } from 'react'
-import Base from '../Base'
+import Base from './Base'
 import clsx from 'clsx'
 
 type Props = Parameters<typeof Base>[0] & {

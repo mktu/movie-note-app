@@ -31,7 +31,7 @@ const useLocalstorage = (localstorage: LocalstorageType) => {
             getSidebarWidth: () => sidebarWidth,
             saveSidebarWidth: (w: number) => {
                 setSidebarWidth(w)
-                setCookie(SIDEBAR_WIDTH_KEY, w)
+                setCookie(SIDEBAR_WIDTH_KEY, w, { path: '/app/' })
             },
             saveLastSidebarWidth: (w: number) => {
                 setLastSidebarWidth(w)

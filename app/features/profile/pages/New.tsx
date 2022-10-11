@@ -1,25 +1,22 @@
-import { Form, useActionData } from "@remix-run/react"
 import { useTranslation } from "react-i18next"
 import { OutlinedButton } from '~/components/buttons'
-import RegistrationForm from './RegistrationForm'
+import { useFormContext } from "~/providers/form/Context"
+import { RegistrationForm } from '../components/register-form'
 
-interface ActionData {
+type Props = {
+    confirmed: boolean,
     error?: string
 }
 
-type Props = {
-    confirmed: boolean
-}
-
-const Register: React.FC<Props> = ({ confirmed }) => {
+const New: React.FC<Props> = ({ confirmed, error }) => {
     const { t } = useTranslation('common')
-    const actionData = useActionData() as ActionData
+    const { form: Form } = useFormContext()
     return (
         <div className='flex h-full w-full flex-col items-center justify-center'>
-            <h1 className='text-text-main'>Registration</h1>
+            <h1 className='text-text-main'>{t('registration')}</h1>
             <div className='my-4' />
-            {actionData?.error && (
-                <p className="text-red-500">{actionData?.error}</p>
+            {error && (
+                <p className="text-red-500">{error}</p>
             )}
             {confirmed ? (
                 <RegistrationForm />
@@ -36,4 +33,4 @@ const Register: React.FC<Props> = ({ confirmed }) => {
     )
 }
 
-export default Register
+export default New

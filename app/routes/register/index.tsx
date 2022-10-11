@@ -1,11 +1,12 @@
-import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
-import { json, redirect } from "@remix-run/cloudflare";
-import { useLoaderData } from "@remix-run/react";
-import authenticator from '~/features/auth/server/auth.server'
-import { hasAuth } from "~/features/auth/server/db";
-import { getSupabaseAdmin, userDb } from '@utils/server/db/index.server'
-import Layout from "~/features/auth/components/Layout";
-import Register from '~/features/auth/components/register'
+import type { ActionArgs, LoaderFunction } from "@remix-run/cloudflare";
+import Layout from '~/features/auth/components/Layout';
+import authenticator from '~/features/auth/server/auth.server';
+import { hasAuth } from '~/features/auth/server/db';
+import { Register } from '~/features/profile/pages';
+
+import { json, redirect } from '@remix-run/cloudflare';
+import { useActionData, useLoaderData } from '@remix-run/react';
+import { getSupabaseAdmin, userDb } from '@utils/server/db/index.server';
 
 interface ActionData {
     error?: string
@@ -36,17 +37,18 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 
 }
 
-export const action: ActionFunction = async ({ request, context }) => {
+export async function action({ request, context }: ActionArgs) {
     const formData = await request.formData()
     const adminDb = getSupabaseAdmin(context)
     const name = formData.get("nickname") as string || ''
+    const comment = formData.get("comment") as string || ''
     const user = await authenticator.isAuthenticated(request)
 
     if (!user) {
         return redirect('/login')
     }
     try {
-        await userDb.registerUser(adminDb, user?.id, name)
+        await userDb.registerUser(adminDb, { authId: user!.id, name, comment })
         return redirect('/app')
     } catch (e) {
         return json<ActionData>({
@@ -57,9 +59,10 @@ export const action: ActionFunction = async ({ request, context }) => {
 
 export default function Index() {
     const { confirmed } = useLoaderData<LorderData>()
+    const actionData = useActionData<typeof action>()
     return (
         <Layout titleMessage="register-title-message">
-            <Register confirmed={confirmed} />
+            <Register confirmed={confirmed} error={actionData?.error} />
         </Layout>
     );
 }
