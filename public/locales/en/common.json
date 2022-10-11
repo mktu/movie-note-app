@@ -8,6 +8,7 @@
     "register-email":"メールアドレス",
     "register-password":"パスワード(6文字以上)",
     "register":"新規登録する",
+    "registration":"新規登録",
     "cancel-register":"登録を止める",
     "has-no-account":"アカウントを持っていない場合",
     "email-validation":"メールアドレス形式で入力してください",
@@ -37,5 +38,7 @@
     "remove-note-description" : "{{title}} を削除します。一度削除したノートは元に戻すことはできません",
     "leave-screen" : "保存されていない変更があります。ページを離れますか?",
     "show-detail" : "作品情報を詳細表示します",
-    "show-summary" : "作品情報を簡易表示します"
+    "show-summary" : "作品情報を簡易表示します",
+    "nickname" : "ニックネーム",
+    "comment" : "コメント"
 }

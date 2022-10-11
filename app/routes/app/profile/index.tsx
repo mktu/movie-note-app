@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/cloudflare";
+import type { ActionArgs, LoaderArgs } from "@remix-run/cloudflare";
 import authenticator from '~/features/auth/server/auth.server';
 
 import { json, redirect } from '@remix-run/cloudflare';
@@ -11,6 +11,9 @@ import { EditProfile } from "~/features/profile";
 
 interface LorderData {
     user: User
+}
+interface ActionData {
+    error?: string
 }
 
 export async function loader({ request, context }: LoaderArgs) {
@@ -28,6 +31,26 @@ export async function loader({ request, context }: LoaderArgs) {
     })
 
 }
+
+export async function action({ request, context }: ActionArgs) {
+    const formData = await request.formData()
+    const adminDb = getSupabaseAdmin(context)
+    const name = formData.get("nickname") as string || ''
+    const comment = formData.get("comment") as string || ''
+    const user = await authenticator.isAuthenticated(request)
+
+    if (!user) {
+        return redirect('/login')
+    }
+    try {
+        await userDb.updateUser(adminDb, { authId: user!.id, name, comment })
+        return redirect('/app')
+    } catch (e) {
+        return json<ActionData>({
+            error: (e as Error).message
+        }, { status: 400 })
+    }
+};
 
 
 const NewNote: FC = () => {

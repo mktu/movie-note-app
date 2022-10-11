@@ -1,20 +1,25 @@
 import type { User } from '@type-defs/backend';
 import type { FC } from 'react'
+import { RegistrationForm } from '../components/register-form';
 
 type Props = {
-    user: User
+    user: User,
+    error?: string
 }
 
 const Edit: FC<Props> = ({
-    user
+    user,
+    error
 }) => {
     return (
-        <div className=''>
-            <div>{user.name}</div>
-            <div>{user.comment}</div>
-            <div>{user.image} </div>
+        <div className='flex h-full w-full flex-col justify-center p-8'>
+            <div className='my-4' />
+            {error && (
+                <p className="text-red-500">{error}</p>
+            )}
+            <RegistrationForm nickname={user.name} comment={user.comment} />
         </div>
-    );
+    )
 };
 
 export default Edit;
