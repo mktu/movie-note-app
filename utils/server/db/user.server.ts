@@ -25,14 +25,16 @@ const registerUser = async (supabaseAdmin: AdminClientType, args: RegisterArgs) 
 type UpdateArgs = {
     authId: string,
     name: string,
-    comment?: string
+    comment?: string,
+    image?: string
 }
 
 const updateUser = async (supabaseAdmin: AdminClientType, args: UpdateArgs) => {
     const { error } = await supabaseAdmin.rpc('update_user', {
         auth_id: args.authId,
         name: args.name,
-        comment: args.comment || null
+        comment: args.comment || null,
+        image: args.image || null
     })
     if (error) {
         console.error(error)

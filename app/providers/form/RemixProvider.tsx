@@ -11,9 +11,9 @@ type Props = {
     children: React.ReactNode,
 }
 
-export const Form: FC<FormProps> = ({ action, method, children, className }) => {
+export const Form: FC<FormProps> = ({ action, method, children, className, encType }) => {
     return (
-        <RemixForm className={className} action={action} method={method}>{children}</RemixForm>
+        <RemixForm className={className} action={action} method={method} encType={encType}>{children}</RemixForm>
     )
 }
 

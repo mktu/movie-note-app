@@ -14,7 +14,6 @@ const useImdb = (imdbId?: string) => {
         if (!imdbId) {
             return
         }
-        console.log(imdbId)
         setLoading(true)
         const res = await fetch(root + imdbId)
         if (!res.ok) {

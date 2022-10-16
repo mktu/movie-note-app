@@ -12,12 +12,11 @@ const Edit: FC<Props> = ({
     error
 }) => {
     return (
-        <div className='flex h-full w-full flex-col justify-center p-8'>
-            <div className='my-4' />
+        <div>
             {error && (
                 <p className="text-red-500">{error}</p>
             )}
-            <RegistrationForm nickname={user.name} comment={user.comment} />
+            <RegistrationForm nickname={user.name} comment={user.comment} image={user.image} />
         </div>
     )
 };
