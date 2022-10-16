@@ -46,7 +46,6 @@ export async function action({ request, context }: ActionArgs) {
     const comment = formData.get("comment") as string || ''
     const file = formData.get("profile-image") as File;
     const user = await authenticator.isAuthenticated(request)
-
     if (!user) {
         return redirect('/login')
     }
@@ -58,7 +57,7 @@ export async function action({ request, context }: ActionArgs) {
             if (!r2) {
                 throw Error('R2 is not bound')
             }
-            await r2.put(imageId, file, {
+            await r2.put(imageId, await file.arrayBuffer(), {
                 httpMetadata: {
                     contentType: file.type
                 }
