@@ -1,6 +1,5 @@
-import clsx from 'clsx';
 import { forwardRef, useState } from 'react'
-import Img from 'public/ImgPlaceholder.svg'
+import { ImagePlaceholder } from '~/components/placeholders';
 
 type Props = React.ImgHTMLAttributes<HTMLImageElement> & { alt: string }
 
@@ -19,10 +18,7 @@ const Image = forwardRef<HTMLImageElement, Props>(({
 
     if (error || !src) {
         return (
-            <div className={clsx('flex items-center justify-center', className)} style={{
-                width, height,
-                backgroundImage: `url(${Img})`,
-            }} >{alt}</div>
+            <ImagePlaceholder className={className} width={width} height={height} alt={alt} />
         )
     }
     return (

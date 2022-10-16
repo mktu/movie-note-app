@@ -5,17 +5,19 @@ export type FormProps = {
     method: "get" | "post" | "put" | "patch" | "delete",
     action?: string,
     children: ReactNode,
-    className?: string
+    className?: string,
+    encType?: "application/x-www-form-urlencoded" | "multipart/form-data";
 }
 
 export const Form: FC<FormProps> = ({
     method,
     children,
     className,
-    action
+    action,
+    encType
 }) => {
     return (
-        <form action={action} method={method} className={className}>{children}</form>
+        <form action={action} method={method} className={className} encType={encType}>{children}</form>
     )
 }
 

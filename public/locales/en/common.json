@@ -40,5 +40,6 @@
     "show-detail" : "作品情報を詳細表示します",
     "show-summary" : "作品情報を簡易表示します",
     "nickname" : "ニックネーム",
-    "comment" : "コメント"
+    "comment" : "コメント",
+    "change-image" : "画像を変更"
 }

@@ -6,7 +6,7 @@ import UserIcon from '~/components/icons/User'
 import LockIcon from '~/components/icons/Lock'
 import GoogleLogin from './GoogleLogin'
 import useLoginForm from '../../hooks/useLoginForm'
-import ValidationTransition from '../ValidationTransition'
+import ValidationTransition from '../../../../components/transitions/ValidationTransition'
 import { useTranslation } from 'react-i18next'
 
 const Login: FC<{ errorKey?: string }> = ({ errorKey }) => {

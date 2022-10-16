@@ -1,4 +1,5 @@
 import type { ActionArgs, LoaderArgs } from "@remix-run/cloudflare";
+import { unstable_createMemoryUploadHandler, unstable_parseMultipartFormData } from "@remix-run/cloudflare";
 import authenticator from '~/features/auth/server/auth.server';
 
 import { json, redirect } from '@remix-run/cloudflare';
@@ -33,17 +34,34 @@ export async function loader({ request, context }: LoaderArgs) {
 }
 
 export async function action({ request, context }: ActionArgs) {
-    const formData = await request.formData()
+    const uploadHandler = unstable_createMemoryUploadHandler({
+        maxPartSize: 500_000,
+    });
+    const formData = await unstable_parseMultipartFormData(
+        request,
+        uploadHandler
+    );
     const adminDb = getSupabaseAdmin(context)
     const name = formData.get("nickname") as string || ''
     const comment = formData.get("comment") as string || ''
+    const file = formData.get("profile-image") as File;
     const user = await authenticator.isAuthenticated(request)
 
     if (!user) {
         return redirect('/login')
     }
     try {
-        await userDb.updateUser(adminDb, { authId: user!.id, name, comment })
+        let image = ''
+        if (file) {
+            const imageId = `profile-${user!.id}`
+            await (context.MovieNoteApp as R2Bucket).put(imageId, file, {
+                httpMetadata: {
+                    contentType: file.type
+                }
+            })
+            image = `/api/images/${imageId}`
+        }
+        await userDb.updateUser(adminDb, { authId: user!.id, name, comment, image })
         return redirect('/app')
     } catch (e) {
         return json<ActionData>({

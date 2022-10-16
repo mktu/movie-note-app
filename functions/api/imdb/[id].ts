@@ -22,3 +22,4 @@ export const onRequestGet: PagesFunction<{
     }
     return json({ ...data, cache: false })
 }
+

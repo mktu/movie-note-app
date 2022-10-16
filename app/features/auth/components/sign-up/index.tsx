@@ -4,7 +4,7 @@ import { ContainedButton } from '~/components/buttons'
 import { TextInput } from '~/components/inputs'
 import UserIcon from '~/components/icons/User'
 import LockIcon from '~/components/icons/Lock'
-import ValidationTransition from '../ValidationTransition'
+import ValidationTransition from '../../../../components/transitions/ValidationTransition'
 import useRegisterForm from '../../hooks/useRegisterForm'
 import { useTranslation } from 'react-i18next'
 
