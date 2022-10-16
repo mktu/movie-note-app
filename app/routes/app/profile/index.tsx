@@ -54,7 +54,11 @@ export async function action({ request, context }: ActionArgs) {
         let image = ''
         if (file) {
             const imageId = `profile-${user!.id}`
-            await (context.MovieNoteApp as R2Bucket).put(imageId, file, {
+            const r2 = context.MovieNoteApp as R2Bucket
+            if (!r2) {
+                throw Error('R2 is not bound')
+            }
+            await r2.put(imageId, file, {
                 httpMetadata: {
                     contentType: file.type
                 }
