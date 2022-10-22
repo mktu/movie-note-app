@@ -17,7 +17,7 @@ export const Form: FC<FormProps> = ({ action, method, children, className, encTy
     )
 }
 
-Form.displayName = 'form'
+Form['displayName'] = 'form'
 
 const useTransitionState = () => {
     const tarnsition = useTransition()

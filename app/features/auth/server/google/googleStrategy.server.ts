@@ -58,7 +58,7 @@ const authenticate = async (authenticator: AuthenticatorType, request: Parameter
   return await authenticator.authenticate('google', request, options)
 }
 
-const saveSession = async (user: any, authenticator: AuthenticatorType, request: Parameters<typeof authenticator.isAuthenticated>[0]) => {
+const saveSession = async (user: any, authenticator: AuthenticatorType, request: Request) => {
   let session = await getSession(request.headers.get("Cookie"));
   // if we do have a successRedirect, we redirect to it and set the user
   // in the session sessionKey

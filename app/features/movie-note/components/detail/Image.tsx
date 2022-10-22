@@ -40,6 +40,6 @@ const Image = forwardRef<HTMLImageElement, Props>(({
     );
 });
 
-Image.displayName = 'image'
+Image['displayName'] = 'image'
 
 export default Image;

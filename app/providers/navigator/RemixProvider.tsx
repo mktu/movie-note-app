@@ -14,7 +14,7 @@ export const Navigator = forwardRef<HTMLAnchorElement, NavigatorProps>(({ to, ch
     )
 })
 
-Navigator.displayName = 'navigator'
+Navigator['displayName'] = 'navigator'
 
 const useNavigator = () => {
     const navigate = useNavigate()

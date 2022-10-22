@@ -22,6 +22,6 @@ const GoogleLogin = forwardRef<HTMLButtonElement, Props>(({
     </Base>
 ))
 
-GoogleLogin.displayName = 'google-login-button'
+GoogleLogin['displayName'] = 'google-login-button'
 
 export default GoogleLogin

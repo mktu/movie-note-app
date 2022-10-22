@@ -7,7 +7,7 @@ export type NavigatorProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>,
 export const Navigator = forwardRef<HTMLAnchorElement, NavigatorProps>(({ children, to, className, ...props }, ref) => (
     <a href={to} ref={ref} className={className} {...props}>{children}</a>
 ))
-Navigator.displayName = 'navigator'
+Navigator['displayName'] = 'navigator'
 
 export const useNavigator = () => {
     return {
