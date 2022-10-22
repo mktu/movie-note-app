@@ -41,6 +41,6 @@
     "show-summary" : "作品情報を簡易表示します",
     "nickname" : "ニックネーム",
     "comment" : "コメント",
-    "change-image" : "画像を変更"
-
+    "change-image" : "画像を変更",
+    "update-succeeded" : "更新に成功しました"
 }

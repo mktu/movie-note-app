@@ -15,11 +15,8 @@ const New: React.FC<Props> = ({ confirmed, error }) => {
         <div className='flex h-full w-full flex-col items-center justify-center'>
             <h1 className='text-text-main'>{t('registration')}</h1>
             <div className='my-4' />
-            {error && (
-                <p className="text-red-500">{error}</p>
-            )}
             {confirmed ? (
-                <RegistrationForm />
+                <RegistrationForm error={error} />
             ) : (
                 <div className='my-4 w-[50%]'>
                     <span className='text-text-main'>{t('please-confirm-email')}</span>
