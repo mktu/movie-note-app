@@ -1,14 +1,16 @@
 import type { ActionArgs, LoaderArgs } from "@remix-run/cloudflare";
-import { unstable_createMemoryUploadHandler, unstable_parseMultipartFormData } from "@remix-run/cloudflare";
 import authenticator from '~/features/auth/server/auth.server';
+import { EditProfile } from '~/features/profile';
+import { userDb } from '~/features/profile/server/db';
 
-import { json, redirect } from '@remix-run/cloudflare';
+import {
+    json, redirect, unstable_createMemoryUploadHandler, unstable_parseMultipartFormData
+} from '@remix-run/cloudflare';
 import { useLoaderData } from '@remix-run/react';
-import { getSupabaseAdmin, userDb } from '@utils/server/db/index.server';
+import { getSupabaseAdmin } from '@utils/server/db';
 
 import type { User } from "@type-defs/backend";
 import type { FC } from "react";
-import { EditProfile } from "~/features/profile";
 
 interface LorderData {
     user: User
@@ -30,7 +32,6 @@ export async function loader({ request, context }: LoaderArgs) {
     return json<LorderData>({
         user
     })
-
 }
 
 export async function action({ request, context }: ActionArgs) {

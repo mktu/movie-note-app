@@ -1,6 +1,6 @@
 import type { UserView } from '@type-defs/backend/index'
 import { v4 as uuidv4 } from 'uuid';
-import type { AdminClientType } from '../../supabaseAdmin.server'
+import type { AdminClientType } from '@utils/supabaseAdmin.server'
 
 type RegisterArgs = {
     authId: string,

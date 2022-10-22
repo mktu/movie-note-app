@@ -2,13 +2,15 @@ import type { LoaderArgs } from "@remix-run/cloudflare";
 import authenticator from '~/features/auth/server/auth.server';
 import { listMovieNote } from '~/features/movie-note/server/db';
 import { setTmdbData } from '~/features/movie-note/utils/tmdb';
+import { userDb } from '~/features/profile/server/db';
 
 import { json, redirect } from '@remix-run/cloudflare';
 import { getSidebarSettings } from '@utils/cookie/cookie.server';
-import { getSupabaseAdmin, userDb } from '@utils/server/db/index.server';
+import { getSupabaseAdmin } from '@utils/server/db';
+
+import { getMovieNoteType } from '../cookie/cookie.server';
 
 import type { MovieNoteListViewItem, User } from "@type-defs/backend/index";
-import { getMovieNoteType } from "../cookie/cookie.server";
 
 type LoaderData = {
     user: User,

@@ -4,7 +4,7 @@ import { parseUpdateNote } from '~/features/movie-note/server/validation/updateN
 import { MovieNoteError } from '~/features/movie-note/utils/error';
 
 import { json, redirect } from '@remix-run/cloudflare';
-import { getSupabaseAdmin } from '@utils/server/db/index.server';
+import { getSupabaseAdmin } from '@utils/server/db';
 
 import type { ActionArgs } from "@remix-run/cloudflare";
 import { putMovieNoteIds } from '../kv/tmdb';
