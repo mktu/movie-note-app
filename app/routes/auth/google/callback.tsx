@@ -1,7 +1,7 @@
 import type { LoaderFunction } from '@remix-run/cloudflare'
 import { redirect } from '@remix-run/cloudflare'
 import { authenticate, saveSession, initGoogleAuthenticator } from '~/features/auth/server/google'
-import { getSupabaseAdmin } from '@utils/server/db/index.server'
+import { getSupabaseAdmin } from '@utils/server/db'
 import { hasAuth } from '~/features/auth/server/db'
 
 export let loader: LoaderFunction = async ({ request, context }) => {

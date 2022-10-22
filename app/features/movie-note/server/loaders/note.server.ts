@@ -8,7 +8,7 @@ import Tmdb, { setTmdbData } from '~/features/movie-note/utils/tmdb';
 import { json, redirect } from '@remix-run/cloudflare';
 import { PerformanceCounter } from '@utils/performance';
 import { getSearchParamAsBoolean } from '@utils/searchparam.server';
-import { getSupabaseAdmin } from '@utils/server/db/index.server';
+import { getSupabaseAdmin } from '@utils/server/db';
 
 import type { Credits, TmdbDetail, TmdbLng } from '~/features/movie-note/utils/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';

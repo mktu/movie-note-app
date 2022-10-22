@@ -1,0 +1,1 @@
+export { getSupabaseAdmin } from '../../supabaseAdmin.server'

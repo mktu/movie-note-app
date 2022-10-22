@@ -3,10 +3,11 @@ import Layout from '~/features/auth/components/Layout';
 import authenticator from '~/features/auth/server/auth.server';
 import { hasAuth } from '~/features/auth/server/db';
 import { Register } from '~/features/profile/pages';
+import { userDb } from '~/features/profile/server/db';
 
 import { json, redirect } from '@remix-run/cloudflare';
 import { useActionData, useLoaderData } from '@remix-run/react';
-import { getSupabaseAdmin, userDb } from '@utils/server/db/index.server';
+import { getSupabaseAdmin } from '@utils/server/db';
 
 interface ActionData {
     error?: string
