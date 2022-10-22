@@ -7,6 +7,7 @@ import ProfileImage from '../../components/image'
 import ValidationTransition from '~/components/transitions/ValidationTransition';
 import useProfileRegister from '../../hooks/useProfileRegister';
 import useImageInput from '~/hooks/useImageInput';
+import Info from '~/components/icons/Info';
 
 type Props = Parameters<typeof useProfileRegister>[0] & {
     image?: string,
@@ -17,12 +18,16 @@ const RegistrationForm: React.FC<Props> = ({ error, ...params }) => {
     const { t } = useTranslation('common')
     const { useTransitionState, form: Form } = useFormContext();
     const transitionState = useTransitionState()
-    const { nickname, valid, errors, comment } = useProfileRegister(params)
+    const { nickname, isSubmittable, errors, comment } = useProfileRegister(params)
     const { handleChangeFile, fileUrl } = useImageInput()
+
     return (
-        <div className='h-full w-full'>
+        <div className='flex h-full w-full flex-col items-center'>
             {error && (
-                <p className="text-red-500">{error}</p>
+                <div className='flex items-center'>
+                    <Info className='mr-1 h-5 w-5 fill-red-500' />
+                    <p className="flex-1 text-red-500">{error}</p>
+                </div>
             )}
             <Form method='post' encType='multipart/form-data' className='flex h-full w-full items-center justify-center gap-6 p-8'>
                 <div className='flex flex-col items-center gap-2'>
@@ -53,7 +58,7 @@ const RegistrationForm: React.FC<Props> = ({ error, ...params }) => {
                         <TextArea className='mt-2 w-full' minRows={3} aria-label={comment.name} id={comment.name}  {...comment} />
                     </div>
                     <div />
-                    <ContainedButton disabled={!valid || transitionState !== 'idle'} className='mt-5 w-full' type='submit'>{
+                    <ContainedButton disabled={(!fileUrl && !isSubmittable) || transitionState !== 'idle'} className='mt-5 w-full' type='submit'>{
                         params.nickname ? t('update') : t('register')}</ContainedButton>
                 </div>
             </Form>

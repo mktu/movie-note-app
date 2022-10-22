@@ -46,7 +46,10 @@ export const App: React.FC = () => {
                                     movieNoteList={movieNoteList} />}>
                                 <Outlet />
                             </SidebarLayout>
-                            <ToastContainer />
+                            <ToastContainer
+                                hideProgressBar
+                                pauseOnHover
+                            />
                         </TmdbProvider>
                     </CookiesProvider>
                 </LocalStorageProvider>

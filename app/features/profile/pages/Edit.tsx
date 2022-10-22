@@ -1,7 +1,9 @@
 import type { User } from '@type-defs/backend';
-import { FC, useEffect } from 'react'
+import type { FC } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+
 import { RegistrationForm } from '../components/register-form';
 
 type Props = {

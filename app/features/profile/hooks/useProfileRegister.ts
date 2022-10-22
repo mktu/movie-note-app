@@ -8,7 +8,7 @@ type Args = {
 
 const useProfileRegister = (args: Args) => {
     const { t } = useTranslation('common')
-    const { register, watch, formState: { errors, isValid } } = useForm({ mode: 'onBlur' });
+    const { register, watch, formState: { errors, isValid, isDirty } } = useForm({ mode: 'onBlur' });
     const nickname = register('nickname', {
         required: t('required'),
         value: args.nickname || ''
@@ -17,13 +17,13 @@ const useProfileRegister = (args: Args) => {
         value: args.comment || ''
     })
 
-    const valid = isValid && Object.keys(errors).length === 0
+    const isSubmittable = isValid && isDirty && Object.keys(errors).length === 0
     return {
         register,
         watch,
         errors,
         nickname,
-        valid,
+        isSubmittable,
         comment
     }
 }
