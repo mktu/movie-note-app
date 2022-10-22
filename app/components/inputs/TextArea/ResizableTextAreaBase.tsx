@@ -14,6 +14,6 @@ const ResizableTextAreaBase = forwardRef<HTMLTextAreaElement, TextareaAutosizePr
     )
 })
 
-ResizableTextAreaBase.displayName = 'resizable-text-area-base'
+ResizableTextAreaBase['displayName'] = 'resizable-text-area-base'
 
 export default ResizableTextAreaBase
