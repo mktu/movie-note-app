@@ -10,14 +10,14 @@ import { PerformanceCounter } from '@utils/performance';
 import { getSearchParamAsBoolean } from '@utils/searchparam.server';
 import { getSupabaseAdmin } from '@utils/server/db';
 
+import type { MovieNoteType } from '~/features/movie-note/server/db';
 import type { Credits, TmdbDetail, TmdbLng } from '~/features/movie-note/utils/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderArgs } from "@remix-run/cloudflare";
-import type { MovieNoteDetail } from '@type-defs/backend';
 import type { ImdbRate } from '~/features/movie-note/features/imdb/types';
 
 type ContentData = {
-    movieNoteDetail: MovieNoteDetail,
+    movieNoteDetail: MovieNoteType,
     tmdbDetail: TmdbDetail,
     tmdbCredits: Credits,
     imdbRate: ImdbRate | null,
@@ -109,8 +109,8 @@ export async function loader({ request, context, params }: LoaderArgs) {
         const lng = note.lng === 'ja' ? 'ja' : 'en'
         const tmdb = new Tmdb(tmdbData.apiKey, lng)
         const [tmdbDetail, tmdbCredits, imdbRate] = await Promise.all([
-            getTmdbDetail_(note.tmdb_id, lng, tmdb),
-            getTmdbCredits_(note.tmdb_id, tmdb),
+            getTmdbDetail_(note.tmdb_id!, lng, tmdb),
+            getTmdbCredits_(note.tmdb_id!, tmdb),
             getImdbRate_(note.imdb_id)])
         contentData = {
             movieNoteDetail: note,

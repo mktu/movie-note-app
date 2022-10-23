@@ -5,17 +5,17 @@ import NavigatorContext from '~/providers/navigator/Context';
 
 import { TmdbmageBasePath } from '@utils/constants';
 
+import { useMovieNoteKvDisabled } from '../../store/localstorage/movieNoteKvDisabled';
 import Image from '../detail/Image';
 import NoteListMenu from './NoteListMenu';
 import RemoveNoteDialog from './RemoveNoteDialog';
 
-import type { MovieNoteListViewItem } from '@type-defs/backend';
-import { useMovieNoteKvDisabled } from '../../store/localstorage/movieNoteKvDisabled';
+import type { MovieListItemType } from '../../server/db';
 
 const imageBasePath = `${TmdbmageBasePath}/w200`
 
 type Props = {
-    movieNoteListViewItem: MovieNoteListViewItem,
+    movieNoteListViewItem: MovieListItemType,
     onRemoveNote: (noteId: string) => void
 }
 
@@ -43,7 +43,7 @@ const NoteListItem: FC<Props> = ({
                         <div className='ml-2 block w-full overflow-hidden'>
                             <div className='overflow-hidden text-ellipsis whitespace-nowrap text-sm'>{movieNoteListViewItem.title}</div>
                             <div className='flex w-full items-center text-xs'>
-                                {movieNoteListViewItem.stars > 0 && (
+                                {(movieNoteListViewItem.stars || 0) > 0 && (
                                     <>
                                         <Star className={`h-4 w-4 ${movieNoteListViewItem.stars ? 'fill-yellow-300' : 'fill-gray-200'}`} />
                                         {movieNoteListViewItem.stars}

@@ -1,9 +1,13 @@
 import React from "react";
-import type { User } from "@type-defs/backend/index";
+import type { UserType } from "~/features/profile/server/db/user.server";
 
-const context = React.createContext<User>({
+const context = React.createContext<UserType>({
     id: '',
-    created_at: 0
+    created_at: '',
+    name: '',
+    image: '',
+    comment: '',
+    auth_id: ''
 });
 
 export default context;

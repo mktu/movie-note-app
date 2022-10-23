@@ -22,7 +22,7 @@ const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
                 if (isExists) {
                     throw new AuthError('user-already-registered', 400)
                 }
-                const { user, error } = await supabaseAdmin.auth.signUp({ email, password })
+                const { data: { user }, error } = await supabaseAdmin.auth.signUp({ email, password })
 
                 if (error) {
                     console.error(error)
@@ -43,15 +43,15 @@ const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
     if (!signinStrategy) {
         signinStrategy = new SigninStrategy(
             async ({ email, password }) => {
-                const { user, error } = await supabaseAdmin.auth.signIn({ email, password })
+                const { data: { user }, error } = await supabaseAdmin.auth.signInWithPassword({ email, password })
                 if (error) {
                     console.error(error)
-                    if (error.status === 404) {
-                        throw new AuthError('user-not-found', 404)
-                    }
-                    if (error.status === 400 && error.message === 'Email not confirmed') {
-                        throw new AuthError('email-not-confirmed', 400)
-                    }
+                    // if (error.status === 404) {
+                    //     throw new AuthError('user-not-found', 404)
+                    // }
+                    // if (error.status === 400 && error.message === 'Email not confirmed') {
+                    //     throw new AuthError('email-not-confirmed', 400)
+                    // }
                     throw new AuthError('invalid-email-or-pass', 400)
                 }
                 if (!user) {

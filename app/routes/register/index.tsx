@@ -27,9 +27,9 @@ export const loader: LoaderFunction = async ({ request, context }) => {
         return redirect('/app')
     }
     if (user.provider === 'email') {
-        const dbUser = await adminDb.auth.api.getUserById(user.id)
+        const dbUser = await adminDb.auth.admin.getUserById(user.id)
         return json<LorderData>({
-            confirmed: Boolean(dbUser.data?.email_confirmed_at || dbUser.data?.confirmed_at)
+            confirmed: Boolean(dbUser.data.user?.email_confirmed_at || dbUser.data.user?.confirmed_at)
         })
     }
     return json<LorderData>({

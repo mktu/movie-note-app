@@ -8,7 +8,7 @@ export const useMovieNoteStore = ({
     noteId,
     lastupdated
 }: {
-    init?: string,
+    init?: string | null,
     noteId: string,
     lastupdated?: string
 }) => {

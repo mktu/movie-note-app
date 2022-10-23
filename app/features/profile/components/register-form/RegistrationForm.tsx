@@ -10,7 +10,7 @@ import useImageInput from '~/hooks/useImageInput';
 import Info from '~/components/icons/Info';
 
 type Props = Parameters<typeof useProfileRegister>[0] & {
-    image?: string,
+    image?: string | null,
     error?: string
 }
 
@@ -35,7 +35,7 @@ const RegistrationForm: React.FC<Props> = ({ error, ...params }) => {
                         width={192}
                         height={192}
                         alt='Not found'
-                        src={fileUrl || params.image} />
+                        src={fileUrl || params.image || ''} />
                     <label className='cursor-pointer rounded border border-primary-main py-2 px-4 text-primary-main hover:border-text-dark' htmlFor='file-upload'>
                         {t('change-image')}
                         <input name='profile-image' id="file-upload" type='file' className='hidden' onChange={handleChangeFile} />

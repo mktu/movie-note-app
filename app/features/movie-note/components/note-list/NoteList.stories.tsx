@@ -29,11 +29,15 @@ Default.args = {
         tmdb_id: '2',
         title: 'test2',
         stars: 5,
-        user_id: '1'
+        user_id: '1',
+        admiration_date: '2020-10-21',
+        thumbnail: null
     }, {
         tmdb_id: '3',
         title: 'すごおおおおおおおおおおおおおおおおおおおおおおく長いタイトル',
         stars: 0,
-        user_id: '1'
+        user_id: '1',
+        admiration_date: '2020-10-21',
+        thumbnail: null
     }]
 }

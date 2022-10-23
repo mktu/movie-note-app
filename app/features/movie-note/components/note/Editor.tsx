@@ -19,7 +19,7 @@ import type { EditorState } from 'lexical';
 type Props = {
     setContentGetter: (fun: () => string) => void,
     monitorCurrentState?: (data: string) => void
-    init?: string
+    init?: string | null
 }
 
 const Editor: FC<Props> = ({

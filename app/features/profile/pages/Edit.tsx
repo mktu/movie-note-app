@@ -1,4 +1,3 @@
-import type { User } from '@type-defs/backend';
 import type { FC } from 'react';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,8 +5,10 @@ import { toast } from 'react-toastify';
 
 import { RegistrationForm } from '../components/register-form';
 
+import type { UserType } from '../server/db/user.server';
+
 type Props = {
-    user: User,
+    user: UserType,
     error?: string,
     succeeded?: boolean
 }

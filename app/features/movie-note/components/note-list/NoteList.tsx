@@ -1,9 +1,10 @@
 import type { FC } from "react";
-import type { MovieNoteListViewItem } from "@type-defs/backend";
-import NoteListItem from "./NoteListItem";
+import NoteListItem from './NoteListItem';
+
+import type { MovieListType } from "../../server/db";
 
 type Props = {
-    movieNoteList: MovieNoteListViewItem[],
+    movieNoteList: MovieListType,
     onRemoveNote: (noteId: string) => void
 }
 

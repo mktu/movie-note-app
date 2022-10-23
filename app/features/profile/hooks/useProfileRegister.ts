@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 type Args = {
-    nickname?: string,
-    comment?: string
+    nickname?: string | null,
+    comment?: string | null
 }
 
 const useProfileRegister = (args: Args) => {

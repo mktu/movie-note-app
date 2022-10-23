@@ -1,10 +1,10 @@
 import React from 'react'
-import type { User } from '@type-defs/backend/index'
 import Context from './Context'
+import type { UserType } from '~/features/profile/server/db/user.server'
 
 type Props = {
     children: React.ReactNode,
-    user: User
+    user: UserType
 }
 
 const DefaultProvider: React.FC<Props> = ({ children, user }) => {
