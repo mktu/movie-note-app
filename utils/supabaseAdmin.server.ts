@@ -1,20 +1,23 @@
 import { createClient } from '@supabase/supabase-js'
-import type { User } from '@supabase/supabase-js'
+import type { User, SupabaseClient } from '@supabase/supabase-js'
+import type { Database } from '~/types/DatabaseDefinitions'
 
-export type AdminClientType = ReturnType<typeof createClient>
+export type AdminClientType = SupabaseClient<Database>
 export type SupabaseUserType = User
 
-let supabaseAdmin : AdminClientType | null = null
+let supabaseAdmin: AdminClientType | null = null
 const getSupabaseAdmin = (context: any) => {
-    if(supabaseAdmin){
+    if (supabaseAdmin) {
         return supabaseAdmin
     }
     const supabaseUrl = context.APP_SUPABASE_URL
     const supabaseSecretKey = context.APP_SUPABASE_SECRET_KEY
-    supabaseAdmin = createClient(supabaseUrl, supabaseSecretKey, {
-        fetch: (req,init,...args) => {
-            return fetch(req, init, ...args)
-        },
+    supabaseAdmin = createClient<Database>(supabaseUrl, supabaseSecretKey, {
+        global: {
+            fetch: (req, init, ...args) => {
+                return fetch(req, init, ...args)
+            },
+        }
     })
     return supabaseAdmin
 }

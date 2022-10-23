@@ -5,10 +5,10 @@ import { userDb } from '~/features/profile/server/db';
 import { json, redirect } from '@remix-run/cloudflare';
 import { getSupabaseAdmin } from '@utils/server/db';
 
-import type { User } from "@type-defs/backend";
+import type { UserType } from "../db/user.server";
 
 interface LorderData {
-    user: User
+    user: UserType
 }
 
 export async function loader({ request, context }: LoaderArgs) {

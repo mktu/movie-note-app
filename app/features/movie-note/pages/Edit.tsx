@@ -1,25 +1,25 @@
 import { useCallback, useState } from 'react';
 
-import Imdb, { ImdbRateLabel } from '../features/imdb';
-import { useReview } from '../hooks/useMovie';
 import Detail from '../components/detail';
 import { EditHeader } from '../components/header';
 import Layout from '../components/layout';
 import MetaInfo from '../components/meta';
 import Note from '../components/note';
 import Review from '../components/review';
+import Imdb, { ImdbRateLabel } from '../features/imdb';
+import { useReview } from '../hooks/useMovie';
+import { useMovieNoteChangeMonitor } from '../hooks/useMovieNoteChangeMonitor';
 
 import type { FC } from "react";
 import type { UpdateMovieNote } from "@type-defs/frontend";
-import type { MovieNoteDetail } from '@type-defs/backend';
 import type { Credits, TmdbDetail } from '../utils/tmdb';
 import type { ImdbRate } from '../features/imdb/types';
-import { useMovieNoteChangeMonitor } from '../hooks/useMovieNoteChangeMonitor';
+import type { MovieNoteType } from '../server/db';
 
 type Props = {
     onSubmit: (note: UpdateMovieNote) => void,
     error?: string,
-    movieNoteDetail?: MovieNoteDetail,
+    movieNoteDetail?: MovieNoteType,
     tmdbDetail?: TmdbDetail
     tmdbCredits?: Credits,
     imdbRate: ImdbRate | null

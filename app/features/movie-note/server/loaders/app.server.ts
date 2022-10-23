@@ -10,12 +10,13 @@ import { getSupabaseAdmin } from '@utils/server/db';
 
 import { getMovieNoteType } from '../cookie/cookie.server';
 
-import type { MovieNoteListViewItem, User } from "@type-defs/backend/index";
+import type { MovieListType } from '~/features/movie-note/server/db';
+import type { UserType } from "~/features/profile/server/db/user.server";
 
 type LoaderData = {
-    user: User,
+    user: UserType,
     tmdbData: ReturnType<typeof setTmdbData>,
-    movieNoteList: MovieNoteListViewItem[],
+    movieNoteList: MovieListType,
     sidebarSettings: ReturnType<typeof getSidebarSettings>,
     movieNoteType: ReturnType<typeof getMovieNoteType>,
 }

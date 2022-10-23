@@ -27,10 +27,13 @@ Default.args = {
         tmdb_id: detail.id,
         lng: 'ja',
         stars: 6,
-        thumbnail: detail.poster_path || detail.backdrop_path,
+        thumbnail: detail.poster_path || detail.backdrop_path || null,
         title: detail.title,
         admiration_date: '2020-02-02',
-        imdb_id: 'a'
+        imdb_id: 'a',
+        memo: '',
+        created_at: '2020-02-02',
+        updated_at: '2020-02-02'
     },
     tmdbDetail: detail,
     tmdbCredits: credits

@@ -1,15 +1,18 @@
 import clsx from 'clsx';
-import type { FC } from 'react'
-import { Menu } from '@headlessui/react'
-import UserPlaceholder from '~/components/icons/User'
-import type { User } from '@type-defs/backend';
+import UserPlaceholder from '~/components/icons/User';
 import { useNavigatorContext } from '~/providers/navigator/Context';
-import { UserIcon } from '../image'
+
+import { Menu } from '@headlessui/react';
+
+import { UserIcon } from '../image';
+
+import type { FC } from 'react'
+import type { UserType } from '../../server/db/user.server';
 
 
 type Props = {
     onLogout: () => void,
-    user: User
+    user: UserType
 }
 const UserMenu: FC<Props> = ({
     onLogout,
