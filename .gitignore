@@ -6,6 +6,7 @@ node_modules
 /functions/_assets/**
 /public/build
 .env
+.env.staging
 /test-results/
 /playwright-report/
 /playwright/.cache/
