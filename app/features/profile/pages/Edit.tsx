@@ -25,7 +25,9 @@ const Edit: FC<Props> = ({
         }
     }, [succeeded, t])
     return (
-        <RegistrationForm nickname={user.name} comment={user.comment} image={user.image} error={error} />
+        <div>
+            <RegistrationForm nickname={user.name} comment={user.comment} image={user.image} error={error} />
+        </div>
     )
 };
 

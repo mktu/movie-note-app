@@ -9,7 +9,14 @@ export default {
 
 const Template: ComponentStory<typeof Edit> = (args) => <Edit {...args} />;
 
-export const Default = Template.bind({});
+export const Update = Template.bind({});
 
-Default.args = {
+Update.args = {
+    nickname: 'test',
+};
+
+export const New = Template.bind({});
+
+New.args = {
+    singleColumn: true
 };
