@@ -6,7 +6,7 @@ import { Register } from '~/features/profile/pages';
 import { userDb } from '~/features/profile/server/db';
 
 import { json, redirect } from '@remix-run/cloudflare';
-import { useActionData, useLoaderData } from '@remix-run/react';
+import { useActionData, useLoaderData, useSubmit } from '@remix-run/react';
 import { getSupabaseAdmin } from '@utils/server/db';
 
 interface ActionData {
@@ -61,9 +61,12 @@ export async function action({ request, context }: ActionArgs) {
 export default function Index() {
     const { confirmed } = useLoaderData<LorderData>()
     const actionData = useActionData<typeof action>()
+    const submit = useSubmit()
     return (
         <Layout titleMessage="register-title-message">
-            <Register confirmed={confirmed} error={actionData?.error} />
+            <Register confirmed={confirmed} error={actionData?.error} onCancel={() => {
+                submit(null, { action: 'logout', method: 'post' })
+            }} />
         </Layout>
     );
 }
