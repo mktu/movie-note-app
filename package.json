@@ -19,7 +19,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@headlessui/react": "1.7.3",
+    "@headlessui/react": "1.7.4",
     "@lexical/react": "0.5.0",
     "@popperjs/core": "2.11.6",
     "@remix-run/cloudflare": "1.7.4",
