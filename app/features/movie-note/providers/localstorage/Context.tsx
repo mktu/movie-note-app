@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import type useLocalstorage from './useLocalstorage';
 
 export type LocalstorageType = ReturnType<typeof useLocalstorage>
@@ -11,3 +11,5 @@ const context = React.createContext<LocalstorageType>({
 });
 
 export default context;
+
+export const useLocalstorageContext = () => useContext(context)

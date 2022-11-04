@@ -1,5 +1,5 @@
 import { useLayoutEffect, useMemo, useState } from "react";
-import type { MovieDetailType, StoredMovieNote } from "../../type-defs";
+import type { StoredMovieNote } from "../../type-defs";
 import * as localstorage from '../../utils/localstorage'
 
 
@@ -7,9 +7,7 @@ import * as localstorage from '../../utils/localstorage'
 const useBrowserLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : () => { };
 
 /** deprecated */
-const useLocalstorage = (init: {
-    movieNoteType: MovieDetailType
-}) => {
+const useLocalstorage = () => {
     const [loaded, setLoaded] = useState(false)
 
     // localstorage only works on the client side 
