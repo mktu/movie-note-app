@@ -4,11 +4,10 @@ import useLocalstorage from './useLocalstorage';
 
 type Props = {
     children: React.ReactNode,
-    init: Parameters<typeof useLocalstorage>[0]
 }
 
-const DefaultProvider: React.FC<Props> = ({ children, init }) => {
-    const methods = useLocalstorage(init)
+const DefaultProvider: React.FC<Props> = ({ children }) => {
+    const methods = useLocalstorage()
     return (
         <Context.Provider value={methods}>
             {children}

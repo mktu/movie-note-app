@@ -32,6 +32,7 @@ const Note: FC = () => {
     const actionData = useActionData<typeof action>()
     const loaderData = useLoaderData<typeof loader>()
     const content = loaderData.content
+
     return (<>
         {loaderData.error && (
             <GeneralError key={loaderData.error} />
