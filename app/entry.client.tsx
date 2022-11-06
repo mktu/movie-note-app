@@ -7,6 +7,15 @@ import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { getInitialNamespaces } from 'remix-i18next';
 import i18n from './i18n'; // your i18n configuration file
 
+async function loadMsw() {
+  const { worker } = await import('../mocks/browser')
+  worker.start()
+}
+// for e2e
+if (process.env.NODE_ENV === 'test') {
+  loadMsw()
+}
+
 i18next
   .use(initReactI18next) // Tell i18next to use the react-i18next plugin
   .use(LanguageDetector) // Setup a client-side language detector
