@@ -87,7 +87,8 @@
     "tailwindcss": "3.2.3",
     "tsconfig-paths-webpack-plugin": "4.0.0",
     "typescript": "4.8.4",
-    "vitest": "0.23.4",
+    "vite": "3.2.3",
+    "vitest": "0.25.1",
     "wrangler": "2.1.15"
   },
   "engines": {
