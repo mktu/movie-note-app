@@ -792,440 +792,440 @@ GRANT ALL ON FUNCTION "extensions"."verify"("token" "text", "secret" "text", "al
 -- Name: FUNCTION "_first_agg"("anyelement", "anyelement"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."_first_agg"("anyelement", "anyelement") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."_first_agg"("anyelement", "anyelement") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."_first_agg"("anyelement", "anyelement") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."_first_agg"("anyelement", "anyelement") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."_first_agg"("anyelement", "anyelement") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."_first_agg"("anyelement", "anyelement") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."_first_agg"("anyelement", "anyelement") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."_first_agg"("anyelement", "anyelement") TO "service_role";
 
 
 --
 -- Name: FUNCTION "alias_or_name_literal"("field" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."alias_or_name_literal"("field" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."alias_or_name_literal"("field" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."alias_or_name_literal"("field" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."alias_or_name_literal"("field" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."alias_or_name_literal"("field" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."alias_or_name_literal"("field" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."alias_or_name_literal"("field" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."alias_or_name_literal"("field" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "arg_clause"("name" "text", "arguments" "jsonb", "variable_definitions" "jsonb", "entity" "regclass", "default_value" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."arg_clause"("name" "text", "arguments" "jsonb", "variable_definitions" "jsonb", "entity" "regclass", "default_value" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."arg_clause"("name" "text", "arguments" "jsonb", "variable_definitions" "jsonb", "entity" "regclass", "default_value" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."arg_clause"("name" "text", "arguments" "jsonb", "variable_definitions" "jsonb", "entity" "regclass", "default_value" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."arg_clause"("name" "text", "arguments" "jsonb", "variable_definitions" "jsonb", "entity" "regclass", "default_value" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."arg_clause"("name" "text", "arguments" "jsonb", "variable_definitions" "jsonb", "entity" "regclass", "default_value" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."arg_clause"("name" "text", "arguments" "jsonb", "variable_definitions" "jsonb", "entity" "regclass", "default_value" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."arg_clause"("name" "text", "arguments" "jsonb", "variable_definitions" "jsonb", "entity" "regclass", "default_value" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."arg_clause"("name" "text", "arguments" "jsonb", "variable_definitions" "jsonb", "entity" "regclass", "default_value" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "arg_coerce_list"("arg" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."arg_coerce_list"("arg" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."arg_coerce_list"("arg" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."arg_coerce_list"("arg" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."arg_coerce_list"("arg" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."arg_coerce_list"("arg" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."arg_coerce_list"("arg" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."arg_coerce_list"("arg" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."arg_coerce_list"("arg" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "arg_index"("arg_name" "text", "variable_definitions" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."arg_index"("arg_name" "text", "variable_definitions" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."arg_index"("arg_name" "text", "variable_definitions" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."arg_index"("arg_name" "text", "variable_definitions" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."arg_index"("arg_name" "text", "variable_definitions" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."arg_index"("arg_name" "text", "variable_definitions" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."arg_index"("arg_name" "text", "variable_definitions" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."arg_index"("arg_name" "text", "variable_definitions" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."arg_index"("arg_name" "text", "variable_definitions" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "arg_to_jsonb"("arg" "jsonb", "variables" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."arg_to_jsonb"("arg" "jsonb", "variables" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."arg_to_jsonb"("arg" "jsonb", "variables" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."arg_to_jsonb"("arg" "jsonb", "variables" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."arg_to_jsonb"("arg" "jsonb", "variables" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."arg_to_jsonb"("arg" "jsonb", "variables" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."arg_to_jsonb"("arg" "jsonb", "variables" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."arg_to_jsonb"("arg" "jsonb", "variables" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."arg_to_jsonb"("arg" "jsonb", "variables" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "argument_value_by_name"("name" "text", "ast" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."argument_value_by_name"("name" "text", "ast" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."argument_value_by_name"("name" "text", "ast" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."argument_value_by_name"("name" "text", "ast" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."argument_value_by_name"("name" "text", "ast" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."argument_value_by_name"("name" "text", "ast" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."argument_value_by_name"("name" "text", "ast" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."argument_value_by_name"("name" "text", "ast" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."argument_value_by_name"("name" "text", "ast" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "ast_pass_fragments"("ast" "jsonb", "fragment_defs" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."ast_pass_fragments"("ast" "jsonb", "fragment_defs" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."ast_pass_fragments"("ast" "jsonb", "fragment_defs" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."ast_pass_fragments"("ast" "jsonb", "fragment_defs" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."ast_pass_fragments"("ast" "jsonb", "fragment_defs" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."ast_pass_fragments"("ast" "jsonb", "fragment_defs" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."ast_pass_fragments"("ast" "jsonb", "fragment_defs" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."ast_pass_fragments"("ast" "jsonb", "fragment_defs" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."ast_pass_fragments"("ast" "jsonb", "fragment_defs" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "ast_pass_strip_loc"("body" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."ast_pass_strip_loc"("body" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."ast_pass_strip_loc"("body" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."ast_pass_strip_loc"("body" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."ast_pass_strip_loc"("body" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."ast_pass_strip_loc"("body" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."ast_pass_strip_loc"("body" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."ast_pass_strip_loc"("body" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."ast_pass_strip_loc"("body" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_args_on_field_query"("ast" "jsonb", "field_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_args_on_field_query"("ast" "jsonb", "field_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_args_on_field_query"("ast" "jsonb", "field_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_args_on_field_query"("ast" "jsonb", "field_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_args_on_field_query"("ast" "jsonb", "field_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_args_on_field_query"("ast" "jsonb", "field_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_args_on_field_query"("ast" "jsonb", "field_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_args_on_field_query"("ast" "jsonb", "field_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_args_on_field_query"("ast" "jsonb", "field_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_connection_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_connection_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_connection_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_connection_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_connection_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_connection_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_connection_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_connection_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_connection_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_delete"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_delete"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_delete"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_delete"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_delete"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_delete"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_delete"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_delete"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_delete"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_enum_values_query"("ast" "jsonb", "type_block_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_enum_values_query"("ast" "jsonb", "type_block_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_enum_values_query"("ast" "jsonb", "type_block_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_enum_values_query"("ast" "jsonb", "type_block_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_enum_values_query"("ast" "jsonb", "type_block_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_enum_values_query"("ast" "jsonb", "type_block_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_enum_values_query"("ast" "jsonb", "type_block_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_enum_values_query"("ast" "jsonb", "type_block_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_enum_values_query"("ast" "jsonb", "type_block_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_field_on_type_query"("ast" "jsonb", "type_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb", "is_input_fields" boolean); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_field_on_type_query"("ast" "jsonb", "type_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb", "is_input_fields" boolean) TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_field_on_type_query"("ast" "jsonb", "type_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb", "is_input_fields" boolean) TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_field_on_type_query"("ast" "jsonb", "type_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb", "is_input_fields" boolean) TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_field_on_type_query"("ast" "jsonb", "type_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb", "is_input_fields" boolean) TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_field_on_type_query"("ast" "jsonb", "type_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb", "is_input_fields" boolean) TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_field_on_type_query"("ast" "jsonb", "type_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb", "is_input_fields" boolean) TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_field_on_type_query"("ast" "jsonb", "type_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb", "is_input_fields" boolean) TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_field_on_type_query"("ast" "jsonb", "type_block_name" "text", "variable_definitions" "jsonb", "variables" "jsonb", "is_input_fields" boolean) TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_heartbeat_query"("ast" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_heartbeat_query"("ast" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_heartbeat_query"("ast" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_heartbeat_query"("ast" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_heartbeat_query"("ast" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_heartbeat_query"("ast" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_heartbeat_query"("ast" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_heartbeat_query"("ast" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_heartbeat_query"("ast" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_insert"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_insert"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_insert"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_insert"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_insert"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_insert"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_insert"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_insert"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_insert"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_node_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_node_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_node_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_node_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_node_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_node_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_node_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_node_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_node_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb", "parent_type" "text", "parent_block_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_schema_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_schema_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_schema_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_schema_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_schema_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_schema_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_schema_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_schema_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_schema_query"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_type_query_core_selects"("ast" "jsonb", "block_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_type_query_core_selects"("ast" "jsonb", "block_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_type_query_core_selects"("ast" "jsonb", "block_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_type_query_core_selects"("ast" "jsonb", "block_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_type_query_core_selects"("ast" "jsonb", "block_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_type_query_core_selects"("ast" "jsonb", "block_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_type_query_core_selects"("ast" "jsonb", "block_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_type_query_core_selects"("ast" "jsonb", "block_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_type_query_core_selects"("ast" "jsonb", "block_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_type_query_in_field_context"("ast" "jsonb", "field_block_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_type_query_in_field_context"("ast" "jsonb", "field_block_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_type_query_in_field_context"("ast" "jsonb", "field_block_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_type_query_in_field_context"("ast" "jsonb", "field_block_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_type_query_in_field_context"("ast" "jsonb", "field_block_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_type_query_in_field_context"("ast" "jsonb", "field_block_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_type_query_in_field_context"("ast" "jsonb", "field_block_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_type_query_in_field_context"("ast" "jsonb", "field_block_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_type_query_in_field_context"("ast" "jsonb", "field_block_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_type_query_wrapper_selects"("ast" "jsonb", "kind" "text", "of_type_selects" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_type_query_wrapper_selects"("ast" "jsonb", "kind" "text", "of_type_selects" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_type_query_wrapper_selects"("ast" "jsonb", "kind" "text", "of_type_selects" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_type_query_wrapper_selects"("ast" "jsonb", "kind" "text", "of_type_selects" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_type_query_wrapper_selects"("ast" "jsonb", "kind" "text", "of_type_selects" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_type_query_wrapper_selects"("ast" "jsonb", "kind" "text", "of_type_selects" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_type_query_wrapper_selects"("ast" "jsonb", "kind" "text", "of_type_selects" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_type_query_wrapper_selects"("ast" "jsonb", "kind" "text", "of_type_selects" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_type_query_wrapper_selects"("ast" "jsonb", "kind" "text", "of_type_selects" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "build_update"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."build_update"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."build_update"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."build_update"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."build_update"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."build_update"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."build_update"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."build_update"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."build_update"("ast" "jsonb", "variable_definitions" "jsonb", "variables" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "cache_key"("role" "regrole", "schemas" "text"[], "schema_version" integer, "ast" "jsonb", "variables" "jsonb", "variable_definitions" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."cache_key"("role" "regrole", "schemas" "text"[], "schema_version" integer, "ast" "jsonb", "variables" "jsonb", "variable_definitions" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."cache_key"("role" "regrole", "schemas" "text"[], "schema_version" integer, "ast" "jsonb", "variables" "jsonb", "variable_definitions" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."cache_key"("role" "regrole", "schemas" "text"[], "schema_version" integer, "ast" "jsonb", "variables" "jsonb", "variable_definitions" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."cache_key"("role" "regrole", "schemas" "text"[], "schema_version" integer, "ast" "jsonb", "variables" "jsonb", "variable_definitions" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."cache_key"("role" "regrole", "schemas" "text"[], "schema_version" integer, "ast" "jsonb", "variables" "jsonb", "variable_definitions" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."cache_key"("role" "regrole", "schemas" "text"[], "schema_version" integer, "ast" "jsonb", "variables" "jsonb", "variable_definitions" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."cache_key"("role" "regrole", "schemas" "text"[], "schema_version" integer, "ast" "jsonb", "variables" "jsonb", "variable_definitions" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."cache_key"("role" "regrole", "schemas" "text"[], "schema_version" integer, "ast" "jsonb", "variables" "jsonb", "variable_definitions" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "cache_key_variable_component"("variables" "jsonb", "variable_definitions" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."cache_key_variable_component"("variables" "jsonb", "variable_definitions" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."cache_key_variable_component"("variables" "jsonb", "variable_definitions" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."cache_key_variable_component"("variables" "jsonb", "variable_definitions" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."cache_key_variable_component"("variables" "jsonb", "variable_definitions" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."cache_key_variable_component"("variables" "jsonb", "variable_definitions" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."cache_key_variable_component"("variables" "jsonb", "variable_definitions" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."cache_key_variable_component"("variables" "jsonb", "variable_definitions" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."cache_key_variable_component"("variables" "jsonb", "variable_definitions" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "column_set_is_unique"("regclass", "columns" "text"[]); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."column_set_is_unique"("regclass", "columns" "text"[]) TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."column_set_is_unique"("regclass", "columns" "text"[]) TO "anon";
-GRANT ALL ON FUNCTION "graphql"."column_set_is_unique"("regclass", "columns" "text"[]) TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."column_set_is_unique"("regclass", "columns" "text"[]) TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."column_set_is_unique"("regclass", "columns" "text"[]) TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."column_set_is_unique"("regclass", "columns" "text"[]) TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."column_set_is_unique"("regclass", "columns" "text"[]) TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."column_set_is_unique"("regclass", "columns" "text"[]) TO "service_role";
 
 
 --
 -- Name: FUNCTION "comment"("regclass"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."comment"("regclass") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."comment"("regclass") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."comment"("regclass") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."comment"("regclass") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regclass") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regclass") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regclass") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regclass") TO "service_role";
 
 
 --
 -- Name: FUNCTION "comment"("regnamespace"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."comment"("regnamespace") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."comment"("regnamespace") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."comment"("regnamespace") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."comment"("regnamespace") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regnamespace") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regnamespace") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regnamespace") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regnamespace") TO "service_role";
 
 
 --
 -- Name: FUNCTION "comment"("regproc"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."comment"("regproc") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."comment"("regproc") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."comment"("regproc") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."comment"("regproc") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regproc") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regproc") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regproc") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regproc") TO "service_role";
 
 
 --
 -- Name: FUNCTION "comment"("regtype"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."comment"("regtype") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."comment"("regtype") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."comment"("regtype") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."comment"("regtype") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regtype") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regtype") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regtype") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regtype") TO "service_role";
 
 
 --
 -- Name: FUNCTION "comment"("regclass", "column_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."comment"("regclass", "column_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."comment"("regclass", "column_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."comment"("regclass", "column_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."comment"("regclass", "column_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regclass", "column_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regclass", "column_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regclass", "column_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."comment"("regclass", "column_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "comment_directive"("comment_" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."comment_directive"("comment_" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."comment_directive"("comment_" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."comment_directive"("comment_" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."comment_directive"("comment_" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive"("comment_" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive"("comment_" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive"("comment_" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive"("comment_" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "comment_directive_inflect_names"("regnamespace"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."comment_directive_inflect_names"("regnamespace") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_inflect_names"("regnamespace") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_inflect_names"("regnamespace") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_inflect_names"("regnamespace") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_inflect_names"("regnamespace") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_inflect_names"("regnamespace") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_inflect_names"("regnamespace") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_inflect_names"("regnamespace") TO "service_role";
 
 
 --
 -- Name: FUNCTION "comment_directive_name"("regclass"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass") TO "service_role";
 
 
 --
 -- Name: FUNCTION "comment_directive_name"("regproc"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regproc") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regproc") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regproc") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regproc") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regproc") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regproc") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regproc") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regproc") TO "service_role";
 
 
 --
 -- Name: FUNCTION "comment_directive_name"("regtype"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regtype") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regtype") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regtype") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regtype") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regtype") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regtype") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regtype") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regtype") TO "service_role";
 
 
 --
 -- Name: FUNCTION "comment_directive_name"("regclass", "column_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass", "column_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass", "column_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass", "column_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass", "column_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass", "column_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass", "column_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass", "column_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_name"("regclass", "column_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "comment_directive_totalcount_enabled"("regclass"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."comment_directive_totalcount_enabled"("regclass") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_totalcount_enabled"("regclass") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_totalcount_enabled"("regclass") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."comment_directive_totalcount_enabled"("regclass") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_totalcount_enabled"("regclass") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_totalcount_enabled"("regclass") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_totalcount_enabled"("regclass") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."comment_directive_totalcount_enabled"("regclass") TO "service_role";
 
 
 --
 -- Name: FUNCTION "cursor_where_clause"("block_name" "text", "column_orders" "graphql"."column_order_w_type"[], "cursor_" "text", "cursor_var_ix" integer, "depth_" integer); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."cursor_where_clause"("block_name" "text", "column_orders" "graphql"."column_order_w_type"[], "cursor_" "text", "cursor_var_ix" integer, "depth_" integer) TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."cursor_where_clause"("block_name" "text", "column_orders" "graphql"."column_order_w_type"[], "cursor_" "text", "cursor_var_ix" integer, "depth_" integer) TO "anon";
-GRANT ALL ON FUNCTION "graphql"."cursor_where_clause"("block_name" "text", "column_orders" "graphql"."column_order_w_type"[], "cursor_" "text", "cursor_var_ix" integer, "depth_" integer) TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."cursor_where_clause"("block_name" "text", "column_orders" "graphql"."column_order_w_type"[], "cursor_" "text", "cursor_var_ix" integer, "depth_" integer) TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."cursor_where_clause"("block_name" "text", "column_orders" "graphql"."column_order_w_type"[], "cursor_" "text", "cursor_var_ix" integer, "depth_" integer) TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."cursor_where_clause"("block_name" "text", "column_orders" "graphql"."column_order_w_type"[], "cursor_" "text", "cursor_var_ix" integer, "depth_" integer) TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."cursor_where_clause"("block_name" "text", "column_orders" "graphql"."column_order_w_type"[], "cursor_" "text", "cursor_var_ix" integer, "depth_" integer) TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."cursor_where_clause"("block_name" "text", "column_orders" "graphql"."column_order_w_type"[], "cursor_" "text", "cursor_var_ix" integer, "depth_" integer) TO "service_role";
 
 
 --
 -- Name: FUNCTION "decode"("text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."decode"("text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."decode"("text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."decode"("text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."decode"("text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."decode"("text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."decode"("text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."decode"("text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."decode"("text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "encode"("jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."encode"("jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."encode"("jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."encode"("jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."encode"("jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."encode"("jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."encode"("jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."encode"("jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."encode"("jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "exception"("message" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."exception"("message" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."exception"("message" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."exception"("message" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."exception"("message" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."exception"("message" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."exception"("message" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."exception"("message" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."exception"("message" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "exception_required_argument"("arg_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."exception_required_argument"("arg_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."exception_required_argument"("arg_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."exception_required_argument"("arg_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."exception_required_argument"("arg_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."exception_required_argument"("arg_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."exception_required_argument"("arg_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."exception_required_argument"("arg_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."exception_required_argument"("arg_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "exception_unknown_field"("field_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "exception_unknown_field"("field_name" "text", "type_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text", "type_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text", "type_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text", "type_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text", "type_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text", "type_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text", "type_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text", "type_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."exception_unknown_field"("field_name" "text", "type_name" "text") TO "service_role";
 
 
 --
@@ -1242,480 +1242,480 @@ GRANT ALL ON TABLE "graphql"."_field" TO "service_role";
 -- Name: FUNCTION "field_name"("rec" "graphql"."_field"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."field_name"("rec" "graphql"."_field") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."field_name"("rec" "graphql"."_field") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."field_name"("rec" "graphql"."_field") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."field_name"("rec" "graphql"."_field") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."field_name"("rec" "graphql"."_field") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."field_name"("rec" "graphql"."_field") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."field_name"("rec" "graphql"."_field") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."field_name"("rec" "graphql"."_field") TO "service_role";
 
 
 --
 -- Name: FUNCTION "field_name_for_column"("entity" "regclass", "column_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."field_name_for_column"("entity" "regclass", "column_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_column"("entity" "regclass", "column_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_column"("entity" "regclass", "column_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_column"("entity" "regclass", "column_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_column"("entity" "regclass", "column_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_column"("entity" "regclass", "column_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_column"("entity" "regclass", "column_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_column"("entity" "regclass", "column_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "field_name_for_function"("func" "regproc"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."field_name_for_function"("func" "regproc") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_function"("func" "regproc") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_function"("func" "regproc") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_function"("func" "regproc") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_function"("func" "regproc") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_function"("func" "regproc") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_function"("func" "regproc") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_function"("func" "regproc") TO "service_role";
 
 
 --
 -- Name: FUNCTION "field_name_for_query_collection"("entity" "regclass"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."field_name_for_query_collection"("entity" "regclass") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_query_collection"("entity" "regclass") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_query_collection"("entity" "regclass") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_query_collection"("entity" "regclass") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_query_collection"("entity" "regclass") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_query_collection"("entity" "regclass") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_query_collection"("entity" "regclass") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_query_collection"("entity" "regclass") TO "service_role";
 
 
 --
 -- Name: FUNCTION "field_name_for_to_many"("foreign_entity" "regclass", "foreign_name_override" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."field_name_for_to_many"("foreign_entity" "regclass", "foreign_name_override" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_to_many"("foreign_entity" "regclass", "foreign_name_override" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_to_many"("foreign_entity" "regclass", "foreign_name_override" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_to_many"("foreign_entity" "regclass", "foreign_name_override" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_to_many"("foreign_entity" "regclass", "foreign_name_override" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_to_many"("foreign_entity" "regclass", "foreign_name_override" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_to_many"("foreign_entity" "regclass", "foreign_name_override" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_to_many"("foreign_entity" "regclass", "foreign_name_override" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "field_name_for_to_one"("foreign_entity" "regclass", "foreign_name_override" "text", "foreign_columns" "text"[]); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."field_name_for_to_one"("foreign_entity" "regclass", "foreign_name_override" "text", "foreign_columns" "text"[]) TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_to_one"("foreign_entity" "regclass", "foreign_name_override" "text", "foreign_columns" "text"[]) TO "anon";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_to_one"("foreign_entity" "regclass", "foreign_name_override" "text", "foreign_columns" "text"[]) TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."field_name_for_to_one"("foreign_entity" "regclass", "foreign_name_override" "text", "foreign_columns" "text"[]) TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_to_one"("foreign_entity" "regclass", "foreign_name_override" "text", "foreign_columns" "text"[]) TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_to_one"("foreign_entity" "regclass", "foreign_name_override" "text", "foreign_columns" "text"[]) TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_to_one"("foreign_entity" "regclass", "foreign_name_override" "text", "foreign_columns" "text"[]) TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."field_name_for_to_one"("foreign_entity" "regclass", "foreign_name_override" "text", "foreign_columns" "text"[]) TO "service_role";
 
 
 --
 -- Name: FUNCTION "get_arg_by_name"("name" "text", "arguments" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."get_arg_by_name"("name" "text", "arguments" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."get_arg_by_name"("name" "text", "arguments" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."get_arg_by_name"("name" "text", "arguments" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."get_arg_by_name"("name" "text", "arguments" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."get_arg_by_name"("name" "text", "arguments" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."get_arg_by_name"("name" "text", "arguments" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."get_arg_by_name"("name" "text", "arguments" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."get_arg_by_name"("name" "text", "arguments" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "get_built_schema_version"(); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."get_built_schema_version"() TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."get_built_schema_version"() TO "anon";
-GRANT ALL ON FUNCTION "graphql"."get_built_schema_version"() TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."get_built_schema_version"() TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."get_built_schema_version"() TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."get_built_schema_version"() TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."get_built_schema_version"() TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."get_built_schema_version"() TO "service_role";
 
 
 --
 -- Name: FUNCTION "inflect_type_default"("text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."inflect_type_default"("text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."inflect_type_default"("text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."inflect_type_default"("text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."inflect_type_default"("text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."inflect_type_default"("text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."inflect_type_default"("text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."inflect_type_default"("text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."inflect_type_default"("text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "is_array"("regtype"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."is_array"("regtype") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."is_array"("regtype") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."is_array"("regtype") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."is_array"("regtype") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."is_array"("regtype") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."is_array"("regtype") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."is_array"("regtype") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."is_array"("regtype") TO "service_role";
 
 
 --
 -- Name: FUNCTION "is_composite"("regtype"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."is_composite"("regtype") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."is_composite"("regtype") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."is_composite"("regtype") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."is_composite"("regtype") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."is_composite"("regtype") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."is_composite"("regtype") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."is_composite"("regtype") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."is_composite"("regtype") TO "service_role";
 
 
 --
 -- Name: FUNCTION "is_literal"("field" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."is_literal"("field" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."is_literal"("field" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."is_literal"("field" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."is_literal"("field" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."is_literal"("field" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."is_literal"("field" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."is_literal"("field" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."is_literal"("field" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "is_variable"("field" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."is_variable"("field" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."is_variable"("field" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."is_variable"("field" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."is_variable"("field" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."is_variable"("field" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."is_variable"("field" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."is_variable"("field" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."is_variable"("field" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "join_clause"("local_columns" "text"[], "local_alias_name" "text", "parent_columns" "text"[], "parent_alias_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."join_clause"("local_columns" "text"[], "local_alias_name" "text", "parent_columns" "text"[], "parent_alias_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."join_clause"("local_columns" "text"[], "local_alias_name" "text", "parent_columns" "text"[], "parent_alias_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."join_clause"("local_columns" "text"[], "local_alias_name" "text", "parent_columns" "text"[], "parent_alias_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."join_clause"("local_columns" "text"[], "local_alias_name" "text", "parent_columns" "text"[], "parent_alias_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."join_clause"("local_columns" "text"[], "local_alias_name" "text", "parent_columns" "text"[], "parent_alias_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."join_clause"("local_columns" "text"[], "local_alias_name" "text", "parent_columns" "text"[], "parent_alias_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."join_clause"("local_columns" "text"[], "local_alias_name" "text", "parent_columns" "text"[], "parent_alias_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."join_clause"("local_columns" "text"[], "local_alias_name" "text", "parent_columns" "text"[], "parent_alias_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "jsonb_coalesce"("val" "jsonb", "default_" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."jsonb_coalesce"("val" "jsonb", "default_" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."jsonb_coalesce"("val" "jsonb", "default_" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."jsonb_coalesce"("val" "jsonb", "default_" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."jsonb_coalesce"("val" "jsonb", "default_" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."jsonb_coalesce"("val" "jsonb", "default_" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."jsonb_coalesce"("val" "jsonb", "default_" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."jsonb_coalesce"("val" "jsonb", "default_" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."jsonb_coalesce"("val" "jsonb", "default_" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "jsonb_unnest_recursive_with_jsonpath"("obj" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."jsonb_unnest_recursive_with_jsonpath"("obj" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."jsonb_unnest_recursive_with_jsonpath"("obj" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."jsonb_unnest_recursive_with_jsonpath"("obj" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."jsonb_unnest_recursive_with_jsonpath"("obj" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."jsonb_unnest_recursive_with_jsonpath"("obj" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."jsonb_unnest_recursive_with_jsonpath"("obj" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."jsonb_unnest_recursive_with_jsonpath"("obj" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."jsonb_unnest_recursive_with_jsonpath"("obj" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "lowercase_first_letter"("text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."lowercase_first_letter"("text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."lowercase_first_letter"("text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."lowercase_first_letter"("text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."lowercase_first_letter"("text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."lowercase_first_letter"("text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."lowercase_first_letter"("text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."lowercase_first_letter"("text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."lowercase_first_letter"("text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "name_literal"("ast" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."name_literal"("ast" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."name_literal"("ast" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."name_literal"("ast" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."name_literal"("ast" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."name_literal"("ast" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."name_literal"("ast" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."name_literal"("ast" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."name_literal"("ast" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "order_by_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."order_by_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."order_by_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "anon";
-GRANT ALL ON FUNCTION "graphql"."order_by_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."order_by_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."order_by_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."order_by_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."order_by_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."order_by_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "service_role";
 
 
 --
 -- Name: FUNCTION "order_by_enum_to_clause"("order_by_enum_val" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."order_by_enum_to_clause"("order_by_enum_val" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."order_by_enum_to_clause"("order_by_enum_val" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."order_by_enum_to_clause"("order_by_enum_val" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."order_by_enum_to_clause"("order_by_enum_val" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."order_by_enum_to_clause"("order_by_enum_val" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."order_by_enum_to_clause"("order_by_enum_val" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."order_by_enum_to_clause"("order_by_enum_val" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."order_by_enum_to_clause"("order_by_enum_val" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "parse"("text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."parse"("text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."parse"("text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."parse"("text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."parse"("text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."parse"("text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."parse"("text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."parse"("text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."parse"("text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "prepared_statement_create_clause"("statement_name" "text", "variable_definitions" "jsonb", "query_" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."prepared_statement_create_clause"("statement_name" "text", "variable_definitions" "jsonb", "query_" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."prepared_statement_create_clause"("statement_name" "text", "variable_definitions" "jsonb", "query_" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."prepared_statement_create_clause"("statement_name" "text", "variable_definitions" "jsonb", "query_" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."prepared_statement_create_clause"("statement_name" "text", "variable_definitions" "jsonb", "query_" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."prepared_statement_create_clause"("statement_name" "text", "variable_definitions" "jsonb", "query_" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."prepared_statement_create_clause"("statement_name" "text", "variable_definitions" "jsonb", "query_" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."prepared_statement_create_clause"("statement_name" "text", "variable_definitions" "jsonb", "query_" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."prepared_statement_create_clause"("statement_name" "text", "variable_definitions" "jsonb", "query_" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "prepared_statement_execute_clause"("statement_name" "text", "variable_definitions" "jsonb", "variables" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."prepared_statement_execute_clause"("statement_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."prepared_statement_execute_clause"("statement_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."prepared_statement_execute_clause"("statement_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."prepared_statement_execute_clause"("statement_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."prepared_statement_execute_clause"("statement_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."prepared_statement_execute_clause"("statement_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."prepared_statement_execute_clause"("statement_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."prepared_statement_execute_clause"("statement_name" "text", "variable_definitions" "jsonb", "variables" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "prepared_statement_exists"("statement_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."prepared_statement_exists"("statement_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."prepared_statement_exists"("statement_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."prepared_statement_exists"("statement_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."prepared_statement_exists"("statement_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."prepared_statement_exists"("statement_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."prepared_statement_exists"("statement_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."prepared_statement_exists"("statement_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."prepared_statement_exists"("statement_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "primary_key_clause"("entity" "regclass", "alias_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."primary_key_clause"("entity" "regclass", "alias_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."primary_key_clause"("entity" "regclass", "alias_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."primary_key_clause"("entity" "regclass", "alias_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."primary_key_clause"("entity" "regclass", "alias_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."primary_key_clause"("entity" "regclass", "alias_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."primary_key_clause"("entity" "regclass", "alias_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."primary_key_clause"("entity" "regclass", "alias_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."primary_key_clause"("entity" "regclass", "alias_name" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "primary_key_columns"("entity" "regclass"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."primary_key_columns"("entity" "regclass") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."primary_key_columns"("entity" "regclass") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."primary_key_columns"("entity" "regclass") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."primary_key_columns"("entity" "regclass") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."primary_key_columns"("entity" "regclass") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."primary_key_columns"("entity" "regclass") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."primary_key_columns"("entity" "regclass") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."primary_key_columns"("entity" "regclass") TO "service_role";
 
 
 --
 -- Name: FUNCTION "primary_key_types"("entity" "regclass"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."primary_key_types"("entity" "regclass") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."primary_key_types"("entity" "regclass") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."primary_key_types"("entity" "regclass") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."primary_key_types"("entity" "regclass") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."primary_key_types"("entity" "regclass") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."primary_key_types"("entity" "regclass") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."primary_key_types"("entity" "regclass") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."primary_key_types"("entity" "regclass") TO "service_role";
 
 
 --
 -- Name: FUNCTION "rebuild_fields"(); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."rebuild_fields"() TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."rebuild_fields"() TO "anon";
-GRANT ALL ON FUNCTION "graphql"."rebuild_fields"() TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."rebuild_fields"() TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_fields"() TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_fields"() TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_fields"() TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_fields"() TO "service_role";
 
 
 --
 -- Name: FUNCTION "rebuild_on_ddl"(); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."rebuild_on_ddl"() TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."rebuild_on_ddl"() TO "anon";
-GRANT ALL ON FUNCTION "graphql"."rebuild_on_ddl"() TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."rebuild_on_ddl"() TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_on_ddl"() TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_on_ddl"() TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_on_ddl"() TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_on_ddl"() TO "service_role";
 
 
 --
 -- Name: FUNCTION "rebuild_on_drop"(); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."rebuild_on_drop"() TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."rebuild_on_drop"() TO "anon";
-GRANT ALL ON FUNCTION "graphql"."rebuild_on_drop"() TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."rebuild_on_drop"() TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_on_drop"() TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_on_drop"() TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_on_drop"() TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_on_drop"() TO "service_role";
 
 
 --
 -- Name: FUNCTION "rebuild_schema"(); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."rebuild_schema"() TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."rebuild_schema"() TO "anon";
-GRANT ALL ON FUNCTION "graphql"."rebuild_schema"() TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."rebuild_schema"() TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_schema"() TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_schema"() TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_schema"() TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_schema"() TO "service_role";
 
 
 --
 -- Name: FUNCTION "rebuild_types"(); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."rebuild_types"() TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."rebuild_types"() TO "anon";
-GRANT ALL ON FUNCTION "graphql"."rebuild_types"() TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."rebuild_types"() TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_types"() TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_types"() TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_types"() TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."rebuild_types"() TO "service_role";
 
 
 --
 -- Name: FUNCTION "reverse"("column_orders" "graphql"."column_order_w_type"[]); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."reverse"("column_orders" "graphql"."column_order_w_type"[]) TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."reverse"("column_orders" "graphql"."column_order_w_type"[]) TO "anon";
-GRANT ALL ON FUNCTION "graphql"."reverse"("column_orders" "graphql"."column_order_w_type"[]) TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."reverse"("column_orders" "graphql"."column_order_w_type"[]) TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."reverse"("column_orders" "graphql"."column_order_w_type"[]) TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."reverse"("column_orders" "graphql"."column_order_w_type"[]) TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."reverse"("column_orders" "graphql"."column_order_w_type"[]) TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."reverse"("column_orders" "graphql"."column_order_w_type"[]) TO "service_role";
 
 
 --
 -- Name: FUNCTION "set_field_name"(); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."set_field_name"() TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."set_field_name"() TO "anon";
-GRANT ALL ON FUNCTION "graphql"."set_field_name"() TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."set_field_name"() TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."set_field_name"() TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."set_field_name"() TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."set_field_name"() TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."set_field_name"() TO "service_role";
 
 
 --
 -- Name: FUNCTION "set_type_name"(); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."set_type_name"() TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."set_type_name"() TO "anon";
-GRANT ALL ON FUNCTION "graphql"."set_type_name"() TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."set_type_name"() TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."set_type_name"() TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."set_type_name"() TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."set_type_name"() TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."set_type_name"() TO "service_role";
 
 
 --
 -- Name: FUNCTION "slug"(); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."slug"() TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."slug"() TO "anon";
-GRANT ALL ON FUNCTION "graphql"."slug"() TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."slug"() TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."slug"() TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."slug"() TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."slug"() TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."slug"() TO "service_role";
 
 
 --
 -- Name: FUNCTION "sql_type_to_graphql_type"("regtype"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."sql_type_to_graphql_type"("regtype") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."sql_type_to_graphql_type"("regtype") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."sql_type_to_graphql_type"("regtype") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."sql_type_to_graphql_type"("regtype") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."sql_type_to_graphql_type"("regtype") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."sql_type_to_graphql_type"("regtype") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."sql_type_to_graphql_type"("regtype") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."sql_type_to_graphql_type"("regtype") TO "service_role";
 
 
 --
 -- Name: FUNCTION "text_to_comparison_op"("text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."text_to_comparison_op"("text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."text_to_comparison_op"("text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."text_to_comparison_op"("text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."text_to_comparison_op"("text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."text_to_comparison_op"("text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."text_to_comparison_op"("text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."text_to_comparison_op"("text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."text_to_comparison_op"("text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "to_camel_case"("text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."to_camel_case"("text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."to_camel_case"("text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."to_camel_case"("text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."to_camel_case"("text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."to_camel_case"("text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."to_camel_case"("text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."to_camel_case"("text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."to_camel_case"("text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "to_column_orders"("order_by_arg" "jsonb", "entity" "regclass", "variables" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."to_column_orders"("order_by_arg" "jsonb", "entity" "regclass", "variables" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."to_column_orders"("order_by_arg" "jsonb", "entity" "regclass", "variables" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."to_column_orders"("order_by_arg" "jsonb", "entity" "regclass", "variables" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."to_column_orders"("order_by_arg" "jsonb", "entity" "regclass", "variables" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."to_column_orders"("order_by_arg" "jsonb", "entity" "regclass", "variables" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."to_column_orders"("order_by_arg" "jsonb", "entity" "regclass", "variables" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."to_column_orders"("order_by_arg" "jsonb", "entity" "regclass", "variables" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."to_column_orders"("order_by_arg" "jsonb", "entity" "regclass", "variables" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "to_cursor_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."to_cursor_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."to_cursor_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "anon";
-GRANT ALL ON FUNCTION "graphql"."to_cursor_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."to_cursor_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."to_cursor_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."to_cursor_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."to_cursor_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."to_cursor_clause"("alias_name" "text", "column_orders" "graphql"."column_order_w_type"[]) TO "service_role";
 
 
 --
 -- Name: FUNCTION "to_function_name"("regproc"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."to_function_name"("regproc") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."to_function_name"("regproc") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."to_function_name"("regproc") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."to_function_name"("regproc") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."to_function_name"("regproc") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."to_function_name"("regproc") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."to_function_name"("regproc") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."to_function_name"("regproc") TO "service_role";
 
 
 --
 -- Name: FUNCTION "to_regclass"("schema_" "text", "name_" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."to_regclass"("schema_" "text", "name_" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."to_regclass"("schema_" "text", "name_" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."to_regclass"("schema_" "text", "name_" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."to_regclass"("schema_" "text", "name_" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."to_regclass"("schema_" "text", "name_" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."to_regclass"("schema_" "text", "name_" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."to_regclass"("schema_" "text", "name_" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."to_regclass"("schema_" "text", "name_" "text") TO "service_role";
 
 
 --
 -- Name: FUNCTION "to_table_name"("regclass"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."to_table_name"("regclass") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."to_table_name"("regclass") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."to_table_name"("regclass") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."to_table_name"("regclass") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."to_table_name"("regclass") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."to_table_name"("regclass") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."to_table_name"("regclass") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."to_table_name"("regclass") TO "service_role";
 
 
 --
 -- Name: FUNCTION "to_type_name"("regtype"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."to_type_name"("regtype") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."to_type_name"("regtype") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."to_type_name"("regtype") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."to_type_name"("regtype") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."to_type_name"("regtype") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."to_type_name"("regtype") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."to_type_name"("regtype") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."to_type_name"("regtype") TO "service_role";
 
 
 --
 -- Name: FUNCTION "type_id"("graphql"."meta_kind"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."type_id"("graphql"."meta_kind") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."type_id"("graphql"."meta_kind") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."type_id"("graphql"."meta_kind") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."type_id"("graphql"."meta_kind") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."type_id"("graphql"."meta_kind") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."type_id"("graphql"."meta_kind") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."type_id"("graphql"."meta_kind") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."type_id"("graphql"."meta_kind") TO "service_role";
 
 
 --
 -- Name: FUNCTION "type_id"("regtype"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."type_id"("regtype") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."type_id"("regtype") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."type_id"("regtype") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."type_id"("regtype") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."type_id"("regtype") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."type_id"("regtype") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."type_id"("regtype") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."type_id"("regtype") TO "service_role";
 
 
 --
 -- Name: FUNCTION "type_id"("type_name" "text"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."type_id"("type_name" "text") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."type_id"("type_name" "text") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."type_id"("type_name" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."type_id"("type_name" "text") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."type_id"("type_name" "text") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."type_id"("type_name" "text") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."type_id"("type_name" "text") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."type_id"("type_name" "text") TO "service_role";
 
 
 --
@@ -1732,70 +1732,70 @@ GRANT ALL ON TABLE "graphql"."_type" TO "service_role";
 -- Name: FUNCTION "type_name"("rec" "graphql"."_type"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."type_name"("rec" "graphql"."_type") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."type_name"("rec" "graphql"."_type") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."type_name"("rec" "graphql"."_type") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."type_name"("rec" "graphql"."_type") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."type_name"("rec" "graphql"."_type") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."type_name"("rec" "graphql"."_type") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."type_name"("rec" "graphql"."_type") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."type_name"("rec" "graphql"."_type") TO "service_role";
 
 
 --
 -- Name: FUNCTION "type_name"("type_id" integer); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."type_name"("type_id" integer) TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."type_name"("type_id" integer) TO "anon";
-GRANT ALL ON FUNCTION "graphql"."type_name"("type_id" integer) TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."type_name"("type_id" integer) TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."type_name"("type_id" integer) TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."type_name"("type_id" integer) TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."type_name"("type_id" integer) TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."type_name"("type_id" integer) TO "service_role";
 
 
 --
 -- Name: FUNCTION "type_name"("regclass", "graphql"."meta_kind"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."type_name"("regclass", "graphql"."meta_kind") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."type_name"("regclass", "graphql"."meta_kind") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."type_name"("regclass", "graphql"."meta_kind") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."type_name"("regclass", "graphql"."meta_kind") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."type_name"("regclass", "graphql"."meta_kind") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."type_name"("regclass", "graphql"."meta_kind") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."type_name"("regclass", "graphql"."meta_kind") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."type_name"("regclass", "graphql"."meta_kind") TO "service_role";
 
 
 --
 -- Name: FUNCTION "value_literal"("ast" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."value_literal"("ast" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."value_literal"("ast" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."value_literal"("ast" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."value_literal"("ast" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."value_literal"("ast" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."value_literal"("ast" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."value_literal"("ast" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."value_literal"("ast" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "value_literal_is_null"("ast" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."value_literal_is_null"("ast" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."value_literal_is_null"("ast" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."value_literal_is_null"("ast" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."value_literal_is_null"("ast" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."value_literal_is_null"("ast" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."value_literal_is_null"("ast" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."value_literal_is_null"("ast" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."value_literal_is_null"("ast" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "variable_definitions_sort"("variable_definitions" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."variable_definitions_sort"("variable_definitions" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."variable_definitions_sort"("variable_definitions" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."variable_definitions_sort"("variable_definitions" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."variable_definitions_sort"("variable_definitions" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."variable_definitions_sort"("variable_definitions" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."variable_definitions_sort"("variable_definitions" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."variable_definitions_sort"("variable_definitions" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."variable_definitions_sort"("variable_definitions" "jsonb") TO "service_role";
 
 
 --
 -- Name: FUNCTION "where_clause"("filter_arg" "jsonb", "entity" "regclass", "alias_name" "text", "variables" "jsonb", "variable_definitions" "jsonb"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."where_clause"("filter_arg" "jsonb", "entity" "regclass", "alias_name" "text", "variables" "jsonb", "variable_definitions" "jsonb") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."where_clause"("filter_arg" "jsonb", "entity" "regclass", "alias_name" "text", "variables" "jsonb", "variable_definitions" "jsonb") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."where_clause"("filter_arg" "jsonb", "entity" "regclass", "alias_name" "text", "variables" "jsonb", "variable_definitions" "jsonb") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."where_clause"("filter_arg" "jsonb", "entity" "regclass", "alias_name" "text", "variables" "jsonb", "variable_definitions" "jsonb") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."where_clause"("filter_arg" "jsonb", "entity" "regclass", "alias_name" "text", "variables" "jsonb", "variable_definitions" "jsonb") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."where_clause"("filter_arg" "jsonb", "entity" "regclass", "alias_name" "text", "variables" "jsonb", "variable_definitions" "jsonb") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."where_clause"("filter_arg" "jsonb", "entity" "regclass", "alias_name" "text", "variables" "jsonb", "variable_definitions" "jsonb") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."where_clause"("filter_arg" "jsonb", "entity" "regclass", "alias_name" "text", "variables" "jsonb", "variable_definitions" "jsonb") TO "service_role";
 
 
 --
@@ -1892,10 +1892,10 @@ GRANT ALL ON FUNCTION "public"."update_user"("auth_id" "text", "name" "text", "c
 -- Name: FUNCTION "first"("anyelement"); Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON FUNCTION "graphql"."first"("anyelement") TO "postgres";
-GRANT ALL ON FUNCTION "graphql"."first"("anyelement") TO "anon";
-GRANT ALL ON FUNCTION "graphql"."first"("anyelement") TO "authenticated";
-GRANT ALL ON FUNCTION "graphql"."first"("anyelement") TO "service_role";
+-- GRANT ALL ON FUNCTION "graphql"."first"("anyelement") TO "postgres";
+-- GRANT ALL ON FUNCTION "graphql"."first"("anyelement") TO "anon";
+-- GRANT ALL ON FUNCTION "graphql"."first"("anyelement") TO "authenticated";
+-- GRANT ALL ON FUNCTION "graphql"."first"("anyelement") TO "service_role";
 
 
 --
