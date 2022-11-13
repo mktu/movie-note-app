@@ -1232,10 +1232,10 @@ GRANT ALL ON FUNCTION "extensions"."verify"("token" "text", "secret" "text", "al
 -- Name: TABLE "_field"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON TABLE "graphql"."_field" TO "postgres";
-GRANT ALL ON TABLE "graphql"."_field" TO "anon";
-GRANT ALL ON TABLE "graphql"."_field" TO "authenticated";
-GRANT ALL ON TABLE "graphql"."_field" TO "service_role";
+-- GRANT ALL ON TABLE "graphql"."_field" TO "postgres";
+-- GRANT ALL ON TABLE "graphql"."_field" TO "anon";
+-- GRANT ALL ON TABLE "graphql"."_field" TO "authenticated";
+-- GRANT ALL ON TABLE "graphql"."_field" TO "service_role";
 
 
 --
@@ -1722,10 +1722,10 @@ GRANT ALL ON TABLE "graphql"."_field" TO "service_role";
 -- Name: TABLE "_type"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON TABLE "graphql"."_type" TO "postgres";
-GRANT ALL ON TABLE "graphql"."_type" TO "anon";
-GRANT ALL ON TABLE "graphql"."_type" TO "authenticated";
-GRANT ALL ON TABLE "graphql"."_type" TO "service_role";
+-- GRANT ALL ON TABLE "graphql"."_type" TO "postgres";
+-- GRANT ALL ON TABLE "graphql"."_type" TO "anon";
+-- GRANT ALL ON TABLE "graphql"."_type" TO "authenticated";
+-- GRANT ALL ON TABLE "graphql"."_type" TO "service_role";
 
 
 --
@@ -1924,122 +1924,122 @@ GRANT ALL ON TABLE "extensions"."pg_stat_statements_info" TO "dashboard_user";
 -- Name: SEQUENCE "_field_id_seq"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON SEQUENCE "graphql"."_field_id_seq" TO "postgres";
-GRANT ALL ON SEQUENCE "graphql"."_field_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "graphql"."_field_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "graphql"."_field_id_seq" TO "service_role";
+-- GRANT ALL ON SEQUENCE "graphql"."_field_id_seq" TO "postgres";
+-- GRANT ALL ON SEQUENCE "graphql"."_field_id_seq" TO "anon";
+-- GRANT ALL ON SEQUENCE "graphql"."_field_id_seq" TO "authenticated";
+-- GRANT ALL ON SEQUENCE "graphql"."_field_id_seq" TO "service_role";
 
 
 --
 -- Name: SEQUENCE "_type_id_seq"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON SEQUENCE "graphql"."_type_id_seq" TO "postgres";
-GRANT ALL ON SEQUENCE "graphql"."_type_id_seq" TO "anon";
-GRANT ALL ON SEQUENCE "graphql"."_type_id_seq" TO "authenticated";
-GRANT ALL ON SEQUENCE "graphql"."_type_id_seq" TO "service_role";
+-- GRANT ALL ON SEQUENCE "graphql"."_type_id_seq" TO "postgres";
+-- GRANT ALL ON SEQUENCE "graphql"."_type_id_seq" TO "anon";
+-- GRANT ALL ON SEQUENCE "graphql"."_type_id_seq" TO "authenticated";
+-- GRANT ALL ON SEQUENCE "graphql"."_type_id_seq" TO "service_role";
 
 
 --
 -- Name: TABLE "entity"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON TABLE "graphql"."entity" TO "postgres";
-GRANT ALL ON TABLE "graphql"."entity" TO "anon";
-GRANT ALL ON TABLE "graphql"."entity" TO "authenticated";
-GRANT ALL ON TABLE "graphql"."entity" TO "service_role";
+-- GRANT ALL ON TABLE "graphql"."entity" TO "postgres";
+-- GRANT ALL ON TABLE "graphql"."entity" TO "anon";
+-- GRANT ALL ON TABLE "graphql"."entity" TO "authenticated";
+-- GRANT ALL ON TABLE "graphql"."entity" TO "service_role";
 
 
 --
 -- Name: TABLE "entity_column"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON TABLE "graphql"."entity_column" TO "postgres";
-GRANT ALL ON TABLE "graphql"."entity_column" TO "anon";
-GRANT ALL ON TABLE "graphql"."entity_column" TO "authenticated";
-GRANT ALL ON TABLE "graphql"."entity_column" TO "service_role";
+-- GRANT ALL ON TABLE "graphql"."entity_column" TO "postgres";
+-- GRANT ALL ON TABLE "graphql"."entity_column" TO "anon";
+-- GRANT ALL ON TABLE "graphql"."entity_column" TO "authenticated";
+-- GRANT ALL ON TABLE "graphql"."entity_column" TO "service_role";
 
 
 --
 -- Name: TABLE "entity_unique_columns"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON TABLE "graphql"."entity_unique_columns" TO "postgres";
-GRANT ALL ON TABLE "graphql"."entity_unique_columns" TO "anon";
-GRANT ALL ON TABLE "graphql"."entity_unique_columns" TO "authenticated";
-GRANT ALL ON TABLE "graphql"."entity_unique_columns" TO "service_role";
+-- GRANT ALL ON TABLE "graphql"."entity_unique_columns" TO "postgres";
+-- GRANT ALL ON TABLE "graphql"."entity_unique_columns" TO "anon";
+-- GRANT ALL ON TABLE "graphql"."entity_unique_columns" TO "authenticated";
+-- GRANT ALL ON TABLE "graphql"."entity_unique_columns" TO "service_role";
 
 
 --
 -- Name: TABLE "type"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-REVOKE SELECT ON TABLE "graphql"."type" FROM "postgres";
-REVOKE SELECT ON TABLE "graphql"."type" FROM "anon";
-REVOKE SELECT ON TABLE "graphql"."type" FROM "authenticated";
-REVOKE SELECT ON TABLE "graphql"."type" FROM "service_role";
-GRANT ALL ON TABLE "graphql"."type" TO "postgres";
-GRANT ALL ON TABLE "graphql"."type" TO "anon";
-GRANT ALL ON TABLE "graphql"."type" TO "authenticated";
-GRANT ALL ON TABLE "graphql"."type" TO "service_role";
+-- REVOKE SELECT ON TABLE "graphql"."type" FROM "postgres";
+-- REVOKE SELECT ON TABLE "graphql"."type" FROM "anon";
+-- REVOKE SELECT ON TABLE "graphql"."type" FROM "authenticated";
+-- REVOKE SELECT ON TABLE "graphql"."type" FROM "service_role";
+-- GRANT ALL ON TABLE "graphql"."type" TO "postgres";
+-- GRANT ALL ON TABLE "graphql"."type" TO "anon";
+-- GRANT ALL ON TABLE "graphql"."type" TO "authenticated";
+-- GRANT ALL ON TABLE "graphql"."type" TO "service_role";
 
 
 --
 -- Name: TABLE "enum_value"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-REVOKE SELECT ON TABLE "graphql"."enum_value" FROM "postgres";
-REVOKE SELECT ON TABLE "graphql"."enum_value" FROM "anon";
-REVOKE SELECT ON TABLE "graphql"."enum_value" FROM "authenticated";
-REVOKE SELECT ON TABLE "graphql"."enum_value" FROM "service_role";
-GRANT ALL ON TABLE "graphql"."enum_value" TO "postgres";
-GRANT ALL ON TABLE "graphql"."enum_value" TO "anon";
-GRANT ALL ON TABLE "graphql"."enum_value" TO "authenticated";
-GRANT ALL ON TABLE "graphql"."enum_value" TO "service_role";
+-- REVOKE SELECT ON TABLE "graphql"."enum_value" FROM "postgres";
+-- REVOKE SELECT ON TABLE "graphql"."enum_value" FROM "anon";
+-- REVOKE SELECT ON TABLE "graphql"."enum_value" FROM "authenticated";
+-- REVOKE SELECT ON TABLE "graphql"."enum_value" FROM "service_role";
+-- GRANT ALL ON TABLE "graphql"."enum_value" TO "postgres";
+-- GRANT ALL ON TABLE "graphql"."enum_value" TO "anon";
+-- GRANT ALL ON TABLE "graphql"."enum_value" TO "authenticated";
+-- GRANT ALL ON TABLE "graphql"."enum_value" TO "service_role";
 
 
 --
 -- Name: TABLE "field"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-REVOKE SELECT ON TABLE "graphql"."field" FROM "postgres";
-REVOKE SELECT ON TABLE "graphql"."field" FROM "anon";
-REVOKE SELECT ON TABLE "graphql"."field" FROM "authenticated";
-REVOKE SELECT ON TABLE "graphql"."field" FROM "service_role";
-GRANT ALL ON TABLE "graphql"."field" TO "postgres";
-GRANT ALL ON TABLE "graphql"."field" TO "anon";
-GRANT ALL ON TABLE "graphql"."field" TO "authenticated";
-GRANT ALL ON TABLE "graphql"."field" TO "service_role";
+-- REVOKE SELECT ON TABLE "graphql"."field" FROM "postgres";
+-- REVOKE SELECT ON TABLE "graphql"."field" FROM "anon";
+-- REVOKE SELECT ON TABLE "graphql"."field" FROM "authenticated";
+-- REVOKE SELECT ON TABLE "graphql"."field" FROM "service_role";
+-- GRANT ALL ON TABLE "graphql"."field" TO "postgres";
+-- GRANT ALL ON TABLE "graphql"."field" TO "anon";
+-- GRANT ALL ON TABLE "graphql"."field" TO "authenticated";
+-- GRANT ALL ON TABLE "graphql"."field" TO "service_role";
 
 
 --
 -- Name: TABLE "relationship"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON TABLE "graphql"."relationship" TO "postgres";
-GRANT ALL ON TABLE "graphql"."relationship" TO "anon";
-GRANT ALL ON TABLE "graphql"."relationship" TO "authenticated";
-GRANT ALL ON TABLE "graphql"."relationship" TO "service_role";
+-- GRANT ALL ON TABLE "graphql"."relationship" TO "postgres";
+-- GRANT ALL ON TABLE "graphql"."relationship" TO "anon";
+-- GRANT ALL ON TABLE "graphql"."relationship" TO "authenticated";
+-- GRANT ALL ON TABLE "graphql"."relationship" TO "service_role";
 
 
 --
 -- Name: TABLE "schema_version"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON TABLE "graphql"."schema_version" TO "postgres";
-GRANT ALL ON TABLE "graphql"."schema_version" TO "anon";
-GRANT ALL ON TABLE "graphql"."schema_version" TO "authenticated";
-GRANT ALL ON TABLE "graphql"."schema_version" TO "service_role";
+-- GRANT ALL ON TABLE "graphql"."schema_version" TO "postgres";
+-- GRANT ALL ON TABLE "graphql"."schema_version" TO "anon";
+-- GRANT ALL ON TABLE "graphql"."schema_version" TO "authenticated";
+-- GRANT ALL ON TABLE "graphql"."schema_version" TO "service_role";
 
 
 --
 -- Name: SEQUENCE "seq_schema_version"; Type: ACL; Schema: graphql; Owner: supabase_admin
 --
 
-GRANT ALL ON SEQUENCE "graphql"."seq_schema_version" TO "postgres";
-GRANT ALL ON SEQUENCE "graphql"."seq_schema_version" TO "anon";
-GRANT ALL ON SEQUENCE "graphql"."seq_schema_version" TO "authenticated";
-GRANT ALL ON SEQUENCE "graphql"."seq_schema_version" TO "service_role";
+-- GRANT ALL ON SEQUENCE "graphql"."seq_schema_version" TO "postgres";
+-- GRANT ALL ON SEQUENCE "graphql"."seq_schema_version" TO "anon";
+-- GRANT ALL ON SEQUENCE "graphql"."seq_schema_version" TO "authenticated";
+-- GRANT ALL ON SEQUENCE "graphql"."seq_schema_version" TO "service_role";
 
 
 --
