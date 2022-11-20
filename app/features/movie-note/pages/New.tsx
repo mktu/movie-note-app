@@ -14,23 +14,29 @@ import Review from '../components/review';
 import type { FC } from "react";
 import type { AddMovieNote } from "@type-defs/frontend";
 import { useMovieNoteChangeMonitor } from '../hooks/useMovieNoteChangeMonitor';
+import type { Credits, TmdbDetail } from '../utils/tmdb';
 
 type Props = {
     onSubmit: (note: AddMovieNote) => void,
     error?: string,
+    tmdbDetail?: TmdbDetail
+    tmdbCredits?: Credits,
 }
 
 const New: FC<Props> = ({
     onSubmit,
     error,
+    tmdbDetail: initDetail,
+    tmdbCredits: initCredits
 }) => {
     const [selected, setSelectedBase] = useState('')
+    const [initialSelected, setInitialSelected] = useState(initDetail?.title || '')
     const [content, setContent] = useState<{ get: () => string }>()
     const setContentGetter = useCallback((getContent: () => string) => {
         setContent({ get: getContent })
     }, [])
-    const { requestDetail, detail, resetDetail } = useDetail()
-    const { requestCredits, credits, resetCredit } = useCredits()
+    const { requestDetail, detail: apiDetail, resetDetail } = useDetail()
+    const { requestCredits, credits: apiCredits, resetCredit } = useCredits()
     const { setStars, setAdmirationDate, stars, formattedWatchDate, admirationDate } = useReview()
     const setSelected = async (id: string) => {
         if (id) {
@@ -44,11 +50,15 @@ const New: FC<Props> = ({
         }
     }
     const { unblock, setDirty } = useMovieNoteChangeMonitor()
+    const detail = apiDetail || initDetail || null
+    const credits = apiCredits || initCredits || null
     return (
         <Layout
             header={<NewHeader
+                initialSelected={initialSelected}
                 error={error}
                 canSave={Boolean(detail)}
+                onReselect={() => { setInitialSelected('') }}
                 onClickSave={() => {
                     unblock()
                     detail && onSubmit({

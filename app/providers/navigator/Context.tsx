@@ -11,7 +11,7 @@ Navigator['displayName'] = 'navigator'
 
 export const useNavigator = () => {
     return {
-        navigate: (path: string) => { }
+        navigate: (path: string) => { console.log('dummy') }
     }
 }
 
