@@ -5,7 +5,7 @@ import { TextButton } from '~/components/buttons';
 
 import { TmdbmageBasePath } from '@utils/constants';
 
-import Image from './Image';
+import Image from '~/components/Image'
 
 import type { FC } from 'react';
 import type { Credits } from '../../utils/tmdb';

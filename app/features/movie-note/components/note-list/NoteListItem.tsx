@@ -6,7 +6,7 @@ import NavigatorContext from '~/providers/navigator/Context';
 import { TmdbmageBasePath } from '@utils/constants';
 
 import { useMovieNoteKvDisabled } from '../../store/localstorage/movieNoteKvDisabled';
-import Image from '../detail/Image';
+import Image from '~/components/Image'
 import NoteListMenu from './NoteListMenu';
 import RemoveNoteDialog from './RemoveNoteDialog';
 
