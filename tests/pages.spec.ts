@@ -12,7 +12,7 @@ test.beforeAll(async ({ browser }) => {
   await page.fill('#email', 'example@test.gmail.com')
   await page.fill('#password', '123456')
   await page.click('#login');
-  await page.waitForURL('http://localhost:8788/app', { waitUntil: 'networkidle' })
+  await page.waitForURL('http://localhost:8788/app')
   await page.waitForLoadState()
   await context.storageState({ path: 'state.json' });
   await context.close();
