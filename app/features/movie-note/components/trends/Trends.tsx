@@ -16,7 +16,7 @@ const Trends: FC<Porps> = ({
     const { i18n } = useTranslation()
     return (
         <div className='flex flex-col gap-2'>
-            <h2 className='flex items-center w-full border-b border-border-main text-2xl'>
+            <h2 className='flex items-center w-full border-b border-border-main text-xl'>
                 <TrendIcon className='h-5 w-5 fill-text-main mr-2' />
                 <span>話題の映画のノートを書く</span>
             </h2>
