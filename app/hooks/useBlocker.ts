@@ -16,7 +16,8 @@ import type { History, Blocker, Transition } from 'history'
  * @see https://reactrouter.com/api/useBlocker
  */
 export function useBlocker(blocker: Blocker, when = true) {
-    const { navigator } = useContext(UNSAFE_NavigationContext);
+    const context = useContext(UNSAFE_NavigationContext);
+    const { navigator } = context || {}
     const unblocker = useRef<(() => void)[]>([])
     const unblockFn = useCallback(() => {
         unblocker.current.forEach(fn => {
@@ -27,6 +28,7 @@ export function useBlocker(blocker: Blocker, when = true) {
 
     useEffect(() => {
         if (!when) return;
+        if (!navigator) return;
 
         const unblock = (navigator as History).block((tx) => {
             const autoUnblockingTx = {

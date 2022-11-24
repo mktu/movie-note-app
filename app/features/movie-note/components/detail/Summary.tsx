@@ -2,7 +2,7 @@ import { TmdbmageBasePath } from '@utils/constants';
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next';
 import type { Credits as CreditsType, TmdbDetail } from '../../utils/tmdb';
-import Image from './Image'
+import Image from '~/components/Image'
 
 ///t/p/w300_and_h450_bestv2/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg 1x, /t/p/w600_and_h900_bestv2/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg 2x
 

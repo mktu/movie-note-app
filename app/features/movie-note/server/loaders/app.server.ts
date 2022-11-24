@@ -21,7 +21,7 @@ type LoaderData = {
     movieNoteType: ReturnType<typeof getMovieNoteType>,
 }
 
-export async function loader({ request, context, params }: LoaderArgs) {
+export async function loader({ request, context }: LoaderArgs) {
     const authUser = await authenticator.isAuthenticated(request)
 
     if (!authUser) {

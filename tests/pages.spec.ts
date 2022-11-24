@@ -12,7 +12,7 @@ test.beforeAll(async ({ browser }) => {
   await page.fill('#email', 'example@test.gmail.com')
   await page.fill('#password', '123456')
   await page.click('#login');
-  await page.waitForURL('http://localhost:8788/app', { waitUntil: 'networkidle' })
+  await page.waitForURL('http://localhost:8788/app')
   await page.waitForLoadState()
   await context.storageState({ path: 'state.json' });
   await context.close();
@@ -23,7 +23,7 @@ test('top page test', async ({ browser }) => {
   const res = await page.goto('http://localhost:8788/app');
   expect(res?.ok).toBeTruthy()
   //await page.waitForTimeout(500) // wait for webkit i18n render
-  expect(await page.textContent('h1')).toBe('Welcome Test User. You are sigined in');
+  expect(await page.textContent('h1')).toBe('Test Userさん, ようこそ Movie Note App へ！');
 });
 
 test('new note test', async ({ browser }) => {
