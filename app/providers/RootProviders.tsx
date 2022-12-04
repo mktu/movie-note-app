@@ -3,6 +3,7 @@ import { RecoilRoot } from 'recoil';
 
 import LocalstorageProvider from './localstorage';
 import RemixNavProvider from './navigator/RemixProvider';
+import RemixSearchParamProvider from './search-param/RemixProvider';
 import RemixFormProvider from './form/RemixProvider';
 
 type Props = {
@@ -13,11 +14,13 @@ const RootProviders: FC<Props> = ({ children }) => {
     return (
         <RemixNavProvider>
             <RemixFormProvider>
-                <RecoilRoot>
-                    <LocalstorageProvider>
-                        {children}
-                    </LocalstorageProvider>
-                </RecoilRoot>
+                <RemixSearchParamProvider>
+                    <RecoilRoot>
+                        <LocalstorageProvider>
+                            {children}
+                        </LocalstorageProvider>
+                    </RecoilRoot>
+                </RemixSearchParamProvider>
             </RemixFormProvider>
         </RemixNavProvider>
     );

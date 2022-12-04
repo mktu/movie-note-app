@@ -13,15 +13,17 @@ export type SearchResult = {
     }[]
 }
 
+export type TmdbTrend = {
+    poster_path?: string,
+    title: string,
+    overview?: string,
+    id: string,
+    release_date: string,
+}
+
 export type TmdbTrends = {
     page: number,
-    results: {
-        poster_path?: string,
-        title: string,
-        overview?: string,
-        id: string,
-        release_date: string
-    }[]
+    results: TmdbTrend[]
 }
 
 export type TmdbLng = 'ja' | 'en'

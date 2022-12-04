@@ -19,11 +19,12 @@ const Edit: FC<Props> = ({
     succeeded
 }) => {
     const { t } = useTranslation('common')
+    const msg = t('update-succeeded')
     useEffect(() => {
         if (succeeded) {
-            toast.success(t('update-succeeded'))
+            toast.success(msg)
         }
-    }, [succeeded, t])
+    }, [succeeded, msg])
     return (
         <div>
             <RegistrationForm nickname={user.name} comment={user.comment} image={user.image} error={error} />
