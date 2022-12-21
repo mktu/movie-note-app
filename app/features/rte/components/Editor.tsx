@@ -10,6 +10,7 @@ import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary'
 
 import initialConfig from './initialConfig';
 import { transformers } from './nodes';
@@ -54,6 +55,7 @@ const Editor: FC<Props> = ({
                 ...initialConfig
             }}>
                 <RichTextPlugin
+                    ErrorBoundary={LexicalErrorBoundary}
                     contentEditable={<ContentEditable className='text-text-main outline-none' />}
                     placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
                 />
