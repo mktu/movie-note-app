@@ -16,6 +16,7 @@ import initialConfig from './initialConfig';
 import { transformers } from './nodes';
 
 import type { EditorState } from 'lexical';
+import Toolbar from './Toolbar';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
@@ -49,16 +50,19 @@ const Editor: FC<Props> = ({
         }
     }, [monitorCurrentState])
     return (
-        <div className='relative'>
+        <div >
             <LexicalComposer initialConfig={{
                 editorState: init,
                 ...initialConfig
             }}>
-                <RichTextPlugin
-                    ErrorBoundary={LexicalErrorBoundary}
-                    contentEditable={<ContentEditable className='text-text-main outline-none' />}
-                    placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
-                />
+                <Toolbar />
+                <div className='relative'>
+                    <RichTextPlugin
+                        ErrorBoundary={LexicalErrorBoundary}
+                        contentEditable={<ContentEditable className='text-text-main outline-none' />}
+                        placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
+                    />
+                </div>
                 <HistoryPlugin />
                 <MarkdownShortcutPlugin transformers={transformers} />
                 <ListPlugin />
