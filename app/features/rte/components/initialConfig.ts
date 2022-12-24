@@ -20,6 +20,9 @@ const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
                 listitem: 'list-none',
             },
         },
+        text: {
+            underline: 'underline'
+        }
     },
     nodes
 };

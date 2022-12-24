@@ -11,7 +11,7 @@ export type NodeListenerType = (node: ElementNode | TextNode, selection: RangeSe
 export const useUpdateListener = (listener: ListenerType) => {
     const [editor] = useLexicalComposerContext()
     useEffect(() => {
-        editor.registerUpdateListener(({ editorState }) => {
+        return editor.registerUpdateListener(({ editorState }) => {
             editorState.read(() => {
                 listener(editor)
             });
