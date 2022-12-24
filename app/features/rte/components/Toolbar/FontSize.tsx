@@ -1,56 +1,59 @@
 import type { FC } from 'react';
-import { useEffect, useState } from 'react';
-import Dropdown from '~/components/dropdown';
-import type { HeadingTagType } from "@lexical/rich-text";
-import { $createHeadingNode, $isHeadingNode } from "@lexical/rich-text";
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
-import { $getSelection, $isRangeSelection, } from 'lexical';
+import { useCallback, useState } from 'react';
+import Dropdown from '~/features/rte/components/Toolbar/dropdown';
+
+import { $createHeadingNode, $isHeadingNode } from '@lexical/rich-text';
 import { $setBlocksType_experimental } from '@lexical/selection';
 
-const SupportedBlockType = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+import { useNodeUpdateListener } from '../../hooks/useUpdateListener';
+
+import type { HeadingTagType } from "@lexical/rich-text";
+import type { NodeListenerType } from '../../hooks/useUpdateListener';
+import { useRangeUpdater } from '../../hooks/useUpdater';
+import { $createParagraphNode } from 'lexical';
+
+const Blocks: { [key: string]: { label: string } } = {
+    normal: { label: 'Normal' },
+    h1: { label: 'Heading 1' },
+    h2: { label: 'Heading 2' },
+    h3: { label: 'Heading 3' },
+    h4: { label: 'Heading 4' },
+    h5: { label: 'Heading 5' },
+    h6: { label: 'Heading 6' }
+}
 
 const FontSize: FC = () => {
     const [type, setType] = useState('')
-    const [editor] = useLexicalComposerContext()
-    useEffect(() => {
-        return editor.registerUpdateListener(({ editorState }) => {
-            editorState.read(() => {
-                const selection = $getSelection();
-                if (!$isRangeSelection(selection)) return;
-
-                const anchorNode = selection.anchor.getNode();
-                const targetNode =
-                    anchorNode.getKey() === "root"
-                        ? anchorNode
-                        : anchorNode.getTopLevelElementOrThrow();
-
-                if ($isHeadingNode(targetNode)) {
-                    const tag = targetNode.getTag();
-                    setType(tag);
-                } else {
-                    const nodeType = targetNode.getType();
-                    if (nodeType in SupportedBlockType) {
-                        setType(nodeType);
-                    } else {
-                        setType("normal");
-                    }
-                }
-            });
-        });
-    }, [editor]);
-    return (
-        <Dropdown selected={type} onSelect={(selectedType: string) => {
-            if (type !== selectedType) {
-                editor.update(() => {
-                    const selection = $getSelection();
-                    if ($isRangeSelection(selection) && selectedType !== 'normal') {
-                        $setBlocksType_experimental(selection, () =>
-                            $createHeadingNode(selectedType as HeadingTagType),
-                        );
-                    }
-                });
+    const listener: NodeListenerType = useCallback((targetNode) => {
+        if ($isHeadingNode(targetNode)) {
+            const tag = targetNode.getTag();
+            setType(tag);
+        } else {
+            const nodeType = targetNode.getType();
+            if (nodeType in Blocks) {
+                setType(nodeType);
+            } else {
+                setType("normal");
             }
-        }} />
+        }
+    }, [])
+    useNodeUpdateListener(listener)
+    const { updateRange } = useRangeUpdater()
+    return (
+        <Dropdown
+            menuItems={Blocks}
+            selected={type}
+            onSelect={(selectedType: string) => {
+                if (type === selectedType) {
+                    return
+                }
+                updateRange((selection) => {
+                    $setBlocksType_experimental(selection, () =>
+                        selectedType !== 'normal' ? $createHeadingNode(selectedType as HeadingTagType) :
+                            $createParagraphNode(),
+                    );
+                })
+            }} />
     );
 };
 
