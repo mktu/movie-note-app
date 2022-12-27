@@ -1,0 +1,109 @@
+import { useCallback, useState } from 'react';
+import { usePopper } from 'react-popper';
+import { IconButton } from '~/components/buttons';
+import Clickaway from '~/components/clickaway';
+import { TextInput } from '~/components/inputs';
+
+import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
+import { $isAtNodeEnd } from '@lexical/selection';
+
+import { useNodeUpdateListener } from '../../../hooks/useUpdateListener';
+import { useRangeUpdater } from '../../../hooks/useUpdater';
+import InsertLink from '../../icons/InsertLink';
+import Input from './Input';
+
+import type { ElementNode, RangeSelection, TextNode } from 'lexical';
+import type { FC } from 'react';
+import type { NodeListenerType } from '../../../hooks/useUpdateListener';
+
+export function getSelectedNode(
+    selection: RangeSelection,
+): TextNode | ElementNode {
+    const anchor = selection.anchor;
+    const focus = selection.focus;
+    const anchorNode = selection.anchor.getNode();
+    const focusNode = selection.focus.getNode();
+    if (anchorNode === focusNode) {
+        return anchorNode;
+    }
+    const isBackward = selection.isBackward();
+    if (isBackward) {
+        return $isAtNodeEnd(focus) ? anchorNode : focusNode;
+    } else {
+        return $isAtNodeEnd(anchor) ? anchorNode : focusNode;
+    }
+}
+
+const Link: FC = () => {
+    const [url, setUrl] = useState('')
+    const [enableLink, setEnableLink] = useState(false)
+    const [showEditor, setShowEditor] = useState(false)
+    const { updateRange } = useRangeUpdater()
+    const [referenceElement, setReferenceElement] = useState<HTMLElement>()
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>()
+    const { styles, attributes } = usePopper(referenceElement, popperElement, {
+        placement: 'auto'
+    });
+    const listener: NodeListenerType = useCallback((_, selection) => {
+        const node = getSelectedNode(selection);
+        const parent = node.getParent();
+        setEnableLink(Boolean(node.getTextContent()))
+        if ($isLinkNode(parent)) {
+            setUrl(parent.getURL());
+        } else if ($isLinkNode(node)) {
+            setUrl(node.getURL());
+        } else {
+            setUrl('');
+        }
+    }, [])
+    useNodeUpdateListener(listener)
+    return (
+        <>
+            <IconButton
+                disabled={!enableLink}
+                ref={(el) => {
+                    el && setReferenceElement(el)
+                }} name={'link'} className={`${enableLink && 'hover:bg-surface-hover'} p-1`} onClick={(e) => {
+                    e.stopPropagation()
+                    setShowEditor(true)
+                    updateRange((_, editor) => {
+                        editor.dispatchCommand(TOGGLE_LINK_COMMAND, url);
+                    })
+                }}>
+                <InsertLink className={`h-4 w-4 
+                ${url !== '' ? 'fill-text-main' : enableLink ? 'fill-text-label' : 'fill-gray-300'}`} />
+            </IconButton>
+            {showEditor && (
+                <Clickaway
+                    onClickAway={(e) => {
+                        setShowEditor(false)
+                    }}>
+                    <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
+                        {...attributes.popper} className='bg-bg-main px-4'>
+                        <Input
+                            key={url}
+                            init={url}
+                            onSubmit={(editUrl) => {
+                                setShowEditor(false)
+                                updateRange((_, editor) => {
+                                    editor.dispatchCommand(TOGGLE_LINK_COMMAND, editUrl);
+                                })
+                            }}
+                        />
+                    </div>
+                </Clickaway>
+            )}
+        </>
+    );
+};
+
+export const LinkInput: FC = () => {
+
+    return (
+        <div>
+            <TextInput />
+        </div>
+    )
+}
+
+export default Link;

@@ -10,6 +10,7 @@ import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { LinkPlugin as LexicalLinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary'
 
 import initialConfig from './initialConfig';
@@ -65,6 +66,7 @@ const Editor: FC<Props> = ({
                 </div>
                 <HistoryPlugin />
                 <MarkdownShortcutPlugin transformers={transformers} />
+                <LexicalLinkPlugin />
                 <ListPlugin />
                 <CheckListPlugin />
                 <OnChangePlugin onChange={(editorState) => {
