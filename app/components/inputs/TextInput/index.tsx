@@ -6,7 +6,9 @@ import clsx from 'clsx'
 type Props = Parameters<typeof Base>[0] & {
     addonLeft?: ReactNode,
     addonRight?: ReactNode,
-    paddings?: string
+    paddings?: string,
+    borderClassName?: string
+    focusClassName?: string
 }
 
 const TextInput = forwardRef<HTMLInputElement, Props>(({
@@ -17,6 +19,8 @@ const TextInput = forwardRef<HTMLInputElement, Props>(({
     onBlur,
     onFocus,
     paddings = 'p-2',
+    borderClassName = 'rounded border border-primary-border',
+    focusClassName = 'outline outline-focus',
     ...props }, ref) => {
     const [focus, setFocus] = useState(false)
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -29,9 +33,10 @@ const TextInput = forwardRef<HTMLInputElement, Props>(({
     }
     return (
         <div className={clsx(
-            'flex items-center rounded border border-primary-border',
+            'flex items-center',
+            borderClassName,
             paddings,
-            focus && 'outline outline-focus',
+            focus && focusClassName,
             className
         )}>
             {addonLeft}

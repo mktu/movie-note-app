@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react';
 import { usePopper } from 'react-popper';
 import { IconButton } from '~/components/buttons';
 import Clickaway from '~/components/clickaway';
-import { TextInput } from '~/components/inputs';
 
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
 import { $isAtNodeEnd } from '@lexical/selection';
@@ -75,7 +74,7 @@ const Link: FC = () => {
             </IconButton>
             {showEditor && (
                 <Clickaway
-                    onClickAway={(e) => {
+                    onClickAway={() => {
                         setShowEditor(false)
                     }}>
                     <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
@@ -96,14 +95,4 @@ const Link: FC = () => {
         </>
     );
 };
-
-export const LinkInput: FC = () => {
-
-    return (
-        <div>
-            <TextInput />
-        </div>
-    )
-}
-
 export default Link;
