@@ -1,49 +1,54 @@
-import { useEffect, useRef, useState } from 'react';
-import { ContainedButton, IconButton, OutlinedButton, TextButton } from '~/components/buttons';
-import Check from '~/components/icons/Check';
+import { useEffect, useRef } from 'react';
+import { ContainedButton, TextButton } from '~/components/buttons';
 import { TextInput } from '~/components/inputs';
 
 import type { FC } from 'react';
+import useLinkInserter from '~/features/rte/hooks/useLinkInserter';
 
 type Props = {
     init?: string,
-    onSubmit: (link: string) => void
+    initLabel?: string,
+    onSubmit: (link: string, label?: string) => void,
+    onCancel: () => void
 }
 
-const Input: FC<Props> = ({ init = '', onSubmit }) => {
-    const [editUrl, setEditUrl] = useState(init)
-    const urlRef = useRef<HTMLInputElement>(null)
-    const divRef = useRef<HTMLDivElement>(null)
+const Input: FC<Props> = ({ init = '', initLabel = '', onSubmit, onCancel }) => {
+    const urlRef = useRef<HTMLInputElement>()
+    const { url, label, registerLabel, registerUrl, valid, errors } = useLinkInserter({
+        initLabel, initUrl: init
+    })
+    const { ref: registerUrlRef, ...registerUrlOther } = registerUrl
     useEffect(() => {
         if (urlRef) {
             urlRef.current?.focus()
         }
     }, [])
     return (
-        <div ref={divRef} className='flex flex-col gap-1 border rounded border-border-main p-2 w-[256px]'>
+        <div className='flex flex-col gap-1 border rounded border-border-main p-2 w-[312px]'>
             <TextInput
-                placeholder='ラベル名'
                 borderClassName='border-b border-primary-border'
+                {...registerLabel}
             />
             <TextInput
-                ref={urlRef}
-                value={editUrl}
-                borderClassName='border-b border-primary-border'
-                onChange={(e) => {
-                    setEditUrl(e.target.value)
-                }}
-                onKeyDown={(e) => {
-                    if (e.key == 'Enter') {
-                        e.preventDefault()
-                        onSubmit(editUrl)
+                ref={(r) => {
+                    registerUrlRef(r)
+                    if (r) {
+                        urlRef.current = r
                     }
                 }}
+                borderClassName='border-b border-primary-border'
+                onKeyDown={(e) => {
+                    if (e.key == 'Enter' && valid) {
+                        onSubmit(url)
+                    }
+                }}
+                {...registerUrlOther}
                 placeholder='https://'
             />
             <div className='flex items-center justify-end font-semibold mt-1 gap-1'>
-                <TextButton theme='label' paddings='py-1 px-2'>CANCEL</TextButton>
-                <ContainedButton onClick={() => {
-                    onSubmit(editUrl)
+                <TextButton onClick={onCancel} theme='label' paddings='py-1 px-2'>CANCEL</TextButton>
+                <ContainedButton disabled={!valid} onClick={() => {
+                    onSubmit(url, label)
                 }} paddings='py-1 px-2'>OK</ContainedButton>
             </div>
         </div>

@@ -14,6 +14,7 @@ import Input from './Input';
 import type { ElementNode, RangeSelection, TextNode } from 'lexical';
 import type { FC } from 'react';
 import type { NodeListenerType } from '../../../hooks/useUpdateListener';
+import { FocusTrap } from '@headlessui/react';
 
 export function getSelectedNode(
     selection: RangeSelection,
@@ -35,7 +36,7 @@ export function getSelectedNode(
 
 const Link: FC = () => {
     const [url, setUrl] = useState('')
-    const [enableLink, setEnableLink] = useState(false)
+    const [label, setLabel] = useState('')
     const [showEditor, setShowEditor] = useState(false)
     const { updateRange } = useRangeUpdater()
     const [referenceElement, setReferenceElement] = useState<HTMLElement>()
@@ -46,7 +47,7 @@ const Link: FC = () => {
     const listener: NodeListenerType = useCallback((_, selection) => {
         const node = getSelectedNode(selection);
         const parent = node.getParent();
-        setEnableLink(Boolean(node.getTextContent()))
+        setLabel(node.getTextContent())
         if ($isLinkNode(parent)) {
             setUrl(parent.getURL());
         } else if ($isLinkNode(node)) {
@@ -59,37 +60,40 @@ const Link: FC = () => {
     return (
         <>
             <IconButton
-                disabled={!enableLink}
                 ref={(el) => {
                     el && setReferenceElement(el)
-                }} name={'link'} className={`${enableLink && 'hover:bg-surface-hover'} p-1`} onClick={(e) => {
+                }} name={'link'} className={'hover:bg-surface-hover p-1'} onClick={(e) => {
                     e.stopPropagation()
                     setShowEditor(true)
-                    updateRange((_, editor) => {
-                        editor.dispatchCommand(TOGGLE_LINK_COMMAND, url);
-                    })
                 }}>
                 <InsertLink className={`h-4 w-4 
-                ${url !== '' ? 'fill-text-main' : enableLink ? 'fill-text-label' : 'fill-gray-300'}`} />
+                ${url !== '' ? 'fill-text-main' : 'fill-text-label'}`} />
             </IconButton>
             {showEditor && (
                 <Clickaway
                     onClickAway={() => {
                         setShowEditor(false)
                     }}>
-                    <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
-                        {...attributes.popper} className='bg-bg-main px-4'>
-                        <Input
-                            key={url}
-                            init={url}
-                            onSubmit={(editUrl) => {
-                                setShowEditor(false)
-                                updateRange((_, editor) => {
-                                    editor.dispatchCommand(TOGGLE_LINK_COMMAND, editUrl);
-                                })
-                            }}
-                        />
-                    </div>
+                    <FocusTrap>
+                        <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
+                            {...attributes.popper} className='bg-bg-main px-4'>
+                            <Input
+                                key={url}
+                                init={url}
+                                initLabel={label}
+                                onCancel={() => {
+                                    setShowEditor(false)
+                                }}
+                                onSubmit={(editUrl, label) => {
+                                    setShowEditor(false)
+                                    updateRange((selection, editor) => {
+                                        label && selection.insertText(label)
+                                        editor.dispatchCommand(TOGGLE_LINK_COMMAND, editUrl);
+                                    })
+                                }}
+                            />
+                        </div>
+                    </FocusTrap>
                 </Clickaway>
             )}
         </>
