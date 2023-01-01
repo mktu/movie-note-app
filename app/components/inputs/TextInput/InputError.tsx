@@ -9,7 +9,7 @@ const InputError: FC<Props> = ({ children, error }) => {
     return (
         <div className='flex flex-col gap-1'>
             {children}
-            <p className='text-error-main text-sm px-2'>{error}</p>
+            {error && <p className='text-error-main text-sm px-2'>{error}</p>}
         </div>
     );
 };

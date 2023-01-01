@@ -7,15 +7,10 @@ type Props = Parameters<typeof Input>[0] & {
 }
 
 const TextInput = forwardRef<HTMLInputElement, Props>(({ error, ...props }, ref) => {
-    if (error) {
-        return (
-            <InputError error={error}>
-                <Input ref={ref} {...props} />
-            </InputError>
-        )
-    }
     return (
-        <Input ref={ref} {...props} />
+        <InputError error={error}>
+            <Input ref={ref} {...props} />
+        </InputError>
     );
 });
 
