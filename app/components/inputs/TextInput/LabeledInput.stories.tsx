@@ -1,13 +1,13 @@
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Input from '.';
+import LabeledInput from './LabeledInput';
 
 export default {
-    title: 'Common/Input/Input',
-    component: Input,
-} as ComponentMeta<typeof Input>;
+    title: 'Common/Input/LabeledInput',
+    component: LabeledInput,
+} as ComponentMeta<typeof LabeledInput>;
 
-const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
+const Template: ComponentStory<typeof LabeledInput> = (args) => <LabeledInput {...args} />;
 
 export const Default = Template.bind({});
 
