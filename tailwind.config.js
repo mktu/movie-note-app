@@ -26,7 +26,9 @@ module.exports = {
           main : '#2AB5F6'
         },
         destructive : {
-          main : '#CE3E34'
+          light : '#ee503b',
+          main : '#CE3E34',
+          dark : '#c1382d'
         },
         text : {
           main : '#37352F',

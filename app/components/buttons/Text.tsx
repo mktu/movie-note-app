@@ -2,12 +2,13 @@ import clsx from "clsx"
 import { forwardRef } from "react"
 import Base from './Base'
 
-type Theme = 'none' | 'text' | 'label'
+type Theme = 'none' | 'text' | 'label' | 'destructive'
 
 const colors: { [t in Theme]: string } = {
     none: '',
     text: 'text-text-main hover:text-text-dark focus:text-text-dark',
-    label: 'text-text-label hover:text-text-main focus:text-text-main'
+    label: 'text-text-label hover:text-text-main focus:text-text-main',
+    destructive: 'text-destructive-light hover:text-destructive-main focus:text-destructive-main'
 }
 
 type Props = Parameters<typeof Base>[0] & {

@@ -76,7 +76,7 @@ const Link: FC = () => {
                     }}>
                     <FocusTrap>
                         <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
-                            {...attributes.popper} className='bg-bg-main px-4'>
+                            {...attributes.popper} className='bg-bg-main'>
                             <Input
                                 key={url}
                                 init={url}
@@ -89,6 +89,13 @@ const Link: FC = () => {
                                     updateRange((selection, editor) => {
                                         label && selection.insertText(label)
                                         editor.dispatchCommand(TOGGLE_LINK_COMMAND, editUrl);
+                                    })
+                                }}
+                                onUnlink={() => {
+                                    setShowEditor(false)
+                                    updateRange((selection, editor) => {
+                                        label && selection.insertText(label)
+                                        editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
                                     })
                                 }}
                             />
