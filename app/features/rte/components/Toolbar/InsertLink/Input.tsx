@@ -53,7 +53,7 @@ const Input: FC<Props> = ({ init = '', initLabel = '', onSubmit, onCancel, onUnl
                 label={t('input-url') + '*'}
             />
             <div className='flex items-center justify-end font-semibold mt-1 gap-1'>
-                <Unlink onClick={onUnlink} />
+                <Unlink onClick={onUnlink} disabled={init === ''} />
                 <TextButton className='ml-auto' onClick={onCancel} theme='label' paddings='py-1 px-2'>CANCEL</TextButton>
                 <ContainedButton disabled={!valid} onClick={() => {
                     onSubmit(url, label)
