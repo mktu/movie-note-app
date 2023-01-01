@@ -42,5 +42,8 @@
     "nickname" : "ニックネーム",
     "comment" : "コメント",
     "change-image" : "画像を変更",
-    "update-succeeded" : "更新しました"
+    "update-succeeded" : "更新しました",
+    "display-text" : "表示テキスト",
+    "input-url" : "URLを入力",
+    "url-validation" : "URL形式が必要です"
 }

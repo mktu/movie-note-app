@@ -4,6 +4,7 @@ import { TextInput } from '~/components/inputs';
 
 import type { FC } from 'react';
 import useLinkInserter from '~/features/rte/hooks/useLinkInserter';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
     init?: string,
@@ -23,13 +24,17 @@ const Input: FC<Props> = ({ init = '', initLabel = '', onSubmit, onCancel }) => 
             urlRef.current?.focus()
         }
     }, [])
+    const { t } = useTranslation('common')
     return (
         <div className='flex flex-col gap-1 border rounded border-border-main p-2 w-[312px]'>
             <TextInput
+                label={t('display-text') + '*'}
                 borderClassName='border-b border-primary-border'
+                error={errors['label']?.message as string}
                 {...registerLabel}
             />
             <TextInput
+                error={errors['url']?.message as string}
                 ref={(r) => {
                     registerUrlRef(r)
                     if (r) {
@@ -43,7 +48,7 @@ const Input: FC<Props> = ({ init = '', initLabel = '', onSubmit, onCancel }) => 
                     }
                 }}
                 {...registerUrlOther}
-                placeholder='https://'
+                label={t('input-url') + '*'}
             />
             <div className='flex items-center justify-end font-semibold mt-1 gap-1'>
                 <TextButton onClick={onCancel} theme='label' paddings='py-1 px-2'>CANCEL</TextButton>

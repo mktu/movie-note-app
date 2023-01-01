@@ -24,3 +24,18 @@ Disabled.args = {
     paddings: 'px-4 py-1',
     disabled: true
 };
+
+export const Labeled = Template.bind({});
+
+Labeled.args = {
+    label: 'Input any values',
+    paddings: 'px-4 py-1',
+};
+
+export const Errored = Template.bind({});
+
+Errored.args = {
+    label: 'Input any values',
+    paddings: 'px-4 py-1',
+    error: 'Value required!'
+};

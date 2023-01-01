@@ -1,15 +1,17 @@
 import { forwardRef } from 'react'
-import Input from './Input';
-import LabeledInput from './LabeledInput';
+import Input from './Inner';
+import InputError from './InputError';
 
 type Props = Parameters<typeof Input>[0] & {
-    label?: string
+    error?: string
 }
 
-const TextInput = forwardRef<HTMLInputElement, Props>(({ label, ...props }, ref) => {
-    if (label) {
+const TextInput = forwardRef<HTMLInputElement, Props>(({ error, ...props }, ref) => {
+    if (error) {
         return (
-            <LabeledInput ref={ref} placeholder={label} {...props} />
+            <InputError error={error}>
+                <Input ref={ref} {...props} />
+            </InputError>
         )
     }
     return (
