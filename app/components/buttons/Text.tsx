@@ -16,8 +16,6 @@ type Props = Parameters<typeof Base>[0] & {
     theme?: Theme
 }
 
-
-
 const Text = forwardRef<HTMLButtonElement, Props>(({
     paddings = 'py-2 px-4',
     theme = 'none',

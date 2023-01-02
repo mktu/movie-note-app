@@ -18,6 +18,7 @@ import { transformers } from './nodes';
 
 import type { EditorState } from 'lexical';
 import Toolbar from './Toolbar';
+import { validateUrl } from '../utils/validateUrl';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
@@ -66,7 +67,7 @@ const Editor: FC<Props> = ({
                 </div>
                 <HistoryPlugin />
                 <MarkdownShortcutPlugin transformers={transformers} />
-                <LexicalLinkPlugin />
+                <LexicalLinkPlugin validateUrl={validateUrl} />
                 <ListPlugin />
                 <CheckListPlugin />
                 <OnChangePlugin onChange={(editorState) => {
