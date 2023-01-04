@@ -3,7 +3,7 @@ import { usePopper } from 'react-popper';
 import { IconButton } from '~/components/buttons';
 import Clickaway from '~/components/clickaway';
 
-import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
+import { $isLinkNode } from '@lexical/link';
 import { $isAtNodeEnd } from '@lexical/selection';
 
 import { useNodeUpdateListener } from '../../../hooks/useUpdateListener';
@@ -12,9 +12,11 @@ import InsertLink from '../../icons/InsertLink';
 import Input from './Input';
 
 import type { ElementNode, RangeSelection, TextNode } from 'lexical';
+import { $isTextNode } from 'lexical';
 import type { FC } from 'react';
 import type { NodeListenerType } from '../../../hooks/useUpdateListener';
 import { FocusTrap } from '@headlessui/react';
+import { replaceLink, unlink } from '~/features/rte/utils/linkInserter';
 
 export function getSelectedNode(
     selection: RangeSelection,
@@ -47,7 +49,6 @@ const Link: FC = () => {
     const listener: NodeListenerType = useCallback((_, selection) => {
         const node = getSelectedNode(selection);
         const parent = node.getParent();
-        setLabel(node.getTextContent())
         if ($isLinkNode(parent)) {
             setUrl(parent.getURL());
         } else if ($isLinkNode(node)) {
@@ -65,6 +66,12 @@ const Link: FC = () => {
                 }} name={'link'} className={'hover:bg-surface-hover p-1'} onClick={(e) => {
                     e.stopPropagation()
                     setShowEditor(true)
+                    updateRange((selection) => {
+                        const nodes = selection.extract()
+                        if (nodes.length > 0) {
+                            setLabel(nodes.filter(v => $isTextNode(v)).map(v => v.getTextContent()).join(''))
+                        }
+                    })
                 }}>
                 <InsertLink className={`h-4 w-4 
                 ${url !== '' ? 'fill-text-main' : 'fill-text-label'}`} />
@@ -87,15 +94,13 @@ const Link: FC = () => {
                                 onSubmit={(editUrl, label) => {
                                     setShowEditor(false)
                                     updateRange((selection, editor) => {
-                                        label && selection.insertText(label)
-                                        editor.dispatchCommand(TOGGLE_LINK_COMMAND, editUrl);
+                                        replaceLink(selection, editor, editUrl, label)
                                     })
                                 }}
                                 onUnlink={() => {
                                     setShowEditor(false)
                                     updateRange((selection, editor) => {
-                                        label && selection.insertText(label)
-                                        editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+                                        unlink(selection, editor)
                                     })
                                 }}
                             />
