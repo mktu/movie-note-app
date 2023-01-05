@@ -1,4 +1,5 @@
 import type { LexicalEditor, RangeSelection } from "lexical";
+import { $isParagraphNode } from "lexical";
 import { $isRootNode, $isTextNode, TextNode } from "lexical";
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
 
@@ -9,10 +10,17 @@ export const replaceLink = (selection: RangeSelection, editor: LexicalEditor, re
     //
     // Text labels are changed up to "TOGGLE_LINK_COMMAND"
     const nodes = selection.extract()
+    if (nodes.filter(v => $isParagraphNode(v)).length > 1) {
+        return
+    }
     if (nodes.length === 0) {
         selection.insertText(replaceText || '')
     }
-    let inserted = false
+    if (nodes.length === 1 && $isParagraphNode(nodes[0])) {
+        const textNode = new TextNode(replaceText || '')
+        nodes[0].append(textNode)
+    }
+    let inserted = false // only one node remains and other nodes will be removed
     nodes.forEach(node => {
         if ($isRootNode(node)) {
             const textNode = new TextNode(replaceText || '')

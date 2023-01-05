@@ -34,7 +34,7 @@ module.exports = {
           main : '#37352F',
           dark : '#111111',
           label : '#7A828B',
-          disabled : '#7A828B',
+          disabled : '#b2b4b7',
           placeholder : 'rgba(0,0,0,0.1)'
         },
         border : {

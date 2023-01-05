@@ -12,17 +12,20 @@ import InsertLink from '../../icons/InsertLink';
 import Input from './Input';
 
 import type { ElementNode, RangeSelection, TextNode } from 'lexical';
+import { $isParagraphNode } from 'lexical';
 import { $isTextNode } from 'lexical';
 import type { FC } from 'react';
 import type { NodeListenerType } from '../../../hooks/useUpdateListener';
 import { FocusTrap } from '@headlessui/react';
 import { replaceLink, unlink } from '~/features/rte/utils/linkInserter';
+import clsx from 'clsx';
 
+// Get the starting node in the selection
 export function getSelectedNode(
     selection: RangeSelection,
 ): TextNode | ElementNode {
-    const anchor = selection.anchor;
-    const focus = selection.focus;
+    const anchor = selection.anchor; // starting point (cursor point)
+    const focus = selection.focus; // selection(dragging) point
     const anchorNode = selection.anchor.getNode();
     const focusNode = selection.focus.getNode();
     if (anchorNode === focusNode) {
@@ -39,6 +42,7 @@ export function getSelectedNode(
 const Link: FC = () => {
     const [url, setUrl] = useState('')
     const [label, setLabel] = useState('')
+    const [enableLink, setEnableLink] = useState(false)
     const [showEditor, setShowEditor] = useState(false)
     const { updateRange } = useRangeUpdater()
     const [referenceElement, setReferenceElement] = useState<HTMLElement>()
@@ -49,6 +53,7 @@ const Link: FC = () => {
     const listener: NodeListenerType = useCallback((_, selection) => {
         const node = getSelectedNode(selection);
         const parent = node.getParent();
+        setEnableLink(selection.getNodes().filter(v => $isParagraphNode(v)).length <= 1)
         if ($isLinkNode(parent)) {
             setUrl(parent.getURL());
         } else if ($isLinkNode(node)) {
@@ -61,9 +66,12 @@ const Link: FC = () => {
     return (
         <>
             <IconButton
+                disabled={!enableLink}
                 ref={(el) => {
                     el && setReferenceElement(el)
-                }} name={'link'} className={'hover:bg-surface-hover p-1'} onClick={(e) => {
+                }} name={'link'} className={clsx(enableLink && 'hover:bg-surface-hover',
+                    'p-1'
+                )} onClick={(e) => {
                     e.stopPropagation()
                     setShowEditor(true)
                     updateRange((selection) => {
@@ -73,8 +81,8 @@ const Link: FC = () => {
                         }
                     })
                 }}>
-                <InsertLink className={`h-4 w-4 
-                ${url !== '' ? 'fill-text-main' : 'fill-text-label'}`} />
+                <InsertLink className={`h-4 w-4
+                ${!enableLink ? 'fill-text-disabled' : url !== '' ? 'fill-text-main' : 'fill-text-label'}`} />
             </IconButton>
             {showEditor && (
                 <Clickaway
