@@ -56,7 +56,7 @@
     "zod-form-data": "1.2.4"
   },
   "devDependencies": {
-    "@babel/core": "7.20.7",
+    "@babel/core": "7.20.12",
     "@cloudflare/workers-types": "3.18.0",
     "@playwright/test": "1.29.1",
     "@remix-run/dev": "1.7.6",
