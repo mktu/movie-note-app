@@ -16,9 +16,11 @@ import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary'
 import initialConfig from './initialConfig';
 import { transformers } from './nodes';
 
-import type { EditorState } from 'lexical';
 import Toolbar from './Toolbar';
 import { validateUrl } from '../utils/validateUrl';
+import useEditorState from '../hooks/useEditorState';
+import { useEditorElement } from '../store/editor';
+import LinkMenu from './floating-menus/LinkMenu';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
@@ -32,25 +34,8 @@ const Editor: FC<Props> = ({
     init
 }) => {
     const { t } = useTranslation('common')
-
-    const editorStateRef = useRef<EditorState>();
-    useEffect(() => {
-        setContentGetter(() => {
-            return editorStateRef.current ? JSON.stringify(editorStateRef.current) : ''
-        })
-    }, [setContentGetter])
-
-    useEffect(() => {
-        if (!monitorCurrentState) {
-            return
-        }
-        const id = setInterval(() => {
-            editorStateRef.current && monitorCurrentState(JSON.stringify(editorStateRef.current))
-        }, 5000);
-        return () => {
-            clearInterval(id)
-        }
-    }, [monitorCurrentState])
+    const { editorStateRef } = useEditorState(setContentGetter, monitorCurrentState)
+    const { setEditorElement } = useEditorElement()
     return (
         <div >
             <LexicalComposer initialConfig={{
@@ -61,10 +46,16 @@ const Editor: FC<Props> = ({
                 <div className='relative'>
                     <RichTextPlugin
                         ErrorBoundary={LexicalErrorBoundary}
-                        contentEditable={<ContentEditable className='text-text-main outline-none' />}
+                        contentEditable={<div ref={(e) => {
+                            e && setEditorElement(e)
+                        }}>
+                            <ContentEditable
+                                className='text-text-main outline-none' />
+                        </div>}
                         placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
                     />
                 </div>
+                <LinkMenu />
                 <HistoryPlugin />
                 <MarkdownShortcutPlugin transformers={transformers} />
                 <LexicalLinkPlugin validateUrl={validateUrl} />

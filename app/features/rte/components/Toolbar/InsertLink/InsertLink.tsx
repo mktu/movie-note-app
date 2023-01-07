@@ -1,48 +1,23 @@
-import { useCallback, useState } from 'react';
+import clsx from 'clsx';
+import { $isTextNode } from 'lexical';
+import { useState } from 'react';
 import { usePopper } from 'react-popper';
 import { IconButton } from '~/components/buttons';
 import Clickaway from '~/components/clickaway';
+import { useLinkListener } from '~/features/rte/store/link';
+import { replaceLink, unlink } from '~/features/rte/utils/linkInserter';
 
-import { $isLinkNode } from '@lexical/link';
-import { $isAtNodeEnd } from '@lexical/selection';
+import { FocusTrap } from '@headlessui/react';
 
 import { useNodeUpdateListener } from '../../../hooks/useUpdateListener';
 import { useRangeUpdater } from '../../../hooks/useUpdater';
 import InsertLink from '../../icons/InsertLink';
 import Input from './Input';
 
-import type { ElementNode, RangeSelection, TextNode } from 'lexical';
-import { $isParagraphNode } from 'lexical';
-import { $isTextNode } from 'lexical';
 import type { FC } from 'react';
-import type { NodeListenerType } from '../../../hooks/useUpdateListener';
-import { FocusTrap } from '@headlessui/react';
-import { replaceLink, unlink } from '~/features/rte/utils/linkInserter';
-import clsx from 'clsx';
-
-// Get the starting node in the selection
-export function getSelectedNode(
-    selection: RangeSelection,
-): TextNode | ElementNode {
-    const anchor = selection.anchor; // starting point (cursor point)
-    const focus = selection.focus; // selection(dragging) point
-    const anchorNode = selection.anchor.getNode();
-    const focusNode = selection.focus.getNode();
-    if (anchorNode === focusNode) {
-        return anchorNode;
-    }
-    const isBackward = selection.isBackward();
-    if (isBackward) {
-        return $isAtNodeEnd(focus) ? anchorNode : focusNode;
-    } else {
-        return $isAtNodeEnd(anchor) ? anchorNode : focusNode;
-    }
-}
 
 const Link: FC = () => {
-    const [url, setUrl] = useState('')
     const [label, setLabel] = useState('')
-    const [enableLink, setEnableLink] = useState(false)
     const [showEditor, setShowEditor] = useState(false)
     const { updateRange } = useRangeUpdater()
     const [referenceElement, setReferenceElement] = useState<HTMLElement>()
@@ -50,26 +25,15 @@ const Link: FC = () => {
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: 'auto'
     });
-    const listener: NodeListenerType = useCallback((_, selection) => {
-        const node = getSelectedNode(selection);
-        const parent = node.getParent();
-        setEnableLink(selection.getNodes().filter(v => $isParagraphNode(v)).length <= 1)
-        if ($isLinkNode(parent)) {
-            setUrl(parent.getURL());
-        } else if ($isLinkNode(node)) {
-            setUrl(node.getURL());
-        } else {
-            setUrl('');
-        }
-    }, [])
+    const { listener, url, valid } = useLinkListener()
     useNodeUpdateListener(listener)
     return (
         <>
             <IconButton
-                disabled={!enableLink}
+                disabled={!valid}
                 ref={(el) => {
                     el && setReferenceElement(el)
-                }} name={'link'} className={clsx(enableLink && 'hover:bg-surface-hover',
+                }} name={'link'} className={clsx(valid && 'hover:bg-surface-hover',
                     'p-1'
                 )} onClick={(e) => {
                     e.stopPropagation()
@@ -82,7 +46,7 @@ const Link: FC = () => {
                     })
                 }}>
                 <InsertLink className={`h-4 w-4
-                ${!enableLink ? 'fill-text-disabled' : url !== '' ? 'fill-text-main' : 'fill-text-label'}`} />
+                ${!valid ? 'fill-text-disabled' : url !== '' ? 'fill-text-main' : 'fill-text-label'}`} />
             </IconButton>
             {showEditor && (
                 <Clickaway

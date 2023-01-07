@@ -1,8 +1,8 @@
-import type { LexicalEditor, RangeSelection } from "lexical";
+import type { ElementNode, LexicalEditor, RangeSelection } from "lexical";
 import { $isParagraphNode } from "lexical";
 import { $isRootNode, $isTextNode, TextNode } from "lexical";
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
-
+import { $isAtNodeEnd } from '@lexical/selection';
 
 export const replaceLink = (selection: RangeSelection, editor: LexicalEditor, replaceLink: string, replaceText?: string) => {
     // "selection" has an entire paragraph, not a selection
@@ -65,4 +65,23 @@ export const unlink = (selection: RangeSelection, editor: LexicalEditor) => {
             node.remove()
         }
     })
+}
+
+// Get the starting node in the selection
+export function getSelectedNode(
+    selection: RangeSelection,
+): TextNode | ElementNode {
+    const anchor = selection.anchor; // starting point (cursor point)
+    const focus = selection.focus; // selection(dragging) point
+    const anchorNode = selection.anchor.getNode();
+    const focusNode = selection.focus.getNode();
+    if (anchorNode === focusNode) {
+        return anchorNode;
+    }
+    const isBackward = selection.isBackward();
+    if (isBackward) {
+        return $isAtNodeEnd(focus) ? anchorNode : focusNode;
+    } else {
+        return $isAtNodeEnd(anchor) ? anchorNode : focusNode;
+    }
 }
