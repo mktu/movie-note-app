@@ -5,11 +5,12 @@ import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 
 import type { Klass, LexicalNode } from "lexical";
+import { LinkPreviewNode } from '../features/link/components/LinkPreviewNode';
 
 //HEADING, QUOTE, CODE, UNORDERED_LIST, ORDERED_LIST
 const nodes: Klass<LexicalNode>[] = [
     HeadingNode, QuoteNode, ListItemNode, ListNode, LinkNode, AutoLinkNode,
-    TableCellNode, TableNode, TableRowNode];
+    TableCellNode, TableNode, TableRowNode, LinkPreviewNode];
 
 
 

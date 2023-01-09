@@ -9,14 +9,14 @@ import { replaceLink, unlink } from '~/features/rte/utils/linkInserter';
 
 import { FocusTrap } from '@headlessui/react';
 
-import { useNodeUpdateListener } from '../../../hooks/useUpdateListener';
-import { useRangeUpdater } from '../../../hooks/useUpdater';
-import InsertLink from '../../icons/InsertLink';
+import { useNodeUpdateListener } from '../../../../hooks/useUpdateListener';
+import { useRangeUpdater } from '../../../../hooks/useUpdater';
+import InsertLink from '../../../../components/icons/InsertLink';
 import Input from './Input';
 
 import type { FC } from 'react';
 
-const Link: FC = () => {
+const LinkInserter: FC = () => {
     const [label, setLabel] = useState('')
     const [showEditor, setShowEditor] = useState(false)
     const { updateRange } = useRangeUpdater()
@@ -27,6 +27,7 @@ const Link: FC = () => {
     });
     const { listener, url, valid } = useLinkListener()
     useNodeUpdateListener(listener)
+
     return (
         <>
             <IconButton
@@ -83,4 +84,4 @@ const Link: FC = () => {
         </>
     );
 };
-export default Link;
+export default LinkInserter;

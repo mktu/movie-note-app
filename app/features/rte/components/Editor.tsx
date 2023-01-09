@@ -1,26 +1,24 @@
 import type { FC } from 'react';
-import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
+import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
+import { LinkPlugin as LexicalLinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import { LinkPlugin as LexicalLinkPlugin } from '@lexical/react/LexicalLinkPlugin';
-import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary'
 
-import initialConfig from './initialConfig';
-import { transformers } from './nodes';
-
-import Toolbar from './Toolbar';
-import { validateUrl } from '../utils/validateUrl';
+import { AutoLinkPlugin, FloatingLinkMenu } from '../features/link';
 import useEditorState from '../hooks/useEditorState';
 import { useEditorElement } from '../store/editor';
-import LinkMenu from './floating-menus/LinkMenu';
+import { validateUrl } from '../utils/validateUrl';
+import initialConfig from './initialConfig';
+import { transformers } from './nodes';
+import Toolbar from './Toolbar';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
@@ -55,10 +53,11 @@ const Editor: FC<Props> = ({
                         placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
                     />
                 </div>
-                <LinkMenu />
+                <FloatingLinkMenu />
                 <HistoryPlugin />
                 <MarkdownShortcutPlugin transformers={transformers} />
                 <LexicalLinkPlugin validateUrl={validateUrl} />
+                <AutoLinkPlugin />
                 <ListPlugin />
                 <CheckListPlugin />
                 <OnChangePlugin onChange={(editorState) => {

@@ -1,17 +1,24 @@
 import type { LexicalEditor, RangeSelection } from 'lexical';
-import { $isRangeSelection } from 'lexical';
-import type { FC } from 'react';
-import { useCallback, useState } from 'react'
-import { $isLinkNode } from '@lexical/link';
-import { useRangeSelectionUpdateListener } from '../../hooks/useUpdateListener';
-import { getSelectedNode } from '../../utils/linkInserter';
 import clsx from 'clsx';
+import { $isRangeSelection } from 'lexical';
+import { useCallback, useState } from 'react';
 import { usePopper } from 'react-popper';
 import LinkSlash from '~/components/icons/LinkSlash';
-import { useLinkListener } from '../../store/link';
 
+import { $isLinkNode } from '@lexical/link';
 
-const LinkMenu: FC = () => {
+import { useRangeSelectionUpdateListener } from '../../../hooks/useUpdateListener';
+import { useLinkListener } from '../../../store/link';
+import { getSelectedNode } from '../../../utils/linkInserter';
+
+import type { FC } from 'react';
+import type { LinkNode } from '@lexical/link';
+
+const showLinkMenu = (node: LinkNode) => {
+    return node.getTextContent() !== node.getURL()
+}
+
+const FloatingLinkMenu: FC = () => {
     const [linkElement, setLinkElement] = useState<HTMLElement | null>(null)
     const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null)
     const { styles, attributes } = usePopper(linkElement, popperElement, {
@@ -23,10 +30,10 @@ const LinkMenu: FC = () => {
             const parent = node.getParent()
             if ($isLinkNode(parent)) {
                 const element = editor.getElementByKey(parent.getKey())
-                setLinkElement(element);
+                showLinkMenu(parent) && setLinkElement(element);
             } else if ($isLinkNode(node)) {
                 const element = editor.getElementByKey(node.getKey())
-                setLinkElement(element);
+                showLinkMenu(node) && setLinkElement(element);
             } else {
                 setLinkElement(null);
             }
@@ -42,12 +49,12 @@ const LinkMenu: FC = () => {
             )} ref={(e) => {
                 e && setPopperElement(e)
             }}>
-            <div className='flex items-center max-w-[312px] text-sm rounded p-1 overflow-hidden bg-bg-main gap-1 shadow-md'>
-                <LinkSlash className='h-3 w-3 fill-text-label block' />
-                <a href={url} target="_blank" rel="noopener noreferrer" className='w-full truncate underline block'>{url}</a>
+            <div className='flex max-w-[312px] items-center gap-1 overflow-hidden rounded bg-bg-main p-1 text-sm shadow-md'>
+                <LinkSlash className='block h-3 w-3 fill-text-label' />
+                <a href={url} target="_blank" rel="noopener noreferrer" className='block w-full truncate underline'>{url}</a>
             </div>
         </div>
     ) : null;
 };
 
-export default LinkMenu;
+export default FloatingLinkMenu;

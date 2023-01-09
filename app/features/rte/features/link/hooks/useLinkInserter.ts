@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { urlRegex } from "../utils/validateUrl";
+import { urlRegex } from "../../../utils/validateUrl";
 
 type Props = {
     initLabel?: string,

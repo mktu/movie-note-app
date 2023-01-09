@@ -3,7 +3,7 @@ import { ContainedButton, TextButton } from '~/components/buttons';
 import { TextInput } from '~/components/inputs';
 
 import type { FC } from 'react';
-import useLinkInserter from '~/features/rte/hooks/useLinkInserter';
+import useLinkInserter from '~/features/rte/features/link/hooks/useLinkInserter';
 import { useTranslation } from 'react-i18next';
 import Unlink from './Unlink';
 
@@ -28,7 +28,7 @@ const Input: FC<Props> = ({ init = '', initLabel = '', onSubmit, onCancel, onUnl
     }, [])
     const { t } = useTranslation('common')
     return (
-        <div className='flex flex-col gap-1 border rounded border-border-main p-2 w-[312px]'>
+        <div className='flex w-[312px] flex-col gap-1 rounded border border-border-main p-2'>
             <TextInput
                 label={t('display-text') + '*'}
                 borderClassName='border-b border-primary-border'
@@ -52,7 +52,7 @@ const Input: FC<Props> = ({ init = '', initLabel = '', onSubmit, onCancel, onUnl
                 {...registerUrlOther}
                 label={t('input-url') + '*'}
             />
-            <div className='flex items-center justify-end font-semibold mt-1 gap-1'>
+            <div className='mt-1 flex items-center justify-end gap-1 font-semibold'>
                 <Unlink onClick={onUnlink} disabled={init === ''} />
                 <TextButton className='ml-auto' onClick={onCancel} theme='label' paddings='py-1 px-2'>CANCEL</TextButton>
                 <ContainedButton disabled={!valid} onClick={() => {

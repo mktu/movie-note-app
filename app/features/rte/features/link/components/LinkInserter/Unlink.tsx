@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type { FC } from 'react'
 import { TextButton } from '~/components/buttons';
-import Unlink from '../../icons/Unlink';
+import Unlink from '../../../../components/icons/Unlink';
 
 type Props = Parameters<typeof TextButton>[0]
 
