@@ -47,7 +47,8 @@ const useLinkPreview = () => {
                             }
                             const paragraps = nodes.map(v => getParagraph(v)).filter(Boolean)
                             if (paragraps.length > 0 && paragraps[0]) {
-                                const previewNode = $createLinkPreviewNode(nodeKey)
+                                const url = targetLinkNode.getURL()
+                                const previewNode = $createLinkPreviewNode(nodeKey, url)
                                 const paragraph = $createParagraphNode()
                                 paragraps[0].insertAfter(paragraph)
                                 paragraps[0].insertAfter(previewNode)
