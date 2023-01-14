@@ -1,18 +1,31 @@
-import type { LexicalNode, NodeKey } from "lexical";
+import type { ElementFormatType, LexicalNode, NodeKey, Spread } from "lexical";
 import { $applyNodeReplacement } from "lexical";
-import { DecoratorNode } from "lexical";
-import type { ReactNode } from "react";
+import type {
+  SerializedDecoratorBlockNode
+} from '@lexical/react/LexicalDecoratorBlockNode';
+import {
+  DecoratorBlockNode
+} from '@lexical/react/LexicalDecoratorBlockNode';
 import LinkPreview from "./LinkPreview";
 
-export class LinkPreviewNode extends DecoratorNode<ReactNode> {
+type LinkPreviewAttributes = {
+  url: string,
+  linkKey: string
+}
+
+type SerializedLinkPreviewNode = Spread<{
+  type: 'link-preview',
+}, Spread<LinkPreviewAttributes, SerializedDecoratorBlockNode>>
+
+export class LinkPreviewNode extends DecoratorBlockNode {
   __link_key: NodeKey;
   __url: string
   static getType(): string {
     return 'link-preview';
   }
 
-  constructor(linkKey: NodeKey, url: string, key?: NodeKey) {
-    super(key)
+  constructor(linkKey: NodeKey, url: string, format?: ElementFormatType, key?: NodeKey) {
+    super(format, key)
     this.__link_key = linkKey
     this.__url = url
   }
@@ -21,20 +34,44 @@ export class LinkPreviewNode extends DecoratorNode<ReactNode> {
     return new LinkPreviewNode(node.__key, node.__url);
   }
 
+  getUrl(): string {
+    return this.__url
+  }
+
   getLinkKey(): NodeKey {
     return this.__link_key
   }
 
   createDOM(): HTMLElement {
-    return document.createElement('p');
+    return document.createElement('div');
   }
 
   updateDOM(): false {
     return false;
   }
 
-  decorate(): ReactNode {
-    return <LinkPreview url={this.__url} />
+  decorate(): JSX.Element {
+    return <LinkPreview url={this.__url} format={this.__format} nodeKey={this.getKey()} />
+  }
+
+  exportJSON(): SerializedLinkPreviewNode {
+    return {
+      ...super.exportJSON(),
+      url: this.__url,
+      linkKey: this.__link_key,
+      type: 'link-preview',
+      version: 1
+    }
+  }
+
+  isInline(): false {
+    return false;
+  }
+
+  static importJSON(serializedLinkPreviewNode: SerializedLinkPreviewNode): LinkPreviewNode {
+    const node = $createLinkPreviewNode(serializedLinkPreviewNode.linkKey, serializedLinkPreviewNode.url);
+    node.setFormat(serializedLinkPreviewNode.format);
+    return node;
   }
 
 }

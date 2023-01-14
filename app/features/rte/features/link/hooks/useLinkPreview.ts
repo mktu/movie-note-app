@@ -1,9 +1,16 @@
-import { useEffect } from 'react';
-import { AutoLinkNode, $isAutoLinkNode } from '@lexical/link';
+import {
+    $getRoot, $getSelection, $isElementNode, $isParagraphNode,
+    $isRangeSelection, $isRootNode
+} from 'lexical';
+import { $insertNodeToNearestRoot } from '@lexical/utils';
+import { useCallback, useEffect } from 'react';
+
+import { $isAutoLinkNode, AutoLinkNode } from '@lexical/link';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import type { LexicalNode, ParagraphNode } from 'lexical';
-import { $createParagraphNode, $getRoot, $getSelection, $isParagraphNode, $isRangeSelection, $isRootNode } from 'lexical';
+
 import { $createLinkPreviewNode, $isLinkPreviewNode } from '../components/LinkPreviewNode';
+
+import type { ElementNode, LexicalNode, ParagraphNode } from 'lexical';
 
 const getParagraph: (node: LexicalNode) => ParagraphNode | null = (node) => {
     const parent = node.getParent()
@@ -25,6 +32,18 @@ const getLink: (node: LexicalNode) => AutoLinkNode | null = (node) => {
         return null
     }
     return getLink(parent)
+}
+
+const flattenNodes: (nodes: LexicalNode[]) => LexicalNode[] = (nodes) => {
+    let results: LexicalNode[] = [...nodes]
+    const elements = nodes.filter(n => $isElementNode(n)).map(n => n as ElementNode)
+    elements.forEach(v => {
+        const children = v.getChildren()
+        const elements = children.filter(c => $isElementNode(c)).map(c => c as ElementNode)
+        const notElements = children.filter(c => !$isElementNode(c))
+        results = [...results, ...notElements, ...flattenNodes(elements)]
+    })
+    return results
 }
 
 const useLinkPreview = () => {
@@ -49,9 +68,7 @@ const useLinkPreview = () => {
                             if (paragraps.length > 0 && paragraps[0]) {
                                 const url = targetLinkNode.getURL()
                                 const previewNode = $createLinkPreviewNode(nodeKey, url)
-                                const paragraph = $createParagraphNode()
-                                paragraps[0].insertAfter(paragraph)
-                                paragraps[0].insertAfter(previewNode)
+                                $insertNodeToNearestRoot(previewNode);
                             }
                         });
                     } else if (mutation === 'destroyed') {
@@ -73,6 +90,36 @@ const useLinkPreview = () => {
             },
         )
     }, [editor])
+}
+
+export const useLinkPreviewUpdater = () => {
+    const [editor] = useLexicalComposerContext()
+    const removePreview = useCallback((url: string) => {
+        editor.update(() => {
+            const root = $getRoot();
+            const preview = root.getChildren().find(v => {
+                if ($isLinkPreviewNode(v)) {
+                    return v.getUrl() === url
+                }
+                return false
+            })
+            if (preview) {
+                preview.remove()
+            }
+            const link = flattenNodes(root.getChildren()).find(v => {
+                if ($isAutoLinkNode(v)) {
+                    return v.getURL() === url
+                }
+                return false
+            })
+            if (link) {
+                link.remove()
+            }
+        })
+    }, [editor])
+    return {
+        removePreview
+    }
 }
 
 export default useLinkPreview
