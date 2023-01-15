@@ -4,8 +4,8 @@ import X from '~/components/icons/X';
 
 import { BlockWithAlignableContents } from '@lexical/react/LexicalBlockWithAlignableContents';
 
-import { useLinkPreviewUpdater } from '../hooks/useLinkPreview';
-import useOgp from '../hooks/useOgp';
+import { useLinkPreviewUpdater } from '../../../hooks/useLinkPreview';
+import useOgp from '../../../hooks/useOgp';
 
 import type { ElementFormatType, NodeKey } from 'lexical';
 

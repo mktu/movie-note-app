@@ -19,6 +19,7 @@ import { validateUrl } from '../utils/validateUrl';
 import initialConfig from './initialConfig';
 import { transformers } from './nodes';
 import Toolbar from './Toolbar';
+import LinkPreviewPlugin from '../features/link/components/link-preview-plugin';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
@@ -57,8 +58,9 @@ const Editor: FC<Props> = ({
                 <HistoryPlugin />
                 <MarkdownShortcutPlugin transformers={transformers} />
                 <LexicalLinkPlugin validateUrl={validateUrl} />
-                <AutoLinkPlugin />
                 <ListPlugin />
+                <AutoLinkPlugin />
+                <LinkPreviewPlugin />
                 <CheckListPlugin />
                 <OnChangePlugin onChange={(editorState) => {
                     editorStateRef.current = editorState

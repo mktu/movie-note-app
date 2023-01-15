@@ -5,7 +5,7 @@ import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 
 import type { Klass, LexicalNode } from "lexical";
-import { LinkPreviewNode } from '../features/link/components/LinkPreviewNode';
+import { LinkPreviewNode } from '../features/link/components/link-preview-plugin/simple-link-preview/LinkPreviewNode';
 
 //HEADING, QUOTE, CODE, UNORDERED_LIST, ORDERED_LIST
 const nodes: Klass<LexicalNode>[] = [
