@@ -23,8 +23,21 @@ type UnPromisify<T> = T extends Promise<infer U> ? U : T;
 
 export type OgpType = UnPromisify<ReturnType<typeof doScrape>>
 
+const getOgp = async (url: string, kv: KVNamespace) => {
+    const cache = await kv.get(url, 'json') as OgpType | null
+    if (cache) {
+        return {
+            ...cache,
+            cache: true
+        }
+    }
+    const result = await doScrape(url)
+    kv.put(url, JSON.stringify(result), { expirationTtl: 60 * 60 * 24 * 7 /** one weeks */ })
+    return result
+}
+
 export const onRequestGet: PagesFunction<{
-    MovieNoteApp: R2Bucket
+    OgpInfo: KVNamespace
 }> = async ({ env, request }) => {
     const url = new URL(request.url);
     if (!url) {
@@ -34,7 +47,7 @@ export const onRequestGet: PagesFunction<{
     }
     try {
         const p = url.searchParams.get('url')
-        const result = p ? await doScrape(p) : ''
+        const result = p ? await getOgp(p, env.OgpInfo) : ''
         return json({
             ...result
         })
