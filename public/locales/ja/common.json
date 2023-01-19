@@ -45,5 +45,6 @@
     "update-succeeded" : "更新しました",
     "display-text" : "表示テキスト",
     "input-url" : "URLを入力",
-    "url-validation" : "URL形式が必要です"
+    "url-validation" : "URL形式が必要です",
+    "ogp-error" : "プレビューの取得に失敗しました。エラーコード:{{code}}"
 }

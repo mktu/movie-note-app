@@ -6,7 +6,7 @@ import type {
 import {
   DecoratorBlockNode
 } from '@lexical/react/LexicalDecoratorBlockNode';
-import LinkPreview from "./LinkPreview";
+import LinkPreview from "./Container";
 
 type LinkPreviewAttributes = {
   url: string,

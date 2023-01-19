@@ -11,7 +11,8 @@ const doScrape = async (url: string) => {
             description: ret.data.description,
             image: ret.data.image?.url,
             date: ret.data.date,
-            logo: ret.data.logo?.url
+            logo: ret.data.logo?.url,
+            url: ret.data.url
         }
     } catch (e) {
         console.error(e)
