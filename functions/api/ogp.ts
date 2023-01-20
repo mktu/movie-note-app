@@ -4,7 +4,7 @@ import mql from '@microlink/mql'
 
 const doScrape = async (url: string) => {
     try {
-        const ret = await mql(url, undefined, { credential: undefined })
+        const ret = await mql(url, undefined, { credentials: undefined })
         return {
             title: ret.data.title,
             author: ret.data.author,
