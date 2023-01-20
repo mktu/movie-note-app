@@ -4,22 +4,28 @@ import type useOgp from '../../../../hooks/useOgp';
 
 type Props = Pick<ReturnType<typeof useOgp>, 'ogp'>
 
+const imgW = 100 * 1.91
+const imgH = 100
+
 const PreviewCard: FC<Props> = ({
     ogp
 }) => {
     return (
         <div className='flex gap-2'>
-            <img src={ogp?.image} alt={ogp?.title || 'untitled'} width={100 * 1.91} height={100} />
-            <div>
+            <img src={ogp?.image} alt={ogp?.title || 'untitled'} width={imgW} height={imgH} style={{
+                width: imgW,
+                height: imgH
+            }} />
+            <div className='overflow-hidden'>
                 <div className='flex items-center gap-1 text-text-main'>
-                    <a href={ogp?.url} className='underline'>{ogp?.title}</a>
+                    <a href={ogp?.url} className='truncate underline'>{ogp?.title}</a>
                 </div>
-                <div className='text-sm text-text-label'>
+                <div className='text-sm text-text-label line-clamp-2'>
                     {ogp?.description}
                 </div>
                 <div className='mt-2 flex items-center gap-1 text-sm text-text-label'>
                     <img src={ogp?.logo} alt={ogp?.author || 'unknown'} width={16} height={16} style={{ width: 16, height: 16 }} />
-                    <span>{ogp?.url}</span>
+                    <span className='truncate'>{ogp?.url}</span>
                 </div>
             </div>
         </div>
