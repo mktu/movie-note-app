@@ -1,20 +1,25 @@
 import type { FC } from 'react';
-import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
+import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
+import { LinkPlugin as LexicalLinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 
+import { AutoLinkPlugin, FloatingLinkMenu } from '../features/link';
+import useEditorState from '../hooks/useEditorState';
+import { useEditorElement } from '../store/editor';
+import { validateUrl } from '../utils/validateUrl';
 import initialConfig from './initialConfig';
 import { transformers } from './nodes';
-
-import type { EditorState } from 'lexical';
+import Toolbar from './Toolbar';
+import LinkPreviewPlugin from '../features/link/components/link-preview-plugin';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
@@ -28,38 +33,34 @@ const Editor: FC<Props> = ({
     init
 }) => {
     const { t } = useTranslation('common')
-
-    const editorStateRef = useRef<EditorState>();
-    useEffect(() => {
-        setContentGetter(() => {
-            return editorStateRef.current ? JSON.stringify(editorStateRef.current) : ''
-        })
-    }, [setContentGetter])
-
-    useEffect(() => {
-        if (!monitorCurrentState) {
-            return
-        }
-        const id = setInterval(() => {
-            editorStateRef.current && monitorCurrentState(JSON.stringify(editorStateRef.current))
-        }, 5000);
-        return () => {
-            clearInterval(id)
-        }
-    }, [monitorCurrentState])
+    const { editorStateRef } = useEditorState(setContentGetter, monitorCurrentState)
+    const { setEditorElement } = useEditorElement()
     return (
-        <div className='relative'>
+        <div >
             <LexicalComposer initialConfig={{
                 editorState: init,
                 ...initialConfig
             }}>
-                <RichTextPlugin
-                    contentEditable={<ContentEditable className='text-text-main outline-none' />}
-                    placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
-                />
+                <Toolbar />
+                <div className='relative'>
+                    <RichTextPlugin
+                        ErrorBoundary={LexicalErrorBoundary}
+                        contentEditable={<div ref={(e) => {
+                            e && setEditorElement(e)
+                        }}>
+                            <ContentEditable
+                                className='text-text-main outline-none' />
+                        </div>}
+                        placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
+                    />
+                </div>
+                <FloatingLinkMenu />
                 <HistoryPlugin />
                 <MarkdownShortcutPlugin transformers={transformers} />
+                <LexicalLinkPlugin validateUrl={validateUrl} />
                 <ListPlugin />
+                <AutoLinkPlugin />
+                <LinkPreviewPlugin />
                 <CheckListPlugin />
                 <OnChangePlugin onChange={(editorState) => {
                     editorStateRef.current = editorState

@@ -14,12 +14,15 @@ const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
             h5: 'text-md',
         },
         list: {
-            ol: 'editor-list-ol',
+            ol: 'lexical-ol',
             ul: 'lexical-ul',
             nested: {
                 listitem: 'list-none',
             },
         },
+        text: {
+            underline: 'underline'
+        }
     },
     nodes
 };

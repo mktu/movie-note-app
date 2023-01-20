@@ -1,13 +1,13 @@
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import TextInput from '.';
+import Input from '.';
 
 export default {
-    title: 'Common/Input/TextInput',
-    component: TextInput,
-} as ComponentMeta<typeof TextInput>;
+    title: 'Common/Input/Input',
+    component: Input,
+} as ComponentMeta<typeof Input>;
 
-const Template: ComponentStory<typeof TextInput> = (args) => <TextInput {...args} />;
+const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
 
 export const Default = Template.bind({});
 
@@ -23,4 +23,19 @@ Disabled.args = {
     placeholder: 'Input any values',
     paddings: 'px-4 py-1',
     disabled: true
+};
+
+export const Labeled = Template.bind({});
+
+Labeled.args = {
+    label: 'Input any values',
+    paddings: 'px-4 py-1',
+};
+
+export const Errored = Template.bind({});
+
+Errored.args = {
+    label: 'Input any values',
+    paddings: 'px-4 py-1',
+    error: 'Value required!'
 };

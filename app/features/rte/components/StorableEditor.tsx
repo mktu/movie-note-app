@@ -1,5 +1,5 @@
 import type { ComponentProps, FC } from 'react'
-import { useMovieNoteStore } from '../../hooks/useMovieNoteStore';
+import { useMovieNoteStore } from '../../movie-note/hooks/useMovieNoteStore';
 import Container from './Container'
 
 type Props = Omit<ComponentProps<typeof Container>, 'saveStateInStore'> & {

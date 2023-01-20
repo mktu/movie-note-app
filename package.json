@@ -11,7 +11,7 @@
     "test": "vitest run",
     "dev:remix": "remix watch",
     "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
-    "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public --binding $(cat .env) --kv ImdbInfo --kv TmdbInfo --kv MovieNoteIds --r2=MovieNoteApp",
+    "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public --binding $(cat .env) --kv ImdbInfo --kv TmdbInfo --kv MovieNoteIds --kv OgpInfo --r2=MovieNoteApp",
     "dev": "concurrently \"npm run dev:css\" \"remix build && run-p dev:*\"",
     "start": "cross-env NODE_ENV=production npm run dev:wrangler",
     "test:playwright": "playwright test",
@@ -21,6 +21,7 @@
   "dependencies": {
     "@headlessui/react": "1.7.7",
     "@lexical/react": "0.7.4",
+    "@microlink/mql": "0.10.32",
     "@popperjs/core": "2.11.6",
     "@remix-run/cloudflare": "1.7.6",
     "@remix-run/cloudflare-pages": "1.7.6",
