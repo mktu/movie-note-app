@@ -8,7 +8,7 @@ import Detail from '../components/detail';
 import { NewHeader } from '../components/header';
 import Layout from '../components/layout';
 import MetaInfo from '../components/meta';
-import Note from '../components/note';
+import Note from '~/features/rte';
 import Review from '../components/review';
 
 import type { FC } from "react";

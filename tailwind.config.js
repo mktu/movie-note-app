@@ -26,13 +26,16 @@ module.exports = {
           main : '#2AB5F6'
         },
         destructive : {
-          main : '#CE3E34'
+          light : '#ee503b',
+          main : '#CE3E34',
+          dark : '#c1382d'
         },
         text : {
           main : '#37352F',
           dark : '#111111',
           label : '#7A828B',
-          disabled : '#7A828B'
+          disabled : '#b2b4b7',
+          placeholder : 'rgba(0,0,0,0.1)'
         },
         border : {
           main : '#E4E7EB',
