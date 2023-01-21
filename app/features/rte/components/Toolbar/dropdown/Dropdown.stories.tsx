@@ -20,7 +20,6 @@ const Blocks = {
 
 Default.args = {
     onSelect(selected) {
-        console.log(selected)
     },
     menuItems: Blocks
 };

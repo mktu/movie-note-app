@@ -3,13 +3,14 @@ import Input from './Inner';
 import InputError from './InputError';
 
 type Props = Parameters<typeof Input>[0] & {
-    error?: string
+    error?: string,
+    inputClassName?: string
 }
 
-const TextInput = forwardRef<HTMLInputElement, Props>(({ error, ...props }, ref) => {
+const TextInput = forwardRef<HTMLInputElement, Props>(({ error, className, inputClassName, ...props }, ref) => {
     return (
-        <InputError error={error}>
-            <Input ref={ref} {...props} />
+        <InputError error={error} className={className}>
+            <Input ref={ref} className={inputClassName} {...props} />
         </InputError>
     );
 });
