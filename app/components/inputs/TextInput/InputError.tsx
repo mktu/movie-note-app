@@ -1,15 +1,17 @@
+import clsx from 'clsx';
 import type { FC, ReactNode } from 'react'
 
 type Props = {
     error?: string,
-    children: ReactNode
+    children: ReactNode,
+    className?: string
 }
 
-const InputError: FC<Props> = ({ children, error }) => {
+const InputError: FC<Props> = ({ children, error, className }) => {
     return (
-        <div className='flex flex-col gap-1'>
+        <div className={clsx('flex flex-col gap-1', className)}>
             {children}
-            {error && <p className='text-error-main text-sm px-2'>{error}</p>}
+            {error && <p className='px-2 text-sm text-error-main'>{error}</p>}
         </div>
     );
 };
