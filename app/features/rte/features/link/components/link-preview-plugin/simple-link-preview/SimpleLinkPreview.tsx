@@ -43,7 +43,7 @@ export default function SimpleLinkPreviewPlugin(): JSX.Element | null {
 
     useEffect(() => {
         if (!editor.hasNodes([LinkPreviewNode])) {
-            throw new Error('YouTubePlugin: YouTubeNode not registered on editor');
+            throw new Error('SimpleLinkPreviewPlugin: LinkPreviewNode not registered on editor');
         }
 
         return editor.registerCommand<string>(

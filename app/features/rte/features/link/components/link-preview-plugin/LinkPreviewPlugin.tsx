@@ -6,6 +6,7 @@ import { AutoEmbedOption, LexicalAutoEmbedPlugin } from '@lexical/react/LexicalA
 
 import PreviewMenu from './PreviewMenu';
 import { SimpleLinkPreviewConfig } from './simple-link-preview';
+import { YoutubePreviewConfig } from './youtube-preview';
 
 const LinkPreviewPlugin: FC = () => {
     // const openEmbedModal = (embedConfig: LinkPreveiwConfig) => {
@@ -30,7 +31,7 @@ const LinkPreviewPlugin: FC = () => {
     return (
         <div className=''>
             <LexicalAutoEmbedPlugin<EmbedConfig>
-                embedConfigs={[SimpleLinkPreviewConfig]}
+                embedConfigs={[SimpleLinkPreviewConfig, YoutubePreviewConfig]}
                 onOpenEmbedModalForConfig={() => { }}
                 getMenuOptions={getMenuOptions}
                 menuRenderFn={PreviewMenu}
