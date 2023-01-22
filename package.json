@@ -49,6 +49,7 @@
     "react-popper": "2.3.0",
     "react-textarea-autosize": "8.4.0",
     "react-toastify": "9.1.1",
+    "react-twitter-embed": "4.0.4",
     "recoil": "0.7.6",
     "remix-auth": "3.4.0",
     "remix-auth-google": "1.1.0",

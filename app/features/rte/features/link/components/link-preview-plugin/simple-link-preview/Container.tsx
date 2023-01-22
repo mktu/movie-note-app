@@ -29,15 +29,17 @@ const Container: FC<Props> = ({
                 base: 'relative',
                 focus: 'relative outline outline-indigo-300'
             }}>
-            <LinkPreview
-                url={url}
-                ogp={ogp}
-                loading={loading}
-                error={error}
-                onClickRemove={() => {
-                    removePreview(url)
-                }}
-            />
+            <div className='max-w-[95%]'>
+                <LinkPreview
+                    url={url}
+                    ogp={ogp}
+                    loading={loading}
+                    error={error}
+                    onClickRemove={() => {
+                        removePreview(url)
+                    }}
+                />
+            </div>
 
         </BlockWithAlignableContents >
     );
