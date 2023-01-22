@@ -25,9 +25,11 @@ const Container: FC<Props> = ({
                 base: 'relative',
                 focus: 'relative outline outline-indigo-300'
             }}>
-            <TwitterTweetEmbed
-                tweetId={tweetId}
-            />
+            <div className='max-w-[550px]'>
+                <TwitterTweetEmbed
+                    tweetId={tweetId}
+                />
+            </div>
         </BlockWithAlignableContents >
     );
 };

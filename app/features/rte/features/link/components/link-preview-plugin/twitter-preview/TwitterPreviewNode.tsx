@@ -14,14 +14,14 @@ type TwitterPreviewAttributes = {
 }
 
 type SerializedTwitterPreviewNode = Spread<{
-    type: 'youtube-preview',
+    type: 'twitter-preview',
 }, Spread<TwitterPreviewAttributes, SerializedDecoratorBlockNode>>
 
 export class TwitterPreviewNode extends DecoratorBlockNode {
     __tweet_id: string;
     __url: string
     static getType(): string {
-        return 'youtube-preview';
+        return 'twitter-preview';
     }
 
     constructor(tweetId: string, url: string, format?: ElementFormatType, key?: NodeKey) {
@@ -59,7 +59,7 @@ export class TwitterPreviewNode extends DecoratorBlockNode {
             ...super.exportJSON(),
             tweetId: this.__tweet_id,
             url: this.__url,
-            type: 'youtube-preview',
+            type: 'twitter-preview',
             version: 1
         }
     }
