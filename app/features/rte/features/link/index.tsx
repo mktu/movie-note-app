@@ -1,4 +1,6 @@
 export { default as AutoLinkPlugin } from './components/AutoLinkPlugin'
-export * from './components/link-preview-plugin/simple-link-preview/LinkPreviewNode'
+export * from './components/link-preview-plugin/simple-link-preview'
+export * from './components/link-preview-plugin/twitter-preview'
+export * from './components/link-preview-plugin/youtube-preview'
 export { default as FloatingLinkMenu } from './components/FloatingLinkMenu'
 export { default as LinkInserter } from './components/LinkInserter'

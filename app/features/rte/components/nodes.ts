@@ -5,14 +5,15 @@ import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 
 import type { Klass, LexicalNode } from "lexical";
-import { LinkPreviewNode } from '../features/link/components/link-preview-plugin/simple-link-preview/LinkPreviewNode';
-import { TwitterPreviewNode } from '../features/link/components/link-preview-plugin/twitter-preview/TwitterPreviewNode';
-import { YoutubePreviewNode } from '../features/link/components/link-preview-plugin/youtube-preview/YoutubePreviewNode';
+import { ImageNode } from '../features/images/components';
+import { LinkPreviewNode } from '../features/link';
+import { TwitterPreviewNode } from '../features/link';
+import { YoutubePreviewNode } from '../features/link';
 
 //HEADING, QUOTE, CODE, UNORDERED_LIST, ORDERED_LIST
 const nodes: Klass<LexicalNode>[] = [
     HeadingNode, QuoteNode, ListItemNode, ListNode, LinkNode, AutoLinkNode,
-    TableCellNode, TableNode, TableRowNode, LinkPreviewNode, YoutubePreviewNode, TwitterPreviewNode];
+    TableCellNode, TableNode, TableRowNode, LinkPreviewNode, YoutubePreviewNode, TwitterPreviewNode, ImageNode];
 
 
 
