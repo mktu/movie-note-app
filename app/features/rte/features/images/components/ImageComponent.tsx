@@ -1,0 +1,43 @@
+import type { FC } from 'react';
+import { useState } from 'react'
+import useResizable from '~/features/rte/hooks/useResizable';
+
+type Props = {
+    altText: string;
+    height: 'inherit' | number;
+    src: string;
+    width: 'inherit' | number;
+}
+
+const ImageComponent: FC<Props> = ({
+    src,
+    width,
+    height,
+    altText
+}) => {
+    const [imgElement, setImgElement] = useState<HTMLImageElement>()
+    const { startDrag, resizeEvent } = useResizable({ imgElement })
+    const { isResizing } = resizeEvent || {}
+    return (
+        <span className='group relative inline-block'>
+            <span onPointerDown={(e) => { startDrag(e, 'left') }}
+                className={`absolute top-1/2 left-4 h-20 w-2 -translate-x-1/2 -translate-y-1/2 
+                cursor-w-resize rounded border border-border-main bg-text-main opacity-0 
+                transition-opacity duration-300 ${!isResizing && 'group-hover:opacity-100'}`} />
+            <img
+                ref={(elm) => {
+                    elm && setImgElement(elm)
+                }}
+                alt={altText}
+                width={width}
+                height={height}
+                src={src}
+            />
+            <span onPointerDown={(e) => { startDrag(e, 'right') }} className={`absolute top-1/2 right-4 h-20 w-2 translate-x-1/2 -translate-y-1/2 
+                cursor-e-resize rounded border border-border-main bg-text-main opacity-0 
+                transition-opacity duration-300 ${!isResizing && 'group-hover:opacity-100'}`} />
+        </span>
+    );
+};
+
+export default ImageComponent;
