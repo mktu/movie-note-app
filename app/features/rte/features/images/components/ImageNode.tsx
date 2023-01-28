@@ -13,7 +13,7 @@ import type {
 } from 'lexical';
 
 import { $applyNodeReplacement, createEditor, DecoratorNode } from 'lexical';
-import ImageComponent from './ImageComponent'
+import ImageComponent from './Container'
 
 export interface ImagePayload {
     altText: string;
@@ -195,6 +195,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
                 height={this.__height}
                 width={this.__width}
                 altText={this.__altText}
+                nodeKey={this.__key}
             />
         );
     }
