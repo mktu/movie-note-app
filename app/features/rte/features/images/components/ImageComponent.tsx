@@ -23,7 +23,7 @@ const ImageComponent: FC<Props> = ({
     const { startDrag, resizeEvent } = useResizable({ imgElement })
     const { isResizing } = resizeEvent || {}
     return (
-        <span className={`group relative inline-block ${isSelected && 'outline-focus outline'}`}>
+        <span className={`group relative inline-block ${isSelected && 'outline outline-focus'}`}>
             <span onPointerDown={(e) => { startDrag(e, 'left') }}
                 className={`absolute top-1/2 left-4 h-20 w-2 -translate-x-1/2 -translate-y-1/2 
                 cursor-w-resize rounded border border-border-main bg-text-main opacity-0 
