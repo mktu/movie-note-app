@@ -46,5 +46,7 @@
     "display-text" : "表示テキスト",
     "input-url" : "URLを入力",
     "url-validation" : "URL形式が必要です",
-    "ogp-error" : "プレビューの取得に失敗しました。エラーコード:{{code}}"
+    "ogp-error" : "プレビューの取得に失敗しました。エラーコード:{{code}}",
+    "image-size-error" : "ERROR ファイルサイズが5MBを超えています",
+    "image-upload-error" : "{{file}}のアップロードに失敗しました"
 }

@@ -1,8 +1,11 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { DRAG_DROP_PASTE } from '@lexical/rich-text';
-import { isMimeType, mediaFileReader } from '@lexical/utils';
+import { mediaFileReader } from '@lexical/utils';
 import { COMMAND_PRIORITY_LOW } from 'lexical';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import { uploadFile } from '~/features/rte/utils/fileUploader';
 import { INSERT_IMAGE_COMMAND } from '..';
 
 const ACCEPTABLE_IMAGE_TYPES = [
@@ -15,6 +18,7 @@ const ACCEPTABLE_IMAGE_TYPES = [
 
 export const useDragDropPaste = () => {
     const [editor] = useLexicalComposerContext();
+    const { t } = useTranslation('common')
     useEffect(() => {
         return editor.registerCommand(
             DRAG_DROP_PASTE,
@@ -25,26 +29,20 @@ export const useDragDropPaste = () => {
                         [ACCEPTABLE_IMAGE_TYPES].flatMap((x) => x),
                     );
                     for (const { file } of filesResult) {
-                        if (isMimeType(file, ACCEPTABLE_IMAGE_TYPES)) {
-                            const formData = new FormData();
-                            formData.append("image", file);
-
-                            const param = {
-                                method: "PUT",
-                                body: formData,
-                            }
-                            const res = await fetch("/api/notes/images", param)
-                            const json = await res.json<{ path: string }>()
-                            editor.dispatchCommand(INSERT_IMAGE_COMMAND, {
-                                altText: file.name,
-                                src: json.path,
-                            });
+                        const res = await uploadFile(file)
+                        if (!res) {
+                            toast.error(t('image-upload-error') as string)
+                            continue
                         }
+                        editor.dispatchCommand(INSERT_IMAGE_COMMAND, {
+                            altText: res.altText,
+                            src: res.src,
+                        });
                     }
                 })();
                 return true;
             },
             COMMAND_PRIORITY_LOW,
         );
-    }, [editor]);
+    }, [editor, t]);
 }

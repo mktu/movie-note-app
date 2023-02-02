@@ -14,6 +14,7 @@ import type {
 
 import { $applyNodeReplacement, createEditor, DecoratorNode } from 'lexical';
 import ImageComponent from './Container'
+import ImageLoader from './ImageLoader';
 
 export interface ImagePayload {
     altText: string;
@@ -25,6 +26,7 @@ export interface ImagePayload {
     src: string;
     width?: number;
     captionsEnabled?: boolean;
+    uploadImage?: File
 }
 
 function convertImageElement(domNode: Node): null | DOMConversionOutput {
@@ -60,6 +62,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     __showCaption: boolean;
     __caption: LexicalEditor;
     __captionsEnabled: boolean;
+    __uploadImage?: File;
 
     static getType(): string {
         return 'image';
@@ -76,6 +79,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
             node.__caption,
             node.__captionsEnabled,
             node.__key,
+            node.__uploadImage,
         );
     }
 
@@ -124,6 +128,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         caption?: LexicalEditor,
         captionsEnabled?: boolean,
         key?: NodeKey,
+        uploadImage?: File
     ) {
         super(key);
         this.__src = src;
@@ -134,6 +139,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
         this.__showCaption = showCaption || false;
         this.__caption = caption || createEditor();
         this.__captionsEnabled = captionsEnabled || captionsEnabled === undefined;
+        this.__uploadImage = uploadImage;
     }
 
     exportJSON(): SerializedImageNode {
@@ -189,6 +195,9 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     }
 
     decorate(): JSX.Element {
+        if (this.__uploadImage) {
+            return <ImageLoader file={this.__uploadImage} nodeKey={this.__key} />
+        }
         return (
             <ImageComponent
                 src={this.__src}
@@ -211,6 +220,7 @@ export function $createImageNode({
     showCaption,
     caption,
     key,
+    uploadImage,
 }: ImagePayload): ImageNode {
     return $applyNodeReplacement(
         new ImageNode(
@@ -223,6 +233,7 @@ export function $createImageNode({
             caption,
             captionsEnabled,
             key,
+            uploadImage
         ),
     );
 }

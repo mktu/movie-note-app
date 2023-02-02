@@ -25,7 +25,7 @@ const Italic: FC<Props> = ({
     useNodeUpdateListener(listener)
     const { updateRange } = useRangeUpdater()
     return (
-        <IconButton name={type} className='hover:bg-surface-hover p-1' onClick={() => {
+        <IconButton name={type} className='p-1 hover:bg-surface-hover' onClick={() => {
             updateRange((_, editor) => {
                 editor.dispatchCommand(FORMAT_TEXT_COMMAND, type);
             })

@@ -46,7 +46,7 @@ const LinkInserter: FC = () => {
                         }
                     })
                 }}>
-                <InsertLink className={`h-4 w-4
+                <InsertLink className={`h-5 w-5
                 ${!valid ? 'fill-text-disabled' : url !== '' ? 'fill-text-main' : 'fill-text-label'}`} />
             </IconButton>
             {showEditor && (
