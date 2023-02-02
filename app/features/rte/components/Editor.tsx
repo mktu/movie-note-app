@@ -12,6 +12,7 @@ import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPl
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 
+import { DragDropPastePlugin, ImagesPlugin } from '../features/images';
 import { AutoLinkPlugin, FloatingLinkMenu } from '../features/link';
 import useEditorState from '../hooks/useEditorState';
 import { useEditorElement } from '../store/editor';
@@ -19,7 +20,6 @@ import { validateUrl } from '../utils/validateUrl';
 import initialConfig from './initialConfig';
 import { transformers } from './nodes';
 import Toolbar from './Toolbar';
-import { DragDropPastePlugin } from '../features/images/components';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
@@ -61,6 +61,7 @@ const Editor: FC<Props> = ({
                 <ListPlugin />
                 <AutoLinkPlugin />
                 <DragDropPastePlugin />
+                <ImagesPlugin />
                 <CheckListPlugin />
                 <OnChangePlugin onChange={(editorState) => {
                     editorStateRef.current = editorState
