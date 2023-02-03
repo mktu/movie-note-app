@@ -3,7 +3,7 @@ import { ContainedButton, TextButton } from '~/components/buttons';
 import { TextInput } from '~/components/inputs';
 
 import type { FC } from 'react';
-import useLinkInserter from '~/features/rte/features/link/hooks/useLinkInserter';
+import useLinkInserter from '../../hooks/useLinkInserter';
 import { useTranslation } from 'react-i18next';
 import Unlink from './Unlink';
 

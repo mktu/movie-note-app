@@ -1,3 +1,2 @@
-export { default } from './YoutubePreview'
-export * from './YoutubePreview'
-export * from './YoutubePreviewNode'
+export { default, YoutubePreviewConfig } from './YoutubePreview'
+export { YoutubePreviewNode } from './YoutubePreviewNode'
