@@ -1,3 +1,2 @@
-export { default } from './SimpleLinkPreview'
-export * from './SimpleLinkPreview'
-export * from './LinkPreviewNode'
+export { default, SimpleLinkPreviewConfig } from './SimpleLinkPreview'
+export { LinkPreviewNode } from './LinkPreviewNode'

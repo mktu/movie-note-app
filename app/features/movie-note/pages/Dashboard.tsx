@@ -12,7 +12,7 @@ const Dashboard: FC<Porps> = ({
     trends
 }) => {
     return (
-        <main className='p-6 flex flex-col gap-6'>
+        <main className='flex flex-col gap-6 p-6'>
             <section>
                 <DashboardSearchbar />
             </section>

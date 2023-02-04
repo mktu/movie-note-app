@@ -13,7 +13,7 @@ import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 
 import { DragDropPastePlugin, ImagesPlugin } from '../features/images';
-import { AutoLinkPlugin, FloatingLinkMenu } from '../features/link';
+import LinkPlugins from '../features/link';
 import useEditorState from '../hooks/useEditorState';
 import { useEditorElement } from '../store/editor';
 import { validateUrl } from '../utils/validateUrl';
@@ -54,12 +54,11 @@ const Editor: FC<Props> = ({
                         placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
                     />
                 </div>
-                <FloatingLinkMenu />
+                <LinkPlugins />
                 <HistoryPlugin />
                 <MarkdownShortcutPlugin transformers={transformers} />
                 <LexicalLinkPlugin validateUrl={validateUrl} />
                 <ListPlugin />
-                <AutoLinkPlugin />
                 <DragDropPastePlugin />
                 <ImagesPlugin />
                 <CheckListPlugin />
