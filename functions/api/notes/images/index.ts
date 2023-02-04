@@ -5,6 +5,7 @@ export const onRequestPut: PagesFunction<{
     MovieNoteImage: R2Bucket
 }> = async ({ env, request }) => {
     const file = (await request.formData()).get('image') as Blob
+    console.log(file)
     const uuid = uuidv4()
     const image = await env.MovieNoteImage.put(uuid, file, {
         httpMetadata: {
