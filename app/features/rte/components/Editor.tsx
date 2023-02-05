@@ -15,7 +15,6 @@ import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { DragDropPastePlugin, ImagesPlugin } from '../features/images';
 import LinkPlugins from '../features/link';
 import useEditorState from '../hooks/useEditorState';
-import { useEditorElement } from '../store/editor';
 import { validateUrl } from '../utils/validateUrl';
 import initialConfig from './initialConfig';
 import { transformers } from './nodes';
@@ -34,7 +33,6 @@ const Editor: FC<Props> = ({
 }) => {
     const { t } = useTranslation('common')
     const { editorStateRef } = useEditorState(setContentGetter, monitorCurrentState)
-    const { setEditorElement } = useEditorElement()
     return (
         <div >
             <LexicalComposer initialConfig={{
@@ -45,9 +43,7 @@ const Editor: FC<Props> = ({
                 <div className='relative'>
                     <RichTextPlugin
                         ErrorBoundary={LexicalErrorBoundary}
-                        contentEditable={<div ref={(e) => {
-                            e && setEditorElement(e)
-                        }}>
+                        contentEditable={<div>
                             <ContentEditable
                                 className='text-text-main outline-none' />
                         </div>}
