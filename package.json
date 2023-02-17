@@ -19,7 +19,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@headlessui/react": "1.7.10",
+    "@headlessui/react": "1.7.11",
     "@lexical/react": "0.7.6",
     "@microlink/mql": "0.10.32",
     "@popperjs/core": "2.11.6",
