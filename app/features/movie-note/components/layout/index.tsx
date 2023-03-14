@@ -21,7 +21,7 @@ const Layout: FC<Props> = ({
     review
 }) => {
     return (
-        <div className='w-full p-5'>
+        <div className='w-full py-5 px-10'>
             {header}
             <Transition
                 className='flex w-full flex-col gap-2'
@@ -44,7 +44,7 @@ const Layout: FC<Props> = ({
                     {review}
                 </div>
                 <div className='rounded-lg border border-dashed border-border-dark p-6'>
-                    <div className='min-h-[256px]'>
+                    <div className='min-h-[512px]'>
                         {note}
                     </div>
                 </div>
