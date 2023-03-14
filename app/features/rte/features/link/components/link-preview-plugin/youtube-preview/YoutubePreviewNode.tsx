@@ -38,10 +38,6 @@ export class YoutubePreviewNode extends DecoratorBlockNode {
         return this.__url
     }
 
-    getLinkKey(): NodeKey {
-        return this.__link_key
-    }
-
     createDOM(): HTMLElement {
         return document.createElement('div');
     }

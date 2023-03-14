@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useState } from 'react'
-import useResizable from '~/features/rte/hooks/useResizable';
+import useResizable from '~/features/rte/features/images/hooks/useResizable';
 
 type Props = {
     altText: string;
