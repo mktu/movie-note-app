@@ -11,8 +11,8 @@ const LabeledInput = forwardRef<HTMLInputElement, Props>(({ id = 'text-input', p
     return (
         <div className='relative'>
             <label className={clsx(
-                'absolute pointer-events-none block origin-top-left transition-transform',
-                !focus && 'translate-x-4 translate-y-[-50%] scale-100 text-text-placeholder top-[50%]',
+                'pointer-events-none absolute block origin-top-left transition-transform',
+                !focus && 'top-[50%] translate-x-4 translate-y-[-50%] scale-100 text-text-placeholder',
                 focus && 'translate-x-4 translate-y-[-10px] scale-75 bg-white px-2 text-text-label',
                 hasValue && !focus && 'invisible bg-red-50'
             )} htmlFor={id}>{placeholder}</label>
