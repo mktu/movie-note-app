@@ -21,7 +21,7 @@ const Layout: FC<Props> = ({
     review
 }) => {
     return (
-        <div className='w-full py-5 px-10'>
+        <div className='relative w-full py-5 px-10'>
             {header}
             <Transition
                 className='flex w-full flex-col gap-2'
