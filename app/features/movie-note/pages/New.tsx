@@ -49,7 +49,7 @@ const New: FC<Props> = ({
             resetCredit()
         }
     }
-    const { unblock, setDirty } = useMovieNoteChangeMonitor()
+    const { unblock, setDirty, checkDirty } = useMovieNoteChangeMonitor()
     const detail = apiDetail || initDetail || null
     const credits = apiCredits || initCredits || null
     return (
@@ -80,7 +80,9 @@ const New: FC<Props> = ({
             note={detail && <Note
                 setContentGetter={setContentGetter}
                 monitorCurrentState={(state) => {
-                    setDirty(Boolean(state))
+                    setDirty(before => {
+                        return before || checkDirty(state)
+                    })
                 }} />}
             review={detail && <Review admirationDate={admirationDate} stars={stars} setAdmirationDate={setAdmirationDate} setStars={setStars} />}
         />

@@ -75,7 +75,7 @@ const deleteNote = async (supabaseAdmin: AdminClientType, tmdbId: string, userId
 
 const listMovieNote = async (supabaseAdmin: AdminClientType, userId: string) => {
     const { data, error } = await supabaseAdmin.from('movie_note_list_view')
-        .select('tmdb_id,user_id,stars,title,admiration_date,thumbnail').eq('user_id', userId)
+        .select('tmdb_id,user_id,stars,title,admiration_date,thumbnail').eq('user_id', userId).order('updated_at', { ascending: false })
     if (error || !data) {
         return []
     }

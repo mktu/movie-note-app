@@ -40,7 +40,7 @@ const Edit: FC<Props> = ({
     const detail = tmdbDetail
     const credits = tmdbCredits || null
     const { setStars, setAdmirationDate, stars, formattedWatchDate, admirationDate } = useReview(movieNoteDetail?.stars, movieNoteDetail?.admiration_date)
-    const { unblock, setDirty } = useMovieNoteChangeMonitor()
+    const { unblock, setDirty, checkDirty } = useMovieNoteChangeMonitor()
     return (
         <Layout
             header={<EditHeader
@@ -72,7 +72,9 @@ const Edit: FC<Props> = ({
                     if (movieNoteDetail?.memo) {
                         setDirty(state !== movieNoteDetail?.memo)
                     } else {
-                        setDirty(Boolean(state))
+                        setDirty(before => {
+                            return before || checkDirty(state)
+                        })
                     }
                 }}
             />}
