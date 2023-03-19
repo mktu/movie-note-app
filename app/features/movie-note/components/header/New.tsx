@@ -1,13 +1,15 @@
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ContainedButton } from '~/components/buttons';
+import { OutlinedButton } from '~/components/buttons';
 
 import Search, { Reselect } from '../search-title';
 import Error from './Error';
 import useFloatingHeader from './useFloatingHeader';
 
 import type { ComponentProps } from 'react'
+import Eye from '~/components/icons/Eye';
+import Check from '~/components/icons/Check';
 
 type Props = {
     onClickSave: () => void,
@@ -48,7 +50,14 @@ const New = forwardRef<HTMLDivElement, Props>(({
                         <Search {...{ selected, setSelected }} />
                     )}
                 </div>
-                <ContainedButton disabled={!canSave} className='ml-auto' onClick={onClickSave}>{t('save')}</ContainedButton>
+                <OutlinedButton disabled={!canSave} className='ml-auto flex items-center gap-1 bg-surface-main' onClick={onClickSave}>
+                    <Eye className='h-5 w-5 fill-text-main' />
+                    見たい
+                </OutlinedButton>
+                <OutlinedButton disabled={!canSave} className='flex items-center gap-1 bg-surface-main' onClick={onClickSave}>
+                    <Check className='h-5 w-5 fill-text-main' />
+                    見た
+                </OutlinedButton>
             </div>
             <div ref={inViewRef} />
             {error && (
