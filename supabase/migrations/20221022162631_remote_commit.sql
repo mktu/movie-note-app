@@ -79,7 +79,7 @@ end;
 $$;
 
 
-ALTER FUNCTION "public"."add_user"("id" "uuid", "name" "text") OWNER TO "supabase_admin";
+ALTER FUNCTION "public"."add_user"("id" "uuid", "name" "text") OWNER TO "postgres";
 
 --
 -- Name: add_user("uuid", "text", "text"); Type: FUNCTION; Schema: public; Owner: supabase_admin
@@ -102,7 +102,7 @@ end;
 $$;
 
 
-ALTER FUNCTION "public"."add_user"("id" "uuid", "name" "text", "auth_id" "text") OWNER TO "supabase_admin";
+ALTER FUNCTION "public"."add_user"("id" "uuid", "name" "text", "auth_id" "text") OWNER TO "postgres";
 
 --
 -- Name: add_user("uuid", "text", "text", "text"); Type: FUNCTION; Schema: public; Owner: supabase_admin
@@ -125,7 +125,7 @@ end;
 $$;
 
 
-ALTER FUNCTION "public"."add_user"("id" "uuid", "name" "text", "auth_id" "text", "comment" "text") OWNER TO "supabase_admin";
+ALTER FUNCTION "public"."add_user"("id" "uuid", "name" "text", "auth_id" "text", "comment" "text") OWNER TO "postgres";
 
 --
 -- Name: is_user_exists("text"); Type: FUNCTION; Schema: public; Owner: supabase_admin
@@ -144,7 +144,7 @@ end;
 $$;
 
 
-ALTER FUNCTION "public"."is_user_exists"("target_email" "text") OWNER TO "supabase_admin";
+ALTER FUNCTION "public"."is_user_exists"("target_email" "text") OWNER TO "postgres";
 
 --
 -- Name: pgrst_watch(); Type: FUNCTION; Schema: public; Owner: supabase_admin
@@ -159,7 +159,7 @@ END;
 $$;
 
 
-ALTER FUNCTION "public"."pgrst_watch"() OWNER TO "supabase_admin";
+ALTER FUNCTION "public"."pgrst_watch"() OWNER TO "postgres";
 
 --
 -- Name: remove_users("text"); Type: FUNCTION; Schema: public; Owner: supabase_admin
@@ -181,7 +181,7 @@ end;
 $$;
 
 
-ALTER FUNCTION "public"."remove_users"("target_email" "text") OWNER TO "supabase_admin";
+ALTER FUNCTION "public"."remove_users"("target_email" "text") OWNER TO "postgres";
 
 --
 -- Name: update_user("text", "text", "text"); Type: FUNCTION; Schema: public; Owner: supabase_admin
@@ -200,7 +200,7 @@ end;
 $$;
 
 
-ALTER FUNCTION "public"."update_user"("auth_id" "text", "name" "text", "comment" "text") OWNER TO "supabase_admin";
+ALTER FUNCTION "public"."update_user"("auth_id" "text", "name" "text", "comment" "text") OWNER TO "postgres";
 
 --
 -- Name: update_user("text", "text", "text", "text"); Type: FUNCTION; Schema: public; Owner: supabase_admin
@@ -220,7 +220,7 @@ end;
 $$;
 
 
-ALTER FUNCTION "public"."update_user"("auth_id" "text", "name" "text", "comment" "text", "image" "text") OWNER TO "supabase_admin";
+ALTER FUNCTION "public"."update_user"("auth_id" "text", "name" "text", "comment" "text", "image" "text") OWNER TO "postgres";
 
 SET default_tablespace = '';
 
@@ -237,7 +237,7 @@ CREATE TABLE "public"."auth" (
 );
 
 
-ALTER TABLE "public"."auth" OWNER TO "supabase_admin";
+ALTER TABLE "public"."auth" OWNER TO "postgres";
 
 --
 -- Name: movie_info; Type: TABLE; Schema: public; Owner: supabase_admin
@@ -253,7 +253,7 @@ CREATE TABLE "public"."movie_info" (
 );
 
 
-ALTER TABLE "public"."movie_info" OWNER TO "supabase_admin";
+ALTER TABLE "public"."movie_info" OWNER TO "postgres";
 
 --
 -- Name: movie_note; Type: TABLE; Schema: public; Owner: supabase_admin
@@ -271,7 +271,7 @@ CREATE TABLE "public"."movie_note" (
 );
 
 
-ALTER TABLE "public"."movie_note" OWNER TO "supabase_admin";
+ALTER TABLE "public"."movie_note" OWNER TO "postgres";
 
 --
 -- Name: movie_note_list_view; Type: VIEW; Schema: public; Owner: supabase_admin
@@ -293,7 +293,7 @@ CREATE VIEW "public"."movie_note_list_view" AS
      JOIN "public"."movie_info" "mi" ON ((("mn"."tmdb_id" = "mi"."tmdb_id") AND ("mn"."lng" = "mi"."lng"))));
 
 
-ALTER TABLE "public"."movie_note_list_view" OWNER TO "supabase_admin";
+ALTER TABLE "public"."movie_note_list_view" OWNER TO "postgres";
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: supabase_admin
@@ -308,7 +308,7 @@ CREATE TABLE "public"."users" (
 );
 
 
-ALTER TABLE "public"."users" OWNER TO "supabase_admin";
+ALTER TABLE "public"."users" OWNER TO "postgres";
 
 --
 -- Name: users_view; Type: VIEW; Schema: public; Owner: supabase_admin
@@ -325,7 +325,7 @@ CREATE VIEW "public"."users_view" AS
      LEFT JOIN "public"."auth" "a" ON (("u"."id" = "a"."user_id")));
 
 
-ALTER TABLE "public"."users_view" OWNER TO "supabase_admin";
+ALTER TABLE "public"."users_view" OWNER TO "postgres";
 
 --
 -- Name: auth auth_pkey; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
