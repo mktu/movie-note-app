@@ -25,7 +25,8 @@ const registerMovieNote = async (supabaseAdmin: AdminClientType, movieNote: AddM
         user_id: userId,
         admiration_date: movieNote.admirationDate || null,
         stars: movieNote.stars,
-        lng: movieNote.lng
+        lng: movieNote.lng,
+        watch_state: movieNote.watchState
     })
     if (noteError) {
         console.error(noteError)
@@ -51,6 +52,7 @@ const updateMovieNote = async (supabaseAdmin: AdminClientType, movieNote: AddMov
         user_id: userId,
         admiration_date: movieNote.admirationDate || null,
         stars: movieNote.stars,
+        watch_state: movieNote.watchState || null
 
     }).match({
         tmdb_id: movieNote.tmdbId,

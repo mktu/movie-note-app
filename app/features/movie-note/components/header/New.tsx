@@ -10,9 +10,10 @@ import useFloatingHeader from './useFloatingHeader';
 import type { ComponentProps } from 'react'
 import Eye from '~/components/icons/Eye';
 import Check from '~/components/icons/Check';
+import type { WatchState } from '@type-defs/frontend';
 
 type Props = {
-    onClickSave: () => void,
+    onClickSave: (state: WatchState) => void,
     className?: string,
     canSave?: boolean
     error?: string,
@@ -50,11 +51,11 @@ const New = forwardRef<HTMLDivElement, Props>(({
                         <Search {...{ selected, setSelected }} />
                     )}
                 </div>
-                <OutlinedButton disabled={!canSave} className='ml-auto flex items-center gap-1 bg-surface-main' onClick={onClickSave}>
+                <OutlinedButton disabled={!canSave} className='ml-auto flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave('lookforward') }}>
                     <Eye className='h-5 w-5 fill-text-main' />
                     見たい
                 </OutlinedButton>
-                <OutlinedButton disabled={!canSave} className='flex items-center gap-1 bg-surface-main' onClick={onClickSave}>
+                <OutlinedButton disabled={!canSave} className='flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave('watched') }}>
                     <Check className='h-5 w-5 fill-text-main' />
                     見た
                 </OutlinedButton>
