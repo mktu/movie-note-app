@@ -8,7 +8,7 @@ import Error from './Error';
 import useFloatingHeader from './useFloatingHeader';
 
 import type { ComponentProps } from 'react'
-import Eye from '~/components/icons/Eye';
+import Stars from '~/components/icons/Stars';
 import Check from '~/components/icons/Check';
 import type { WatchState } from '@type-defs/frontend';
 
@@ -51,13 +51,15 @@ const New = forwardRef<HTMLDivElement, Props>(({
                         <Search {...{ selected, setSelected }} />
                     )}
                 </div>
-                <OutlinedButton disabled={!canSave} className='ml-auto flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave('lookforward') }}>
-                    <Eye className='h-5 w-5 fill-text-main' />
-                    見たい
+                <OutlinedButton border='border-2 border-yellow-500 group-hover:border-yellow-600' disabled={!canSave} className='group ml-auto flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave('lookforward') }}>
+                    <Stars className='h-5 w-5 fill-yellow-500 group-hover:fill-yellow-600' />
+                    <span className='text-yellow-500 group-hover:text-yellow-600'>{t('lookforward')}</span>
                 </OutlinedButton>
-                <OutlinedButton disabled={!canSave} className='flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave('watched') }}>
-                    <Check className='h-5 w-5 fill-text-main' />
-                    見た
+                <OutlinedButton border='border-2 border-green-500 group-hover:border-green-600' disabled={!canSave} className='group flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave('watched') }}>
+                    <Check className='h-5 w-5 fill-green-500 group-hover:fill-green-600' />
+                    <span className='text-green-500 group-hover:text-green-600'>
+                        {t('watched')}
+                    </span>
                 </OutlinedButton>
             </div>
             <div ref={inViewRef} />

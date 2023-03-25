@@ -45,7 +45,7 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                         <Stars className={clsx('h-5 w-5 group-hover:fill-yellow-500',
                             watchState === 'lookforward' ? 'fill-yellow-500' : 'fill-text-disabled')} />
                         <span className={clsx('whitespace-nowrap group-hover:text-yellow-500',
-                            watchState === 'lookforward' ? 'text-yellow-500' : 'text-text-disabled')}>見たい</span>
+                            watchState === 'lookforward' ? 'text-yellow-500' : 'text-text-disabled')}>{t('lookforward')}</span>
                     </TextButton>
                     <TextButton className='group flex items-center gap-1' onClick={() => { setWatchState('watched') }}>
                         <Check className={clsx('h-5 w-5 group-hover:fill-green-500',
@@ -53,7 +53,7 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                         )} />
                         <span className={clsx('whitespace-nowrap group-hover:text-green-500',
                             watchState === 'watched' ? 'text-green-500' : 'text-text-disabled')}>
-                            見た
+                            {t('watched')}
                         </span>
                     </TextButton>
                 </div>
