@@ -50,5 +50,9 @@
     "image-size-error" : "ERROR ファイルサイズが5MBを超えています",
     "image-upload-error" : "{{file}}のアップロードに失敗しました",
     "watched" : "見た",
-    "lookforward" : "見たい"
+    "lookforward" : "見たい",
+    "all": "全て",
+    "created-at-desc": "作成が新しい順",
+    "created-at-asc": "作成が古い順",
+    "updated-at-desc": "更新が新しい順（初期値）"
 }
