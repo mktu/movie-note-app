@@ -1,5 +1,5 @@
 import type { AdminClientType } from '@utils/supabaseAdmin.server'
-import type { AddMovieNote } from '../types'
+import type { AddMovieNote, SortType } from '../types'
 import { fromCode } from '../../utils/error';
 import type { UnboxReturnedPromise } from '~/types/utils';
 
@@ -75,9 +75,11 @@ const deleteNote = async (supabaseAdmin: AdminClientType, tmdbId: string, userId
     }
 }
 
-const listMovieNote = async (supabaseAdmin: AdminClientType, userId: string) => {
+const listMovieNote = async (supabaseAdmin: AdminClientType, userId: string, sortType?: SortType) => {
+    const sortBy = sortType?.includes('updated-at') ? 'created_at' : 'updated_at'
+    const asc = sortType?.includes('asc') ? true : false
     const { data, error } = await supabaseAdmin.from('movie_note_list_view')
-        .select('tmdb_id,user_id,stars,title,admiration_date,thumbnail,watch_state').eq('user_id', userId).order('updated_at', { ascending: false })
+        .select('tmdb_id,user_id,stars,title,admiration_date,thumbnail,watch_state').eq('user_id', userId).order(sortBy, { ascending: asc })
     if (error || !data) {
         return []
     }
