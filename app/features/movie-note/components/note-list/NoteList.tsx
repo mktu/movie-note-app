@@ -1,5 +1,6 @@
 import type { FC } from "react";
-import { useMovieNoteList } from '../../hooks/useMovieNoteList';
+import { useEffect } from "react";
+import { useMovieNoteList } from '../../store/data/useMovieNoteList';
 import NoteListItem from './NoteListItem';
 import SortMenu from './SortMenu';
 
@@ -15,7 +16,10 @@ const NoteList: FC<Props> = ({
     movieNoteList: initMovieNoteList,
     onRemoveNote
 }) => {
-    const { selectSortType, selectFilterType, movieNoteList, sortType, filterType } = useMovieNoteList(initMovieNoteList)
+    const { selectSortType, selectFilterType, movieNoteList, sortType, filterType, setMovieNoteList } = useMovieNoteList()
+    useEffect(() => {
+        setMovieNoteList(initMovieNoteList)
+    }, [setMovieNoteList, initMovieNoteList])
     return (
         <div>
             <div className='flex items-center p-2'>

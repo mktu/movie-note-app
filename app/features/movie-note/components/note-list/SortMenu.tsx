@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { TextButton } from '~/components/buttons';
 import Check from '~/components/icons/Check';
 import Sort from '~/components/icons/Sort';
-import type { SortType } from '../../hooks/useMovieNoteList';
+import type { SortType } from '../../store/data/useMovieNoteList';
 
 type Props = {
     sortType?: SortType,
@@ -24,7 +24,7 @@ const SortMenu: FC<Props> = ({ onSort, sortType }) => {
     return (
         <Menu as='div'>
             <Menu.Button>
-                <Sort className={clsx('h-5 w-5 hover:fill-text-main', sortType && sortType !== 'updated-at-desc' ? 'fill-text-main' : 'fill-text-label')} />
+                <Sort className={clsx('h-5 w-5 fill-text-label hover:fill-text-main')} />
             </Menu.Button>
             <Menu.Items className={'absolute z-20 mt-2 w-[256px] rounded border border-border-dark bg-white py-2 text-sm'}>
                 {Object.keys(targets).map(v => (
