@@ -87,6 +87,26 @@ export interface Database {
           watch_state?: string | null
         }
       }
+      user_settings: {
+        Row: {
+          created_at: string | null
+          key: string | null
+          user_id: string
+          value: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          key?: string | null
+          user_id: string
+          value?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          key?: string | null
+          user_id?: string
+          value?: string | null
+        }
+      }
       users: {
         Row: {
           comment: string | null

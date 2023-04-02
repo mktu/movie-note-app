@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { TextButton } from '~/components/buttons';
 import Check from '~/components/icons/Check';
 import Filter from '~/components/icons/Filter';
-import type { FilterType } from '../../store/data/useMovieNoteList';
+import type { FilterType } from '../../type-defs';
 
 type Props = {
     filterType?: FilterType,

@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useEffect } from "react";
-import { useMovieNoteList } from '../../store/data/useMovieNoteList';
+import { useMovieNoteList } from '../../store/data/movieNoteList';
 import NoteListItem from './NoteListItem';
 import SortMenu from './SortMenu';
 
@@ -16,7 +16,7 @@ const NoteList: FC<Props> = ({
     movieNoteList: initMovieNoteList,
     onRemoveNote
 }) => {
-    const { selectSortType, selectFilterType, movieNoteList, sortType, filterType, setMovieNoteList } = useMovieNoteList()
+    const { updateSortType, updateFilterType, movieNoteList, sortType, filterType, setMovieNoteList } = useMovieNoteList()
     useEffect(() => {
         setMovieNoteList(initMovieNoteList)
     }, [setMovieNoteList, initMovieNoteList])
@@ -25,8 +25,8 @@ const NoteList: FC<Props> = ({
             <div className='flex items-center p-2'>
                 <div className='text-text-main'>Notes</div>
                 <div className='ml-auto flex items-center gap-3'>
-                    <FilterMenu onFilter={selectFilterType} filterType={filterType} />
-                    <SortMenu onSort={selectSortType} sortType={sortType} />
+                    <FilterMenu onFilter={updateFilterType} filterType={filterType} />
+                    <SortMenu onSort={updateSortType} sortType={sortType} />
                 </div>
             </div>
             <div className='flex flex-col gap-1 p-2'>{movieNoteList.map(v => (

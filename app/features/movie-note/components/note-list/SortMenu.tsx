@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { TextButton } from '~/components/buttons';
 import Check from '~/components/icons/Check';
 import Sort from '~/components/icons/Sort';
-import type { SortType } from '../../store/data/useMovieNoteList';
+import type { SortType } from '../../type-defs';
 
 type Props = {
     sortType?: SortType,
