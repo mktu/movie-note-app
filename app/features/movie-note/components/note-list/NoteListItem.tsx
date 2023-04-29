@@ -1,17 +1,19 @@
 import type { FC } from 'react';
 import { useContext, useState } from 'react';
-import Star from '~/components/icons/Star';
+import { useTranslation } from 'react-i18next';
+import Check from '~/components/icons/Check';
+import Stars from '~/components/icons/Stars';
+import Image from '~/components/Image';
 import NavigatorContext from '~/providers/navigator/Context';
 
 import { TmdbmageBasePath } from '@utils/constants';
 
 import { useMovieNoteKvDisabled } from '../../store/localstorage/movieNoteKvDisabled';
-import Image from '~/components/Image'
 import NoteListMenu from './NoteListMenu';
 import RemoveNoteDialog from './RemoveNoteDialog';
 
 import type { MovieListItemType } from '../../server/db';
-
+import type { WatchState } from '@type-defs/frontend';
 const imageBasePath = `${TmdbmageBasePath}/w200`
 
 type Props = {
@@ -27,7 +29,9 @@ const NoteListItem: FC<Props> = ({
     const path = movieNoteListViewItem.thumbnail ? `${imageBasePath}${movieNoteListViewItem.thumbnail}` : undefined
     const [deleting, setDeleting] = useState(false)
     const { isMovieNoteKvDisabled } = useMovieNoteKvDisabled()
+    const { t } = useTranslation('common')
     const to = isMovieNoteKvDisabled ? `/app/notes/${movieNoteListViewItem.tmdb_id}?disableKv=true` : `/app/notes/${movieNoteListViewItem.tmdb_id}`
+    const watchedState = movieNoteListViewItem.watch_state as WatchState
     return (
         <>
             {deleting && (<RemoveNoteDialog title={movieNoteListViewItem.title || ''} onClose={() => {
@@ -43,14 +47,23 @@ const NoteListItem: FC<Props> = ({
                         <div className='ml-2 block w-full overflow-hidden'>
                             <div className='overflow-hidden text-ellipsis whitespace-nowrap text-sm'>{movieNoteListViewItem.title}</div>
                             <div className='flex w-full items-center text-xs'>
-                                {(movieNoteListViewItem.stars || 0) > 0 && (
-                                    <>
-                                        <Star className={`h-4 w-4 ${movieNoteListViewItem.stars ? 'fill-yellow-300' : 'fill-gray-200'}`} />
-                                        {movieNoteListViewItem.stars}
-                                        <div className='mx-1' />
-                                    </>
-                                )}
-                                <div>{movieNoteListViewItem.admiration_date || '--'}</div>
+                                <div className='flex items-center gap-2'>
+                                    {watchedState === 'watched' ? (
+                                        <>
+                                            <Check className='h-5 w-5 fill-green-500' />
+                                            <span className='text-green-600'>{t('watched')}</span>
+                                        </>
+                                    ) : watchedState === 'lookforward' ? (
+                                        <>
+                                            <Stars className='h-5 w-5 fill-yellow-500' />
+                                            <span className='text-yellow-600'>{t('lookforward')}</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            ---
+                                        </>
+                                    )}
+                                </div>
                             </div>
                         </div>
 

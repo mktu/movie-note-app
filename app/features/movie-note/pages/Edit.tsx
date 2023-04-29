@@ -11,7 +11,7 @@ import { useReview } from '../hooks/useMovie';
 import { useMovieNoteChangeMonitor } from '../hooks/useMovieNoteChangeMonitor';
 
 import type { FC } from "react";
-import type { UpdateMovieNote } from "@type-defs/frontend";
+import type { UpdateMovieNote, WatchState } from "@type-defs/frontend";
 import type { Credits, TmdbDetail } from '../utils/tmdb';
 import type { ImdbRate } from '../features/imdb/types';
 import type { MovieNoteType } from '../server/db';
@@ -46,8 +46,9 @@ const Edit: FC<Props> = ({
             header={<EditHeader
                 error={error}
                 title={movieNoteDetail?.title || ''}
+                watchState={movieNoteDetail?.watch_state as WatchState}
                 canSave={Boolean(detail)}
-                onClickSave={() => {
+                onClickSave={(watchState) => {
                     unblock()
                     detail && onSubmit({
                         title: detail.title,
@@ -57,7 +58,8 @@ const Edit: FC<Props> = ({
                         movieMemo: content ? content.get() : '',
                         admirationDate: formattedWatchDate || '',
                         stars,
-                        lng: detail.lng
+                        lng: detail.lng,
+                        watchState
                     })
                 }} />}
             movieInfo={detail && {

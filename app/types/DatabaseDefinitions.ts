@@ -11,155 +11,199 @@ export interface Database {
     Tables: {
       auth: {
         Row: {
+          created_at: string | null
           id: string
           user_id: string
-          created_at: string | null
         }
         Insert: {
+          created_at?: string | null
           id: string
           user_id: string
-          created_at?: string | null
         }
         Update: {
+          created_at?: string | null
           id?: string
           user_id?: string
-          created_at?: string | null
         }
       }
       movie_info: {
         Row: {
+          created_at: string | null
+          imdb_id: string | null
+          lng: string
+          thumbnail: string | null
           title: string | null
           tmdb_id: string
-          thumbnail: string | null
-          lng: string
-          imdb_id: string | null
-          created_at: string | null
         }
         Insert: {
+          created_at?: string | null
+          imdb_id?: string | null
+          lng: string
+          thumbnail?: string | null
           title?: string | null
           tmdb_id: string
-          thumbnail?: string | null
-          lng: string
-          imdb_id?: string | null
-          created_at?: string | null
         }
         Update: {
+          created_at?: string | null
+          imdb_id?: string | null
+          lng?: string
+          thumbnail?: string | null
           title?: string | null
           tmdb_id?: string
-          thumbnail?: string | null
-          lng?: string
-          imdb_id?: string | null
-          created_at?: string | null
         }
       }
       movie_note: {
         Row: {
-          tmdb_id: string
-          user_id: string
+          admiration_date: string | null
+          created_at: string | null
+          lng: string
           memo: string | null
           stars: number | null
-          admiration_date: string | null
-          lng: string
-          created_at: string | null
+          tmdb_id: string
           updated_at: string | null
+          user_id: string
+          watch_state: string | null
         }
         Insert: {
-          tmdb_id: string
-          user_id: string
+          admiration_date?: string | null
+          created_at?: string | null
+          lng: string
           memo?: string | null
           stars?: number | null
-          admiration_date?: string | null
-          lng: string
-          created_at?: string | null
+          tmdb_id: string
           updated_at?: string | null
+          user_id: string
+          watch_state?: string | null
         }
         Update: {
-          tmdb_id?: string
-          user_id?: string
+          admiration_date?: string | null
+          created_at?: string | null
+          lng?: string
           memo?: string | null
           stars?: number | null
-          admiration_date?: string | null
-          lng?: string
-          created_at?: string | null
+          tmdb_id?: string
           updated_at?: string | null
+          user_id?: string
+          watch_state?: string | null
+        }
+      }
+      user_settings: {
+        Row: {
+          created_at: string | null
+          key: string | null
+          user_id: string
+          value: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          key?: string | null
+          user_id: string
+          value?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          key?: string | null
+          user_id?: string
+          value?: string | null
         }
       }
       users: {
         Row: {
-          id: string
-          name: string | null
-          image: string | null
           comment: string | null
           created_at: string | null
+          id: string
+          image: string | null
+          name: string | null
         }
         Insert: {
-          id: string
-          name?: string | null
-          image?: string | null
           comment?: string | null
           created_at?: string | null
+          id: string
+          image?: string | null
+          name?: string | null
         }
         Update: {
-          id?: string
-          name?: string | null
-          image?: string | null
           comment?: string | null
           created_at?: string | null
+          id?: string
+          image?: string | null
+          name?: string | null
         }
       }
     }
     Views: {
       movie_note_list_view: {
         Row: {
+          admiration_date: string | null
           created_at: string | null
-          tmdb_id: string | null
-          user_id: string | null
+          imdb_id: string | null
+          lng: string | null
           memo: string | null
           stars: number | null
-          admiration_date: string | null
-          lng: string | null
-          updated_at: string | null
-          title: string | null
           thumbnail: string | null
-          imdb_id: string | null
+          title: string | null
+          tmdb_id: string | null
+          updated_at: string | null
+          user_id: string | null
+          watch_state: string | null
         }
       }
       users_view: {
         Row: {
-          id: string | null
-          created_at: string | null
-          name: string | null
-          image: string | null
-          comment: string | null
           auth_id: string | null
+          comment: string | null
+          created_at: string | null
+          id: string | null
+          image: string | null
+          name: string | null
         }
       }
     }
     Functions: {
       add_user:
         | {
-            Args: { id: string; name: string }
+            Args: {
+              id: string
+              name: string
+            }
             Returns: number
           }
         | {
-            Args: { id: string; name: string; auth_id: string }
+            Args: {
+              id: string
+              name: string
+              auth_id: string
+            }
             Returns: number
           }
         | {
-            Args: { id: string; name: string; auth_id: string; comment: string }
+            Args: {
+              id: string
+              name: string
+              auth_id: string
+              comment: string
+            }
             Returns: number
           }
       is_user_exists: {
-        Args: { target_email: string }
+        Args: {
+          target_email: string
+        }
         Returns: boolean
       }
       remove_users: {
-        Args: { target_email: string }
+        Args: {
+          target_email: string
+        }
         Returns: undefined
       }
       update_user:
         | {
-            Args: { auth_id: string; name: string; comment: string }
+            Args: {
+              auth_id: string
+              name: string
+              comment: string
+            }
             Returns: undefined
           }
         | {
@@ -175,6 +219,8 @@ export interface Database {
     Enums: {
       [_ in never]: never
     }
+    CompositeTypes: {
+      [_ in never]: never
+    }
   }
 }
-

@@ -20,6 +20,8 @@ const schema = zfd.formData({
         .text(z.string().min(1, { message: "title-validation-error" })),
     lng: zfd
         .text(z.string().min(1, { message: "lng-validation-error" })),
+    watchState: zfd
+        .text(z.string().optional()),
 })
 
 export const updateNoteSchema = schema

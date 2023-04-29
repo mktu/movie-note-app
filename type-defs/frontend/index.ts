@@ -1,3 +1,4 @@
+export type WatchState = 'watched' | 'lookforward'
 export type AddMovieNote = {
     tmdbId: string,
     stars: number,
@@ -6,7 +7,8 @@ export type AddMovieNote = {
     movieMemo: string,
     thumbnail: string,
     imdbId?: string,
-    admirationDate: string
+    admirationDate: string,
+    watchState?: WatchState
 }
 
 export type UpdateMovieNote = AddMovieNote

@@ -1,16 +1,19 @@
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ContainedButton } from '~/components/buttons';
+import { OutlinedButton } from '~/components/buttons';
 
 import Search, { Reselect } from '../search-title';
 import Error from './Error';
 import useFloatingHeader from './useFloatingHeader';
 
 import type { ComponentProps } from 'react'
+import Stars from '~/components/icons/Stars';
+import Check from '~/components/icons/Check';
+import type { WatchState } from '@type-defs/frontend';
 
 type Props = {
-    onClickSave: () => void,
+    onClickSave: (state: WatchState) => void,
     className?: string,
     canSave?: boolean
     error?: string,
@@ -48,7 +51,16 @@ const New = forwardRef<HTMLDivElement, Props>(({
                         <Search {...{ selected, setSelected }} />
                     )}
                 </div>
-                <ContainedButton disabled={!canSave} className='ml-auto' onClick={onClickSave}>{t('save')}</ContainedButton>
+                <OutlinedButton border='border-2 border-yellow-500 group-hover:border-yellow-600' disabled={!canSave} className='group ml-auto flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave('lookforward') }}>
+                    <Stars className='h-5 w-5 fill-yellow-500 group-hover:fill-yellow-600' />
+                    <span className='text-yellow-500 group-hover:text-yellow-600'>{t('lookforward')}</span>
+                </OutlinedButton>
+                <OutlinedButton border='border-2 border-green-500 group-hover:border-green-600' disabled={!canSave} className='group flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave('watched') }}>
+                    <Check className='h-5 w-5 fill-green-500 group-hover:fill-green-600' />
+                    <span className='text-green-500 group-hover:text-green-600'>
+                        {t('watched')}
+                    </span>
+                </OutlinedButton>
             </div>
             <div ref={inViewRef} />
             {error && (
