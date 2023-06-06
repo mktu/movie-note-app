@@ -33,7 +33,7 @@
     "compressorjs": "1.1.1",
     "cross-env": "7.0.3",
     "date-fns": "2.29.3",
-    "i18next": "21.10.0",
+    "i18next": "22.5.1",
     "i18next-browser-languagedetector": "6.1.8",
     "i18next-http-backend": "1.4.5",
     "i18next-resources-to-backend": "1.0.0",
