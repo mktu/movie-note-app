@@ -21,7 +21,7 @@
   "dependencies": {
     "@headlessui/react": "1.7.15",
     "@lexical/react": "0.7.6",
-    "@microlink/mql": "0.10.32",
+    "@microlink/mql": "0.10.33",
     "@popperjs/core": "2.11.6",
     "@remix-run/cloudflare": "1.7.6",
     "@remix-run/cloudflare-pages": "1.7.6",
