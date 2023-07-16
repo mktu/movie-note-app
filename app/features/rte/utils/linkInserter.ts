@@ -1,6 +1,5 @@
 import type { ElementNode, LexicalEditor, RangeSelection } from "lexical";
-import { $isParagraphNode } from "lexical";
-import { $isRootNode, $isTextNode, TextNode } from "lexical";
+import { $isRootNode, $isTextNode, TextNode, $isParagraphNode } from "lexical";
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
 import { $isAtNodeEnd } from '@lexical/selection';
 

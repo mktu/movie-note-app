@@ -11,7 +11,7 @@ const DashboardSearchbar: FC = () => {
     const { name } = useUserContext()
     return (
         <div className='flex flex-col gap-4'>
-            <h1 className='flex items-center w-full border-b border-border-main text-2xl'>
+            <h1 className='flex w-full items-center border-b border-border-main text-2xl'>
                 {name}さん, ようこそ Movie Note App へ！
             </h1>
             <p>最近見た映画や、好きな映画の感想をノートを書きましょう！</p>

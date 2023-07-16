@@ -30,7 +30,7 @@ const Card: FC<Props> = ({
 }) => {
     const { navigator: Navigator } = useNavigatorContext()
     return (
-        <div className={clsx('flex flex-col gap-2 justify-start', className)}>
+        <div className={clsx('flex flex-col justify-start gap-2', className)}>
             <Navigator to={path}>
                 <Image
                     className='rounded'
