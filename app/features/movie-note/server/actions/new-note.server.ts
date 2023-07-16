@@ -41,4 +41,4 @@ export async function action({ request, context }: ActionArgs) {
             error: (e as Error).message
         }, { status: 400 })
     }
-};
+}

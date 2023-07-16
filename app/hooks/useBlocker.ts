@@ -5,7 +5,7 @@
  */
 import { useContext, useEffect, useCallback, useRef } from 'react';
 import { UNSAFE_NavigationContext } from 'react-router-dom';
-import type { History, Blocker, Transition } from 'history'
+import type { Blocker, Transition } from 'history'
 
 /**
  * Blocks all navigation attempts. This is useful for preventing the page from
@@ -30,21 +30,26 @@ export function useBlocker(blocker: Blocker, when = true) {
         if (!when) return;
         if (!navigator) return;
 
-        const unblock = (navigator as History).block((tx) => {
-            const autoUnblockingTx = {
-                ...tx,
-                retry() {
-                    // Automatically unblock the transition so it can play all the way
-                    // through before retrying it. TODO: Figure out how to re-enable
-                    // this block if the transition is cancelled for some reason.
-                    unblock();
-                    tx.retry();
-                },
-            };
+        // TODO
+        // Removing navigator.block in 6.4
+        // this should be replaced by storeing unsaved contents in localstorage
+        // see https://github.com/remix-run/react-router/issues/8139#issuecomment-1262630360
 
-            blocker(autoUnblockingTx);
-        });
-        unblocker.current.push(unblock)
+        // const unblock = (navigator as History).block((tx) => {
+        //     const autoUnblockingTx = {
+        //         ...tx,
+        //         retry() {
+        //             // Automatically unblock the transition so it can play all the way
+        //             // through before retrying it. TODO: Figure out how to re-enable
+        //             // this block if the transition is cancelled for some reason.
+        //             unblock();
+        //             tx.retry();
+        //         },
+        //     };
+
+        //     blocker(autoUnblockingTx);
+        // });
+        // unblocker.current.push(unblock)
         return () => {
             unblockFn()
         };
