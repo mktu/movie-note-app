@@ -60,7 +60,7 @@
   "devDependencies": {
     "@babel/core": "7.20.12",
     "@cloudflare/workers-types": "3.19.0",
-    "@playwright/test": "1.30.0",
+    "@playwright/test": "1.36.1",
     "@remix-run/dev": "1.7.6",
     "@remix-run/eslint-config": "1.7.6",
     "@storybook/addon-actions": "6.5.16",
