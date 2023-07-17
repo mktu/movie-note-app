@@ -38,7 +38,7 @@ export const App: React.FC = () => {
                             <SidebarLayout
                                 initialSidebarWidth={sidebarSettings.sidebarWidth}
                                 userMenu={<UserMenu user={user} onLogout={() => {
-                                    submit(null, { action: 'logout', method: 'post' })
+                                    submit(null, { action: '/logout', method: 'post' })
                                 }} />}
                                 noteList={<NoteList
                                     onRemoveNote={(noteId) => {
