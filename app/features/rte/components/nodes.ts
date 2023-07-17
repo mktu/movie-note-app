@@ -6,9 +6,7 @@ import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 
 import type { Klass, LexicalNode } from "lexical";
 import { ImageNode } from '../features/images/components';
-import { LinkPreviewNode } from '../features/link';
-import { TwitterPreviewNode } from '../features/link';
-import { YoutubePreviewNode } from '../features/link';
+import { LinkPreviewNode, YoutubePreviewNode, TwitterPreviewNode } from '../features/link';
 
 //HEADING, QUOTE, CODE, UNORDERED_LIST, ORDERED_LIST
 const nodes: Klass<LexicalNode>[] = [

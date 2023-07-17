@@ -43,4 +43,4 @@ export async function loader({ request, context }: LoaderArgs) {
         sidebarSettings,
         movieNoteType
     })
-};
+}
