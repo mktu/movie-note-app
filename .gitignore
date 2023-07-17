@@ -12,6 +12,7 @@ node_modules
 /playwright/.cache/
 /app/styles/app.css
 .mf/**
+.wrangler/**
 
 state.json
 .DS_Store
