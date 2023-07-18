@@ -17,7 +17,7 @@ const DashboardSearchbar: FC = () => {
             <p>最近見た映画や、好きな映画の感想をノートを書きましょう！</p>
             <div className='py-3'>
                 <SearchTitle selected='' setSelected={(tmdbId) => {
-                    navigate(`/app/new-note?tmdbId=${tmdbId}&lng=${i18n.language}`)
+                    navigate(`/app/movies/${tmdbId}?lng=${i18n.language}`)
                 }} />
             </div>
         </div>

@@ -54,5 +54,7 @@
     "all": "全て",
     "created-at-desc": "作成が新しい順",
     "created-at-asc": "作成が古い順",
-    "updated-at-desc": "更新が新しい順（初期値）"
+    "updated-at-desc": "更新が新しい順（初期値）",
+    "lng-not-found": "言語が未設定です",
+    "movie-id-not-found": "作品IDが未設定です"
 }

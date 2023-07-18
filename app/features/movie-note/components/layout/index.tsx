@@ -43,11 +43,13 @@ const Layout: FC<Props> = ({
                 <div>
                     {review}
                 </div>
-                <div className='rounded-lg border border-dashed border-border-dark p-6'>
-                    <div className='min-h-[512px]'>
-                        {note}
+                {note && (
+                    <div className='rounded-lg border border-dashed border-border-dark p-6'>
+                        <div className='min-h-[512px]'>
+                            {note}
+                        </div>
                     </div>
-                </div>
+                )}
             </Transition>
         </div>
     );
