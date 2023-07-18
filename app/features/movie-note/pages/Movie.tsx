@@ -3,9 +3,9 @@ import { useState } from 'react';
 import Imdb from '../features/imdb';
 import useCredits from '../hooks/useTmdb/useCredits';
 import useDetail from '../hooks/useTmdb/useDetail';
-import Detail from '../components/detail';
+import { Detail } from '../components/detail';
 import { NewHeader } from '../components/header';
-import Layout from '../components/layout';
+import { MovieLayout } from '../components/layout';
 import MetaInfo from '../components/meta';
 
 import type { FC } from "react";
@@ -43,7 +43,7 @@ const Movie: FC<Props> = ({
     const detail = apiDetail || initDetail || null
     const credits = apiCredits || initCredits || null
     return (
-        <Layout
+        <MovieLayout
             header={<NewHeader
                 initialSelected={initialSelected}
                 error={error}

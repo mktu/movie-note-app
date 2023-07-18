@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 
-import Detail from '../components/detail';
+import { Summary } from '../components/detail';
 import { EditHeader } from '../components/header';
-import Layout from '../components/layout';
+import { MovieLayout } from '../components/layout';
 import MetaInfo from '../components/meta';
 import Note from '~/features/rte';
 import Review from '../components/review';
@@ -42,7 +42,7 @@ const Edit: FC<Props> = ({
     const { setStars, setAdmirationDate, stars, formattedWatchDate, admirationDate } = useReview(movieNoteDetail?.stars, movieNoteDetail?.admiration_date)
     const { unblock, setDirty, checkDirty } = useMovieNoteChangeMonitor()
     return (
-        <Layout
+        <MovieLayout
             header={<EditHeader
                 error={error}
                 title={movieNoteDetail?.title || ''}
@@ -63,7 +63,7 @@ const Edit: FC<Props> = ({
                     })
                 }} />}
             movieInfo={detail && {
-                detail: <Detail detail={detail} credits={credits} />,
+                detail: <Summary detail={detail} credits={credits} />,
                 metaInfo: <MetaInfo genres={detail?.genres || []} />,
                 imdb: imdbRate ? <ImdbRateLabel imdbId={detail.imdb_id!} {...imdbRate} /> : <Imdb imdbId={detail?.imdb_id} />
             }}
