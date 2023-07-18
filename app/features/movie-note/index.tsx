@@ -1,1 +1,1 @@
-export { NewMovieNote, EditMovieNote, MovieNotePlaceholder } from './pages'
+export { EditMovieNote, MovieNotePlaceholder } from './pages'

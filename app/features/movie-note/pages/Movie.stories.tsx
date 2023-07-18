@@ -3,14 +3,14 @@ import { action } from '@storybook/addon-actions';
 import { screen, userEvent } from '@storybook/testing-library';
 
 import { handlers } from './msw';
-import New from './New';
+import Movie from './Movie';
 
 export default {
     title: 'app/movie-note/New',
-    component: New,
-} as ComponentMeta<typeof New>;
+    component: Movie,
+} as ComponentMeta<typeof Movie>;
 
-const Template: ComponentStory<typeof New> = (args) => <New {...args} />;
+const Template: ComponentStory<typeof Movie> = (args) => <Movie {...args} />;
 
 export const Default = Template.bind({});
 
