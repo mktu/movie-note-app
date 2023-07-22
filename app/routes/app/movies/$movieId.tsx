@@ -8,7 +8,7 @@ import { useActionData, useLoaderData, useSubmit } from '@remix-run/react';
 import { getFormData } from '@utils/form';
 
 import type { FC } from "react";
-import Movie from '~/features/movie-note/pages/Movie';
+import { Movie } from '~/features/movie/pages';
 export {
     loader,
     action

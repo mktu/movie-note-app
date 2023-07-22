@@ -1,9 +1,9 @@
-import Tmdb, { setTmdbData } from '~/features/movie-note/utils/tmdb';
+import { setTmdbData, Tmdb } from '~/features/tmdb';
 import i18next from '~/i18next.server';
 
 import { json } from '@remix-run/cloudflare';
 
-import type { TmdbTrends } from '~/features/movie-note/utils/tmdb';
+import type { TmdbTrends } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderArgs } from "@remix-run/cloudflare";
 import { tmdbKv } from '~/features/movie-note/server/kv';

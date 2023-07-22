@@ -1,5 +1,5 @@
 import React from 'react'
-import type Tmdb from '~/features/movie-note/utils/tmdb'
+import type { Tmdb } from '~/features/tmdb'
 import Context from './Context'
 
 type Props = {

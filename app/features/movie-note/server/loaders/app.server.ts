@@ -1,7 +1,7 @@
 import type { LoaderArgs } from "@remix-run/cloudflare";
 import authenticator from '~/features/auth/server/auth.server';
 import { listMovieNote } from '~/features/movie-note/server/db';
-import { setTmdbData } from '~/features/movie-note/utils/tmdb';
+import { setTmdbData } from '~/features/tmdb';
 import { userDb } from '~/features/profile/server/db';
 
 import { json, redirect } from '@remix-run/cloudflare';

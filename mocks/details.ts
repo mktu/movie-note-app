@@ -1,4 +1,4 @@
-import type { TmdbDetail } from "~/features/movie-note/utils/tmdb"
+import type { TmdbDetail } from "~/features/tmdb"
 
 const detail: { [key: string]: TmdbDetail } = {
     555: {

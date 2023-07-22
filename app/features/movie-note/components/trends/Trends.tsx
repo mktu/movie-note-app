@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import TrendIcon from '~/components/icons/ArrowTrendUp';
 
 
-import type { TmdbTrends } from '../../utils/tmdb';
+import type { TmdbTrends } from '~/features/tmdb';
 import Card from './Card';
 
 type Porps = {

@@ -1,6 +1,6 @@
 // src/mocks/handlers.js
 import { rest } from 'msw'
-import type { SearchResult } from '~/features/movie-note/utils/tmdb'
+import type { SearchResult } from '~/features/tmdb'
 import details from './details'
 // handle for e2e (not for storybook)
 export const handlers = [

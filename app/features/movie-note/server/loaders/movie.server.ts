@@ -1,16 +1,16 @@
 import authenticator from '~/features/auth/server/auth.server';
-import { getImdbRateKv } from '~/features/movie-note/features/imdb/server/kv';
+import { getImdbRateKv } from '~/features/imdb/server/kv';
 import { tmdbKv } from '~/features/movie-note/server/kv';
-import Tmdb, { setTmdbData } from '~/features/movie-note/utils/tmdb';
+import { setTmdbData, Tmdb } from '~/features/tmdb';
 
 import { json, redirect } from '@remix-run/cloudflare';
 import { PerformanceCounter } from '@utils/performance';
 import { getSearchParamAsBoolean } from '@utils/searchparam.server';
 
-import type { Credits, TmdbDetail, TmdbLng } from '~/features/movie-note/utils/tmdb';
+import type { Credits, TmdbDetail, TmdbLng } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderArgs } from "@remix-run/cloudflare";
-import type { ImdbRate } from '~/features/movie-note/features/imdb/types';
+import type { ImdbRate } from '~/features/imdb/types';
 
 type ContentData = {
     tmdbDetail: TmdbDetail,

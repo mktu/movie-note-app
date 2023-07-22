@@ -1,8 +1,8 @@
 import type { FC } from 'react'
-import DashboardSearchbar from '../components/search-title/DashboardSearchbar';
+import { DashboardSearchbar } from '~/features/movie';
 import Trends from '../components/trends';
 
-import type { TmdbTrends } from '../utils/tmdb';
+import type { TmdbTrends } from '~/features/tmdb';
 
 type Porps = {
     trends: TmdbTrends
