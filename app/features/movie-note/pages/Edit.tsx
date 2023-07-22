@@ -3,17 +3,17 @@ import { useCallback, useState } from 'react';
 import { Summary } from '../components/detail';
 import { EditHeader } from '../components/header';
 import { MovieLayout } from '../components/layout';
-import MetaInfo from '../components/meta';
+import { Meta } from '~/features/movie';
 import Note from '~/features/rte';
 import Review from '../components/review';
-import Imdb, { ImdbRateLabel } from '../features/imdb';
+import Imdb, { ImdbRateLabel } from '../../imdb';
 import { useReview } from '../hooks/useMovie';
 import { useMovieNoteChangeMonitor } from '../hooks/useMovieNoteChangeMonitor';
 
 import type { FC } from "react";
 import type { UpdateMovieNote, WatchState } from "@type-defs/frontend";
-import type { Credits, TmdbDetail } from '../utils/tmdb';
-import type { ImdbRate } from '../features/imdb/types';
+import type { Credits, TmdbDetail } from '~/features/tmdb';
+import type { ImdbRate } from '../../imdb/types';
 import type { MovieNoteType } from '../server/db';
 
 type Props = {
@@ -64,7 +64,7 @@ const Edit: FC<Props> = ({
                 }} />}
             movieInfo={detail && {
                 detail: <Summary detail={detail} credits={credits} />,
-                metaInfo: <MetaInfo genres={detail?.genres || []} />,
+                metaInfo: <Meta genres={detail?.genres || []} />,
                 imdb: imdbRate ? <ImdbRateLabel imdbId={detail.imdb_id!} {...imdbRate} /> : <Imdb imdbId={detail?.imdb_id} />
             }}
             note={detail && <Note

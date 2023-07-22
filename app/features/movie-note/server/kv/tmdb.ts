@@ -1,4 +1,4 @@
-import type { TmdbDetail, TmdbLng, TmdbTrends } from "../../utils/tmdb";
+import type { TmdbDetail, TmdbLng, TmdbTrends } from '~/features/tmdb';
 
 type MovieNoteIds = {
     tmdbId: string,

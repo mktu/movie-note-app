@@ -3,7 +3,7 @@ import { ContainedButton, TextButton } from '~/components/buttons';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import Error from './Error'
-import useFloatingHeader from './useFloatingHeader';
+import useFloatingHeader from '~/hooks/useFloatingHeader';
 import type { WatchState } from '@type-defs/frontend';
 import Check from '~/components/icons/Check';
 import Stars from '~/components/icons/Stars';

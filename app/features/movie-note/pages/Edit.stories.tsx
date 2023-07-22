@@ -33,7 +33,8 @@ Default.args = {
         imdb_id: 'a',
         memo: null,
         created_at: '2020-02-02',
-        updated_at: '2020-02-02'
+        updated_at: '2020-02-02',
+        watch_state: null
     },
     tmdbDetail: detail,
     tmdbCredits: credits

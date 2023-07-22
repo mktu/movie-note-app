@@ -1,5 +1,5 @@
 import { json } from "@remix-run/cloudflare"
-import { scrapeOrGetFromKv } from "~/features/movie-note/features/imdb/server/scrape"
+import { scrapeOrGetFromKv } from "~/features/imdb/server/scrape"
 
 
 export const onRequestGet: PagesFunction<{

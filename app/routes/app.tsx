@@ -9,7 +9,7 @@ import NoteList from '~/features/movie-note/components/note-list';
 import LocalStorageProvider from '~/features/movie-note/providers/localstorage';
 import { loader } from '~/features/movie-note/server/loaders/app.server';
 import { movieDetailType } from '~/features/movie-note/store/cookie/movieDetailType';
-import Tmdb from '~/features/movie-note/utils/tmdb';
+import { Tmdb } from '~/features/tmdb';
 import { UserMenu } from '~/features/profile/components/user-menu';
 import { AppOutletProvider } from '~/providers/outlets';
 import TmdbProvider from '~/providers/tmdb';
