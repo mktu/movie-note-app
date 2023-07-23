@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { PictureAndLines, SingleLine } from '~/components/skeltons';
 import { MovieLayout } from '../components/layout';
-import Review from '../components/review';
+import Review from '../components/watch-log';
 import { useMovieDetailType } from '../store/cookie/movieDetailType';
 
 const Placeholder: FC = () => {

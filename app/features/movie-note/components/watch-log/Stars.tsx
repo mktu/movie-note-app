@@ -19,7 +19,7 @@ const isColored = (hoverPos: number, starPos: number, i: number) => {
 
 const Stars: FC<Props> = ({
     stars,
-    starSize = 'w-8 h-8',
+    starSize = 'w-6 h-6',
     onSetStar
 }) => {
     const [hoverPos, setHoverPos] = useState(-1)

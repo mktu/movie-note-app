@@ -5,9 +5,8 @@ import { EditHeader } from '../components/header';
 import { MovieLayout } from '../components/layout';
 import { Meta } from '~/features/movie';
 import Note from '~/features/rte';
-import Review from '../components/review';
 import Imdb, { ImdbRateLabel } from '../../imdb';
-import { useReview } from '../hooks/useMovie';
+import { useWatchLog } from '../hooks/useMovie';
 import { useMovieNoteChangeMonitor } from '../hooks/useMovieNoteChangeMonitor';
 
 import type { FC } from "react";
@@ -39,12 +38,15 @@ const Edit: FC<Props> = ({
     }, [])
     const detail = tmdbDetail
     const credits = tmdbCredits || null
-    const { setStars, setAdmirationDate, stars, formattedWatchDate, admirationDate } = useReview(movieNoteDetail?.stars, movieNoteDetail?.admiration_date)
+    const watchLogs = useWatchLog(movieNoteDetail?.stars, movieNoteDetail?.admiration_date)
+    const { stars, formattedWatchDate } = watchLogs
     const { unblock, setDirty, checkDirty } = useMovieNoteChangeMonitor()
     return (
         <MovieLayout
             header={<EditHeader
                 error={error}
+                watchLogs={watchLogs}
+                image={detail?.poster_path || detail?.backdrop_path || ''}
                 title={movieNoteDetail?.title || ''}
                 watchState={movieNoteDetail?.watch_state as WatchState}
                 canSave={Boolean(detail)}
@@ -80,7 +82,6 @@ const Edit: FC<Props> = ({
                     }
                 }}
             />}
-            review={detail && <Review admirationDate={admirationDate} stars={stars} setAdmirationDate={setAdmirationDate} setStars={setStars} />}
         />
     )
 }

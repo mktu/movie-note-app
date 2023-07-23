@@ -1,14 +1,14 @@
 import { action } from '@storybook/addon-actions';
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Review from './Review';
+import WatchLog from './WatchLog';
 
 export default {
     title: 'app/movie-note/Review',
-    component: Review,
-} as ComponentMeta<typeof Review>;
+    component: WatchLog,
+} as ComponentMeta<typeof WatchLog>;
 
-const Template: ComponentStory<typeof Review> = (args) => <Review {...args} />;
+const Template: ComponentStory<typeof WatchLog> = (args) => <WatchLog {...args} />;
 
 export const Default = Template.bind({});
 
