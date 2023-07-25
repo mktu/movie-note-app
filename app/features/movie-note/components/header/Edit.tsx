@@ -9,7 +9,7 @@ import WatchStateButtons from './WatchStateButtons';
 
 import type { WatchState } from '@type-defs/frontend';
 import MiniImage from './MiniImage';
-import type { WatchLogs } from '../../hooks/useMovie';
+import type { UseWatchLogProps } from '../../hooks/useMovie';
 import WatchLog from './WatchLog';
 
 type Props = {
@@ -20,7 +20,7 @@ type Props = {
     canSave?: boolean
     error?: string,
     watchState?: WatchState,
-    watchLogs: WatchLogs
+    useWatchLogProps: UseWatchLogProps
 }
 
 const Edit = forwardRef<HTMLDivElement, Props>(({
@@ -29,13 +29,14 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
     canSave,
     title,
     image,
-    watchLogs,
+    useWatchLogProps,
     error,
     watchState: watchStatebase
 }, ref) => {
     const { t } = useTranslation('common')
     const { setObserverElm, ref: inViewRef, inView } = useFloatingHeader()
     const [watchState, setWatchState] = useState<WatchState | undefined>(watchStatebase)
+    const { setAdmirationDate, setStars, admirationDate: initAdmirationDate, stars: initStars } = useWatchLogProps
     return (
         <>
             <div ref={(elm) => {
@@ -55,10 +56,25 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                     <div>
                         <div className='text-lg font-semibold text-text-main'>{title}</div>
                         <WatchLog
-                            watchLogs={watchLogs}
+                            initAdmirationDate={initAdmirationDate}
+                            initStars={initStars}
+                            onSaveWatchLogs={(watchLogs) => {
+                                setStars(watchLogs?.stars || 0)
+                                setAdmirationDate(watchLogs?.admirationDate || '')
+                            }}
                         />
                     </div>
-                    <WatchStateButtons watchState={watchState} onClick={setWatchState} />
+                    <WatchStateButtons
+                        initAdmirationDate={initAdmirationDate}
+                        initStars={initStars}
+                        watchState={watchState}
+                        onClick={(watchState, watchLogs) => {
+                            setWatchState(watchState)
+                            if (watchLogs && watchState === 'watched') {
+                                setStars(watchLogs.stars)
+                                setAdmirationDate(watchLogs.admirationDate)
+                            }
+                        }} />
                 </div>
                 <div className='ml-auto flex items-center gap-2 font-semibold'>
                     <ContainedButton disabled={!canSave} onClick={() => {

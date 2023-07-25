@@ -3,6 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { TextInput } from '~/components/inputs';
 import Stars from './Stars';
 
+export type WatchLogs = {
+    stars: number,
+    admirationDate: string
+}
+
 type Props = {
     admirationDate?: string,
     setAdmirationDate: (date: string) => void,

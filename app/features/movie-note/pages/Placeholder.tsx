@@ -1,7 +1,6 @@
 import type { FC } from 'react'
 import { PictureAndLines, SingleLine } from '~/components/skeltons';
 import { MovieLayout } from '../components/layout';
-import Review from '../components/watch-log';
 import { useMovieDetailType } from '../store/cookie/movieDetailType';
 
 const Placeholder: FC = () => {
@@ -15,13 +14,6 @@ const Placeholder: FC = () => {
                 metaInfo: <div className='h-[24px]' />,
                 imdb: <div />
             }}
-            review={(
-                <Review setAdmirationDate={() => {
-                    //
-                }} setStars={() => {
-                    //
-                }} />
-            )}
         />
     );
 };

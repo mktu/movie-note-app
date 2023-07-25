@@ -2,18 +2,19 @@ import clsx from 'clsx';
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { OutlinedButton } from '~/components/buttons';
+import Check from '~/components/icons/Check';
+import Stars from '~/components/icons/Stars';
+import useFloatingHeader from '~/hooks/useFloatingHeader';
 
 import Search, { Reselect } from '../search-title';
 import Error from './Error';
-import useFloatingHeader from '~/hooks/useFloatingHeader';
 
 import type { ComponentProps } from 'react'
-import Stars from '~/components/icons/Stars';
-import Check from '~/components/icons/Check';
 import type { WatchState } from '@type-defs/frontend';
+import type { WatchLogs } from '~/features/movie-note';
 
 type Props = {
-    onClickSave: (state: WatchState) => void,
+    onClickSave: (state: WatchState, watchLogs?: WatchLogs) => void,
     className?: string,
     canSave?: boolean
     error?: string,

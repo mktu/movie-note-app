@@ -45,7 +45,7 @@ const Edit: FC<Props> = ({
         <MovieLayout
             header={<EditHeader
                 error={error}
-                watchLogs={watchLogs}
+                useWatchLogProps={watchLogs}
                 image={detail?.poster_path || detail?.backdrop_path || ''}
                 title={movieNoteDetail?.title || ''}
                 watchState={movieNoteDetail?.watch_state as WatchState}

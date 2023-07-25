@@ -13,4 +13,4 @@ export const useWatchLog = (initStar?: number | null, initAdmirationDate?: strin
     }
 }
 
-export type WatchLogs = ReturnType<typeof useWatchLog>
+export type UseWatchLogProps = ReturnType<typeof useWatchLog>

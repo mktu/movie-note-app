@@ -7,22 +7,25 @@ import { Dialog } from '@headlessui/react';
 import WatchLog from './WatchLog';
 
 import type { FC } from 'react';
-import type { WatchLogs } from '../../hooks/useMovie';
 
 type Props = {
     open: boolean,
     onClose: () => void,
-    watchLogs: WatchLogs,
+    initAdmirationDate?: string,
+    initStars?: number,
+    onSave: (admirationDate: string, stars: number) => void
 }
 
 const WatchLogDialog: FC<Props> = ({
     open,
     onClose,
-    watchLogs,
+    initStars,
+    initAdmirationDate,
+    onSave
 }) => {
     const { t } = useTranslation('common')
-    const [admirationDate, setAdmirationDate] = useState(watchLogs.admirationDate || '')
-    const [stars, setStars] = useState(watchLogs.stars || 0)
+    const [admirationDate, setAdmirationDate] = useState(initAdmirationDate || '')
+    const [stars, setStars] = useState(initStars || 0)
     return (
         <Dialog open={open} onClose={onClose}>
             <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
@@ -41,9 +44,7 @@ const WatchLogDialog: FC<Props> = ({
                     <div className='flex items-center justify-end'>
                         <TextButton className='font-semibold' onClick={onClose}>Cancel</TextButton>
                         <TextButton className='font-semibold text-destructive-main' onClick={() => {
-                            watchLogs.setAdmirationDate(admirationDate)
-                            watchLogs.setStars(stars)
-                            onClose()
+                            onSave(admirationDate, stars)
                         }}>{t('save')}</TextButton>
                     </div>
                 </Dialog.Panel>

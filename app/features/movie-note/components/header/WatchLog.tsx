@@ -4,16 +4,20 @@ import { useTranslation } from 'react-i18next';
 
 import WatchLogDialog from '../watch-log/WatchLogDialog';
 
-import type { WatchLogs } from '../../hooks/useMovie';
 import Star from '~/components/icons/Star';
 import { TextButton } from '~/components/buttons';
+import type { WatchLogs } from '../watch-log';
 
 type Props = {
-    watchLogs: WatchLogs
+    initAdmirationDate?: string,
+    initStars?: number,
+    onSaveWatchLogs: (watchLogs: WatchLogs) => void
 }
 
 const WatchLog: FC<Props> = ({
-    watchLogs
+    initAdmirationDate,
+    initStars,
+    onSaveWatchLogs
 }) => {
     const { t } = useTranslation('common')
     const [openWatchLog, setOpenWatchLog] = useState(false)
@@ -22,10 +26,10 @@ const WatchLog: FC<Props> = ({
             <div className='flex items-center gap-2 text-sm'>
                 <TextButton onClick={() => {
                     setOpenWatchLog(true)
-                }} className='underline' paddings='px-1 py-0'>{t('watched-log')}: {watchLogs.admirationDate || t('no-watched-log')}</TextButton>
+                }} className='underline' paddings='px-1 py-0'>{t('watched-log')}: {initAdmirationDate || t('no-watched-log')}</TextButton>
                 <div className='flex items-center gap-1'>
                     <Star className='h-4 w-4 fill-yellow-400' />
-                    <span>{watchLogs.stars || '-'}</span>
+                    <span>{initStars || '-'}</span>
                 </div>
                 <span>|</span>
                 <span>作品情報を見る</span>
@@ -33,8 +37,16 @@ const WatchLog: FC<Props> = ({
             </div>
             <WatchLogDialog
                 open={openWatchLog}
-                watchLogs={watchLogs}
+                initAdmirationDate={initAdmirationDate}
+                initStars={initStars}
                 onClose={() => {
+                    setOpenWatchLog(false)
+                }}
+                onSave={(admirationDate, stars) => {
+                    onSaveWatchLogs({
+                        admirationDate,
+                        stars
+                    })
                     setOpenWatchLog(false)
                 }}
             />
