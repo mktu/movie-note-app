@@ -9,7 +9,6 @@ import WatchStateButtons from './WatchStateButtons';
 
 import type { WatchState } from '@type-defs/frontend';
 import MiniImage from './MiniImage';
-import type { UseWatchLogProps } from '../../hooks/useMovie';
 import WatchLog from './WatchLog';
 
 type Props = {
@@ -20,7 +19,10 @@ type Props = {
     canSave?: boolean
     error?: string,
     watchState?: WatchState,
-    useWatchLogProps: UseWatchLogProps
+    admirationDate?: string,
+    stars?: number,
+    onOpenDetailDialog: () => void,
+    onOpenWatchLogDialog: () => void
 }
 
 const Edit = forwardRef<HTMLDivElement, Props>(({
@@ -29,14 +31,16 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
     canSave,
     title,
     image,
-    useWatchLogProps,
     error,
-    watchState: watchStatebase
+    watchState: watchStatebase,
+    onOpenDetailDialog,
+    onOpenWatchLogDialog,
+    admirationDate,
+    stars
 }, ref) => {
     const { t } = useTranslation('common')
     const { setObserverElm, ref: inViewRef, inView } = useFloatingHeader()
     const [watchState, setWatchState] = useState<WatchState | undefined>(watchStatebase)
-    const { setAdmirationDate, setStars, admirationDate: initAdmirationDate, stars: initStars } = useWatchLogProps
     return (
         <>
             <div ref={(elm) => {
@@ -56,23 +60,18 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                     <div>
                         <div className='text-lg font-semibold text-text-main'>{title}</div>
                         <WatchLog
-                            initAdmirationDate={initAdmirationDate}
-                            initStars={initStars}
-                            onSaveWatchLogs={(watchLogs) => {
-                                setStars(watchLogs?.stars || 0)
-                                setAdmirationDate(watchLogs?.admirationDate || '')
-                            }}
+                            admirationDate={admirationDate}
+                            stars={stars}
+                            onOpenDetailDialog={onOpenDetailDialog}
+                            onOpenWatchLogDialog={onOpenWatchLogDialog}
                         />
                     </div>
                     <WatchStateButtons
-                        initAdmirationDate={initAdmirationDate}
-                        initStars={initStars}
                         watchState={watchState}
-                        onClick={(watchState, watchLogs) => {
+                        onClick={(watchState) => {
                             setWatchState(watchState)
-                            if (watchLogs && watchState === 'watched') {
-                                setStars(watchLogs.stars)
-                                setAdmirationDate(watchLogs.admirationDate)
+                            if (watchState === 'watched') {
+                                onOpenWatchLogDialog()
                             }
                         }} />
                 </div>

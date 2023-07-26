@@ -51,7 +51,7 @@ const CreditsComp: FC<Props> = ({
                 </div>
             </div>
             <div>
-                <h3 className='mb-2 text-lg'>キャスト</h3>
+                <h3 className='mb-2 text-lg'>{t('casts')}</h3>
                 <div className='flex w-full overflow-x-auto py-2'>
                     {target.map((cast) => {
                         return (
@@ -68,7 +68,7 @@ const CreditsComp: FC<Props> = ({
                         )
                     })}
                     {!showAll && (
-                        <TextButton onClick={() => { setShowAll(true) }} theme='label'>全て表示</TextButton>
+                        <TextButton onClick={() => { setShowAll(true) }} theme='label'>{t('view-all')}</TextButton>
                     )}
                 </div>
             </div>
