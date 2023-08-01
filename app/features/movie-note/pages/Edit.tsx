@@ -15,6 +15,7 @@ import type { Credits, TmdbDetail } from '~/features/tmdb';
 import type { ImdbRate } from '../../imdb/types';
 import type { MovieNoteType } from '../server/db';
 import WatchLogDialog from '../components/watch-log/WatchLogDialog';
+import { Video } from '~/features/tmdb/utils';
 
 type Props = {
     onSubmit: (note: UpdateMovieNote) => void,
@@ -22,7 +23,8 @@ type Props = {
     movieNoteDetail?: MovieNoteType,
     tmdbDetail?: TmdbDetail
     tmdbCredits?: Credits,
-    imdbRate: ImdbRate | null
+    imdbRate: ImdbRate | null,
+    trailers: Video[]
 }
 
 const Edit: FC<Props> = ({
@@ -31,7 +33,8 @@ const Edit: FC<Props> = ({
     movieNoteDetail,
     tmdbDetail,
     tmdbCredits,
-    imdbRate
+    imdbRate,
+    trailers
 }) => {
     const [content, setContent] = useState<{ get: () => string }>()
     const setContentGetter = useCallback((getContent: () => string) => {
@@ -94,6 +97,7 @@ const Edit: FC<Props> = ({
                 <DetailDialog
                     detail={detail}
                     credits={credits}
+                    trailers={trailers}
                     onClose={() => { setOpenDetailDialog(false) }}
                     open={openDetailDialog}
                 />

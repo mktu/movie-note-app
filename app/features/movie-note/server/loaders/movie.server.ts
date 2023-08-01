@@ -11,10 +11,12 @@ import type { Credits, TmdbDetail, TmdbLng } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderArgs } from "@remix-run/cloudflare";
 import type { ImdbRate } from '~/features/imdb/types';
+import type { Video } from '~/features/tmdb/utils';
 
 type ContentData = {
     tmdbDetail: TmdbDetail,
     tmdbCredits: Credits,
+    trailers: Video[],
     imdbRate: ImdbRate | null,
     performanceData: { [k: string]: number }
 }
@@ -46,6 +48,8 @@ export async function loader({ request, context, params }: LoaderArgs) {
     const t1 = counter.create('tmdbDetail')
     const t2 = counter.create('tmdbCredits')
     const t3 = counter.create('imdbInfoKv')
+    const t4 = counter.create('tmdbTrailers')
+
     const tall = counter.start('all')
 
     const getTmdbDetail_ = async (tmdbId: string, lng: TmdbLng, tmdb: Tmdb) => {
@@ -75,15 +79,24 @@ export async function loader({ request, context, params }: LoaderArgs) {
         return imdbRate
     }
 
+    const getTrailers_ = async (tmdbId: string, tmdb: Tmdb) => {
+        t4.start()
+        const trailers = await tmdb.getYoutubeTrailers(tmdbId)
+        t4.stop()
+        return trailers
+    }
+
     const tmdb = new Tmdb(tmdbData.apiKey, lng as TmdbLng)
-    const [tmdbDetail, tmdbCredits, imdbRate] = await Promise.all([
+    const [tmdbDetail, tmdbCredits, imdbRate, trailers] = await Promise.all([
         getTmdbDetail_(movieId, lng as TmdbLng, tmdb),
         getTmdbCredits_(movieId, tmdb),
-        getImdbRate_(movieId)])
+        getImdbRate_(movieId),
+        getTrailers_(movieId, tmdb)])
     const contentData: Omit<ContentData, 'performanceData'> = {
         tmdbDetail,
         tmdbCredits,
         imdbRate,
+        trailers
     }
 
     t1.finish()

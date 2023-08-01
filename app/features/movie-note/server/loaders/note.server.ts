@@ -15,11 +15,14 @@ import type { Credits, TmdbDetail, TmdbLng } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderArgs } from "@remix-run/cloudflare";
 import type { ImdbRate } from '~/features/imdb/types';
+import type { Video } from '~/features/tmdb/utils';
+
 
 type ContentData = {
     movieNoteDetail: MovieNoteType,
     tmdbDetail: TmdbDetail,
     tmdbCredits: Credits,
+    trailers: Video[],
     imdbRate: ImdbRate | null,
     performanceData: { [k: string]: number }
 }
@@ -53,6 +56,7 @@ export async function loader({ request, context, params }: LoaderArgs) {
     const t2 = counter.create('tmdbDetail')
     const t3 = counter.create('tmdbCredits')
     const t4 = counter.create('imdbInfoKv')
+    const t5 = counter.create('tmdbTrailers')
     const tall = counter.start('all')
 
     const loadMovieNote_ = async () => {
@@ -89,34 +93,48 @@ export async function loader({ request, context, params }: LoaderArgs) {
         return imdbRate
     }
 
+    const getTrailers_ = async (tmdbId: string, tmdb: Tmdb) => {
+        t5.start()
+        const trailers = await tmdb.getYoutubeTrailers(tmdbId)
+        t5.stop()
+        return trailers
+    }
+
     let contentData: Omit<ContentData, 'performanceData'>;
     if (ids) {
         const lng = ids.lng === 'ja' ? 'ja' : 'en'
         const tmdb = new Tmdb(tmdbData.apiKey, lng)
-        const [note, tmdbDetail, tmdbCredits, imdbRate] = await Promise.all([
+        const [note, tmdbDetail, tmdbCredits, imdbRate, trailers] = await Promise.all([
             loadMovieNote_(),
             getTmdbDetail_(ids.tmdbId, lng, tmdb),
             getTmdbCredits_(ids.tmdbId, tmdb),
-            getImdbRate_(ids.imdbId)])
+            getImdbRate_(ids.imdbId),
+            getTrailers_(ids.tmdbId, tmdb)])
         contentData = {
             movieNoteDetail: note,
             tmdbDetail,
             tmdbCredits,
             imdbRate,
+            trailers
         }
     } else {
         const note = await loadMovieNote_()
         const lng = note.lng === 'ja' ? 'ja' : 'en'
         const tmdb = new Tmdb(tmdbData.apiKey, lng)
-        const [tmdbDetail, tmdbCredits, imdbRate] = await Promise.all([
-            getTmdbDetail_(note.tmdb_id!, lng, tmdb),
-            getTmdbCredits_(note.tmdb_id!, tmdb),
-            getImdbRate_(note.imdb_id)])
+        if (!note.tmdb_id) {
+            throw Error('tmdb id is undefined')
+        }
+        const [tmdbDetail, tmdbCredits, imdbRate, trailers] = await Promise.all([
+            getTmdbDetail_(note.tmdb_id, lng, tmdb),
+            getTmdbCredits_(note.tmdb_id, tmdb),
+            getImdbRate_(note.imdb_id),
+            getTrailers_(note.tmdb_id, tmdb)])
         contentData = {
             movieNoteDetail: note,
             tmdbDetail,
             tmdbCredits,
             imdbRate,
+            trailers
         }
 
     }

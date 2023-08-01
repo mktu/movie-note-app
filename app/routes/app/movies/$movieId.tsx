@@ -32,6 +32,7 @@ const Note: FC = () => {
                 <Movie
                     tmdbDetail={content.tmdbDetail}
                     tmdbCredits={content.tmdbCredits}
+                    trailers={content.trailers}
                     error={actionData?.error}
                     onSubmit={(updateMovieNote) => {
                         submit(getFormData(updateMovieNote), { method: 'post' })

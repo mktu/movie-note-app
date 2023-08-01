@@ -1,6 +1,7 @@
 const searchBasePath = 'https://api.themoviedb.org/3/search/movie'
 const detailBasePath = 'https://api.themoviedb.org/3/movie'
 const trendPath = 'https://api.themoviedb.org/3/trending'
+const movieBasePath = (id: string) => `https://api.themoviedb.org/3/movie/${id}/videos`
 const creditsBasePath = (id: string) => `https://api.themoviedb.org/3/movie/${id}/credits`
 
 export type SearchResult = {
@@ -67,6 +68,20 @@ export type Credits = {
     crew: Crew[]
 }
 
+export type Video = {
+    id: string,
+    type: string,
+    official: string,
+    site: string,
+    size: number,
+    key: string
+}
+
+export type Videos = {
+    id: number,
+    results: Video[]
+}
+
 export default class Tmdb {
     apiKey = ''
     lng: TmdbLng = 'ja'
@@ -111,6 +126,19 @@ export default class Tmdb {
         const response = await fetch(`${detailBasePath}/${id}?${searchParams}`)
         const json = await response.json<Omit<TmdbDetail, 'lng'>>()
         return { ...json, lng: this.lng }
+    }
+    getVideos = async (id: string) => {
+        const searchParams = new URLSearchParams({
+            api_key: this.apiKey,
+            language: this.lng
+        })
+        const response = await fetch(`${movieBasePath(id)}?${searchParams}`)
+        const json = await response.json<Videos>()
+        return json
+    }
+    getYoutubeTrailers = async (id: string) => {
+        const res = await this.getVideos(id)
+        return res.results.filter(v => v.type === 'Trailer' && v.site === 'YouTube')
     }
 }
 

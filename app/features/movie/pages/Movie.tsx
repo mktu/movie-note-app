@@ -10,19 +10,22 @@ import { Meta } from '../components/meta';
 import type { FC } from "react";
 import type { AddMovieNote } from "@type-defs/frontend";
 import type { Credits, TmdbDetail } from '~/features/tmdb';
+import type { Video } from '~/features/tmdb/utils';
 
 type Props = {
     onSubmit: (note: AddMovieNote) => void,
     error?: string,
     tmdbDetail?: TmdbDetail
     tmdbCredits?: Credits,
+    trailers: Video[]
 }
 
 const Movie: FC<Props> = ({
     onSubmit,
     error,
     tmdbDetail: initDetail,
-    tmdbCredits: initCredits
+    tmdbCredits: initCredits,
+    trailers
 }) => {
     const [selected, setSelectedBase] = useState('')
     const [initialSelected, setInitialSelected] = useState(initDetail?.title || '')
@@ -62,7 +65,11 @@ const Movie: FC<Props> = ({
                     })
                 }} {...{ selected, setSelected }} />}
             movieInfo={detail && {
-                detail: <Detail detail={detail} credits={credits} />,
+                detail: <Detail
+                    detail={detail}
+                    credits={credits}
+                    trailers={trailers}
+                />,
                 metaInfo: <Meta genres={detail?.genres || []} />,
                 imdb: <Imdb imdbId={detail?.imdb_id} />
             }}

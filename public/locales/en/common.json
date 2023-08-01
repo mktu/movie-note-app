@@ -63,5 +63,6 @@
     "no-watched-log":"未入力",
     "stars":"評価",
     "movie-detail" : "{{movie}}の作品情報",
-    "close":"閉じる"
+    "close":"閉じる",
+    "trailer":"トレイラー"
 }
