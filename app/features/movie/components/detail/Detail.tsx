@@ -34,17 +34,25 @@ const Detail: FC<Props> = ({ detail, credits, trailers }) => {
     const src = poster_path || backdrop_path || ''
     return (
         <div className='flex w-full flex-col justify-center gap-4'>
-            <div className='flex w-full'>
-                <div>
-                    <Image
-                        alt={detail?.title || 'Error'}
-                        className='overflow-hidden rounded-xl'
-                        key={src}
-                        src={src && `${imageBasePath}/${src}`}
-                        srcSet={imageBasePaths.map((path, idx) => `${path}/${src} ${idx + 1}x`).join(',')}
-                        width={300}
-                        height={450} />
+            {trailers.length > 0 && (
+                <div className='min-h-[360px]'>
+                    <Youtube iframeClassName='w-full' videoId={trailers[0].key} />
                 </div>
+
+            )}
+            <div className='flex w-full'>
+                {trailers.length === 0 && (
+                    <div>
+                        <Image
+                            alt={detail?.title || 'Error'}
+                            className='overflow-hidden rounded-xl'
+                            key={src}
+                            src={src && `${imageBasePath}/${src}`}
+                            srcSet={imageBasePaths.map((path, idx) => `${path}/${src} ${idx + 1}x`).join(',')}
+                            width={300}
+                            height={450} />
+                    </div>
+                )}
                 <div className='ml-4 flex w-full flex-1 flex-col gap-4 overflow-hidden text-text-label'>
                     <div>
                         <h3 className='mb-2 text-lg'>{t('over-view')}</h3>
@@ -55,12 +63,6 @@ const Detail: FC<Props> = ({ detail, credits, trailers }) => {
                     </div>
                     <Credits credits={credits} />
                 </div>
-            </div>
-            <div>
-                <h3 className='mb-2 text-lg text-text-label'>{t('trailer')}</h3>
-                {trailers.length > 0 && (
-                    <Youtube iframeClassName='w-full' videoId={trailers[0].key} />
-                )}
             </div>
         </div>
     );

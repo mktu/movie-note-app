@@ -41,7 +41,7 @@ const CreditsComp: FC<Props> = ({
             <div>
                 <div className='flex w-full overflow-x-auto py-2'>
                     {Object.keys(jobMap).map(job => (
-                        <div key={job} className='mr-4 whitespace-nowrap'>
+                        <div key={job} className='mr-4'>
                             <span>{t(job)} : </span>
                             <span>
                                 {crew.filter(c => jobMap[job].includes(c.job)).map(crew => crew.name).join(',')}
