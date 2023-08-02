@@ -36,6 +36,10 @@ const Header = forwardRef<HTMLDivElement, Props>(({
     const { setObserverElm, ref: inViewRef, inView } = useFloatingHeader()
     return (
         <>
+            <div ref={inViewRef} />
+            {!inView && (
+                <div className='h-[64px]' /> // for layout sfift
+            )}
             <div ref={(elm) => {
                 if (typeof ref === 'function') {
                     ref(elm)
@@ -63,7 +67,7 @@ const Header = forwardRef<HTMLDivElement, Props>(({
                     </span>
                 </OutlinedButton>
             </div>
-            <div ref={inViewRef} />
+
             {error && (
                 <Error error={t(error)} />
             )}

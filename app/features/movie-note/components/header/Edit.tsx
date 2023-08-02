@@ -43,6 +43,10 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
     const [watchState, setWatchState] = useState<WatchState | undefined>(watchStatebase)
     return (
         <>
+            <div ref={inViewRef} />
+            {!inView && (
+                <div className='h-[64px]' /> // for layout sfift
+            )}
             <div ref={(elm) => {
                 if (typeof ref === 'function') {
                     ref(elm)
@@ -81,7 +85,6 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                     }}>{t('update')}</ContainedButton>
                 </div>
             </div>
-            <div ref={inViewRef} />
             {error && (
                 <Error error={t(error)} />
             )}
