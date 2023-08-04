@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import Image from '~/components/Image';
-import Youtube from 'react-youtube';
 
 import { TmdbmageBasePath } from '@utils/constants';
 
@@ -9,6 +8,7 @@ import Credits from './Credits';
 import type { FC } from 'react'
 import type { Credits as CreditsType, TmdbDetail } from '~/features/tmdb';
 import type { Video } from '~/features/tmdb/utils';
+import YoutubeContainer from './Youtube';
 
 ///t/p/w300_and_h450_bestv2/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg 1x, /t/p/w600_and_h900_bestv2/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg 2x
 
@@ -35,9 +35,7 @@ const Detail: FC<Props> = ({ detail, credits, trailers }) => {
     return (
         <div className='flex w-full flex-col justify-center gap-4'>
             {trailers.length > 0 && (
-                <div className='min-h-[360px]'>
-                    <Youtube iframeClassName='w-full' videoId={trailers[0].key} />
-                </div>
+                <YoutubeContainer trailers={trailers} />
 
             )}
             <div className='flex w-full'>

@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import Youtube from 'react-youtube';
 import { TextButton } from '~/components/buttons';
 
 import { Dialog } from '@headlessui/react';
@@ -10,6 +9,7 @@ import type { FC } from 'react'
 import type { Credits as CreditsType } from '~/features/tmdb';
 import type { TmdbDetail } from '~/features/tmdb';
 import type { Video } from '~/features/tmdb/utils';
+import YoutubeContainer from './Youtube';
 
 type Props = {
     detail: TmdbDetail | null,
@@ -41,7 +41,7 @@ const DetailDialog: FC<Props> = ({
                         <div className='flex w-full flex-col'>
                             <div>
                                 {trailers.length > 0 && (
-                                    <Youtube iframeClassName='w-full' videoId={trailers[0].key} />
+                                    <YoutubeContainer trailers={trailers} />
                                 )}
                             </div>
                             <div className='ml-4 flex w-full flex-1 flex-col gap-4 overflow-hidden text-text-label'>
