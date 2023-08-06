@@ -38,7 +38,7 @@ const DetailDialog: FC<Props> = ({
                 <Dialog.Panel className="w-full max-w-4xl rounded border border-border-main bg-white p-4 text-text-main shadow">
                     <Dialog.Title className='' as='h4'>{t('movie-detail', { movie: title })}</Dialog.Title>
                     <Dialog.Description as='div' className='my-2 max-h-[650px] overflow-y-auto overflow-x-hidden'>
-                        <div className='flex w-full flex-col'>
+                        <div className='flex w-full flex-col gap-2'>
                             <div>
                                 {trailers.length > 0 && (
                                     <YoutubeContainer trailers={trailers} />

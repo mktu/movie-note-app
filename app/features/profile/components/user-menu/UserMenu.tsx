@@ -30,9 +30,7 @@ const UserMenu: FC<Props> = ({
             <Menu.Items className="absolute mx-2 mt-2 w-[128px] rounded border border-border-dark bg-white p-2">
                 <Menu.Item>
                     {() => (
-                        <Navigator onClick={() => {
-
-                        }} to='/app/profile' className={clsx('block text-text-main')}>
+                        <Navigator to='/app/profile' className={clsx('block text-text-main')}>
                             編集
                         </Navigator>
                     )}

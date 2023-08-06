@@ -15,7 +15,7 @@ import type { Credits, TmdbDetail } from '~/features/tmdb';
 import type { ImdbRate } from '../../imdb/types';
 import type { MovieNoteType } from '../server/db';
 import WatchLogDialog from '../components/watch-log/WatchLogDialog';
-import { Video } from '~/features/tmdb/utils';
+import type { Video } from '~/features/tmdb/utils';
 
 type Props = {
     onSubmit: (note: UpdateMovieNote) => void,

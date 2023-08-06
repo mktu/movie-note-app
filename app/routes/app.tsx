@@ -16,6 +16,7 @@ import TmdbProvider from '~/providers/tmdb';
 import UserProvider from '~/providers/user';
 
 import { useLoaderData, useSubmit } from '@remix-run/react';
+import { SearchMenu } from '~/features/movie';
 
 export { loader }
 
@@ -37,6 +38,7 @@ export const App: React.FC = () => {
                         <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey, i18n.language === 'ja' ? 'ja' : 'en')}>
                             <SidebarLayout
                                 initialSidebarWidth={sidebarSettings.sidebarWidth}
+                                searchMenu={<SearchMenu />}
                                 userMenu={<UserMenu user={user} onLogout={() => {
                                     submit(null, { action: '/logout', method: 'post' })
                                 }} />}

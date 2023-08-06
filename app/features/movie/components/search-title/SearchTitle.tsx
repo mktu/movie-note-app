@@ -24,7 +24,7 @@ const Search: FC<Props> = ({
     searchResult: init
 }) => {
     const { t } = useTranslation()
-    const { query, setQuery, searchResult, count } = useTmdbSearch(init)
+    const { query, setQuery, searchResult } = useTmdbSearch(init)
     const selectedText = searchResult?.results?.find(v => v.id === selected)?.title || ''
     return (
         <Combobox value={selected} onChange={setSelected}>
@@ -52,8 +52,6 @@ const Search: FC<Props> = ({
                             onChange={(event) => setQuery(event.target.value)}
                         />
                     )}
-
-                    <div className='ml-auto'>{count}</div>
                 </div>
                 <Transition
                     as={Fragment}

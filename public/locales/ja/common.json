@@ -64,5 +64,8 @@
     "stars":"評価",
     "movie-detail" : "{{movie}}の作品情報",
     "close":"閉じる",
-    "trailer":"トレイラー"
+    "trailer":"トレイラー",
+    "global-search":"グローバル検索",
+    "search-movie": "映画を検索",
+    "search-actor":"俳優を検索"
 }

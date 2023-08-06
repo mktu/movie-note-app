@@ -4,11 +4,13 @@ import StaticLinks from './StaticLinks'
 type Props = {
     noteList: ReactNode,
     userMenu: ReactNode
+    searchMenu: ReactNode
 }
 
 const Sidebar: FC<Props> = ({
     noteList,
-    userMenu
+    userMenu,
+    searchMenu
 }) => {
     return (
         <div className='flex w-full flex-col divide-y divide-border-main'>
@@ -17,6 +19,9 @@ const Sidebar: FC<Props> = ({
             </div>
             <div>
                 <StaticLinks />
+            </div>
+            <div>
+                {searchMenu}
             </div>
             <div>
                 {noteList}
