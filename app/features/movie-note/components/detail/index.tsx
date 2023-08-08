@@ -1,1 +1,1 @@
-export { default } from './Container'
+export { default as Summary } from './Summary'

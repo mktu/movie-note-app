@@ -1,13 +1,12 @@
 import type { FC } from 'react'
 import { PictureAndLines, SingleLine } from '~/components/skeltons';
-import Layout from '../components/layout';
-import Review from '../components/review';
+import { MovieLayout } from '../components/layout';
 import { useMovieDetailType } from '../store/cookie/movieDetailType';
 
 const Placeholder: FC = () => {
     const { movieDetailType } = useMovieDetailType()
     return (
-        <Layout
+        <MovieLayout
             header={(<SingleLine className='w-full' height={32} />)}
             movieInfo={{
                 detail: movieDetailType === 'detail' ?
@@ -15,9 +14,6 @@ const Placeholder: FC = () => {
                 metaInfo: <div className='h-[24px]' />,
                 imdb: <div />
             }}
-            review={(
-                <Review setAdmirationDate={() => { }} setStars={() => { }} />
-            )}
         />
     );
 };

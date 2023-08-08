@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import tmdb from "~/features/movie-note/utils/tmdb";
+import { Tmdb } from "~/features/tmdb";
 
-const context = React.createContext<tmdb>(new tmdb('', 'en'));
+const context = React.createContext<Tmdb>(new Tmdb('', 'en'));
 
 export const useTmdbContext = () => useContext(context)
 

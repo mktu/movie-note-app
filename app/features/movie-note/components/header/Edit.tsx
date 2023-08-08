@@ -1,20 +1,28 @@
-import { forwardRef, useState } from 'react'
-import { ContainedButton, TextButton } from '~/components/buttons';
 import clsx from 'clsx';
+import { forwardRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Error from './Error'
-import useFloatingHeader from './useFloatingHeader';
+import { ContainedButton } from '~/components/buttons';
+import useFloatingHeader from '~/hooks/useFloatingHeader';
+
+import Error from './Error';
+import WatchStateButtons from './WatchStateButtons';
+
 import type { WatchState } from '@type-defs/frontend';
-import Check from '~/components/icons/Check';
-import Stars from '~/components/icons/Stars';
+import MiniImage from './MiniImage';
+import WatchLog from './WatchLog';
 
 type Props = {
     onClickSave: (state?: WatchState) => void,
     title: string,
+    image?: string,
     className?: string,
     canSave?: boolean
     error?: string,
-    watchState?: WatchState
+    watchState?: WatchState,
+    admirationDate?: string,
+    stars?: number,
+    onOpenDetailDialog: () => void,
+    onOpenWatchLogDialog: () => void
 }
 
 const Edit = forwardRef<HTMLDivElement, Props>(({
@@ -22,14 +30,23 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
     className,
     canSave,
     title,
+    image,
     error,
-    watchState: watchStatebase
+    watchState: watchStatebase,
+    onOpenDetailDialog,
+    onOpenWatchLogDialog,
+    admirationDate,
+    stars
 }, ref) => {
     const { t } = useTranslation('common')
     const { setObserverElm, ref: inViewRef, inView } = useFloatingHeader()
     const [watchState, setWatchState] = useState<WatchState | undefined>(watchStatebase)
     return (
         <>
+            <div ref={inViewRef} />
+            {!inView && (
+                <div className='h-[64px]' /> // for layout sfift
+            )}
             <div ref={(elm) => {
                 if (typeof ref === 'function') {
                     ref(elm)
@@ -39,23 +56,28 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                 setObserverElm(elm)
             }} className={clsx(className, 'flex w-full items-center gap-2 py-2',
                 !inView && 'fixed top-0 right-0 z-20 bg-white/80 px-10 shadow')}>
-                <div className='flex w-full flex-1 items-center text-lg font-semibold text-text-main'>
-                    {title}
-                    <TextButton className='group ml-auto flex items-center gap-1' onClick={() => { setWatchState('lookforward') }}>
-                        <Stars className={clsx('h-5 w-5 group-hover:fill-yellow-500',
-                            watchState === 'lookforward' ? 'fill-yellow-500' : 'fill-text-disabled')} />
-                        <span className={clsx('whitespace-nowrap group-hover:text-yellow-500',
-                            watchState === 'lookforward' ? 'text-yellow-500' : 'text-text-disabled')}>{t('lookforward')}</span>
-                    </TextButton>
-                    <TextButton className='group flex items-center gap-1' onClick={() => { setWatchState('watched') }}>
-                        <Check className={clsx('h-5 w-5 group-hover:fill-green-500',
-                            watchState === 'watched' ? ' fill-green-500' : 'fill-text-disabled'
-                        )} />
-                        <span className={clsx('whitespace-nowrap group-hover:text-green-500',
-                            watchState === 'watched' ? 'text-green-500' : 'text-text-disabled')}>
-                            {t('watched')}
-                        </span>
-                    </TextButton>
+                <MiniImage
+                    src={image}
+                    title={title}
+                />
+                <div className='flex w-full flex-1 items-center'>
+                    <div>
+                        <div className='text-lg font-semibold text-text-main'>{title}</div>
+                        <WatchLog
+                            admirationDate={admirationDate}
+                            stars={stars}
+                            onOpenDetailDialog={onOpenDetailDialog}
+                            onOpenWatchLogDialog={onOpenWatchLogDialog}
+                        />
+                    </div>
+                    <WatchStateButtons
+                        watchState={watchState}
+                        onClick={(watchState) => {
+                            setWatchState(watchState)
+                            if (watchState === 'watched') {
+                                onOpenWatchLogDialog()
+                            }
+                        }} />
                 </div>
                 <div className='ml-auto flex items-center gap-2 font-semibold'>
                     <ContainedButton disabled={!canSave} onClick={() => {
@@ -63,7 +85,6 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                     }}>{t('update')}</ContainedButton>
                 </div>
             </div>
-            <div ref={inViewRef} />
             {error && (
                 <Error error={t(error)} />
             )}

@@ -9,13 +9,14 @@ import NoteList from '~/features/movie-note/components/note-list';
 import LocalStorageProvider from '~/features/movie-note/providers/localstorage';
 import { loader } from '~/features/movie-note/server/loaders/app.server';
 import { movieDetailType } from '~/features/movie-note/store/cookie/movieDetailType';
-import Tmdb from '~/features/movie-note/utils/tmdb';
+import { Tmdb } from '~/features/tmdb';
 import { UserMenu } from '~/features/profile/components/user-menu';
 import { AppOutletProvider } from '~/providers/outlets';
 import TmdbProvider from '~/providers/tmdb';
 import UserProvider from '~/providers/user';
 
 import { useLoaderData, useSubmit } from '@remix-run/react';
+import { SearchMenu } from '~/features/movie';
 
 export { loader }
 
@@ -37,8 +38,9 @@ export const App: React.FC = () => {
                         <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey, i18n.language === 'ja' ? 'ja' : 'en')}>
                             <SidebarLayout
                                 initialSidebarWidth={sidebarSettings.sidebarWidth}
+                                searchMenu={<SearchMenu />}
                                 userMenu={<UserMenu user={user} onLogout={() => {
-                                    submit(null, { action: 'logout', method: 'post' })
+                                    submit(null, { action: '/logout', method: 'post' })
                                 }} />}
                                 noteList={<NoteList
                                     onRemoveNote={(noteId) => {

@@ -1,13 +1,9 @@
 import type { FC } from 'react';
 import HomeIcon from '~/components/icons/Home';
-import SearchIcon from '~/components/icons/Search';
-import SquarePlus from '~/components/icons/SquarePlus';
 import { useNavigatorContext } from '~/providers/navigator/Context';
 
 const links = [
     { name: 'HOME', icon: <HomeIcon className='h-5 w-5 fill-text-main' />, link: '/app' },
-    { name: 'SEARCH', icon: <SearchIcon className='h-5 w-5 fill-text-main' />, link: '/search' },
-    { name: 'NEW NOTE', icon: <SquarePlus className='h-5 w-5 fill-text-main' />, link: '/app/new-note' },
 ]
 
 const StaticLinks: FC = () => {

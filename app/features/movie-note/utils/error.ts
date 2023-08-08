@@ -1,8 +1,10 @@
 export type ErrorKey =
     'movie-note-already-registered' |
     'movie-note-not-found' |
+    'movie-id-not-found' |
     'invalid-movie-note' |
-    'backend-error'
+    'backend-error' |
+    'lng-not-found'
 
 const dbErrorCodeMap: { [n: string]: ErrorKey } = {
     '23505': 'movie-note-already-registered'

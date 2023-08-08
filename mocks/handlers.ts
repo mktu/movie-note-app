@@ -1,6 +1,6 @@
 // src/mocks/handlers.js
 import { rest } from 'msw'
-import type { SearchResult } from '~/features/movie-note/utils/tmdb'
+import type { SearchResult } from '~/features/tmdb'
 import details from './details'
 // handle for e2e (not for storybook)
 export const handlers = [
@@ -9,7 +9,7 @@ export const handlers = [
             page: 1,
             results: [{
                 title: 'ターミネーター4',
-                id: '555',
+                id: '534',
                 release_date: '2009-05-20',
                 poster_path: '/ghKQ6it5j7KjdYghT5EDthVNXlD.jpg'
             },

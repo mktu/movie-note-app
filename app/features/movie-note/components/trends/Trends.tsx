@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import TrendIcon from '~/components/icons/ArrowTrendUp';
 
 
-import type { TmdbTrends } from '../../utils/tmdb';
+import type { TmdbTrends } from '~/features/tmdb';
 import Card from './Card';
 
 type Porps = {
@@ -22,7 +22,7 @@ const Trends: FC<Porps> = ({
             </h2>
             <div className='grid w-full grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-2 overflow-auto'>
                 {trends.results.map(v => (
-                    <Card className='mx-1' key={v.id} path={`/app/new-note?tmdbId=${v.id}&lng=${i18n.language}`} {...v} />
+                    <Card className='mx-1' key={v.id} path={`/app/movies/${v.id}?lng=${i18n.language}`} {...v} />
                 ))}
             </div>
         </div>

@@ -29,7 +29,7 @@ test('top page test', async ({ browser }) => {
 test('new note test', async ({ browser }) => {
   const context = await browser.newContext({ storageState: 'state.json' })
   const page = await context.newPage()
-  const res = await page.goto('http://localhost:8788/app/new-note');
+  const res = await page.goto('http://localhost:8788/app');
   expect(res?.ok).toBeTruthy()
   await page.fill('[name="search-title"]', 'terminator')
   await page.locator('li:has-text("ターミネーター4")').click()
