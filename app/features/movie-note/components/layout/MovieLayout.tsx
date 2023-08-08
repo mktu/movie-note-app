@@ -1,4 +1,3 @@
-import { Transition } from '@headlessui/react';
 import type { FC, ReactNode } from 'react'
 
 type MovieInfo = {

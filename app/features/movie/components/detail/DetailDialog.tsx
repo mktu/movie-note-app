@@ -6,8 +6,7 @@ import { Dialog } from '@headlessui/react';
 import Credits from './Credits';
 
 import type { FC } from 'react'
-import type { Credits as CreditsType } from '~/features/tmdb';
-import type { TmdbDetail } from '~/features/tmdb';
+import type { Credits as CreditsType, TmdbDetail } from '~/features/tmdb';
 import type { Video } from '~/features/tmdb/utils';
 import YoutubeContainer from './Youtube';
 
