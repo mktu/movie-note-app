@@ -14,7 +14,7 @@ const SearchMovie: FC<Props> = ({
     const { t } = useTranslation()
     const { query, setQuery, searchResult } = useTmdbSearch()
     return (
-        <div className='flex flex-col gap-2 p-1'>
+        <div className='flex flex-col gap-2 overflow-hidden p-1'>
             <TextInput
                 autoComplete='off'
                 name='search-title'
@@ -27,9 +27,11 @@ const SearchMovie: FC<Props> = ({
                         {searchResult ? 'Nothing found' : 'Loading...'}
                     </div>
                 ) : (
-                    searchResult.results.slice(0, 10).map((result) => (
-                        <MovieOptionItem key={result.id} result={result} onSelect={onSelect} />
-                    ))
+                    <div className='h-full overflow-auto'>
+                        {searchResult.results.slice(0, 10).map((result) => (
+                            <MovieOptionItem key={result.id} result={result} onSelect={onSelect} />
+                        ))}
+                    </div>
                 )}
         </div>
     );
