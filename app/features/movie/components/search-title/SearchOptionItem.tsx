@@ -1,12 +1,12 @@
 import { Combobox } from '@headlessui/react';
 import { TmdbmageBasePath } from '@utils/constants';
 import type { FC } from 'react'
-import type { SearchResult } from '~/features/tmdb';
+import type { SearchMovieResult } from '~/features/tmdb';
 
 const imageBasePath = `${TmdbmageBasePath}/w200`
 
 type Props = {
-    result: SearchResult['results'][0],
+    result: SearchMovieResult['results'][0],
     idx: number
 }
 

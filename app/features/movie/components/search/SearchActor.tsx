@@ -1,18 +1,18 @@
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next';
 import { TextInput } from '~/components/inputs';
-import { useMovieSearch } from '~/features/tmdb';
-import MovieOptionItem from './MovieOptionItem';
+import { useActorSearch } from '~/features/tmdb/hooks/useSearch';
+import ActorOptionItem from './ActorOptionItem';
 
 type Props = {
     onSelected: () => void
 }
 
-const SearchMovie: FC<Props> = ({
+const SearchActor: FC<Props> = ({
     onSelected
 }) => {
     const { t } = useTranslation()
-    const { query, setQuery, searchResult } = useMovieSearch()
+    const { query, setQuery, searchResult } = useActorSearch()
     return (
         <div className='flex flex-col gap-2 overflow-hidden p-1'>
             <TextInput
@@ -29,7 +29,7 @@ const SearchMovie: FC<Props> = ({
                 ) : (
                     <div className='flex h-full flex-col gap-1 overflow-auto'>
                         {searchResult.results.slice(0, 10).map((result) => (
-                            <MovieOptionItem key={result.id} result={result} onSelected={onSelected} />
+                            <ActorOptionItem key={result.id} result={result} onSelected={onSelected} />
                         ))}
                     </div>
                 )}
@@ -37,4 +37,4 @@ const SearchMovie: FC<Props> = ({
     );
 };
 
-export default SearchMovie;
+export default SearchActor;

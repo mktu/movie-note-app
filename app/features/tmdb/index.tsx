@@ -7,7 +7,8 @@ export type {
     TmdbLng,
     TmdbTrend,
     Credits,
-    SearchResult,
+    SearchMovieResult,
+    SearchActorResult,
     TmdbTrends
 } from './utils'
 

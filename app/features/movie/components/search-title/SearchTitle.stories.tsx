@@ -3,7 +3,7 @@ import { action } from "@storybook/addon-actions";
 import { rest } from 'msw';
 
 import SearchTitle from '.';
-import type { SearchResult } from '~/features/tmdb';
+import type { SearchMovieResult } from '~/features/tmdb';
 
 export default {
     title: 'app/movie-note/SearchTitle',
@@ -18,7 +18,7 @@ Default.parameters = {
     msw: {
         handlers: [
             rest.get('https://api.themoviedb.org/3/search/movie', (req, res, ctx) => {
-                const result: SearchResult = {
+                const result: SearchMovieResult = {
                     page: 1,
                     results: [{
                         title: 'Example-1',

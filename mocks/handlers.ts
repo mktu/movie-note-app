@@ -1,11 +1,11 @@
 // src/mocks/handlers.js
 import { rest } from 'msw'
-import type { SearchResult } from '~/features/tmdb'
+import type { SearchMovieResult } from '~/features/tmdb'
 import details from './details'
 // handle for e2e (not for storybook)
 export const handlers = [
     rest.get('https://api.themoviedb.org/3/search/movie', (req, res, ctx) => {
-        const result: SearchResult = {
+        const result: SearchMovieResult = {
             page: 1,
             results: [{
                 title: 'ターミネーター4',

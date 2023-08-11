@@ -2,11 +2,11 @@ import { rest } from 'msw';
 import { credits, detail } from '~/features/movie/components/detail/mocks';
 
 import type { ImdbRate } from "../../imdb/types"
-import type { SearchResult } from "~/features/tmdb"
+import type { SearchMovieResult } from "~/features/tmdb"
 export { detail, credits }
 export const handlers = [
     rest.get('https://api.themoviedb.org/3/search/movie', (req, res, ctx) => {
-        const result: SearchResult = {
+        const result: SearchMovieResult = {
             page: 1,
             results: [{
                 title: 'Example-1',

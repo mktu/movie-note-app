@@ -1,16 +1,39 @@
 const searchBasePath = 'https://api.themoviedb.org/3/search/movie'
+const searchActorPath = 'https://api.themoviedb.org/3/search/person'
 const detailBasePath = 'https://api.themoviedb.org/3/movie'
 const trendPath = 'https://api.themoviedb.org/3/trending'
 const movieBasePath = (id: string) => `https://api.themoviedb.org/3/movie/${id}/videos`
 const creditsBasePath = (id: string) => `https://api.themoviedb.org/3/movie/${id}/credits`
 
-export type SearchResult = {
+export type SearchMovieResult = {
     page: number,
     results: {
         poster_path?: string,
         title: string,
         id: string,
         release_date: string
+    }[]
+}
+
+export type ActorKnownFor = {
+    backdrop_path: string,
+    id: string,
+    title: string,
+    overview: string,
+    poster_path: string,
+}
+
+export type SearchActorResult = {
+    page: number,
+    results: {
+        adult: boolean,
+        gender: number,
+        id: string,
+        known_for_department: string,
+        name: string,
+        original_name: string,
+        profile_path: string,
+        known_for: ActorKnownFor[]
     }[]
 }
 
@@ -97,7 +120,18 @@ export default class Tmdb {
             language: this.lng
         });
         const response = await fetch(`${searchBasePath}?${searchParams}`)
-        const json = await response.json<SearchResult>()
+        const json = await response.json<SearchMovieResult>()
+        return json
+    }
+    searchActor = async (query: string) => {
+        const searchParams = new URLSearchParams({
+            api_key: this.apiKey,
+            query,
+            page: '1',
+            language: this.lng
+        });
+        const response = await fetch(`${searchActorPath}?${searchParams}`)
+        const json = await response.json<SearchActorResult>()
         return json
     }
     getTrends = async () => {
