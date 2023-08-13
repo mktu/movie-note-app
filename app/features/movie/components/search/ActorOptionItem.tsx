@@ -25,11 +25,11 @@ const ActorOptionItem: FC<Props> = ({ result, onSelected }) => {
                     </svg>
                 )}
             </div>
-            <Navigator className='absolute inset-0' to={`/app/movies/${result.id}?lng=${i18n.language}`} onClick={onSelected} />
-            <div className='z-10 block truncate font-normal'>
+            <Navigator className='absolute inset-0' to={`/app/actors/${result.id}?lng=${i18n.language}`} onClick={onSelected} />
+            <div className='block truncate font-normal'>
                 <div className='text-[#1b72e8]'>{result.name}</div>
                 <div className='flex items-center gap-1 text-xs'>{result.known_for.map(v => (
-                    <Navigator onClick={onSelected} to={`/app/movies/${v.id}?lng=${i18n.language}`} key={v.id}>{v.title}</Navigator>
+                    <Navigator className='z-10' onClick={onSelected} to={`/app/movies/${v.id}?lng=${i18n.language}`} key={v.id}>{v.title}</Navigator>
                 ))}</div>
             </div>
         </div>

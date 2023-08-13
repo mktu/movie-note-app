@@ -2,8 +2,10 @@ const searchBasePath = 'https://api.themoviedb.org/3/search/movie'
 const searchActorPath = 'https://api.themoviedb.org/3/search/person'
 const detailBasePath = 'https://api.themoviedb.org/3/movie'
 const trendPath = 'https://api.themoviedb.org/3/trending'
+const personPath = 'https://api.themoviedb.org/3/person'
 const movieBasePath = (id: string) => `https://api.themoviedb.org/3/movie/${id}/videos`
 const creditsBasePath = (id: string) => `https://api.themoviedb.org/3/movie/${id}/credits`
+const movieCreditPath = (id: string) => `https://api.themoviedb.org/3/person/${id}/movie_credits`
 
 export type SearchMovieResult = {
     page: number,
@@ -64,6 +66,27 @@ export type TmdbDetail = {
     genres: { name: string, id: number }[],
     homepage?: string,
     imdb_id?: string,
+}
+
+export type Actor = {
+    id: string,
+    biography: string,
+    birthday: string,
+    name: string,
+    place_of_birth: string,
+    profile_path: string
+}
+
+export type MovieCredits = {
+    id: string,
+    cast: {
+        backdrop_path: string,
+        id: string,
+        title: string,
+        poster_path: string,
+        release_date: string,
+        character: string
+    }[]
 }
 
 export type Cast = {
@@ -160,6 +183,25 @@ export default class Tmdb {
         const response = await fetch(`${detailBasePath}/${id}?${searchParams}`)
         const json = await response.json<Omit<TmdbDetail, 'lng'>>()
         return { ...json, lng: this.lng }
+    }
+    getActor = async (id: string) => {
+        const searchParams = new URLSearchParams({
+            api_key: this.apiKey,
+            language: this.lng
+        });
+        const response = await fetch(`${personPath}/${id}?${searchParams}`)
+        const json = await response.json<Omit<Actor, 'lng'>>()
+        console.log('bio-', json.biography)
+        return { ...json, id }
+    }
+    getMovieCredit = async (id: string) => {
+        const searchParams = new URLSearchParams({
+            api_key: this.apiKey,
+            language: this.lng
+        });
+        const response = await fetch(`${movieCreditPath(id)}?${searchParams}`)
+        const json = await response.json<Omit<MovieCredits, 'lng'>>()
+        return { ...json, lng: this.lng, id }
     }
     getVideos = async (id: string) => {
         const searchParams = new URLSearchParams({

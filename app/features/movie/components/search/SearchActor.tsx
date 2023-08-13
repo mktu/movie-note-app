@@ -17,8 +17,8 @@ const SearchActor: FC<Props> = ({
         <div className='flex flex-col gap-2 overflow-hidden p-1'>
             <TextInput
                 autoComplete='off'
-                name='search-title'
-                placeholder={t('search-title')}
+                name='search-actor'
+                placeholder={t('search-actor')}
                 className="w-full border-none outline-none focus:ring-0"
                 onChange={(e) => { setQuery(e.target.value) }} />
             {!searchResult?.results || searchResult.results.length === 0 ?

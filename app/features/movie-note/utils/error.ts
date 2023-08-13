@@ -4,7 +4,8 @@ export type ErrorKey =
     'movie-id-not-found' |
     'invalid-movie-note' |
     'backend-error' |
-    'lng-not-found'
+    'lng-not-found' |
+    'actor-id-not-found'
 
 const dbErrorCodeMap: { [n: string]: ErrorKey } = {
     '23505': 'movie-note-already-registered'

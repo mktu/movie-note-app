@@ -9,7 +9,9 @@ export type {
     Credits,
     SearchMovieResult,
     SearchActorResult,
-    TmdbTrends
+    TmdbTrends,
+    MovieCredits,
+    Actor
 } from './utils'
 
 export * from './hooks'

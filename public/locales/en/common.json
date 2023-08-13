@@ -67,5 +67,8 @@
     "trailer":"トレイラー",
     "global-search":"グローバル検索",
     "search-movie": "映画を検索",
-    "search-actor":"俳優を検索"
+    "search-actor":"俳優を検索",
+    "birthday":"{{birthday}} 生まれ",
+    "no-biography":"バイオグラフィーはありません",
+    "movie-credits":"出演映画"
 }
