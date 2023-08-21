@@ -1,12 +1,11 @@
-import { useContext, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import TmdbContext from '~/providers/tmdb/Context'
-import type { SearchResult } from '~/features/tmdb'
+import type { SearchMovieResult, SearchActorResult } from '~/features/tmdb'
 
-const useTmdb = (init?: SearchResult) => {
+const useSearchBase = <T>(searchFunc: (query: string) => Promise<T>, init?: T) => {
     const [query, setQuery] = useState('')
     const [count, setCount] = useState(0) // this is for debug
-    const [searchResult, setSearchResult] = useState<SearchResult | null>(init || null)
-    const tmdb = useContext(TmdbContext)
+    const [searchResult, setSearchResult] = useState<T | null>(init || null)
     useEffect(() => {
         let ignore = false
         if (!query) {
@@ -18,18 +17,17 @@ const useTmdb = (init?: SearchResult) => {
                 return
             }
             setCount(b => b + 1)
-            tmdb.search(query)
-                .then((result) => {
-                    if (ignore) {
-                        return
-                    }
-                    setSearchResult(result)
-                })
+            searchFunc(query).then(v => {
+                if (ignore) {
+                    return
+                }
+                setSearchResult(v)
+            })
         }, 1000);
         return () => {
             ignore = true
         }
-    }, [query, tmdb])
+    }, [searchFunc, query])
     return {
         query,
         setQuery,
@@ -38,4 +36,23 @@ const useTmdb = (init?: SearchResult) => {
     }
 }
 
-export default useTmdb
+const useMovieSearch = (init?: SearchMovieResult) => {
+    const tmdb = useContext(TmdbContext)
+    const func = useCallback(async (query: string) => {
+        return await tmdb.search(query)
+    }, [tmdb])
+    return useSearchBase(func, init)
+}
+
+const useActorSearch = (init?: SearchActorResult) => {
+    const tmdb = useContext(TmdbContext)
+    const func = useCallback(async (query: string) => {
+        return await tmdb.searchActor(query)
+    }, [tmdb])
+    return useSearchBase(func, init)
+}
+
+export {
+    useMovieSearch,
+    useActorSearch
+}

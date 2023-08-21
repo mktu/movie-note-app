@@ -9,6 +9,7 @@ import Image from '~/components/Image'
 
 import type { FC } from 'react';
 import type { Credits } from '~/features/tmdb';
+import { useNavigatorContext } from '~/providers/navigator/Context';
 
 
 const imageBasePath = `${TmdbmageBasePath}/w276_and_h350_face`
@@ -36,6 +37,8 @@ const CreditsComp: FC<Props> = ({
     const { cast, crew } = credits || { cast: [], crew: [] }
     const { t } = useTranslation('common')
     const target = showAll ? cast : cast.slice(0, 8)
+    const { navigator: Navigator } = useNavigatorContext()
+    const { i18n } = useTranslation()
     return (
         <div className={clsx('flex w-full flex-col gap-4', clasName)}>
             <div>
@@ -62,7 +65,7 @@ const CreditsComp: FC<Props> = ({
                                     srcSet={imageBasePaths.map((path, idx) => `${path}${cast.profile_path} ${idx + 1}x`).join(',')}
                                     width={138}
                                     height={175} className='rounded' />
-                                <div className='text-sm'>{cast.name}</div>
+                                <Navigator className='text-sm' to={`/app/actors/${cast.id}?lng=${i18n.language}`}>{cast.name}</Navigator>
                                 <div className='text-sm'>({cast.character})</div>
                             </div>
                         )

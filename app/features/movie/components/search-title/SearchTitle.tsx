@@ -6,16 +6,16 @@ import XIcon from '~/components/icons/X';
 
 import { Combobox, Transition } from '@headlessui/react';
 
-import { useTmdbSearch } from '~/features/tmdb/hooks';
+import { useMovieSearch } from '~/features/tmdb/hooks';
 import SearchOptionItem from './SearchOptionItem';
 
 import type { FC } from "react";
-import type { SearchResult } from '~/features/tmdb';
+import type { SearchMovieResult } from '~/features/tmdb';
 
 type Props = {
     selected: string,
     setSelected: (select: string) => void,
-    searchResult?: SearchResult
+    searchResult?: SearchMovieResult
 }
 
 const Search: FC<Props> = ({
@@ -24,7 +24,7 @@ const Search: FC<Props> = ({
     searchResult: init
 }) => {
     const { t } = useTranslation()
-    const { query, setQuery, searchResult } = useTmdbSearch(init)
+    const { query, setQuery, searchResult } = useMovieSearch(init)
     const selectedText = searchResult?.results?.find(v => v.id === selected)?.title || ''
     return (
         <Combobox value={selected} onChange={setSelected}>

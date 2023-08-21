@@ -7,8 +7,11 @@ export type {
     TmdbLng,
     TmdbTrend,
     Credits,
-    SearchResult,
-    TmdbTrends
+    SearchMovieResult,
+    SearchActorResult,
+    TmdbTrends,
+    MovieCredits,
+    Actor
 } from './utils'
 
 export * from './hooks'

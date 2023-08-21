@@ -21,7 +21,7 @@ const SearchDialog: FC<Props> = ({
                 <Dialog.Panel className="w-full max-w-4xl rounded border border-border-main bg-white p-4 text-text-main shadow">
                     <Dialog.Title as='h4'>{t('global-search')}</Dialog.Title>
                     <Dialog.Description as='div' className='my-2 max-h-[650px] overflow-y-auto overflow-x-hidden'>
-                        <Search onSelectMovie={onClose} />
+                        <Search onSelected={onClose} />
                     </Dialog.Description>
                     <hr className='my-1' />
                     <div className='flex items-center justify-end'>

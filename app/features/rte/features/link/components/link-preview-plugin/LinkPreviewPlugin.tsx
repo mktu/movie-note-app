@@ -32,7 +32,7 @@ const LinkPreviewPlugin: FC = () => {
     return (
         <div className=''>
             <LexicalAutoEmbedPlugin<EmbedConfig>
-                embedConfigs={[YoutubePreviewConfig, TwitterPreviewConfig, SimpleLinkPreviewConfig]}
+                embedConfigs={[SimpleLinkPreviewConfig, YoutubePreviewConfig, TwitterPreviewConfig]}
                 // need if using "INSERT_EMBED_COMMAND" from Toolbar
                 onOpenEmbedModalForConfig={() => { }}
                 getMenuOptions={getMenuOptions}
