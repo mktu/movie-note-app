@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@headlessui/react": "1.7.15",
-    "@lexical/react": "0.11.2",
+    "@lexical/react": "0.12.0",
     "@microlink/mql": "0.10.33",
     "@popperjs/core": "2.11.8",
     "@remix-run/cloudflare": "1.19.3",
