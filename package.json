@@ -52,7 +52,7 @@
     "react-twitter-embed": "4.0.4",
     "react-youtube": "10.1.0",
     "recoil": "0.7.7",
-    "remix-auth": "3.5.0",
+    "remix-auth": "3.5.1",
     "remix-auth-google": "1.2.0",
     "remix-i18next": "4.1.1",
     "uuid": "9.0.0",
