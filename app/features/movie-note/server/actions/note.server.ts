@@ -28,7 +28,8 @@ export async function action({ request, context }: ActionArgs) {
             imdbId: data.imdbId || null,
             lng: data.lng
         }, user.id)
-        return redirect('/app')
+        return json<ActionData>({
+        }, { status: 200 })
     } catch (e) {
         if (e instanceof MovieNoteError) {
             return json<ActionData>({

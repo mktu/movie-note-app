@@ -1,7 +1,6 @@
 import clsx from 'clsx';
-import { forwardRef, useState } from 'react';
+import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ContainedButton } from '~/components/buttons';
 import useFloatingHeader from '~/hooks/useFloatingHeader';
 
 import Error from './Error';
@@ -12,7 +11,7 @@ import MiniImage from './MiniImage';
 import WatchLog from './WatchLog';
 
 type Props = {
-    onClickSave: (state?: WatchState) => void,
+    onChangeState: (state?: WatchState) => void,
     title: string,
     image?: string,
     className?: string,
@@ -26,13 +25,13 @@ type Props = {
 }
 
 const Edit = forwardRef<HTMLDivElement, Props>(({
-    onClickSave,
+    onChangeState,
     className,
     canSave,
     title,
     image,
     error,
-    watchState: watchStatebase,
+    watchState,
     onOpenDetailDialog,
     onOpenWatchLogDialog,
     admirationDate,
@@ -40,7 +39,7 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
 }, ref) => {
     const { t } = useTranslation('common')
     const { setObserverElm, ref: inViewRef, inView } = useFloatingHeader()
-    const [watchState, setWatchState] = useState<WatchState | undefined>(watchStatebase)
+
     return (
         <>
             <div ref={inViewRef} />
@@ -73,16 +72,11 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                     <WatchStateButtons
                         watchState={watchState}
                         onClick={(watchState) => {
-                            setWatchState(watchState)
+                            onChangeState(watchState)
                             if (watchState === 'watched') {
                                 onOpenWatchLogDialog()
                             }
                         }} />
-                </div>
-                <div className='ml-auto flex items-center gap-2 font-semibold'>
-                    <ContainedButton disabled={!canSave} onClick={() => {
-                        onClickSave(watchState)
-                    }}>{t('update')}</ContainedButton>
                 </div>
             </div>
             {error && (

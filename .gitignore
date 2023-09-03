@@ -13,6 +13,8 @@ node_modules
 /app/styles/app.css
 .mf/**
 .wrangler/**
+functions/metafile.js.json
+functions/metafile.server.json
 
 state.json
 .DS_Store

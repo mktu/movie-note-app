@@ -16,7 +16,7 @@ const useEditorState = (setContentGetter: (fun: () => string) => void,
         }
         const id = setInterval(() => {
             editorStateRef.current && monitorCurrentState(JSON.stringify(editorStateRef.current))
-        }, 5000);
+        }, 1000);
         return () => {
             clearInterval(id)
         }
