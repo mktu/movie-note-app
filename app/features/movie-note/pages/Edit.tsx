@@ -6,8 +6,6 @@ import { MovieLayout } from '../components/layout';
 import { DetailDialog, Meta } from '~/features/movie';
 import Note from '~/features/rte';
 import Imdb, { ImdbRateLabel } from '../../imdb';
-import { useWatchLog } from '../hooks/useMovie';
-import { useMovieNoteChangeMonitor } from '../hooks/useMovieNoteChangeMonitor';
 
 import type { FC } from "react";
 import type { UpdateMovieNote, WatchState } from "@type-defs/frontend";
@@ -16,9 +14,10 @@ import type { ImdbRate } from '../../imdb/types';
 import type { MovieNoteType } from '../server/db';
 import WatchLogDialog from '../components/watch-log/WatchLogDialog';
 import type { Video } from '~/features/tmdb/utils';
+import { format } from 'date-fns';
 
 type Props = {
-    onSubmit: (note: UpdateMovieNote) => void,
+    onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void,
     error?: string,
     movieNoteDetail?: MovieNoteType,
     tmdbDetail?: TmdbDetail
@@ -42,9 +41,9 @@ const Edit: FC<Props> = ({
     }, [])
     const detail = tmdbDetail
     const credits = tmdbCredits || null
-    const watchLogs = useWatchLog(movieNoteDetail?.stars, movieNoteDetail?.admiration_date)
-    const { stars, formattedWatchDate, setAdmirationDate, setStars } = watchLogs
-    const { unblock, setDirty, checkDirty } = useMovieNoteChangeMonitor()
+    const stars = movieNoteDetail?.stars || 0
+    const formattedWatchDate = movieNoteDetail?.admiration_date || ''
+    const watchState = movieNoteDetail?.watch_state as WatchState
     const [openDetailDialog, setOpenDetailDialog] = useState(false)
     const [openWatchLog, setOpenWatchLog] = useState(false)
     return (
@@ -60,18 +59,17 @@ const Edit: FC<Props> = ({
                     title={movieNoteDetail?.title || ''}
                     watchState={movieNoteDetail?.watch_state as WatchState}
                     canSave={Boolean(detail)}
-                    onClickSave={(watchState) => {
-                        unblock()
+                    onChangeState={(newState) => {
                         detail && onSubmit({
                             title: detail.title,
                             thumbnail: detail.poster_path || detail.backdrop_path || '',
                             tmdbId: detail.id,
                             imdbId: detail.imdb_id,
-                            movieMemo: content ? content.get() : '',
+                            movieMemo: content?.get() || '',
                             admirationDate: formattedWatchDate || '',
-                            stars,
+                            stars: stars,
                             lng: detail.lng,
-                            watchState
+                            watchState: newState
                         })
                     }} />}
                 movieInfo={detail && {
@@ -79,17 +77,22 @@ const Edit: FC<Props> = ({
                     metaInfo: <Meta genres={detail?.genres || []} />,
                     imdb: imdbRate ? <ImdbRateLabel imdbId={detail.imdb_id!} {...imdbRate} /> : <Imdb imdbId={detail?.imdb_id} />
                 }}
+                // RTEのonChangeハンドラでonSubmitする必要あり
                 note={detail && <Note
                     setContentGetter={setContentGetter}
                     init={movieNoteDetail?.memo}
-                    monitorCurrentState={(state) => {
-                        if (movieNoteDetail?.memo) {
-                            setDirty(state !== movieNoteDetail?.memo)
-                        } else {
-                            setDirty(before => {
-                                return before || checkDirty(state)
-                            })
-                        }
+                    onChange={(text) => {
+                        onSubmit({
+                            title: detail.title,
+                            thumbnail: detail.poster_path || detail.backdrop_path || '',
+                            tmdbId: detail.id,
+                            imdbId: detail.imdb_id,
+                            movieMemo: text,
+                            admirationDate: formattedWatchDate,
+                            stars,
+                            lng: detail.lng,
+                            watchState
+                        }, 1000)
                     }}
                 />}
             />
@@ -111,8 +114,17 @@ const Edit: FC<Props> = ({
                         setOpenWatchLog(false)
                     }}
                     onSave={(newAdmirationDate, newStars) => {
-                        setStars(newStars)
-                        setAdmirationDate(newAdmirationDate)
+                        detail && onSubmit({
+                            title: detail.title,
+                            thumbnail: detail.poster_path || detail.backdrop_path || '',
+                            tmdbId: detail.id,
+                            imdbId: detail.imdb_id,
+                            movieMemo: content?.get() || '',
+                            admirationDate: format(new Date(newAdmirationDate), 'yyyy-MM-dd') || '',
+                            stars: newStars,
+                            lng: detail.lng,
+                            watchState
+                        })
                         setOpenWatchLog(false)
                     }}
                 />

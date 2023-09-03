@@ -22,13 +22,15 @@ import Toolbar from './Toolbar';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
-    monitorCurrentState?: (data: string) => void
+    monitorCurrentState?: (data: string) => void,
+    onChange?: (content: string) => void
     init?: string | null
 }
 
 const Editor: FC<Props> = ({
     setContentGetter,
     monitorCurrentState,
+    onChange,
     init
 }) => {
     const { t } = useTranslation('common')
@@ -60,6 +62,7 @@ const Editor: FC<Props> = ({
                 <CheckListPlugin />
                 <OnChangePlugin onChange={(editorState) => {
                     editorStateRef.current = editorState
+                    onChange && onChange(JSON.stringify(editorStateRef.current))
                 }} />
             </LexicalComposer>
         </div>

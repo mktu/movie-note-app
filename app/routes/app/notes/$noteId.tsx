@@ -5,11 +5,13 @@ import Settings from '~/features/movie-note/components/performance/Settings';
 import { action } from '~/features/movie-note/server/actions/note.server';
 import { loader } from '~/features/movie-note/server/loaders/note.server';
 
-import { useActionData, useLoaderData, useSubmit } from '@remix-run/react';
+import { useActionData, useLoaderData } from '@remix-run/react';
 import { getFormData } from '@utils/form';
 
 import type { HeadersFunction } from "@remix-run/cloudflare";
-import type { FC } from "react";
+import { useCallback, type FC } from "react";
+import { useDebounceFetcher } from '~/features/movie-note/hooks/useDebounceFetcher';
+import { AddMovieNote } from '~/features/movie-note/server/types';
 
 // stale-while-revalidateの設定
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
@@ -28,10 +30,14 @@ export {
 }
 
 const Note: FC = () => {
-    const submit = useSubmit()
+    const debounceSubmit = useDebounceFetcher()
     const actionData = useActionData<typeof action>()
     const loaderData = useLoaderData<typeof loader>()
     const content = loaderData.content
+
+    const onSubmit = useCallback((updateMovieNote: AddMovieNote, debounceTimeout?: number) => {
+        debounceSubmit(getFormData(updateMovieNote), { method: 'post', debounceTimeout })
+    }, [debounceSubmit])
 
     return (<>
         {loaderData.error && (
@@ -49,9 +55,7 @@ const Note: FC = () => {
                     imdbRate={content.imdbRate}
                     tmdbCredits={content.tmdbCredits}
                     trailers={content.trailers}
-                    onSubmit={(updateMovieNote) => {
-                        submit(getFormData(updateMovieNote), { method: 'post' })
-                    }} error={actionData?.error} />
+                    onSubmit={onSubmit} error={actionData?.error} />
             </>
         )}
     </>)
