@@ -11,11 +11,9 @@ const Template: ComponentStory<typeof MovieHeader> = (args) => <MovieHeader {...
 
 export const Enabled = Template.bind({});
 Enabled.args = {
-    canSave: true
 }
 
 export const Disabled = Template.bind({});
 
 Disabled.args = {
-    canSave: false
 }

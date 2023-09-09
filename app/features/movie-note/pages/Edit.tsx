@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { Summary } from '../components/detail';
 import { EditHeader } from '../components/header';
 import { MovieLayout } from '../components/layout';
-import { DetailDialog, Meta } from '~/features/movie';
+import { Meta } from '~/features/movie';
 import Note from '~/features/rte';
 import Imdb, { ImdbRateLabel } from '../../imdb';
 
@@ -13,8 +13,8 @@ import type { Credits, TmdbDetail } from '~/features/tmdb';
 import type { ImdbRate } from '../../imdb/types';
 import type { MovieNoteType } from '../server/db';
 import WatchLogDialog from '../components/watch-log/WatchLogDialog';
-import type { Video } from '~/features/tmdb/utils';
 import { format } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
     onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void,
@@ -23,7 +23,6 @@ type Props = {
     tmdbDetail?: TmdbDetail
     tmdbCredits?: Credits,
     imdbRate: ImdbRate | null,
-    trailers: Video[]
 }
 
 const Edit: FC<Props> = ({
@@ -33,7 +32,6 @@ const Edit: FC<Props> = ({
     tmdbDetail,
     tmdbCredits,
     imdbRate,
-    trailers
 }) => {
     const [content, setContent] = useState<{ get: () => string }>()
     const setContentGetter = useCallback((getContent: () => string) => {
@@ -44,13 +42,13 @@ const Edit: FC<Props> = ({
     const stars = movieNoteDetail?.stars || 0
     const formattedWatchDate = movieNoteDetail?.admiration_date || ''
     const watchState = movieNoteDetail?.watch_state as WatchState
-    const [openDetailDialog, setOpenDetailDialog] = useState(false)
     const [openWatchLog, setOpenWatchLog] = useState(false)
+    const { i18n } = useTranslation()
     return (
         <>
             <MovieLayout
                 header={<EditHeader
-                    onOpenDetailDialog={() => { setOpenDetailDialog(true) }}
+                    detailPath={`/app/movies/${detail?.id}?lng=${i18n.language}`}
                     onOpenWatchLogDialog={() => { setOpenWatchLog(true) }}
                     error={error}
                     admirationDate={formattedWatchDate}
@@ -58,7 +56,6 @@ const Edit: FC<Props> = ({
                     image={detail?.poster_path || detail?.backdrop_path || ''}
                     title={movieNoteDetail?.title || ''}
                     watchState={movieNoteDetail?.watch_state as WatchState}
-                    canSave={Boolean(detail)}
                     onChangeState={(newState) => {
                         detail && onSubmit({
                             title: detail.title,
@@ -96,15 +93,6 @@ const Edit: FC<Props> = ({
                     }}
                 />}
             />
-            {openDetailDialog && detail && (
-                <DetailDialog
-                    detail={detail}
-                    credits={credits}
-                    trailers={trailers}
-                    onClose={() => { setOpenDetailDialog(false) }}
-                    open={openDetailDialog}
-                />
-            )}
             {openWatchLog && (
                 <WatchLogDialog
                     open={openWatchLog}

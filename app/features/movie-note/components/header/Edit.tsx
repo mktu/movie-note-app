@@ -15,24 +15,22 @@ type Props = {
     title: string,
     image?: string,
     className?: string,
-    canSave?: boolean
     error?: string,
     watchState?: WatchState,
     admirationDate?: string,
     stars?: number,
-    onOpenDetailDialog: () => void,
+    detailPath: string,
     onOpenWatchLogDialog: () => void
 }
 
 const Edit = forwardRef<HTMLDivElement, Props>(({
     onChangeState,
     className,
-    canSave,
     title,
     image,
     error,
     watchState,
-    onOpenDetailDialog,
+    detailPath,
     onOpenWatchLogDialog,
     admirationDate,
     stars
@@ -65,7 +63,7 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                         <WatchLog
                             admirationDate={admirationDate}
                             stars={stars}
-                            onOpenDetailDialog={onOpenDetailDialog}
+                            detailPath={detailPath}
                             onOpenWatchLogDialog={onOpenWatchLogDialog}
                         />
                     </div>

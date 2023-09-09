@@ -54,7 +54,6 @@ const Note: FC = () => {
                     tmdbDetail={content.tmdbDetail}
                     imdbRate={content.imdbRate}
                     tmdbCredits={content.tmdbCredits}
-                    trailers={content.trailers}
                     onSubmit={onSubmit} error={actionData?.error} />
             </>
         )}
