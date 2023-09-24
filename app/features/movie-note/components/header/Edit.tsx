@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import useFloatingHeader from '~/hooks/useFloatingHeader';
 
 import Error from './Error';
-import WatchStateButtons from './WatchStateButtons';
 
 import type { WatchState } from '@type-defs/frontend';
 import MiniImage from './MiniImage';
 import WatchLog from './WatchLog';
+import { ContainedButton } from '~/components/buttons';
 
 type Props = {
     onChangeState: (state?: WatchState) => void,
@@ -20,7 +20,9 @@ type Props = {
     admirationDate?: string,
     stars?: number,
     detailPath: string,
-    onOpenWatchLogDialog: () => void
+    published?: boolean,
+    onOpenWatchLogDialog: () => void,
+    onPublish: () => void
 }
 
 const Edit = forwardRef<HTMLDivElement, Props>(({
@@ -31,9 +33,11 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
     error,
     watchState,
     detailPath,
+    published,
     onOpenWatchLogDialog,
     admirationDate,
-    stars
+    stars,
+    onPublish
 }, ref) => {
     const { t } = useTranslation('common')
     const { setObserverElm, ref: inViewRef, inView } = useFloatingHeader()
@@ -65,21 +69,24 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                             stars={stars}
                             detailPath={detailPath}
                             onOpenWatchLogDialog={onOpenWatchLogDialog}
+                            watchState={watchState}
+                            onChangeState={onChangeState}
                         />
                     </div>
-                    <WatchStateButtons
-                        watchState={watchState}
-                        onClick={(watchState) => {
-                            onChangeState(watchState)
-                            if (watchState === 'watched') {
-                                onOpenWatchLogDialog()
-                            }
-                        }} />
+
+                    <div className='ml-auto flex items-center gap-2 font-semibold'>
+                        {published ? (
+                            <ContainedButton onClick={onPublish}>{t('update-publish')}</ContainedButton>
+                        ) : (
+                            <ContainedButton onClick={onPublish}>{t('publish')}</ContainedButton>
+                        )}
+                    </div>
                 </div>
-            </div>
+            </div >
             {error && (
                 <Error error={t(error)} />
-            )}
+            )
+            }
         </>
     );
 });

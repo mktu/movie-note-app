@@ -34,13 +34,19 @@ const Edit: FC<Props> = ({
     imdbRate,
 }) => {
     const [content, setContent] = useState<{ get: () => string }>()
+    const [htmlConvertUtil, setHtmlConvertUtil] = useState<{ convert: () => Promise<string> }>()
     const setContentGetter = useCallback((getContent: () => string) => {
         setContent({ get: getContent })
+    }, [])
+    const setHtmlConverter = useCallback((convert: () => Promise<string>) => {
+        setHtmlConvertUtil({ convert })
     }, [])
     const detail = tmdbDetail
     const credits = tmdbCredits || null
     const stars = movieNoteDetail?.stars || 0
     const formattedWatchDate = movieNoteDetail?.admiration_date || ''
+    const published = Boolean(movieNoteDetail?.published)
+    const html = movieNoteDetail?.html || undefined
     const watchState = movieNoteDetail?.watch_state as WatchState
     const [openWatchLog, setOpenWatchLog] = useState(false)
     const { i18n } = useTranslation()
@@ -56,6 +62,7 @@ const Edit: FC<Props> = ({
                     image={detail?.poster_path || detail?.backdrop_path || ''}
                     title={movieNoteDetail?.title || ''}
                     watchState={movieNoteDetail?.watch_state as WatchState}
+                    published={published}
                     onChangeState={(newState) => {
                         detail && onSubmit({
                             title: detail.title,
@@ -66,9 +73,27 @@ const Edit: FC<Props> = ({
                             admirationDate: formattedWatchDate || '',
                             stars: stars,
                             lng: detail.lng,
-                            watchState: newState
+                            watchState: newState,
+                            published,
+                            html
                         })
-                    }} />}
+                    }}
+                    onPublish={async () => {
+                        detail && onSubmit({
+                            title: detail.title,
+                            thumbnail: detail.poster_path || detail.backdrop_path || '',
+                            tmdbId: detail.id,
+                            imdbId: detail.imdb_id,
+                            movieMemo: content?.get() || '',
+                            admirationDate: formattedWatchDate || '',
+                            stars: stars,
+                            lng: detail.lng,
+                            watchState,
+                            published: true,
+                            html: await htmlConvertUtil?.convert()
+                        })
+                    }}
+                />}
                 movieInfo={detail && {
                     detail: <Summary detail={detail} credits={credits} />,
                     metaInfo: <Meta genres={detail?.genres || []} />,
@@ -77,6 +102,7 @@ const Edit: FC<Props> = ({
                 // RTEのonChangeハンドラでonSubmitする必要あり
                 note={detail && <Note
                     setContentGetter={setContentGetter}
+                    setHtmlConverter={setHtmlConverter}
                     init={movieNoteDetail?.memo}
                     onChange={(text) => {
                         onSubmit({
@@ -88,7 +114,9 @@ const Edit: FC<Props> = ({
                             admirationDate: formattedWatchDate,
                             stars,
                             lng: detail.lng,
-                            watchState
+                            watchState,
+                            published,
+                            html
                         }, 1000)
                     }}
                 />}
@@ -111,7 +139,9 @@ const Edit: FC<Props> = ({
                             admirationDate: format(new Date(newAdmirationDate), 'yyyy-MM-dd') || '',
                             stars: newStars,
                             lng: detail.lng,
-                            watchState
+                            watchState,
+                            published,
+                            html
                         })
                         setOpenWatchLog(false)
                     }}

@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
@@ -19,9 +19,11 @@ import { validateUrl } from '../utils/validateUrl';
 import initialConfig from './initialConfig';
 import { transformers } from './nodes';
 import Toolbar from './Toolbar';
+import HTMLConvertPlugin from './HTMLConvertPlugin';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
+    setHtmlConverter: (fun: () => Promise<string>) => void,
     monitorCurrentState?: (data: string) => void,
     onChange?: (content: string) => void
     init?: string | null
@@ -29,6 +31,7 @@ type Props = {
 
 const Editor: FC<Props> = ({
     setContentGetter,
+    setHtmlConverter,
     monitorCurrentState,
     onChange,
     init
@@ -64,6 +67,8 @@ const Editor: FC<Props> = ({
                     editorStateRef.current = editorState
                     onChange && onChange(JSON.stringify(editorStateRef.current))
                 }} />
+                <HTMLConvertPlugin
+                    getConverter={setHtmlConverter} />
             </LexicalComposer>
         </div>
     );
