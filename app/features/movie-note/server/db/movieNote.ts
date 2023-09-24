@@ -53,7 +53,7 @@ const updateMovieNote = async (supabaseAdmin: AdminClientType, movieNote: AddMov
         admiration_date: movieNote.admirationDate || null,
         stars: movieNote.stars,
         watch_state: movieNote.watchState || null,
-        published: movieNote.published || null,
+        published: movieNote.published === 'true' ? true : false,
         html: movieNote.html || null
     }).match({
         tmdb_id: movieNote.tmdbId,

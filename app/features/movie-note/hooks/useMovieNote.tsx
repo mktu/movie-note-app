@@ -1,0 +1,91 @@
+import type { Credits, TmdbDetail } from "~/features/tmdb"
+import type { MovieNoteType } from "../server/db"
+import { useCallback, useState } from "react"
+import type { UpdateMovieNote, WatchState } from "@type-defs/frontend"
+import format from "date-fns/format"
+import { useTranslation } from "react-i18next"
+
+type Props = {
+    movieNoteDetail?: MovieNoteType,
+    tmdbDetail?: TmdbDetail
+    tmdbCredits?: Credits,
+    error?: string,
+    onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void
+}
+
+export const useMovieNote = ({
+    movieNoteDetail,
+    tmdbCredits,
+    tmdbDetail,
+    error,
+    onSubmit,
+}: Props) => {
+    const { i18n } = useTranslation()
+    const [content, setContent] = useState<{ get: () => string }>()
+    const [htmlConvertUtil, setHtmlConvertUtil] = useState<{ convert: () => Promise<string> }>()
+    const setContentGetter = useCallback((getContent: () => string) => {
+        setContent({ get: getContent })
+    }, [])
+    const setHtmlConverter = useCallback((convert: () => Promise<string>) => {
+        setHtmlConvertUtil({ convert })
+    }, [])
+    const title = movieNoteDetail?.title || ''
+    const detail = tmdbDetail
+    const detailPath = `/app/movies/${detail?.id}?lng=${i18n.language}`
+    const credits = tmdbCredits || null
+    const stars = movieNoteDetail?.stars || 0
+    const formattedWatchDate = movieNoteDetail?.admiration_date || ''
+    const published = Boolean(movieNoteDetail?.published)
+    const html = movieNoteDetail?.html || undefined
+    const watchState = movieNoteDetail?.watch_state as WatchState
+    const imagePath = detail?.poster_path || detail?.backdrop_path || ''
+    const submitNote = useCallback(({
+        newWatchState,
+        newAdmirationDate,
+        newStars,
+        newPublished,
+        newNote,
+        newHtml,
+        debounceTimeout
+    }: {
+        newWatchState?: WatchState,
+        newAdmirationDate?: string,
+        newNote?: string,
+        newStars?: number,
+        newPublished?: boolean
+        newHtml?: string,
+        debounceTimeout?: number
+    }) => {
+        detail && onSubmit({
+            title: detail.title,
+            thumbnail: detail.poster_path || detail.backdrop_path || '',
+            tmdbId: detail.id,
+            imdbId: detail.imdb_id,
+            movieMemo: newNote !== undefined ? newNote : content?.get() || '',
+            admirationDate: newAdmirationDate !== undefined ? format(new Date(newAdmirationDate), 'yyyy-MM-dd') : formattedWatchDate,
+            stars: newStars !== undefined ? newStars : stars,
+            lng: detail.lng,
+            watchState: newWatchState || watchState,
+            published: newPublished !== undefined ? newPublished : published || false,
+            html: newHtml !== undefined ? newHtml : html || ''
+        }, debounceTimeout)
+    }, [content, detail, formattedWatchDate, html, onSubmit, published, stars, watchState])
+
+
+    return {
+        detail,
+        credits,
+        stars,
+        watchState,
+        imagePath,
+        formattedWatchDate,
+        published,
+        detailPath,
+        title,
+        error,
+        setHtmlConverter,
+        setContentGetter,
+        htmlConvertUtil,
+        submitNote
+    }
+}

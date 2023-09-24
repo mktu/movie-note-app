@@ -8,32 +8,34 @@ import type { WatchState } from '@type-defs/frontend';
 import Stars from '~/components/icons/Stars';
 import clsx from 'clsx';
 import Check from '~/components/icons/Check';
+import { useMovieNoteContext } from '../../context/movie-note/Context';
 
 type Props = {
-    admirationDate?: string,
-    stars?: number,
-    detailPath: string,
     onOpenWatchLogDialog: () => void,
-    watchState?: WatchState,
-    onChangeState: (state?: WatchState) => void,
 }
 
 const WatchLog: FC<Props> = ({
-    admirationDate,
-    stars,
-    detailPath,
     onOpenWatchLogDialog,
-    watchState,
-    onChangeState
 }) => {
     const { t } = useTranslation('common')
     const { navigator: Navigator } = useNavigatorContext()
-    const onClickWatchState = useCallback((state: WatchState) => {
-        onChangeState(state)
-        if (state === 'watched') {
+    const {
+        stars,
+        watchState,
+        submitNote,
+        formattedWatchDate,
+        detailPath
+    } = useMovieNoteContext()
+    const onClickWatchState = useCallback((newWatchState: WatchState) => {
+        if (newWatchState === 'watched') {
             onOpenWatchLogDialog()
+        } else {
+            submitNote({
+                newWatchState
+            })
         }
-    }, [onChangeState, onOpenWatchLogDialog])
+    }, [onOpenWatchLogDialog, submitNote])
+
     return (
         <>
             <div className='flex items-center gap-4 text-sm'>
@@ -46,7 +48,7 @@ const WatchLog: FC<Props> = ({
                         )} />
                         <span className={clsx('whitespace-nowrap group-hover:text-green-500',
                             watchState === 'watched' ? 'text-green-500' : 'text-text-disabled')}>
-                            {watchState === 'watched' ? `${t('watched')}:${admirationDate || t('no-watched-log')}` : t('watched')}
+                            {watchState === 'watched' ? `${t('watched')}:${formattedWatchDate || t('no-watched-log')}` : t('watched')}
                         </span>
                     </TextButton>
                     <TextButton paddings='px-2 py-2' className='group flex items-center gap-1' onClick={() => { onClickWatchState('lookforward') }}>

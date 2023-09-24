@@ -23,7 +23,7 @@ const schema = zfd.formData({
     watchState: zfd
         .text(z.string().optional()),
     published: zfd
-        .text(z.coerce.boolean().optional()),
+        .text(z.string().optional()),
     html: zfd
         .text(z.string().optional())
 })

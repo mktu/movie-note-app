@@ -7,23 +7,23 @@ import { Dialog } from '@headlessui/react';
 import WatchLog from './WatchLog';
 
 import type { FC } from 'react';
+import { useMovieNoteContext } from '../../context/movie-note/Context';
 
 type Props = {
     open: boolean,
     onClose: () => void,
-    initAdmirationDate?: string,
-    initStars?: number,
-    onSave: (admirationDate: string, stars: number) => void
 }
 
 const WatchLogDialog: FC<Props> = ({
     open,
     onClose,
-    initStars,
-    initAdmirationDate,
-    onSave
 }) => {
     const { t } = useTranslation('common')
+    const {
+        stars: initStars,
+        formattedWatchDate: initAdmirationDate,
+        submitNote
+    } = useMovieNoteContext()
     const [admirationDate, setAdmirationDate] = useState(initAdmirationDate || '')
     const [stars, setStars] = useState(initStars || 0)
     return (
@@ -44,7 +44,12 @@ const WatchLogDialog: FC<Props> = ({
                     <div className='flex items-center justify-end'>
                         <TextButton className='font-semibold' onClick={onClose}>Cancel</TextButton>
                         <TextButton className='font-semibold text-destructive-main' onClick={() => {
-                            onSave(admirationDate, stars)
+                            submitNote({
+                                newAdmirationDate: admirationDate,
+                                newStars: stars,
+                                newWatchState: 'watched'
+                            })
+                            onClose()
                         }}>{t('save')}</TextButton>
                     </div>
                 </Dialog.Panel>

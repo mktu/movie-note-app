@@ -52,7 +52,6 @@ const Note: FC = () => {
                     key={content.movieNoteDetail.tmdb_id || ''}
                     movieNoteDetail={content.movieNoteDetail}
                     tmdbDetail={content.tmdbDetail}
-                    imdbRate={content.imdbRate}
                     tmdbCredits={content.tmdbCredits}
                     onSubmit={onSubmit} error={actionData?.error} />
             </>
