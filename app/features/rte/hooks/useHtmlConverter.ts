@@ -7,7 +7,8 @@ export const useHtmlConverter = () => {
     const convertToHtml = useCallback(() => {
         return new Promise<string>((resolve) => {
             editor.update(() => {
-                resolve($generateHtmlFromNodes(editor))
+                const result = $generateHtmlFromNodes(editor)
+                resolve(result)
             })
         })
     }, [editor])

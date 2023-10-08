@@ -2,7 +2,7 @@ import type { OgpType } from "functions/api/ogp"
 import { useCallback, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-const useOgp = (url: string) => {
+const useOgp = (url: string, onFetchOgp: (ogp: OgpType) => void) => {
     const [ogp, setOgp] = useState<OgpType>()
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
@@ -11,13 +11,15 @@ const useOgp = (url: string) => {
         const params = new URLSearchParams({ url });
         const res = await fetch('/api/ogp?' + params.toString())
         if (res.ok) {
-            setOgp(await res.json())
+            const ret = await res.json<OgpType>()
+            setOgp(ret)
+            onFetchOgp(ret)
         } else {
             console.error(res)
             setError(t('ogp-error', { code: res.statusText }))
         }
         setLoading(false)
-    }, [url, t])
+    }, [url, t, onFetchOgp])
     useEffect(() => {
         fetcher()
     }, [fetcher])

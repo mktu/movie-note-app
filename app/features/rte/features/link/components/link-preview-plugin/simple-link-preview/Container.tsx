@@ -7,19 +7,22 @@ import useOgp from '../../../hooks/useOgp';
 import LinkPreview from './presenter';
 
 import type { ElementFormatType, NodeKey } from 'lexical';
+import type { OgpType } from 'functions/api/ogp';
 
 type Props = {
     url: string,
     format: ElementFormatType | null;
     nodeKey: NodeKey;
+    onFetchOgp: (ogp: OgpType) => void
 }
 
 const Container: FC<Props> = ({
     url,
     format,
-    nodeKey
+    nodeKey,
+    onFetchOgp
 }) => {
-    const { ogp, loading, error } = useOgp(url)
+    const { ogp, loading, error } = useOgp(url, onFetchOgp)
     const { removePreview } = useLinkPreviewUpdater()
     return (
         <BlockWithAlignableContents
