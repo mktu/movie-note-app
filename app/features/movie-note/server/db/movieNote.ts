@@ -2,6 +2,7 @@ import type { AdminClientType } from '@utils/supabaseAdmin.server'
 import type { AddMovieNote, FilterType, SortType } from '../types'
 import { fromCode } from '../../utils/error';
 import type { UnboxReturnedPromise } from '~/types/utils';
+import type { PublishNote } from '../validation/parsePublish';
 
 const registerMovieNote = async (supabaseAdmin: AdminClientType, movieNote: AddMovieNote, userId: string) => {
 
@@ -57,7 +58,22 @@ const updateMovieNote = async (supabaseAdmin: AdminClientType, movieNote: AddMov
         html: movieNote.html || null
     }).match({
         tmdb_id: movieNote.tmdbId,
+        user_id: userId,
         lng: movieNote.lng
+    })
+    if (noteError) {
+        console.error(noteError)
+        throw fromCode(noteError.code)
+    }
+}
+
+const publishNote = async (supabaseAdmin: AdminClientType, movieNote: PublishNote, userId: string) => {
+    const { error: noteError } = await supabaseAdmin.from('movie_note').update({
+        published: movieNote.published === 'true' ? true : false,
+        html: movieNote.html || null
+    }).match({
+        tmdb_id: movieNote.tmdbId,
+        user_id: userId,
     })
     if (noteError) {
         console.error(noteError)
@@ -120,5 +136,6 @@ export {
     updateMovieNote,
     listMovieNote,
     loadMovieNote,
-    deleteNote
+    deleteNote,
+    publishNote
 }

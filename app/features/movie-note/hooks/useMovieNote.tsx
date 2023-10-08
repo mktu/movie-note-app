@@ -4,6 +4,8 @@ import { useCallback, useState } from "react"
 import type { UpdateMovieNote, WatchState } from "@type-defs/frontend"
 import format from "date-fns/format"
 import { useTranslation } from "react-i18next"
+import { useNavigatorContext } from "~/providers/navigator/Context"
+import { setMovieNotePreviewHtml } from "../utils/localstorage"
 
 type Props = {
     movieNoteDetail?: MovieNoteType,
@@ -23,6 +25,9 @@ export const useMovieNote = ({
     const { i18n } = useTranslation()
     const [content, setContent] = useState<{ get: () => string }>()
     const [htmlConvertUtil, setHtmlConvertUtil] = useState<{ convert: () => Promise<string> }>()
+    const { useNavigator } = useNavigatorContext()
+    const { navigate } = useNavigator()
+
     const setContentGetter = useCallback((getContent: () => string) => {
         setContent({ get: getContent })
     }, [])
@@ -32,6 +37,7 @@ export const useMovieNote = ({
     const title = movieNoteDetail?.title || ''
     const detail = tmdbDetail
     const detailPath = `/app/movies/${detail?.id}?lng=${i18n.language}`
+    const previewPath = `/app/note-preview/${detail?.id}?lng=${i18n.language}`
     const credits = tmdbCredits || null
     const stars = movieNoteDetail?.stars || 0
     const formattedWatchDate = movieNoteDetail?.admiration_date || ''
@@ -70,7 +76,10 @@ export const useMovieNote = ({
             html: newHtml !== undefined ? newHtml : html || ''
         }, debounceTimeout)
     }, [content, detail, formattedWatchDate, html, onSubmit, published, stars, watchState])
-
+    const showPreview = useCallback((previewHtml: string) => {
+        setMovieNotePreviewHtml(previewHtml)
+        navigate(previewPath)
+    }, [navigate, previewPath])
 
     return {
         detail,
@@ -81,11 +90,13 @@ export const useMovieNote = ({
         formattedWatchDate,
         published,
         detailPath,
+        previewPath,
         title,
         error,
         setHtmlConverter,
         setContentGetter,
         htmlConvertUtil,
-        submitNote
+        submitNote,
+        showPreview
     }
 }

@@ -71,5 +71,7 @@
     "search-actor":"俳優を検索",
     "birthday":"{{birthday}} 生まれ",
     "no-biography":"バイオグラフィーはありません",
-    "movie-credits":"出演映画"
+    "movie-credits":"出演映画",
+    "comfirm-publish":"{{title}}のノートを公開します。よろしいですか",
+    "back":"戻る"
 }
