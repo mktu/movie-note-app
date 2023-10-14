@@ -31,7 +31,7 @@ export const TwitterPreviewConfig: TwitterPreveiwConfig = {
     },
 
     parseUrl: async (url: string) => {
-        const match = /^https?:\/\/(www\.)?twitter\.com\/[a-zA-Z0-9_]+\/status\/([0-9]+)/.exec(url);
+        const match = /^https?:\/\/(www\.)?x\.com\/[a-zA-Z0-9_]+\/status\/([0-9]+)/.exec(url);
         if (match != null && match.length > 2) {
             return {
                 id: match[2],

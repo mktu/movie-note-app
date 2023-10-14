@@ -71,7 +71,6 @@ export class YoutubePreviewNode extends DecoratorBlockNode {
     }
 
     exportJSON(): SerializedYoutubePreviewNode {
-        console.log(this.__video_id)
         return {
             ...super.exportJSON(),
             videoId: this.__video_id,
