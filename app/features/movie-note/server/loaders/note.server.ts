@@ -1,5 +1,4 @@
 import authenticator from '~/features/auth/server/auth.server';
-import { getImdbRateKv } from '~/features/imdb/server/kv';
 import { loadMovieNote } from '~/features/movie-note/server/db';
 import { tmdbKv } from '~/features/movie-note/server/kv';
 import { getMovieNoteIds } from '~/features/movie-note/server/kv/tmdb';
@@ -14,7 +13,6 @@ import type { MovieNoteType } from '~/features/movie-note/server/db';
 import type { Credits, TmdbDetail, TmdbLng } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderArgs } from "@remix-run/cloudflare";
-import type { ImdbRate } from '~/features/imdb/types';
 import type { Video } from '~/features/tmdb/utils';
 
 
@@ -23,7 +21,6 @@ type ContentData = {
     tmdbDetail: TmdbDetail,
     tmdbCredits: Credits,
     trailers: Video[],
-    imdbRate: ImdbRate | null,
     performanceData: { [k: string]: number }
 }
 
@@ -86,13 +83,6 @@ export async function loader({ request, context, params }: LoaderArgs) {
         return credits
     }
 
-    const getImdbRate_ = async (imdbId: string | null) => {
-        t4.start()
-        const imdbRate = imdbId ? await getImdbRateKv(context.ImdbInfo as KVNamespace, imdbId) : null
-        t4.stop()
-        return imdbRate
-    }
-
     const getTrailers_ = async (tmdbId: string, tmdb: Tmdb) => {
         t5.start()
         const trailers = await tmdb.getYoutubeTrailers(tmdbId)
@@ -104,17 +94,15 @@ export async function loader({ request, context, params }: LoaderArgs) {
     if (ids) {
         const lng = ids.lng === 'ja' ? 'ja' : 'en'
         const tmdb = new Tmdb(tmdbData.apiKey, lng)
-        const [note, tmdbDetail, tmdbCredits, imdbRate, trailers] = await Promise.all([
+        const [note, tmdbDetail, tmdbCredits, trailers] = await Promise.all([
             loadMovieNote_(),
             getTmdbDetail_(ids.tmdbId, lng, tmdb),
             getTmdbCredits_(ids.tmdbId, tmdb),
-            getImdbRate_(ids.imdbId),
             getTrailers_(ids.tmdbId, tmdb)])
         contentData = {
             movieNoteDetail: note,
             tmdbDetail,
             tmdbCredits,
-            imdbRate,
             trailers
         }
     } else {
@@ -124,16 +112,14 @@ export async function loader({ request, context, params }: LoaderArgs) {
         if (!note.tmdb_id) {
             throw Error('tmdb id is undefined')
         }
-        const [tmdbDetail, tmdbCredits, imdbRate, trailers] = await Promise.all([
+        const [tmdbDetail, tmdbCredits, trailers] = await Promise.all([
             getTmdbDetail_(note.tmdb_id, lng, tmdb),
             getTmdbCredits_(note.tmdb_id, tmdb),
-            getImdbRate_(note.imdb_id),
             getTrailers_(note.tmdb_id, tmdb)])
         contentData = {
             movieNoteDetail: note,
             tmdbDetail,
             tmdbCredits,
-            imdbRate,
             trailers
         }
 

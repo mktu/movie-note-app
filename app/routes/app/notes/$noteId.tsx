@@ -11,7 +11,7 @@ import { getFormData } from '@utils/form';
 import type { HeadersFunction } from "@remix-run/cloudflare";
 import { useCallback, type FC } from "react";
 import { useDebounceFetcher } from '~/features/movie-note/hooks/useDebounceFetcher';
-import { AddMovieNote } from '~/features/movie-note/server/types';
+import type { AddMovieNote } from '@type-defs/frontend';
 
 // stale-while-revalidateの設定
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
@@ -52,9 +52,7 @@ const Note: FC = () => {
                     key={content.movieNoteDetail.tmdb_id || ''}
                     movieNoteDetail={content.movieNoteDetail}
                     tmdbDetail={content.tmdbDetail}
-                    imdbRate={content.imdbRate}
                     tmdbCredits={content.tmdbCredits}
-                    trailers={content.trailers}
                     onSubmit={onSubmit} error={actionData?.error} />
             </>
         )}

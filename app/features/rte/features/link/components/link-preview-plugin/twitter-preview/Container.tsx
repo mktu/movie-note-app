@@ -10,12 +10,14 @@ type Props = {
     tweetId: string,
     format: ElementFormatType | null;
     nodeKey: NodeKey;
+    onLoadTweet: (node: HTMLElement) => void
 }
 
 const Container: FC<Props> = ({
     tweetId,
     format,
-    nodeKey
+    nodeKey,
+    onLoadTweet
 }) => {
     return (
         <BlockWithAlignableContents
@@ -27,6 +29,7 @@ const Container: FC<Props> = ({
             }}>
             <div className='max-w-[550px]'>
                 <TwitterTweetEmbed
+                    onLoad={onLoadTweet}
                     tweetId={tweetId}
                 />
             </div>

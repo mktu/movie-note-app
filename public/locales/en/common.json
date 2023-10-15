@@ -29,7 +29,9 @@
     "casts" : "キャスト",
     "add-note" : "感想やメモを自由に記入してください",
     "save" : "保存",
-    "update" : "更新",
+    "update" : "更新する",
+    "publish": "公開する",
+    "update-publish": "公開ノートを更新する",
     "movie-note-already-registered" : "既にノートに登録されています",
     "movie-note-not-found" : "ノートが存在しません",
     "invalid-movie-note" : "不正なノートです",
@@ -59,8 +61,7 @@
     "lng-not-found": "言語が未設定です",
     "movie-id-not-found": "作品IDが未設定です",
     "edit-watch-log":"観賞記録を編集",
-    "watched-log":"観賞記録",
-    "no-watched-log":"未入力",
+    "no-watched-log":"観賞日未入力",
     "stars":"評価",
     "movie-detail" : "{{movie}}の作品情報",
     "close":"閉じる",
@@ -70,5 +71,8 @@
     "search-actor":"俳優を検索",
     "birthday":"{{birthday}} 生まれ",
     "no-biography":"バイオグラフィーはありません",
-    "movie-credits":"出演映画"
+    "movie-credits":"出演映画",
+    "comfirm-publish":"{{title}}のノートを公開します。よろしいですか？",
+    "confirm-update-published": "公開中のノート\"{{title}}\"を更新します。よろしいですか？",
+    "back":"戻る"
 }

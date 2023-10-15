@@ -3,7 +3,7 @@ export type Json =
   | number
   | boolean
   | null
-  | { [key: string]: Json }
+  | { [key: string]: Json | undefined }
   | Json[]
 
 export interface Database {
@@ -25,6 +25,7 @@ export interface Database {
           id?: string
           user_id?: string
         }
+        Relationships: []
       }
       movie_info: {
         Row: {
@@ -51,13 +52,16 @@ export interface Database {
           title?: string | null
           tmdb_id?: string
         }
+        Relationships: []
       }
       movie_note: {
         Row: {
           admiration_date: string | null
           created_at: string | null
+          html: string | null
           lng: string
           memo: string | null
+          published: boolean | null
           stars: number | null
           tmdb_id: string
           updated_at: string | null
@@ -67,8 +71,10 @@ export interface Database {
         Insert: {
           admiration_date?: string | null
           created_at?: string | null
+          html?: string | null
           lng: string
           memo?: string | null
+          published?: boolean | null
           stars?: number | null
           tmdb_id: string
           updated_at?: string | null
@@ -78,14 +84,17 @@ export interface Database {
         Update: {
           admiration_date?: string | null
           created_at?: string | null
+          html?: string | null
           lng?: string
           memo?: string | null
+          published?: boolean | null
           stars?: number | null
           tmdb_id?: string
           updated_at?: string | null
           user_id?: string
           watch_state?: string | null
         }
+        Relationships: []
       }
       user_settings: {
         Row: {
@@ -106,6 +115,7 @@ export interface Database {
           user_id?: string
           value?: string | null
         }
+        Relationships: []
       }
       users: {
         Row: {
@@ -129,6 +139,7 @@ export interface Database {
           image?: string | null
           name?: string | null
         }
+        Relationships: []
       }
     }
     Views: {
@@ -136,9 +147,11 @@ export interface Database {
         Row: {
           admiration_date: string | null
           created_at: string | null
+          html: string | null
           imdb_id: string | null
           lng: string | null
           memo: string | null
+          published: boolean | null
           stars: number | null
           thumbnail: string | null
           title: string | null
@@ -147,6 +160,7 @@ export interface Database {
           user_id: string | null
           watch_state: string | null
         }
+        Relationships: []
       }
       users_view: {
         Row: {
@@ -157,17 +171,11 @@ export interface Database {
           image: string | null
           name: string | null
         }
+        Relationships: []
       }
     }
     Functions: {
       add_user:
-        | {
-            Args: {
-              id: string
-              name: string
-            }
-            Returns: number
-          }
         | {
             Args: {
               id: string
@@ -182,6 +190,13 @@ export interface Database {
               name: string
               auth_id: string
               comment: string
+            }
+            Returns: number
+          }
+        | {
+            Args: {
+              id: string
+              name: string
             }
             Returns: number
           }

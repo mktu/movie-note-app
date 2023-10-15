@@ -11,10 +11,9 @@ import Error from './Error';
 
 import type { ComponentProps } from 'react'
 import type { WatchState } from '@type-defs/frontend';
-import type { WatchLogs } from '~/features/movie-note';
 
 type Props = {
-    onClickSave: (state: WatchState, watchLogs?: WatchLogs) => void,
+    onClickSave: (state: WatchState) => void,
     className?: string,
     canSave?: boolean
     error?: string,

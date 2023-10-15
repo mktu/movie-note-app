@@ -8,7 +8,9 @@ export type AddMovieNote = {
     thumbnail: string,
     imdbId?: string,
     admirationDate: string,
-    watchState?: WatchState
+    watchState?: WatchState,
+    published?: boolean,
+    html?: string
 }
 
 export type UpdateMovieNote = AddMovieNote

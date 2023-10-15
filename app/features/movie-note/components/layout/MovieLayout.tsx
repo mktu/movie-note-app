@@ -1,9 +1,7 @@
 import type { FC, ReactNode } from 'react'
 
 type MovieInfo = {
-    detail: ReactNode,
     metaInfo: ReactNode,
-    imdb: ReactNode
 }
 
 type Props = {
@@ -29,7 +27,6 @@ const MovieLayout: FC<Props> = ({
             )}
             <div className='flex w-full items-center'>
                 {movieInfo?.metaInfo}
-                <div className='ml-auto'>{movieInfo?.imdb}</div>
             </div>
         </div>
     );

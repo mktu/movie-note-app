@@ -4,41 +4,35 @@ import { useTranslation } from 'react-i18next';
 import useFloatingHeader from '~/hooks/useFloatingHeader';
 
 import Error from './Error';
-import WatchStateButtons from './WatchStateButtons';
 
-import type { WatchState } from '@type-defs/frontend';
 import MiniImage from './MiniImage';
 import WatchLog from './WatchLog';
+import { Menu } from '@headlessui/react';
+import { TextButton } from '~/components/buttons';
+import ShareIcon from '~/components/icons/Share';
+import { useMovieNoteContext } from '../../context/movie-note/Context';
 
 type Props = {
-    onChangeState: (state?: WatchState) => void,
-    title: string,
-    image?: string,
     className?: string,
-    canSave?: boolean
-    error?: string,
-    watchState?: WatchState,
-    admirationDate?: string,
-    stars?: number,
-    onOpenDetailDialog: () => void,
-    onOpenWatchLogDialog: () => void
+    onOpenWatchLogDialog: () => void,
 }
 
 const Edit = forwardRef<HTMLDivElement, Props>(({
-    onChangeState,
     className,
-    canSave,
-    title,
-    image,
-    error,
-    watchState,
-    onOpenDetailDialog,
     onOpenWatchLogDialog,
-    admirationDate,
-    stars
 }, ref) => {
     const { t } = useTranslation('common')
     const { setObserverElm, ref: inViewRef, inView } = useFloatingHeader()
+
+    const {
+        htmlConvertUtil,
+        imagePath,
+        title,
+        error,
+        showPreview,
+        published
+    } = useMovieNoteContext()
+
 
     return (
         <>
@@ -56,32 +50,41 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
             }} className={clsx(className, 'flex w-full items-center gap-2 py-2',
                 !inView && 'fixed top-0 right-0 z-20 bg-white/80 px-10 shadow')}>
                 <MiniImage
-                    src={image}
+                    src={imagePath}
                     title={title}
                 />
                 <div className='flex w-full flex-1 items-center'>
                     <div>
                         <div className='text-lg font-semibold text-text-main'>{title}</div>
                         <WatchLog
-                            admirationDate={admirationDate}
-                            stars={stars}
-                            onOpenDetailDialog={onOpenDetailDialog}
                             onOpenWatchLogDialog={onOpenWatchLogDialog}
                         />
                     </div>
-                    <WatchStateButtons
-                        watchState={watchState}
-                        onClick={(watchState) => {
-                            onChangeState(watchState)
-                            if (watchState === 'watched') {
-                                onOpenWatchLogDialog()
-                            }
-                        }} />
+
+                    <div className='relative ml-auto flex items-center gap-2'>
+                        <Menu as='div'>
+                            <Menu.Button>
+                                <ShareIcon className='h-6 w-6 fill-primary-main' />
+                            </Menu.Button>
+                            <Menu.Items className={'absolute right-0 z-20 mt-1 w-fit rounded border border-border-dark bg-white py-1 text-sm'}>
+                                <Menu.Item>{() => (
+                                    <TextButton className='flex w-full items-center gap-2 whitespace-nowrap hover:bg-surface-hover'
+                                        onClick={async () => {
+                                            htmlConvertUtil && showPreview(await htmlConvertUtil?.convert())
+                                        }}
+                                    >
+                                        {published ? t('update-publish') : t('publish')}
+                                    </TextButton>
+                                )}</Menu.Item>
+                            </Menu.Items>
+                        </Menu>
+                    </div>
                 </div>
-            </div>
+            </div >
             {error && (
                 <Error error={t(error)} />
-            )}
+            )
+            }
         </>
     );
 });
