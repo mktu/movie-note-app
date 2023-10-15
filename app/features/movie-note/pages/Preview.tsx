@@ -7,12 +7,14 @@ import type { TmdbDetail } from '~/features/tmdb';
 
 type Props = {
     tmdbDetail?: TmdbDetail,
+    isUpdate: boolean,
     onPublish: (content: string) => void,
     onBack: () => void,
 }
 
 const Preview: FC<Props> = ({
     tmdbDetail,
+    isUpdate,
     onPublish,
     onBack
 }) => {
@@ -20,6 +22,7 @@ const Preview: FC<Props> = ({
     return (
         <PreviewLayout
             header={<PreviewHeader
+                isUpdate={isUpdate}
                 onPublish={() => {
                     onPublish(html)
                 }}

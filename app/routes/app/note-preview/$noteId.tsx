@@ -32,6 +32,7 @@ const NotePreview: FC = () => {
             )}
             {loaderData.content?.tmdbDetail.id && (
                 <MovieNotePreview
+                    isUpdate={loaderData.content.isUpdate}
                     tmdbDetail={loaderData.content?.tmdbDetail}
                     onPublish={(html) => {
                         onSubmit({

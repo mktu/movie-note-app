@@ -29,7 +29,8 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
         imagePath,
         title,
         error,
-        showPreview
+        showPreview,
+        published
     } = useMovieNoteContext()
 
 
@@ -72,7 +73,7 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                                             htmlConvertUtil && showPreview(await htmlConvertUtil?.convert())
                                         }}
                                     >
-                                        {t('publish')}
+                                        {published ? t('update-publish') : t('publish')}
                                     </TextButton>
                                 )}</Menu.Item>
                             </Menu.Items>

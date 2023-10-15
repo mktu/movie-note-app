@@ -12,6 +12,7 @@ import type { LoaderArgs } from "@remix-run/cloudflare";
 
 type ContentData = {
     tmdbDetail: TmdbDetail,
+    isUpdate: boolean
 }
 
 export type LorderData = {
@@ -23,6 +24,7 @@ export async function loader({ request, context, params }: LoaderArgs) {
     const user = await authenticator.isAuthenticated(request)
     const url = new URL(request.url);
     const lng: TmdbLng = url.searchParams.get('lng') as TmdbLng || 'ja';
+    const isUpdate = url.searchParams.get('update') === 'true'
     const noteId = params.noteId;
     if (!user) {
         return redirect('/login')
@@ -43,12 +45,12 @@ export async function loader({ request, context, params }: LoaderArgs) {
         return tmdbDetail
     }
 
-
     const tmdb = new Tmdb(tmdbData.apiKey, lng as TmdbLng)
     const [tmdbDetail] = await Promise.all([
         getTmdbDetail_(noteId, lng as TmdbLng, tmdb)])
     const contentData: Omit<ContentData, 'performanceData'> = {
         tmdbDetail,
+        isUpdate
     }
 
 

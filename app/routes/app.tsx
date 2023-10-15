@@ -44,7 +44,7 @@ export const App: React.FC = () => {
                                 }} />}
                                 noteList={<NoteList
                                     onRemoveNote={(noteId) => {
-                                        submit({ noteId }, { action: 'app/delete-note', method: 'post' })
+                                        submit({ noteId }, { action: '/app/delete-note', method: 'post' })
                                     }}
                                     movieNoteList={movieNoteList} />}>
                                 <AppOutletProvider />
