@@ -52,7 +52,7 @@ const Editor: FC<Props> = ({
                             <ContentEditable
                                 className='text-text-main outline-none' />
                         </div>}
-                        placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
+                        placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('note-place-holder')}...✍️</div>}
                     />
                 </div>
                 <LinkPlugins />
