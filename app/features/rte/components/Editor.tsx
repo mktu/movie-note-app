@@ -63,10 +63,15 @@ const Editor: FC<Props> = ({
                 <DragDropPastePlugin />
                 <ImagesPlugin />
                 <CheckListPlugin />
-                <OnChangePlugin onChange={(editorState) => {
-                    editorStateRef.current = editorState
-                    onChange && onChange(JSON.stringify(editorStateRef.current))
-                }} />
+                <OnChangePlugin
+                    ignoreSelectionChange
+                    onChange={(editorState) => {
+                        editorStateRef.current = editorState
+                        if (!editorState.isEmpty() && onChange) {
+                            onChange(JSON.stringify(editorStateRef.current))
+                        }
+
+                    }} />
                 <HTMLConvertPlugin
                     getConverter={setHtmlConverter} />
             </LexicalComposer>
