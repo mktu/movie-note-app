@@ -17,6 +17,7 @@ const context = React.createContext<MovieNoteContextType>({
     },
     submitNote: () => { },
     showPreview: () => { },
+    getTemplates: async () => [],
     title: '',
     imagePath: '',
     detailPath: '',

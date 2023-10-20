@@ -1,4 +1,4 @@
-import type { DOMExportOutput, ElementFormatType, LexicalEditor, LexicalNode, NodeKey, Spread } from "lexical";
+import type { DOMExportOutput, DOMConversionMap, ElementFormatType, LexicalEditor, LexicalNode, NodeKey, Spread, DOMConversionOutput } from "lexical";
 import { $applyNodeReplacement } from "lexical";
 import type {
   SerializedDecoratorBlockNode
@@ -84,7 +84,8 @@ export class LinkPreviewNode extends DecoratorBlockNode {
 
   exportDOM(editor: LexicalEditor): DOMExportOutput {
     const elm = this.__ogp.title !== '' ? (
-      <div className='max-w-[95%]'>
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      <div id='link-preview-node'>
         <PreviewCard ogp={this.__ogp} />
       </div>
     ) : <div />
@@ -93,6 +94,14 @@ export class LinkPreviewNode extends DecoratorBlockNode {
     return {
       element: parent
     }
+  }
+  static importDOM(): DOMConversionMap | null {
+    return {
+      div: (node: Node) => ({
+        conversion: convertPreviewElement,
+        priority: 0,
+      }),
+    };
   }
 
   isInline(): false {
@@ -105,6 +114,33 @@ export class LinkPreviewNode extends DecoratorBlockNode {
     return node;
   }
 
+}
+
+function convertPreviewElement(domNode: Node): null | DOMConversionOutput {
+  if (domNode instanceof HTMLDivElement) {
+    const { id } = domNode;
+    if (id === 'link-preview-node') {
+      const aNode = domNode.querySelector('a')
+      const imgNode = domNode.querySelector("img[id='img']") as HTMLImageElement
+      const logoNode = domNode.querySelector("img[id='logo']") as HTMLImageElement
+      const descriptionNode = domNode.querySelector('#description')
+      if (!aNode) {
+        return null
+      }
+
+      const node = $createLinkPreviewNode('', aNode.href, {
+        "title": aNode.textContent,
+        "author": null,
+        "description": descriptionNode?.textContent || '',
+        "image": imgNode?.src || '',
+        "date": "2022-11-29T01:08:17.000Z",
+        "logo": logoNode?.src || '',
+        "url": aNode.href
+      });
+      return { node };
+    }
+  }
+  return null;
 }
 
 export function $createLinkPreviewNode(linkKey: NodeKey, url: string, ogp?: OgpType): LinkPreviewNode {

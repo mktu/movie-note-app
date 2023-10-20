@@ -96,6 +96,33 @@ export interface Database {
         }
         Relationships: []
       }
+      note_template: {
+        Row: {
+          created_at: string
+          id: number
+          name: string
+          public: boolean | null
+          template: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name: string
+          public?: boolean | null
+          template?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string
+          public?: boolean | null
+          template?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       user_settings: {
         Row: {
           created_at: string | null

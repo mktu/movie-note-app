@@ -39,6 +39,7 @@ const Edit: FC<Props> = ({
         detail,
         setHtmlConverter,
         setContentGetter,
+        getTemplates,
         submitNote
     } = contextValue
     const [openWatchLog, setOpenWatchLog] = useState(false)
@@ -54,6 +55,7 @@ const Edit: FC<Props> = ({
                 note={detail && <Note
                     setContentGetter={setContentGetter}
                     setHtmlConverter={setHtmlConverter}
+                    templateGetter={getTemplates}
                     init={movieNoteDetail?.memo}
                     onChange={(text) => {
                         submitNote({

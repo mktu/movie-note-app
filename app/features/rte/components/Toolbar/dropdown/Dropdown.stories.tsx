@@ -1,13 +1,13 @@
-import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 
 import Dropdown from '.';
 
 export default {
     title: 'features/rte/Dropdown',
     component: Dropdown,
-} as ComponentMeta<typeof Dropdown>;
+} as Meta<typeof Dropdown>;
 
-const Template: ComponentStory<typeof Dropdown> = (args) => <Dropdown {...args} />;
+const Template: StoryFn<typeof Dropdown> = (args) => <Dropdown {...args} />;
 
 export const Default = Template.bind({});
 
@@ -21,6 +21,7 @@ const Blocks = {
 Default.args = {
     onSelect(selected) {
     },
+    defaultSelected: 'Normal',
     menuItems: Blocks
 };
 

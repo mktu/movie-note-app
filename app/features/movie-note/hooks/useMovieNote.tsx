@@ -6,6 +6,8 @@ import format from "date-fns/format"
 import { useTranslation } from "react-i18next"
 import { useNavigatorContext } from "~/providers/navigator/Context"
 import { setMovieNotePreviewHtml } from "../utils/localstorage"
+import { getTemplates as getTemplatesApi } from "../utils/api"
+import type { ListTemplateType } from "../server/db/template"
 
 type Props = {
     movieNoteDetail?: MovieNoteType,
@@ -33,6 +35,11 @@ export const useMovieNote = ({
     }, [])
     const setHtmlConverter = useCallback((convert: () => Promise<string>) => {
         setHtmlConvertUtil({ convert })
+    }, [])
+    const getTemplates = useCallback(async () => {
+        const res = await getTemplatesApi()
+        const templates = await res.json<ListTemplateType>()
+        return templates
     }, [])
     const title = movieNoteDetail?.title || ''
     const detail = tmdbDetail
@@ -97,6 +104,7 @@ export const useMovieNote = ({
         setContentGetter,
         htmlConvertUtil,
         submitNote,
-        showPreview
+        showPreview,
+        getTemplates
     }
 }

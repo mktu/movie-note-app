@@ -12,7 +12,7 @@ const PreviewCard: FC<Props> = ({
 }) => {
     return (
         <div className='flex gap-2'>
-            <img src={ogp?.image} alt={ogp?.title || 'untitled'} width={imgW} height={imgH} style={{
+            <img id='img' src={ogp?.image} alt={ogp?.title || 'untitled'} width={imgW} height={imgH} style={{
                 width: imgW,
                 height: imgH
             }} />
@@ -20,11 +20,11 @@ const PreviewCard: FC<Props> = ({
                 <div className='flex items-center gap-1 text-text-main'>
                     <a href={ogp?.url} className='truncate underline'>{ogp?.title}</a>
                 </div>
-                <div className='text-sm text-text-label line-clamp-2'>
+                <div id='description' className='text-sm text-text-label line-clamp-2'>
                     {ogp?.description}
                 </div>
                 <div className='mt-2 flex items-center gap-1 text-sm text-text-label'>
-                    <img src={ogp?.logo} alt={ogp?.author || 'unknown'} width={16} height={16} style={{ width: 16, height: 16 }} />
+                    <img id='logo' src={ogp?.logo} alt={ogp?.author || 'unknown'} width={16} height={16} style={{ width: 16, height: 16 }} />
                     <span className='truncate'>{ogp?.url}</span>
                 </div>
             </div>

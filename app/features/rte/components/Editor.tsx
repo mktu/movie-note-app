@@ -19,11 +19,14 @@ import { validateUrl } from '../utils/validateUrl';
 import initialConfig from './initialConfig';
 import { transformers } from './nodes';
 import Toolbar from './Toolbar';
+
 import HTMLConvertPlugin from './HTMLConvertPlugin';
+import Templates from './Toolbar/Templates';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
     setHtmlConverter: (fun: () => Promise<string>) => void,
+    templateGetter?: Parameters<typeof Templates>[0]['templateGetter']
     monitorCurrentState?: (data: string) => void,
     onChange?: (content: string) => void
     init?: string | null
@@ -32,6 +35,7 @@ type Props = {
 const Editor: FC<Props> = ({
     setContentGetter,
     setHtmlConverter,
+    templateGetter,
     monitorCurrentState,
     onChange,
     init
@@ -44,7 +48,13 @@ const Editor: FC<Props> = ({
                 editorState: init,
                 ...initialConfig
             }}>
-                <Toolbar />
+                <Toolbar
+                    templateComponent={
+                        <Templates
+                            templateGetter={templateGetter}
+                        />
+                    }
+                />
                 <div className='relative'>
                     <RichTextPlugin
                         ErrorBoundary={LexicalErrorBoundary}
