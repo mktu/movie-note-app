@@ -1,8 +1,15 @@
-import { useEffect, type FC, useState, useMemo } from 'react'
+import {
+    useEffect, type FC, useState
+} from 'react'
 import { $generateNodesFromDOM } from '@lexical/html';
 import { useRangeUpdater } from '../../hooks/useUpdater';
 import { $getRoot } from 'lexical';
-import Dropdown from './dropdown/Dropdown';
+import AddIcon from '~/components/icons/Add';
+import { FocusTrap } from '@headlessui/react';
+import { usePopper } from 'react-popper';
+import { TextButton } from '~/components/buttons';
+import clsx from 'clsx';
+import { TemplatePopup } from '../../features/templates/components';
 
 export type Template = {
     name: string,
@@ -18,44 +25,59 @@ const Templates: FC<Props> = ({
     templateGetter
 }) => {
     const { updateRange } = useRangeUpdater()
+    const [showEditor, setShowEditor] = useState(false)
+    const [referenceElement, setReferenceElement] = useState<HTMLElement>()
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>()
+    const { styles, attributes } = usePopper(referenceElement, popperElement, {
+        placement: 'auto'
+    });
     const [templates, setTemplates] = useState<Template[]>([])
     useEffect(() => {
         templateGetter && templateGetter().then(templates => {
             setTemplates(templates)
         })
     }, [templateGetter])
-    const menus = useMemo(() => {
-        const m = templates.reduce((acc, cur) => {
-            acc[cur.id] = {
-                label: cur.name
-            }
-            return acc
-        }, {} as { [key: string]: { label: string } })
-        return m
-    }, [templates])
     return (
-        <div className=''>
-            <Dropdown
-                menuItems={menus}
-                defaultSelected=''
-                label='Template'
-                onSelect={(item) => {
-                    const target = templates.find(v => String(v.id) === item)
-                    if (!target || !target.template) {
-                        return
-                    }
-                    updateRange((selection, editor) => {
-                        const parser = new DOMParser();
-                        const dom = parser.parseFromString(target.template!, 'text/html');
-                        const nodes = $generateNodesFromDOM(editor, dom);
-                        // Select the root
-                        $getRoot().select();
+        <div>
+            <TextButton
+                paddings=''
+                ref={(el) => {
+                    el && setReferenceElement(el)
+                }} name={'link'} className={clsx('flex items-center gap-1 p-1 text-text-label hover:bg-surface-hover'
+                )} onClick={(e) => {
+                    setShowEditor(true)
+                }}>
+                <AddIcon className='h-5 w-5 fill-text-label' />
+                <span>Template</span>
+            </TextButton>
+            {showEditor && (
+                <FocusTrap>
+                    <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
+                        {...attributes.popper} className='bg-bg-main'>
+                        <TemplatePopup
+                            templates={templates}
+                            onSelect={(template) => {
+                                if (!template.template) {
+                                    return
+                                }
+                                updateRange((selection, editor) => {
+                                    const parser = new DOMParser();
+                                    const dom = parser.parseFromString(template.template!, 'text/html');
+                                    const nodes = $generateNodesFromDOM(editor, dom);
+                                    // Select the root
+                                    $getRoot().select();
 
-                        // Insert them at a selection.
-                        selection.insertNodes(nodes);
-                    })
-                }}
-            />
+                                    // Insert them at a selection.
+                                    selection.insertNodes(nodes);
+                                })
+                            }}
+                            onCancel={() => {
+                                setShowEditor(false)
+                            }}
+                        />
+                    </div>
+                </FocusTrap>
+            )}
         </div>
     );
 };

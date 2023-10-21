@@ -3,7 +3,6 @@ import { $isTextNode } from 'lexical';
 import { useState } from 'react';
 import { usePopper } from 'react-popper';
 import { IconButton } from '~/components/buttons';
-import Clickaway from '~/components/clickaway';
 import { useLinkListener } from '~/features/rte/store/link';
 import { replaceLink, unlink } from '~/features/rte/utils/linkInserter';
 
@@ -50,36 +49,31 @@ const LinkInserter: FC = () => {
                 ${!valid ? 'fill-text-disabled' : url !== '' ? 'fill-text-main' : 'fill-text-label'}`} />
             </IconButton>
             {showEditor && (
-                <Clickaway
-                    onClickAway={() => {
-                        setShowEditor(false)
-                    }}>
-                    <FocusTrap>
-                        <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
-                            {...attributes.popper} className='bg-bg-main'>
-                            <Input
-                                key={url}
-                                init={url}
-                                initLabel={label}
-                                onCancel={() => {
-                                    setShowEditor(false)
-                                }}
-                                onSubmit={(editUrl, label) => {
-                                    setShowEditor(false)
-                                    updateRange((selection, editor) => {
-                                        replaceLink(selection, editor, editUrl, label)
-                                    })
-                                }}
-                                onUnlink={() => {
-                                    setShowEditor(false)
-                                    updateRange((selection, editor) => {
-                                        unlink(selection, editor)
-                                    })
-                                }}
-                            />
-                        </div>
-                    </FocusTrap>
-                </Clickaway>
+                <FocusTrap>
+                    <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
+                        {...attributes.popper} className='bg-bg-main'>
+                        <Input
+                            key={url}
+                            init={url}
+                            initLabel={label}
+                            onCancel={() => {
+                                setShowEditor(false)
+                            }}
+                            onSubmit={(editUrl, label) => {
+                                setShowEditor(false)
+                                updateRange((selection, editor) => {
+                                    replaceLink(selection, editor, editUrl, label)
+                                })
+                            }}
+                            onUnlink={() => {
+                                setShowEditor(false)
+                                updateRange((selection, editor) => {
+                                    unlink(selection, editor)
+                                })
+                            }}
+                        />
+                    </div>
+                </FocusTrap>
             )}
         </>
     );
