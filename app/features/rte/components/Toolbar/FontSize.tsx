@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import Dropdown from '~/features/rte/components/Toolbar/dropdown';
 
 import { $createHeadingNode, $isHeadingNode } from '@lexical/rich-text';
-import { $setBlocksType_experimental } from '@lexical/selection';
+import { $setBlocksType } from '@lexical/selection';
 
 import { useNodeUpdateListener } from '../../hooks/useUpdateListener';
 
@@ -42,13 +42,14 @@ const FontSize: FC = () => {
     return (
         <Dropdown
             menuItems={Blocks}
+            defaultSelected='normal'
             selected={type}
             onSelect={(selectedType: string) => {
                 if (type === selectedType) {
                     return
                 }
                 updateRange((selection) => {
-                    $setBlocksType_experimental(selection, () =>
+                    $setBlocksType(selection, () =>
                         selectedType !== 'normal' ? $createHeadingNode(selectedType as HeadingTagType) :
                             $createParagraphNode(),
                     );

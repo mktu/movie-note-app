@@ -30,7 +30,7 @@ export async function action({ request, context }: ActionArgs) {
             imdbId: data.imdbId || null,
             lng: data.lng
         }, user.id)
-        return redirect('/app')
+        return redirect(`/app/notes/${data.tmdbId}`)
     } catch (e) {
         if (e instanceof MovieNoteError) {
             return json<ActionData>({

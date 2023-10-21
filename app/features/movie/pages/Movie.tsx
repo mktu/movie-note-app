@@ -51,7 +51,7 @@ const Movie: FC<Props> = ({
                 error={error}
                 canSave={Boolean(detail)}
                 onReselect={() => { setInitialSelected('') }}
-                onClickSave={(watchState) => {
+                onClickSave={() => {
                     detail && onSubmit({
                         title: detail.title,
                         thumbnail: detail.poster_path || detail.backdrop_path || '',
@@ -60,8 +60,7 @@ const Movie: FC<Props> = ({
                         admirationDate: '',
                         stars: 0,
                         imdbId: detail.imdb_id,
-                        lng: detail.lng,
-                        watchState
+                        lng: detail.lng
                     })
                 }} {...{ selected, setSelected }} />}
             movieInfo={detail && {

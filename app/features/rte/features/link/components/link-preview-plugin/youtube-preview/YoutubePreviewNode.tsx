@@ -1,4 +1,4 @@
-import type { DOMExportOutput, ElementFormatType, LexicalEditor, LexicalNode, NodeKey, Spread } from "lexical";
+import type { DOMConversionMap, DOMExportOutput, ElementFormatType, LexicalEditor, LexicalNode, NodeKey, Spread } from "lexical";
 import { $applyNodeReplacement } from "lexical";
 import type {
     SerializedDecoratorBlockNode
@@ -90,6 +90,12 @@ export class YoutubePreviewNode extends DecoratorBlockNode {
         return node;
     }
 
+    static importDOM(): DOMConversionMap | null {
+        return {
+
+        };
+
+    }
 }
 
 export function $createYoutubePreviewNode(videoId: string, url: string): YoutubePreviewNode {

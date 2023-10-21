@@ -17,3 +17,7 @@ export const getMovieNoteList = (sortType: SortType, filterType: FilterType) => 
         credentials: 'same-origin'
     })
 }
+
+export const getTemplates = async () => {
+    return fetch(`/api/notes/templates`)
+}

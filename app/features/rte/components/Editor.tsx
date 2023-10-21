@@ -19,11 +19,14 @@ import { validateUrl } from '../utils/validateUrl';
 import initialConfig from './initialConfig';
 import { transformers } from './nodes';
 import Toolbar from './Toolbar';
+
 import HTMLConvertPlugin from './HTMLConvertPlugin';
+import Templates from './Toolbar/Templates';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
     setHtmlConverter: (fun: () => Promise<string>) => void,
+    templateGetter?: Parameters<typeof Templates>[0]['templateGetter']
     monitorCurrentState?: (data: string) => void,
     onChange?: (content: string) => void
     init?: string | null
@@ -32,6 +35,7 @@ type Props = {
 const Editor: FC<Props> = ({
     setContentGetter,
     setHtmlConverter,
+    templateGetter,
     monitorCurrentState,
     onChange,
     init
@@ -44,7 +48,13 @@ const Editor: FC<Props> = ({
                 editorState: init,
                 ...initialConfig
             }}>
-                <Toolbar />
+                <Toolbar
+                    templateComponent={
+                        <Templates
+                            templateGetter={templateGetter}
+                        />
+                    }
+                />
                 <div className='relative'>
                     <RichTextPlugin
                         ErrorBoundary={LexicalErrorBoundary}
@@ -52,7 +62,7 @@ const Editor: FC<Props> = ({
                             <ContentEditable
                                 className='text-text-main outline-none' />
                         </div>}
-                        placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('add-note')}...✍️</div>}
+                        placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('note-place-holder')}...✍️</div>}
                     />
                 </div>
                 <LinkPlugins />
@@ -63,10 +73,15 @@ const Editor: FC<Props> = ({
                 <DragDropPastePlugin />
                 <ImagesPlugin />
                 <CheckListPlugin />
-                <OnChangePlugin onChange={(editorState) => {
-                    editorStateRef.current = editorState
-                    onChange && onChange(JSON.stringify(editorStateRef.current))
-                }} />
+                <OnChangePlugin
+                    ignoreSelectionChange
+                    onChange={(editorState) => {
+                        editorStateRef.current = editorState
+                        if (!editorState.isEmpty() && onChange) {
+                            onChange(JSON.stringify(editorStateRef.current))
+                        }
+
+                    }} />
                 <HTMLConvertPlugin
                     getConverter={setHtmlConverter} />
             </LexicalComposer>
