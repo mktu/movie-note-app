@@ -7,7 +7,7 @@ import { getSearchParamAsBoolean } from '@utils/searchparam.server';
 
 import type { TmdbDetail, TmdbLng } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
-import type { LoaderArgs } from "@remix-run/cloudflare";
+import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 
 
 type ContentData = {
@@ -20,7 +20,7 @@ export type LorderData = {
     content?: ContentData
 }
 
-export async function loader({ request, context, params }: LoaderArgs) {
+export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const user = await authenticator.isAuthenticated(request)
     const url = new URL(request.url);
     const lng: TmdbLng = url.searchParams.get('lng') as TmdbLng || 'ja';

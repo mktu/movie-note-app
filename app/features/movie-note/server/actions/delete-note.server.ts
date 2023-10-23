@@ -7,12 +7,12 @@ import { getSupabaseAdmin } from '@utils/server/db';
 
 import { parseDeleteNote } from '../validation/delete-note';
 
-import type { ActionArgs } from "@remix-run/cloudflare";
+import type { ActionFunctionArgs } from "@remix-run/cloudflare";
 
 type ActionData = {
     error?: string
 }
-export async function action({ request, context }: ActionArgs) {
+export async function action({ request, context }: ActionFunctionArgs) {
 
     const user = await authenticator.isAuthenticated(request)
 

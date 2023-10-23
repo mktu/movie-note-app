@@ -1,11 +1,11 @@
+import type { ReactNode } from 'react';
 import { forwardRef } from 'react';
-import React from 'react'
 import Context from './Context'
 import type { ContextType, NavigatorProps } from './Context'
 import { useNavigate, NavLink } from '@remix-run/react'
 
 type Props = {
-    children: React.ReactNode,
+    children: ReactNode,
 }
 
 export const Navigator = forwardRef<HTMLAnchorElement, NavigatorProps>(({ to, children, className, ...props }, ref) => {

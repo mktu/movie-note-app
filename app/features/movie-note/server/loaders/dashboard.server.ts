@@ -5,7 +5,7 @@ import { json } from '@remix-run/cloudflare';
 
 import type { TmdbTrends } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
-import type { LoaderArgs } from "@remix-run/cloudflare";
+import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { tmdbKv } from '~/features/movie-note/server/kv';
 import { getSearchParamAsBoolean } from '@utils/searchparam.server';
 import { PerformanceCounter } from '@utils/performance';
@@ -20,7 +20,7 @@ export type LorderData = {
     content?: ContentData
 }
 
-export async function loader({ request, context }: LoaderArgs) {
+export async function loader({ request, context }: LoaderFunctionArgs) {
     let lng = await i18next.getLocale(request);
     const tmdbData = setTmdbData(context)
     const tmdb = new Tmdb(tmdbData.apiKey, lng === 'ja' ? 'ja' : 'en')

@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/cloudflare";
+import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import authenticator from '~/features/auth/server/auth.server';
 import { listMovieNote } from '~/features/movie-note/server/db';
 import { setTmdbData } from '~/features/tmdb';
@@ -21,7 +21,7 @@ type LoaderData = {
     movieNoteType: ReturnType<typeof getMovieNoteType>,
 }
 
-export async function loader({ request, context }: LoaderArgs) {
+export async function loader({ request, context }: LoaderFunctionArgs) {
     const authUser = await authenticator.isAuthenticated(request)
 
     if (!authUser) {
