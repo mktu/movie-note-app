@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
 
-import { Form as RemixForm, useTransition } from '@remix-run/react';
+import { Form as RemixForm, useNavigation } from '@remix-run/react';
 
 import Context from './Context';
 
@@ -20,8 +20,8 @@ export const Form: FC<FormProps> = ({ action, method, children, className, encTy
 Form['displayName'] = 'form'
 
 const useTransitionState = () => {
-    const tarnsition = useTransition()
-    return tarnsition.state
+    const navigation = useNavigation()
+    return navigation.state
 }
 
 

@@ -1,5 +1,5 @@
 import authenticator from '~/features/auth/server/auth.server';
-import { redirect, type LoaderArgs, json } from "@remix-run/cloudflare";
+import { redirect, type LoaderFunctionArgs, json } from "@remix-run/cloudflare";
 import type { TmdbLng, MovieCredits, Actor } from '~/features/tmdb';
 import { setTmdbData, Tmdb } from '~/features/tmdb';
 import type { ErrorKey } from '../../utils/error';
@@ -18,7 +18,7 @@ export type LorderData = {
     content?: ContentData
 }
 
-export async function loader({ request, context, params }: LoaderArgs) {
+export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const user = await authenticator.isAuthenticated(request)
 
     const url = new URL(request.url);

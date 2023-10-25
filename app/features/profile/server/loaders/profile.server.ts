@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/cloudflare";
+import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import authenticator from '~/features/auth/server/auth.server';
 import { userDb } from '~/features/profile/server/db';
 
@@ -11,7 +11,7 @@ interface LorderData {
     user: UserType
 }
 
-export async function loader({ request, context }: LoaderArgs) {
+export async function loader({ request, context }: LoaderFunctionArgs) {
     const authUser = await authenticator.isAuthenticated(request)
     if (!authUser) {
         return redirect('/login')

@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Form, Link, useTransition } from '@remix-run/react'
+import { Form, Link, useNavigation } from '@remix-run/react'
 import { ContainedButton } from '~/components/buttons'
 import { TextInput } from '~/components/inputs'
 import UserIcon from '~/components/icons/User'
@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 const Login: FC<{ errorKey?: string }> = ({ errorKey }) => {
     const { t } = useTranslation('common')
     const { email, password, errors, valid } = useRegisterForm()
-    const transition = useTransition();
+    const navigation = useNavigation()
     return (
         <div className='flex h-full w-full flex-col items-center justify-center'>
             <h1 className='text-text-main'>Sign Up</h1>
@@ -37,7 +37,7 @@ const Login: FC<{ errorKey?: string }> = ({ errorKey }) => {
                 <ValidationTransition className='mt-2 w-full text-sm text-error-main' show={Boolean(errors[password.name])}>
                     {errors[password.name]?.message?.toString()}
                 </ValidationTransition>
-                <ContainedButton id='login' disabled={!valid || transition.state !== 'idle'} className='mt-5 w-full'>{t('register')}</ContainedButton>
+                <ContainedButton id='login' disabled={!valid || navigation.state !== 'idle'} className='mt-5 w-full'>{t('register')}</ContainedButton>
             </Form>
             <div className='my-4 text-sm'>
                 <span className='mr-2 text-text-main'>{t('has-no-account')}</span>

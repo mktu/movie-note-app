@@ -1,4 +1,4 @@
-import type { ActionArgs } from "@remix-run/cloudflare";
+import type { ActionFunctionArgs } from "@remix-run/cloudflare";
 import authenticator from '~/features/auth/server/auth.server';
 import { userDb } from '~/features/profile/server/db';
 
@@ -12,7 +12,7 @@ interface ActionData {
     succeeded?: boolean
 }
 
-export async function action({ request, context }: ActionArgs) {
+export async function action({ request, context }: ActionFunctionArgs) {
     const uploadHandler = unstable_createMemoryUploadHandler({
         maxPartSize: 500_000,
     });
