@@ -1,4 +1,4 @@
-import type { ActionArgs, LoaderFunction } from "@remix-run/cloudflare";
+import type { ActionFunctionArgs, LoaderFunction } from "@remix-run/cloudflare";
 import Layout from '~/features/auth/components/Layout';
 import authenticator from '~/features/auth/server/auth.server';
 import { hasAuth } from '~/features/auth/server/db';
@@ -38,7 +38,7 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 
 }
 
-export async function action({ request, context }: ActionArgs) {
+export async function action({ request, context }: ActionFunctionArgs) {
     const formData = await request.formData()
     const adminDb = getSupabaseAdmin(context)
     const name = formData.get("nickname") as string || ''

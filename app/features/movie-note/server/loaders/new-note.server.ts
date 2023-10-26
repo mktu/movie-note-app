@@ -4,7 +4,7 @@ import { json } from '@remix-run/cloudflare';
 
 import type { Credits, TmdbDetail } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
-import type { LoaderArgs } from "@remix-run/cloudflare";
+import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 
 type ContentData = {
     tmdbDetail: TmdbDetail,
@@ -16,7 +16,7 @@ export type LorderData = {
     content?: ContentData
 }
 
-export async function loader({ request, context }: LoaderArgs) {
+export async function loader({ request, context }: LoaderFunctionArgs) {
     const url = new URL(request.url);
     const tmdbId = url.searchParams.get('tmdbId');
     const lng = url.searchParams.get('lng');

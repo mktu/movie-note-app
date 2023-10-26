@@ -6,13 +6,13 @@ import { MovieNoteError } from '~/features/movie-note/utils/error';
 import { json, redirect } from '@remix-run/cloudflare';
 import { getSupabaseAdmin } from '@utils/server/db';
 
-import type { ActionArgs } from "@remix-run/cloudflare";
+import type { ActionFunctionArgs } from "@remix-run/cloudflare";
 import { putMovieNoteIds } from '../kv/tmdb';
 
 type ActionData = {
     error?: string
 }
-export async function action({ request, context }: ActionArgs) {
+export async function action({ request, context }: ActionFunctionArgs) {
 
     const user = await authenticator.isAuthenticated(request)
 

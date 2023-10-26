@@ -12,7 +12,7 @@ import { getSupabaseAdmin } from '@utils/server/db';
 import type { MovieNoteType } from '~/features/movie-note/server/db';
 import type { Credits, TmdbDetail, TmdbLng } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
-import type { LoaderArgs } from "@remix-run/cloudflare";
+import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import type { Video } from '~/features/tmdb/utils';
 
 
@@ -29,7 +29,7 @@ export type LorderData = {
     content?: ContentData
 }
 
-export async function loader({ request, context, params }: LoaderArgs) {
+export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const user = await authenticator.isAuthenticated(request)
     const noteId = params.noteId;
     if (!user) {
