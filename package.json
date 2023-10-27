@@ -34,7 +34,7 @@
     "compressorjs": "1.1.1",
     "cross-env": "7.0.3",
     "date-fns": "2.29.3",
-    "html-react-parser": "4.2.2",
+    "html-react-parser": "4.2.9",
     "i18next": "23.6.0",
     "i18next-browser-languagedetector": "7.1.0",
     "i18next-http-backend": "2.2.2",
