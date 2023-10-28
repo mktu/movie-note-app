@@ -127,6 +127,7 @@ function convertPreviewElement(domNode: Node): null | DOMConversionOutput {
       if (!aNode) {
         return null
       }
+      console.log(aNode, imgNode)
 
       const node = $createLinkPreviewNode('', aNode.href, {
         "title": aNode.textContent,

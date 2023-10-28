@@ -25,12 +25,16 @@ type UnPromisify<T> = T extends Promise<infer U> ? U : T;
 export type OgpType = UnPromisify<ReturnType<typeof doScrape>>
 
 const getOgp = async (url: string, kv: KVNamespace) => {
-    const cache = await kv.get(url, 'json') as OgpType | null
-    if (cache) {
-        return {
-            ...cache,
-            cache: true
+    try {
+        const cache = await kv.get(url, 'json') as OgpType | null
+        if (cache) {
+            return {
+                ...cache,
+                cache: true
+            }
         }
+    } catch (error) {
+        console.error(error)
     }
     const result = await doScrape(url)
     kv.put(url, JSON.stringify(result), { expirationTtl: 60 * 60 * 24 * 7 /** one weeks */ })

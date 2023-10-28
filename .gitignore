@@ -15,6 +15,7 @@ node_modules
 .wrangler/**
 functions/metafile.js.json
 functions/metafile.server.json
+functions/version.txt
 
 state.json
 .DS_Store

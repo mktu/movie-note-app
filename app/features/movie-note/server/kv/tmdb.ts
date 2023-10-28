@@ -16,18 +16,27 @@ const makeMovieCreditsKey = (actorId: string, lng: TmdbLng) => `movie-credits-${
 
 const makeTrendsKey = (lng: TmdbLng) => `trends-${lng}`
 
+const getOrDeleteIfError = async <Expected>(kv: KVNamespace, key: string) => {
+    try {
+        const ret = await kv.get<Expected>(key, 'json')
+        return ret || null
+    } catch (error) {
+        console.error(error)
+        await kv.delete(key)
+        return null
+    }
+}
+
 const putTmdbInfo = async (kv: KVNamespace, tmdbInfo: TmdbDetail) => {
     await kv.put(makeDetailKey(tmdbInfo.id, tmdbInfo.lng), JSON.stringify(tmdbInfo), { expirationTtl: 60 * 60 * 24 * 14 /** two weeks */ })
 }
 
 const getTmdbKv = async (kv: KVNamespace, tmdbId: string, lng: TmdbLng) => {
-    const ret = await kv.get(makeDetailKey(tmdbId, lng), 'json') as TmdbDetail
-    return ret || null
+    return await getOrDeleteIfError<TmdbDetail>(kv, makeDetailKey(tmdbId, lng))
 }
 
 const getTmdbTrends = async (kv: KVNamespace, lng: TmdbLng) => {
-    const ret = await kv.get(makeTrendsKey(lng), 'json') as TmdbTrends
-    return ret || null
+    return getOrDeleteIfError<TmdbTrends>(kv, makeTrendsKey(lng))
 }
 
 const putTmdnTrends = async (kv: KVNamespace, lng: TmdbLng, trends: TmdbTrends) => {
@@ -43,8 +52,7 @@ const getMovieNoteIds = async (kv: KVNamespace, tmdbId: string, userId: string) 
 }
 
 const getTmdbActor = async (kv: KVNamespace, actorId: string, lng: TmdbLng) => {
-    const ret = await kv.get(makeActorKey(actorId, lng), 'json') as Actor
-    return ret || null
+    return await getOrDeleteIfError<Actor>(kv, makeActorKey(actorId, lng))
 }
 
 const putTmdbActor = async (kv: KVNamespace, actor: Actor, lng: TmdbLng) => {
@@ -52,8 +60,7 @@ const putTmdbActor = async (kv: KVNamespace, actor: Actor, lng: TmdbLng) => {
 }
 
 const getTmdbMovieCredits = async (kv: KVNamespace, actorId: string, lng: TmdbLng) => {
-    const ret = await kv.get(makeMovieCreditsKey(actorId, lng), 'json') as MovieCredits
-    return ret || null
+    return await getOrDeleteIfError<MovieCredits>(kv, makeMovieCreditsKey(actorId, lng))
 }
 
 const putTmdbMovieCredits = async (kv: KVNamespace, movieCredits: MovieCredits, lng: TmdbLng) => {
