@@ -5,6 +5,7 @@ node_modules
 /functions/\[\[path\]\].js.map
 /functions/_assets/**
 /public/build
+/functions/version.txt
 .env
 .env.staging
 /test-results/
@@ -15,7 +16,6 @@ node_modules
 .wrangler/**
 functions/metafile.js.json
 functions/metafile.server.json
-functions/version.txt
 
 state.json
 .DS_Store
