@@ -3,6 +3,7 @@ import TemplatePopupMenu from './TemplatePopupMenu';
 import type { Template } from '~/features/rte/components/Toolbar/Templates';
 import { ContainedButton, TextButton } from '~/components/buttons';
 import { useTranslation } from 'react-i18next';
+import { useNavigatorContext } from '~/providers/navigator/Context';
 
 type Props = {
     templates: Template[],
@@ -26,6 +27,7 @@ const TemplatePopup: FC<Props> = ({
         return m
     }, [templates])
     const { t } = useTranslation('common')
+    const { navigator: Navigator } = useNavigatorContext()
     return (
         <div className='relative flex min-h-[128px] w-[312px] flex-col gap-2 rounded border border-border-main p-4' >
             <TemplatePopupMenu
@@ -38,7 +40,7 @@ const TemplatePopup: FC<Props> = ({
                 }}
             />
             <div className='mt-auto flex items-center justify-end text-sm'>
-                <a href={'#a'}>+ {t('create-template')}</a>
+                <Navigator to='/app/note-template/new'>+ {t('create-template')}</Navigator>
             </div>
             <div className='flex items-center justify-end gap-1 p-1 font-semibold'>
                 <TextButton className='ml-auto' onClick={onCancel} theme='label' paddings='py-1 px-2'>CANCEL</TextButton>

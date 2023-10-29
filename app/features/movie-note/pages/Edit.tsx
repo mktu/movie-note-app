@@ -12,6 +12,7 @@ import type { MovieNoteType } from '../server/db';
 import WatchLogDialog from '../components/watch-log/WatchLogDialog';
 import { useMovieNote } from '../hooks/useMovieNote';
 import { MovieNoteContext } from '../context/movie-note';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
     onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void,
@@ -43,6 +44,7 @@ const Edit: FC<Props> = ({
         submitNote
     } = contextValue
     const [openWatchLog, setOpenWatchLog] = useState(false)
+    const { t } = useTranslation('common')
     return (
         <MovieNoteContext.Provider value={contextValue}>
             <MovieLayout
@@ -56,6 +58,7 @@ const Edit: FC<Props> = ({
                     setContentGetter={setContentGetter}
                     setHtmlConverter={setHtmlConverter}
                     templateGetter={getTemplates}
+                    placeholder={`${t('note-place-holder')}...✍️`}
                     init={movieNoteDetail?.memo}
                     onChange={(text) => {
                         submitNote({

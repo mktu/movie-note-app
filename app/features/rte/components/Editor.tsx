@@ -1,5 +1,4 @@
 import { type FC } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
@@ -25,11 +24,15 @@ import Templates from './Toolbar/Templates';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
-    setHtmlConverter: (fun: () => Promise<string>) => void,
+    setHtmlConverter?: (fun: () => Promise<string>) => void,
     templateGetter?: Parameters<typeof Templates>[0]['templateGetter']
     monitorCurrentState?: (data: string) => void,
     onChange?: (content: string) => void
-    init?: string | null
+    init?: string | null,
+    placeholder?: string,
+    toolbarOptions?: {
+        template: 'create' | 'use'
+    }
 }
 
 const Editor: FC<Props> = ({
@@ -38,9 +41,10 @@ const Editor: FC<Props> = ({
     templateGetter,
     monitorCurrentState,
     onChange,
-    init
+    init,
+    placeholder,
+    toolbarOptions
 }) => {
-    const { t } = useTranslation('common')
     const { editorStateRef } = useEditorState(setContentGetter, monitorCurrentState)
     return (
         <div >
@@ -50,7 +54,7 @@ const Editor: FC<Props> = ({
             }}>
                 <Toolbar
                     templateComponent={
-                        <Templates
+                        toolbarOptions?.template === 'create' ? <div /> : <Templates
                             templateGetter={templateGetter}
                         />
                     }
@@ -62,7 +66,7 @@ const Editor: FC<Props> = ({
                             <ContentEditable
                                 className='text-text-main outline-none' />
                         </div>}
-                        placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{t('note-place-holder')}...✍️</div>}
+                        placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{placeholder}</div>}
                     />
                 </div>
                 <LinkPlugins />
