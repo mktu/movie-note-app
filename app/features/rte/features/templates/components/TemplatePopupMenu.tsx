@@ -19,7 +19,7 @@ const TemplatePopupMenu: FC<Props> = ({
 }) => {
     return (
         <Menu as='div' >
-            <Menu.Button className='flex w-[290px] items-center p-2 text-text-label hover:bg-surface-hover'>
+            <Menu.Button className={`flex w-[290px] items-center p-2 ${selected ? 'text-text-main' : 'text-text-label'} border-b border-border-main hover:bg-surface-hover`}>
                 <span className='mr-1'>{selected ? menuItems[selected].label : placeholder}</span>
                 <AngleDown className='ml-auto h-4 w-4 fill-text-label' />
             </Menu.Button>

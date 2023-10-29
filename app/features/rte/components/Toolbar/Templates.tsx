@@ -70,6 +70,7 @@ const Templates: FC<Props> = ({
                                     // Insert them at a selection.
                                     selection.insertNodes(nodes);
                                 })
+                                setShowEditor(false)
                             }}
                             onCancel={() => {
                                 setShowEditor(false)
