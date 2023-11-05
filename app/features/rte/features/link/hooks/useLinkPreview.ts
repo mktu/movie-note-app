@@ -9,6 +9,7 @@ import {
 } from '../components/link-preview-plugin/simple-link-preview/LinkPreviewNode';
 
 import type { ElementNode, LexicalNode } from 'lexical';
+import { $isLinkPreviewPlaceholderNode } from '../components/link-preview-plugin/simple-link-preview/LinkPreviewPlaceholderNode';
 
 
 const flattenNodes: (nodes: LexicalNode[]) => LexicalNode[] = (nodes) => {
@@ -48,7 +49,20 @@ export const useLinkPreviewUpdater = () => {
             }
         })
     }, [editor])
+
+    const removePlaceholder = useCallback(() => {
+        editor.update(() => {
+            const root = $getRoot();
+            const preview = flattenNodes(root.getChildren()).find(v => {
+                return $isLinkPreviewPlaceholderNode(v)
+            })
+            if (preview) {
+                preview.remove()
+            }
+        })
+    }, [editor])
     return {
-        removePreview
+        removePreview,
+        removePlaceholder
     }
 }

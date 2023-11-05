@@ -21,6 +21,7 @@ import Toolbar from './Toolbar';
 
 import HTMLConvertPlugin from './HTMLConvertPlugin';
 import Templates from './Toolbar/Templates';
+import TemplateNode from './Toolbar/TemplateNode';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
@@ -54,7 +55,7 @@ const Editor: FC<Props> = ({
             }}>
                 <Toolbar
                     templateComponent={
-                        toolbarOptions?.template === 'create' ? <div /> : <Templates
+                        toolbarOptions?.template === 'create' ? <TemplateNode /> : <Templates
                             templateGetter={templateGetter}
                         />
                     }

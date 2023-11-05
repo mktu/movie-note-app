@@ -79,5 +79,6 @@
     "back": "戻る",
     "insert-template": "テンプレートを挿入します✨",
     "select-template": "テンプレートを選択してください",
-    "create-template": "テンプレートを作成する"
+    "create-template": "テンプレートを作成する",
+    "imdb-placeholder": "ここにIMDBのリンクが挿入されます"
 }

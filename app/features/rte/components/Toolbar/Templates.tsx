@@ -25,7 +25,7 @@ const Templates: FC<Props> = ({
     templateGetter
 }) => {
     const { updateRange } = useRangeUpdater()
-    const [showEditor, setShowEditor] = useState(false)
+    const [showTemplateMenu, setShowTemplateMenu] = useState(false)
     const [referenceElement, setReferenceElement] = useState<HTMLElement>()
     const [popperElement, setPopperElement] = useState<HTMLDivElement | null>()
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -45,12 +45,12 @@ const Templates: FC<Props> = ({
                     el && setReferenceElement(el)
                 }} name={'link'} className={clsx('flex items-center gap-1 p-1 text-text-label hover:bg-surface-hover'
                 )} onClick={(e) => {
-                    setShowEditor(true)
+                    setShowTemplateMenu(true)
                 }}>
                 <AddIcon className='h-5 w-5 fill-text-label' />
                 <span>Template</span>
             </TextButton>
-            {showEditor && (
+            {showTemplateMenu && (
                 <FocusTrap>
                     <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
                         {...attributes.popper} className='bg-bg-main'>
@@ -70,10 +70,10 @@ const Templates: FC<Props> = ({
                                     // Insert them at a selection.
                                     selection.insertNodes(nodes);
                                 })
-                                setShowEditor(false)
+                                setShowTemplateMenu(false)
                             }}
                             onCancel={() => {
-                                setShowEditor(false)
+                                setShowTemplateMenu(false)
                             }}
                         />
                     </div>

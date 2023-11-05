@@ -6,12 +6,12 @@ import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 
 import type { Klass, LexicalNode } from "lexical";
 import { ImageNode } from '../features/images/components';
-import { LinkPreviewNode, YoutubePreviewNode, TwitterPreviewNode } from '../features/link';
+import { LinkPreviewNode, YoutubePreviewNode, TwitterPreviewNode, LinkPreviewPlaceholderNode } from '../features/link';
 
 //HEADING, QUOTE, CODE, UNORDERED_LIST, ORDERED_LIST
 const nodes: Klass<LexicalNode>[] = [
     HeadingNode, QuoteNode, ListItemNode, ListNode, LinkNode, AutoLinkNode,
-    TableCellNode, TableNode, TableRowNode, LinkPreviewNode, YoutubePreviewNode, TwitterPreviewNode, ImageNode];
+    TableCellNode, TableNode, TableRowNode, LinkPreviewNode, LinkPreviewPlaceholderNode, YoutubePreviewNode, TwitterPreviewNode, ImageNode];
 
 
 

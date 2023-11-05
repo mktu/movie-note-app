@@ -3,5 +3,6 @@ export {
     LinkInserter,
     LinkPreviewNode,
     TwitterPreviewNode,
-    YoutubePreviewNode
+    YoutubePreviewNode,
+    LinkPreviewPlaceholderNode
 } from './components'
