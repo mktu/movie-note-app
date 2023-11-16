@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import useImdb from './hooks/useImdb';
-import ImdbRateLabel from './components'
+import ImdbRateLabel, { ImdbIcon } from './components'
 import Placeholder from './components/Placeholder'
 
 type Props = {
@@ -20,6 +20,6 @@ const Imdb: FC<Props> = ({
     )
 };
 
-export { ImdbRateLabel }
+export { ImdbRateLabel, ImdbIcon }
 
 export default Imdb;

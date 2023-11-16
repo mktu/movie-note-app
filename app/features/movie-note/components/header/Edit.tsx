@@ -2,9 +2,7 @@ import clsx from 'clsx';
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import useFloatingHeader from '~/hooks/useFloatingHeader';
-
-import Error from './Error';
-
+import { Error } from '~/components/header'
 import MiniImage from './MiniImage';
 import WatchLog from './WatchLog';
 import { Menu } from '@headlessui/react';

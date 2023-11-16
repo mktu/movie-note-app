@@ -1,4 +1,4 @@
-import { $getRoot, $isElementNode } from 'lexical';
+import { $getRoot } from 'lexical';
 import { useCallback } from 'react';
 
 import { $isAutoLinkNode } from '@lexical/link';
@@ -8,20 +8,8 @@ import {
     $isLinkPreviewNode
 } from '../components/link-preview-plugin/simple-link-preview/LinkPreviewNode';
 
-import type { ElementNode, LexicalNode } from 'lexical';
-
-
-const flattenNodes: (nodes: LexicalNode[]) => LexicalNode[] = (nodes) => {
-    let results: LexicalNode[] = [...nodes]
-    const elements = nodes.filter(n => $isElementNode(n)).map(n => n as ElementNode)
-    elements.forEach(v => {
-        const children = v.getChildren()
-        const elements = children.filter(c => $isElementNode(c)).map(c => c as ElementNode)
-        const notElements = children.filter(c => !$isElementNode(c))
-        results = [...results, ...notElements, ...flattenNodes(elements)]
-    })
-    return results
-}
+import { $isLinkPreviewPlaceholderNode } from '../components/link-preview-plugin/simple-link-preview/LinkPreviewPlaceholderNode';
+import { flattenNodes } from '~/features/rte/utils/node';
 
 export const useLinkPreviewUpdater = () => {
     const [editor] = useLexicalComposerContext()
@@ -48,7 +36,20 @@ export const useLinkPreviewUpdater = () => {
             }
         })
     }, [editor])
+
+    const removePlaceholder = useCallback(() => {
+        editor.update(() => {
+            const root = $getRoot();
+            const preview = flattenNodes(root.getChildren()).find(v => {
+                return $isLinkPreviewPlaceholderNode(v)
+            })
+            if (preview) {
+                preview.remove()
+            }
+        })
+    }, [editor])
     return {
-        removePreview
+        removePreview,
+        removePlaceholder
     }
 }

@@ -18,6 +18,6 @@ export const getMovieNoteList = (sortType: SortType, filterType: FilterType) => 
     })
 }
 
-export const getTemplates = async () => {
-    return fetch(`/api/notes/templates`)
+export const getTemplates = async (tmdbId: string) => {
+    return fetch(`/api/notes/templates/${tmdbId}`)
 }

@@ -17,6 +17,7 @@ import UserProvider from '~/providers/user';
 
 import { useLoaderData, useSubmit } from '@remix-run/react';
 import { SearchMenu } from '~/features/movie';
+import TemplateList from '~/features/movie-note/components/template-list/TemplateList';
 
 export { loader }
 
@@ -25,7 +26,7 @@ export function links() {
 }
 
 export const App: React.FC = () => {
-    const { user, tmdbData, movieNoteList, sidebarSettings, movieNoteType } = useLoaderData<typeof loader>()
+    const { user, tmdbData, movieNoteList, sidebarSettings, movieNoteType, templateList } = useLoaderData<typeof loader>()
     const { i18n } = useTranslation('common')
     const submit = useSubmit()
     return (
@@ -46,7 +47,14 @@ export const App: React.FC = () => {
                                     onRemoveNote={(noteId) => {
                                         submit({ noteId }, { action: '/app/delete-note', method: 'post' })
                                     }}
-                                    movieNoteList={movieNoteList} />}>
+                                    movieNoteList={movieNoteList} />}
+                                templateList={<TemplateList
+                                    templateList={templateList}
+                                    onRemoveNote={() => {
+
+                                    }}
+                                />}
+                            >
                                 <AppOutletProvider />
                             </SidebarLayout>
                             <ToastContainer

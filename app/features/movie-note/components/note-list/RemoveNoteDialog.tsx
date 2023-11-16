@@ -28,7 +28,7 @@ const RemoveNoteDialog: FC<Props> = ({
                     <hr className='my-1' />
                     <div className='flex items-center justify-end'>
                         <TextButton className='font-semibold' onClick={onClose}>Cancel</TextButton>
-                        <TextButton className='font-semibold text-destructive-main' onClick={onRemove}>削除</TextButton>
+                        <TextButton className='font-semibold text-destructive-main' onClick={onRemove}>{t('delete')}</TextButton>
                     </div>
                 </Dialog.Panel>
             </div>

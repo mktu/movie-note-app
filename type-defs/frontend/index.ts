@@ -12,5 +12,18 @@ export type AddMovieNote = {
     published?: boolean,
     html?: string
 }
+export type AddNoteTemplate = {
+    name: string,
+    template: string,
+    html: string,
+}
+
+export type NoteTemplate = {
+    id: number,
+    name: string;
+    public: boolean | null;
+    template: string | null;
+    html: string | null
+}
 
 export type UpdateMovieNote = AddMovieNote

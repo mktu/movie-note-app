@@ -9,7 +9,7 @@ type Props = Parameters<typeof Input>[0] & {
 const TextInputInnerComponent = forwardRef<HTMLInputElement, Props>(({ label, ...props }, ref) => {
     if (label) {
         return (
-            <LabeledInput ref={ref} placeholder={label} {...props} />
+            <LabeledInput ref={ref} label={label} {...props} />
         )
     }
     return (

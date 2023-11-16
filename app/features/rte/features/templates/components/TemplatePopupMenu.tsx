@@ -1,6 +1,6 @@
-import { Menu } from '@headlessui/react';
+import { RadioGroup } from '@headlessui/react';
 import type { FC, ReactNode } from 'react'
-import AngleDown from '~/components/icons/AngleDown'
+import CheckIcon from '~/components/icons/Check'
 
 type MenuItemTypes = { [key: string]: { label: string } }
 
@@ -18,29 +18,28 @@ const TemplatePopupMenu: FC<Props> = ({
     placeholder
 }) => {
     return (
-        <Menu as='div' >
-            <Menu.Button className='flex w-[290px] items-center p-2 text-text-label hover:bg-surface-hover'>
-                <span className='mr-1'>{selected ? menuItems[selected].label : placeholder}</span>
-                <AngleDown className='ml-auto h-4 w-4 fill-text-label' />
-            </Menu.Button>
-            <Menu.Items className="absolute z-20 flex w-[290px] flex-col gap-1 rounded border-border-dark bg-white text-text-label shadow">
-                {Object.keys(menuItems).map((key) => (
-                    <Menu.Item key={key} as='button' onClick={() => {
-                        onSelect(key)
-                    }}
-                    >
-                        {({ active }) => (
-                            <span
-                                className={`${active && 'bg-surface-hover'} flex w-full justify-start p-2`}
-                            >
-                                {menuItems[key].label}
+        <RadioGroup className='border-collapse' value={selected} onChange={(sel) => {
+            const found = menuItems[sel]
+            found && onSelect(found.label)
+        }}>
+            <RadioGroup.Label>{placeholder}</RadioGroup.Label>
+            {Object.values(menuItems).map((item, idx) => (
+                <RadioGroup.Option
+                    className={`flex cursor-pointer items-center gap-2 border border-border-main bg-surface-main p-2 text-text-label hover:bg-surface-hover hover:text-text-main ${idx !== 0 ? 'border-t-0' : 'mt-4'}`}
+                    key={idx}
+                    value={item}
+                >
+                    {({ checked }) => (
+                        <>
+                            <CheckIcon className={`h-5 w-5 ${checked ? 'fill-green-400' : 'fill-text-placeholder'}`} />
+                            <span className=''>
+                                {item.label}
                             </span>
-                        )}
-                    </Menu.Item>
-                ))}
-
-            </Menu.Items>
-        </Menu>
+                        </>
+                    )}
+                </RadioGroup.Option>
+            ))}
+        </RadioGroup >
     );
 };
 

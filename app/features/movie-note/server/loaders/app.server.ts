@@ -12,11 +12,14 @@ import { getMovieNoteType } from '../cookie/cookie.server';
 
 import type { MovieListType } from '~/features/movie-note/server/db';
 import type { UserType } from "~/features/profile/server/db/user.server";
+import type { ListTemplateType } from "~/features/note-template/server/db/template";
+import { listMyTemplate } from "~/features/note-template/server/db/template";
 
 type LoaderData = {
     user: UserType,
     tmdbData: ReturnType<typeof setTmdbData>,
     movieNoteList: MovieListType,
+    templateList: ListTemplateType,
     sidebarSettings: ReturnType<typeof getSidebarSettings>,
     movieNoteType: ReturnType<typeof getMovieNoteType>,
 }
@@ -34,12 +37,14 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
     }
     const tmdbData = setTmdbData(context)
     const movieNoteList = await listMovieNote(dbAdmin, authUser.id)
+    const templateList = await listMyTemplate(dbAdmin, authUser.id)
     const sidebarSettings = getSidebarSettings(request)
     const movieNoteType = getMovieNoteType(request)
     return json<LoaderData>({
         user,
         tmdbData,
         movieNoteList,
+        templateList,
         sidebarSettings,
         movieNoteType
     })

@@ -30,3 +30,4 @@ const Imdb: FC<Props> = ({
 };
 
 export default Imdb;
+export { ImdbIcon }
