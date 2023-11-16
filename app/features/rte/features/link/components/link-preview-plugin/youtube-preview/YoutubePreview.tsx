@@ -59,7 +59,7 @@ export default function YoutubePreviewPlugin(): JSX.Element | null {
         return editor.registerCommand(
             INSERT_YOUTUBE_COMMAND,
             (payload) => {
-                const node = $createYoutubePreviewNode(payload.id, payload.url);
+                const node = $createYoutubePreviewNode(payload.id);
                 $insertNodeToNearestRoot(node);
 
                 return true;

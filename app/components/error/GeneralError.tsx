@@ -1,10 +1,8 @@
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next';
 
-import type { ErrorKey } from '~/features/movie-note/utils/error';
-
 type Props = {
-    key: ErrorKey
+    key: string
 }
 
 const GeneralError: FC<Props> = ({ key }) => {

@@ -10,11 +10,13 @@ import { usePopper } from 'react-popper';
 import { TextButton } from '~/components/buttons';
 import clsx from 'clsx';
 import { TemplatePopup } from '../../features/templates/components';
+import ClickAwayListener from '~/components/clickaway';
 
 export type Template = {
     name: string,
     id: number,
-    template: string | null
+    template: string | null,
+    html: string | null
 }
 
 type Props = {
@@ -52,31 +54,35 @@ const Templates: FC<Props> = ({
             </TextButton>
             {showTemplateMenu && (
                 <FocusTrap>
-                    <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
-                        {...attributes.popper} className='bg-bg-main'>
-                        <TemplatePopup
-                            templates={templates}
-                            onSelect={(template) => {
-                                if (!template.template) {
-                                    return
-                                }
-                                updateRange((selection, editor) => {
-                                    const parser = new DOMParser();
-                                    const dom = parser.parseFromString(template.template!, 'text/html');
-                                    const nodes = $generateNodesFromDOM(editor, dom);
-                                    // Select the root
-                                    $getRoot().select();
+                    <ClickAwayListener onClickAway={() => {
+                        setShowTemplateMenu(false)
+                    }}>
+                        <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
+                            {...attributes.popper} className='bg-bg-main'>
+                            <TemplatePopup
+                                templates={templates}
+                                onSelect={(template) => {
+                                    if (!template.html) {
+                                        return
+                                    }
+                                    updateRange((selection, editor) => {
+                                        const parser = new DOMParser();
+                                        const dom = parser.parseFromString(template.html!, 'text/html');
+                                        const nodes = $generateNodesFromDOM(editor, dom);
+                                        // Select the root
+                                        $getRoot().select();
 
-                                    // Insert them at a selection.
-                                    selection.insertNodes(nodes);
-                                })
-                                setShowTemplateMenu(false)
-                            }}
-                            onCancel={() => {
-                                setShowTemplateMenu(false)
-                            }}
-                        />
-                    </div>
+                                        // Insert them at a selection.
+                                        selection.insertNodes(nodes);
+                                    })
+                                    setShowTemplateMenu(false)
+                                }}
+                                onCancel={() => {
+                                    setShowTemplateMenu(false)
+                                }}
+                            />
+                        </div>
+                    </ClickAwayListener>
                 </FocusTrap>
             )}
         </div>

@@ -99,6 +99,7 @@ export interface Database {
       note_template: {
         Row: {
           created_at: string
+          html: string | null
           id: number
           name: string
           public: boolean | null
@@ -107,6 +108,7 @@ export interface Database {
         }
         Insert: {
           created_at?: string
+          html?: string | null
           id?: number
           name: string
           public?: boolean | null
@@ -115,6 +117,7 @@ export interface Database {
         }
         Update: {
           created_at?: string
+          html?: string | null
           id?: number
           name?: string
           public?: boolean | null
@@ -207,6 +210,13 @@ export interface Database {
             Args: {
               id: string
               name: string
+            }
+            Returns: number
+          }
+        | {
+            Args: {
+              id: string
+              name: string
               auth_id: string
             }
             Returns: number
@@ -217,13 +227,6 @@ export interface Database {
               name: string
               auth_id: string
               comment: string
-            }
-            Returns: number
-          }
-        | {
-            Args: {
-              id: string
-              name: string
             }
             Returns: number
           }

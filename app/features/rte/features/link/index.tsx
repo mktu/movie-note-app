@@ -4,5 +4,7 @@ export {
     LinkPreviewNode,
     TwitterPreviewNode,
     YoutubePreviewNode,
-    LinkPreviewPlaceholderNode
+    LinkPreviewPlaceholderNode,
+    YoutubePreviewPlaceholderNode,
+    PlaceholderImportNode
 } from './components'

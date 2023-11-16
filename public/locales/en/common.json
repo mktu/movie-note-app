@@ -40,6 +40,8 @@
     "backend-error": "サーバーエラーが発生しました",
     "remove-note": "ノートを削除",
     "remove-note-description": "{{title}} を削除します。一度削除したノートは元に戻すことはできません",
+    "remove-template": "テンプレートを削除",
+    "remove-template-description": "{{title}} を削除します。一度削除したテンプレートは元に戻すことはできません",
     "leave-screen": "保存されていない変更があります。ページを離れますか?",
     "show-detail": "作品情報を見る",
     "show-summary": "作品情報を簡易表示します",
@@ -62,6 +64,7 @@
     "updated-at-desc": "更新が新しい順（初期値）",
     "lng-not-found": "言語が未設定です",
     "movie-id-not-found": "作品IDが未設定です",
+    "template-id-not-found": "テンプレートIDが未設定です",
     "edit-watch-log": "観賞記録を編集",
     "no-watched-log": "観賞日未入力",
     "stars": "評価",
@@ -80,5 +83,10 @@
     "insert-template": "テンプレートを挿入します✨",
     "select-template": "テンプレートを選択してください",
     "create-template": "テンプレートを作成する",
-    "imdb-placeholder": "ここにIMDBのリンクが挿入されます"
+    "imdb-template-node-name": "Imdbの映画情報",
+    "imdb-placeholder": "ここにIMDBのリンクが挿入されます",
+    "trailer-template-node-name": "作品のトレイラー動画",
+    "trailer-placeholder": "ここにトレイラーが挿入されます",
+    "template-not-found": "テンプレートが見つかりません",
+    "delete": "削除"
 }

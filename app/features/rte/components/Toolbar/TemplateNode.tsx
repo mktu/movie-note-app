@@ -9,10 +9,26 @@ import { useRangeUpdater } from '../../hooks/useUpdater';
 import { $createLinkPreviewPlaceholderNode } from '../../features/link/components/link-preview-plugin/simple-link-preview/LinkPreviewPlaceholderNode';
 import { $isRootOrShadowRoot, $createParagraphNode, type RangeSelection } from 'lexical';
 import { $wrapNodeInElement } from '@lexical/utils';
+import { $createYoutubePreviewPlaceholderNode } from '../../features/link/components/link-preview-plugin/youtube-preview/YoutubePreviewPlaceholderNode';
+import ClickAwayListener from '~/components/clickaway';
 
+export type TemplateNodeProps = {
+    linkNodes: {
+        name: string,
+        placeholder: string,
+        placeholderText: string
+    }[],
+    youtubeNodes: {
+        name: string,
+        placeholder: string,
+        placeholderText: string
+    }[]
+}
 
-
-const TemplateNode: FC = () => {
+const TemplateNode: FC<TemplateNodeProps> = ({
+    linkNodes,
+    youtubeNodes
+}) => {
     const [showTemplateNodeMenu, setShowTemplateNodeMenu] = useState(false)
     const [referenceElement, setReferenceElement] = useState<HTMLElement>()
     const [popperElement, setPopperElement] = useState<HTMLDivElement | null>()
@@ -20,27 +36,28 @@ const TemplateNode: FC = () => {
         placement: 'auto'
     });
     const { updateRange } = useRangeUpdater()
-    const templateNodes =
-        [
-            {
-                name: 'Imdbの映画情報', createDom: (selection: RangeSelection) => {
-                    const node = $createLinkPreviewPlaceholderNode('$imdbPlaceholder')
-                    selection.insertNodes([node])
-                    if ($isRootOrShadowRoot(node.getParentOrThrow())) {
-                        $wrapNodeInElement(node, $createParagraphNode).selectEnd();
-                    }
+    const templateNodes = [
+        ...linkNodes.map(v => ({
+            name: v.name,
+            createDom: (selection: RangeSelection) => {
+                const node = $createLinkPreviewPlaceholderNode(v.placeholder, v.placeholderText)
+                selection.insertNodes([node])
+                if ($isRootOrShadowRoot(node.getParentOrThrow())) {
+                    $wrapNodeInElement(node, $createParagraphNode).selectEnd();
                 }
-            },
-            {
-                name: 'youtubeプレビュー', createDom: (selection: RangeSelection) => {
-                    const node = $createLinkPreviewPlaceholderNode('$youtubePlaceholder')
-                    selection.insertNodes([node])
-                    if ($isRootOrShadowRoot(node.getParentOrThrow())) {
-                        $wrapNodeInElement(node, $createParagraphNode).selectEnd();
-                    }
+            }
+        })),
+        ...youtubeNodes.map(v => ({
+            name: v.name,
+            createDom: (selection: RangeSelection) => {
+                const node = $createYoutubePreviewPlaceholderNode(v.placeholder, v.placeholderText)
+                selection.insertNodes([node])
+                if ($isRootOrShadowRoot(node.getParentOrThrow())) {
+                    $wrapNodeInElement(node, $createParagraphNode).selectEnd();
                 }
-            },
-        ]
+            }
+        }))
+    ]
     return (
         <div className=''>
             <TextButton
@@ -56,22 +73,26 @@ const TemplateNode: FC = () => {
             </TextButton>
             {showTemplateNodeMenu && (
                 <FocusTrap>
-                    <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
-                        {...attributes.popper} className='bg-bg-main'>
-                        <TemplateNodePopup
-                            templateNodes={templateNodes}
-                            onCancel={() => {
-                                setShowTemplateNodeMenu(false)
-                            }}
-                            onSelect={(selected) => {
-                                const template = templateNodes.find(v => v.name === selected.name)
-                                template && updateRange((selection) => {
-                                    template.createDom(selection)
-                                })
-                                setShowTemplateNodeMenu(false)
-                            }}
-                        />
-                    </div>
+                    <ClickAwayListener onClickAway={() => {
+                        setShowTemplateNodeMenu(false)
+                    }}>
+                        <div ref={setPopperElement} style={{ ...styles.popper, zIndex: 20 }}
+                            {...attributes.popper} className='bg-bg-main'>
+                            <TemplateNodePopup
+                                templateNodes={templateNodes}
+                                onCancel={() => {
+                                    setShowTemplateNodeMenu(false)
+                                }}
+                                onSelect={(selected) => {
+                                    const template = templateNodes.find(v => v.name === selected.name)
+                                    template && updateRange((selection) => {
+                                        template.createDom(selection)
+                                    })
+                                    setShowTemplateNodeMenu(false)
+                                }}
+                            />
+                        </div>
+                    </ClickAwayListener>
                 </FocusTrap>
             )}
         </div>

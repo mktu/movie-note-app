@@ -10,7 +10,6 @@ import YoutubePreview from "./Container";
 import { renderToStaticMarkup } from "react-dom/server";
 
 type YoutubePreviewAttributes = {
-    url: string,
     videoId: string
 }
 
@@ -20,23 +19,17 @@ type SerializedYoutubePreviewNode = Spread<{
 
 export class YoutubePreviewNode extends DecoratorBlockNode {
     __video_id: string;
-    __url: string
     static getType(): string {
         return 'youtube-preview';
     }
 
-    constructor(videoId: string, url: string, format?: ElementFormatType, key?: NodeKey) {
+    constructor(videoId: string, format?: ElementFormatType, key?: NodeKey) {
         super(format, key)
         this.__video_id = videoId
-        this.__url = url
     }
 
     static clone(node: YoutubePreviewNode): YoutubePreviewNode {
-        return new YoutubePreviewNode(node.__video_id, node.__url, node.__format, node.__key);
-    }
-
-    getUrl(): string {
-        return this.__url
+        return new YoutubePreviewNode(node.__video_id, node.__format, node.__key);
     }
 
     createDOM(): HTMLElement {
@@ -74,7 +67,6 @@ export class YoutubePreviewNode extends DecoratorBlockNode {
         return {
             ...super.exportJSON(),
             videoId: this.__video_id,
-            url: this.__url,
             type: 'youtube-preview',
             version: 1
         }
@@ -85,7 +77,7 @@ export class YoutubePreviewNode extends DecoratorBlockNode {
     }
 
     static importJSON(serializedLinkPreviewNode: SerializedYoutubePreviewNode): YoutubePreviewNode {
-        const node = $createYoutubePreviewNode(serializedLinkPreviewNode.videoId, serializedLinkPreviewNode.url);
+        const node = $createYoutubePreviewNode(serializedLinkPreviewNode.videoId);
         node.setFormat(serializedLinkPreviewNode.format);
         return node;
     }
@@ -98,8 +90,8 @@ export class YoutubePreviewNode extends DecoratorBlockNode {
     }
 }
 
-export function $createYoutubePreviewNode(videoId: string, url: string): YoutubePreviewNode {
-    return $applyNodeReplacement(new YoutubePreviewNode(videoId, url));
+export function $createYoutubePreviewNode(videoId: string): YoutubePreviewNode {
+    return $applyNodeReplacement(new YoutubePreviewNode(videoId));
 }
 
 export function $isYoutubePreviewNode(node?: LexicalNode): node is YoutubePreviewNode {

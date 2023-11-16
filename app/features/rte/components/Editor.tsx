@@ -21,6 +21,7 @@ import Toolbar from './Toolbar';
 
 import HTMLConvertPlugin from './HTMLConvertPlugin';
 import Templates from './Toolbar/Templates';
+import type { TemplateNodeProps } from './Toolbar/TemplateNode';
 import TemplateNode from './Toolbar/TemplateNode';
 
 type Props = {
@@ -33,7 +34,8 @@ type Props = {
     placeholder?: string,
     toolbarOptions?: {
         template: 'create' | 'use'
-    }
+    },
+    templateNodeOptions?: TemplateNodeProps
 }
 
 const Editor: FC<Props> = ({
@@ -44,7 +46,8 @@ const Editor: FC<Props> = ({
     onChange,
     init,
     placeholder,
-    toolbarOptions
+    toolbarOptions,
+    templateNodeOptions
 }) => {
     const { editorStateRef } = useEditorState(setContentGetter, monitorCurrentState)
     return (
@@ -55,7 +58,10 @@ const Editor: FC<Props> = ({
             }}>
                 <Toolbar
                     templateComponent={
-                        toolbarOptions?.template === 'create' ? <TemplateNode /> : <Templates
+                        toolbarOptions?.template === 'create' ? <TemplateNode
+                            youtubeNodes={templateNodeOptions ? templateNodeOptions.youtubeNodes : []}
+                            linkNodes={templateNodeOptions ? templateNodeOptions.linkNodes : []}
+                        /> : <Templates
                             templateGetter={templateGetter}
                         />
                     }

@@ -7,12 +7,14 @@ import { useTranslation } from "react-i18next"
 import { useNavigatorContext } from "~/providers/navigator/Context"
 import { setMovieNotePreviewHtml } from "../utils/localstorage"
 import { getTemplates as getTemplatesApi } from "../utils/api"
-import type { ListTemplateType } from "../server/db/template"
+import type { ListTemplateType } from "../../note-template/server/db/template"
+import type { Video } from "~/features/tmdb/utils"
 
 type Props = {
     movieNoteDetail?: MovieNoteType,
     tmdbDetail?: TmdbDetail
     tmdbCredits?: Credits,
+    trailers?: Video[],
     error?: string,
     onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void
 }
@@ -21,6 +23,7 @@ export const useMovieNote = ({
     movieNoteDetail,
     tmdbCredits,
     tmdbDetail,
+    trailers,
     error,
     onSubmit,
 }: Props) => {
@@ -37,10 +40,13 @@ export const useMovieNote = ({
         setHtmlConvertUtil({ convert })
     }, [])
     const getTemplates = useCallback(async () => {
-        const res = await getTemplatesApi()
+        if (!movieNoteDetail?.tmdb_id) {
+            return []
+        }
+        const res = await getTemplatesApi(movieNoteDetail.tmdb_id)
         const templates = await res.json<ListTemplateType>()
         return templates
-    }, [])
+    }, [movieNoteDetail?.tmdb_id])
     const title = movieNoteDetail?.title || ''
     const detail = tmdbDetail
     const published = Boolean(movieNoteDetail?.published)

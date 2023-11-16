@@ -1,6 +1,6 @@
-import { Menu } from '@headlessui/react';
 import type { FC, ReactNode } from 'react'
-import AngleDown from '~/components/icons/AngleDown'
+import CheckIcon from '~/components/icons/Check'
+import { RadioGroup } from '@headlessui/react'
 
 
 type Props = {
@@ -17,29 +17,27 @@ const TemplateNodePopupMenu: FC<Props> = ({
     placeholder
 }) => {
     return (
-        <Menu as='div' >
-            <Menu.Button className={`flex w-[290px] items-center p-2 ${selected ? 'text-text-main' : 'text-text-label'} border-b border-border-main hover:bg-surface-hover`}>
-                <span className='mr-1'>{selected ? selected : placeholder}</span>
-                <AngleDown className='ml-auto h-4 w-4 fill-text-label' />
-            </Menu.Button>
-            <Menu.Items className="absolute z-20 flex w-[290px] flex-col gap-1 rounded border-border-dark bg-white text-text-label shadow">
-                {menuItems.map((item, index) => (
-                    <Menu.Item key={index} as='button' onClick={() => {
-                        onSelect(index)
-                    }}
-                    >
-                        {({ active }) => (
-                            <span
-                                className={`${active && 'bg-surface-hover'} flex w-full justify-start p-2`}
-                            >
+        <RadioGroup className='border-collapse' value={selected} onChange={(sel) => {
+            onSelect(menuItems.findIndex(val => val === sel))
+        }}>
+            <RadioGroup.Label>{placeholder}</RadioGroup.Label>
+            {menuItems.map((item, idx) => (
+                <RadioGroup.Option
+                    className={`flex cursor-pointer items-center gap-2 border border-border-main bg-surface-main p-2 text-text-label hover:bg-surface-hover hover:text-text-main ${idx !== 0 ? 'border-t-0' : 'mt-4'}`}
+                    key={idx}
+                    value={item}
+                >
+                    {({ checked }) => (
+                        <>
+                            <CheckIcon className={`h-5 w-5 ${checked ? 'fill-green-400' : 'fill-text-placeholder'}`} />
+                            <span className=''>
                                 {item}
                             </span>
-                        )}
-                    </Menu.Item>
-                ))}
-
-            </Menu.Items>
-        </Menu>
+                        </>
+                    )}
+                </RadioGroup.Option>
+            ))}
+        </RadioGroup >
     );
 };
 
