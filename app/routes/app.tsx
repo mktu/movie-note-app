@@ -15,9 +15,9 @@ import { AppOutletProvider } from '~/providers/outlets';
 import TmdbProvider from '~/providers/tmdb';
 import UserProvider from '~/providers/user';
 
-import { useLoaderData, useSubmit } from '@remix-run/react';
+import { useLoaderData, useMatches, useSubmit } from '@remix-run/react';
 import { SearchMenu } from '~/features/movie';
-import TemplateList from '~/features/movie-note/components/template-list/TemplateList';
+import TemplateList from '~/features/note-template/components/template-list';
 
 export { loader }
 
@@ -29,6 +29,8 @@ export const App: React.FC = () => {
     const { user, tmdbData, movieNoteList, sidebarSettings, movieNoteType, templateList } = useLoaderData<typeof loader>()
     const { i18n } = useTranslation('common')
     const submit = useSubmit()
+    const matches = useMatches();
+    const currentPath = matches[2].pathname
     return (
         <RecoilRoot initializeState={({ set }) => {
             set(movieDetailType, movieNoteType.movieNoteType)
@@ -50,8 +52,8 @@ export const App: React.FC = () => {
                                     movieNoteList={movieNoteList} />}
                                 templateList={<TemplateList
                                     templateList={templateList}
-                                    onRemoveNote={() => {
-
+                                    onRemoveNote={(templateId) => {
+                                        submit({ templateId, redirectTo: currentPath.includes(String(templateId)) ? '/app' : currentPath }, { action: '/app/note-template/delete', method: 'post' })
                                     }}
                                 />}
                             >
