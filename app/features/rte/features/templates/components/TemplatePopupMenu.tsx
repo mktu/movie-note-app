@@ -11,6 +11,7 @@ type Props = {
     placeholder?: string | ReactNode
 }
 
+
 const TemplatePopupMenu: FC<Props> = ({
     selected,
     menuItems,
@@ -19,21 +20,20 @@ const TemplatePopupMenu: FC<Props> = ({
 }) => {
     return (
         <RadioGroup className='border-collapse' value={selected} onChange={(sel) => {
-            const found = menuItems[sel]
-            found && onSelect(found.label)
+            onSelect(sel)
         }}>
             <RadioGroup.Label>{placeholder}</RadioGroup.Label>
-            {Object.values(menuItems).map((item, idx) => (
+            {Object.keys(menuItems).map((key, idx) => (
                 <RadioGroup.Option
                     className={`flex cursor-pointer items-center gap-2 border border-border-main bg-surface-main p-2 text-text-label hover:bg-surface-hover hover:text-text-main ${idx !== 0 ? 'border-t-0' : 'mt-4'}`}
-                    key={idx}
-                    value={item}
+                    key={key}
+                    value={key}
                 >
                     {({ checked }) => (
                         <>
                             <CheckIcon className={`h-5 w-5 ${checked ? 'fill-green-400' : 'fill-text-placeholder'}`} />
                             <span className=''>
-                                {item.label}
+                                {menuItems[key].label}
                             </span>
                         </>
                     )}

@@ -1,6 +1,5 @@
 import { zfd } from "zod-form-data";
-import { z } from "zod";
-import type { ZodError } from "zod";
+import type { z, ZodError } from "zod";
 
 const schema = zfd.formData({
     id: zfd.numeric(),

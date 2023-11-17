@@ -14,7 +14,8 @@ const PreviewCard: FC<Props> = ({
         <div className='flex gap-2'>
             <img id='img' src={ogp?.image} alt={ogp?.title || 'untitled'} width={imgW} height={imgH} style={{
                 width: imgW,
-                height: imgH
+                height: imgH,
+                objectFit: 'cover'
             }} />
             <div className='overflow-hidden'>
                 <div className='flex items-center gap-1 text-text-main'>
