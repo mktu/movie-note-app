@@ -1,15 +1,14 @@
 import { zfd } from "zod-form-data";
-import { z } from "zod";
-import type { ZodError } from "zod";
+import type { z, ZodError } from "zod";
 
 const schema = zfd.formData({
-    id: zfd.text(z.string()),
+    id: zfd.numeric(),
     name: zfd
-        .text(z.string()),
+        .text(),
     template: zfd
-        .text(z.string()),
+        .text(),
     html: zfd
-        .text(z.string()),
+        .text(),
 })
 
 export const updateTemplateSchema = schema

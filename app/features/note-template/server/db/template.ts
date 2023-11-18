@@ -20,7 +20,11 @@ export const listMyTemplate = async (supabaseAdmin: AdminClientType, userId: str
         .select('*')
         .eq('user_id', userId)
     const { data, error } = await query
-    if (error || !data) {
+    if (error) {
+        console.error(error)
+        throw new NoteTemplateError('backend-error', Number(error.code))
+    }
+    if (!data) {
         return []
     }
     return data
@@ -45,6 +49,14 @@ export const updateTemplate = async (supabaseAdmin: AdminClientType, template: U
         html: template.html,
         name: template.name
     }).eq('id', template.id)
+    if (infoError) {
+        console.error(infoError)
+        throw new NoteTemplateError('backend-error', Number(infoError.code))
+    }
+}
+
+export const deleteTemplate = async (supabaseAdmin: AdminClientType, id: number) => {
+    const { error: infoError } = await supabaseAdmin.from('note_template').delete().eq('id', id)
     if (infoError) {
         console.error(infoError)
         throw new NoteTemplateError('backend-error', Number(infoError.code))

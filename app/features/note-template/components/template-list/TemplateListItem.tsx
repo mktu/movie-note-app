@@ -22,6 +22,7 @@ const TemplateListItem: FC<Props> = ({
                 setDeleting(false)
             }} open={deleting} onRemove={() => {
                 onRemoveNote(templateListItem.id)
+                setDeleting(false)
             }} />)}
             <div className='flex w-full items-center'>
                 <Navigator className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' to={to} >
