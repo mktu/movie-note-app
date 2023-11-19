@@ -27,7 +27,9 @@ export const onRequestGet: PagesFunction<{
     const templates = ((await listTemplate(dbAdmin, authUser?.id)).map(t =>
         videos.results.length > 0 ? ({ ...t, html: t.html?.replace(TrailerPlaceholder, videos.results[0].key) }) : t
     )).map(t =>
-        ({ ...t, html: t.html?.replace(ImdbPlaceholder, `https://www.imdb.com/title/${detail.imdb_id}`) })
+    ({
+        ...t, html: t.html?.replace(ImdbPlaceholder, `https://www.imdb.com/title/${detail.imdb_id}`)
+    })
     )
     return json(templates)
 }

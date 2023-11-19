@@ -12,7 +12,10 @@ export const listTemplate = async (supabaseAdmin: AdminClientType, userId: strin
     if (error || !data) {
         return []
     }
-    return data
+    return data.map(v => ({
+        ...v,
+        editable: v.user_id === userId
+    }))
 }
 
 export const listMyTemplate = async (supabaseAdmin: AdminClientType, userId: string) => {

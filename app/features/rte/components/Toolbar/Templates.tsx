@@ -17,7 +17,8 @@ export type Template = {
     name: string,
     id: number,
     template: string | null,
-    html: string | null
+    html: string | null,
+    onEdit?: () => void
 }
 
 type Props = {

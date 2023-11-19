@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigatorContext } from "~/providers/navigator/Context"
 import { setMovieNotePreviewHtml } from "../utils/localstorage"
 import { getTemplates as getTemplatesApi } from "../utils/api"
-import type { ListTemplateType } from "../../note-template/server/db/template"
+import type { ListTemplateItemType } from "../../note-template/server/db/template"
 import type { Video } from "~/features/tmdb/utils"
 
 type Props = {
@@ -44,9 +44,14 @@ export const useMovieNote = ({
             return []
         }
         const res = await getTemplatesApi(movieNoteDetail.tmdb_id)
-        const templates = await res.json<ListTemplateType>()
-        return templates
-    }, [movieNoteDetail?.tmdb_id])
+        const templates = await res.json<(ListTemplateItemType & { editable: boolean })[]>()
+        return templates.map(v => ({
+            ...v,
+            onEdit: v.editable ? () => {
+                navigate(`/app/note-template/${v.id}`)
+            } : undefined
+        }))
+    }, [movieNoteDetail?.tmdb_id, navigate])
     const title = movieNoteDetail?.title || ''
     const detail = tmdbDetail
     const published = Boolean(movieNoteDetail?.published)
