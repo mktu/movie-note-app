@@ -11,6 +11,7 @@ import { TextButton } from '~/components/buttons';
 import clsx from 'clsx';
 import { TemplatePopup } from '../../features/templates/components';
 import ClickAwayListener from '~/components/clickaway';
+import { useTranslation } from 'react-i18next';
 
 export type Template = {
     name: string,
@@ -33,6 +34,7 @@ const Templates: FC<Props> = ({
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: 'auto'
     });
+    const { t } = useTranslation('common')
     const [templates, setTemplates] = useState<Template[]>([])
     useEffect(() => {
         templateGetter && templateGetter().then(templates => {
@@ -50,7 +52,7 @@ const Templates: FC<Props> = ({
                     setShowTemplateMenu(true)
                 }}>
                 <AddIcon className='h-5 w-5 fill-text-label' />
-                <span>Template</span>
+                <span>{t('template')}</span>
             </TextButton>
             {showTemplateMenu && (
                 <FocusTrap>

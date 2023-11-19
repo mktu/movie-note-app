@@ -25,7 +25,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
         const data = parseAddTemplate(await request.formData())
         await registerTemplate(supabaseAdmin, data, user.id)
         const ret = await getTemplate(supabaseAdmin, data.name, user.id)
-        return redirect(`/app/note-template/${ret.id}`)
+        return redirect(`/app/note-template/${ret.id}?created=new`)
     } catch (e) {
         if (e instanceof NoteTemplateError) {
             return json<ActionData>({
