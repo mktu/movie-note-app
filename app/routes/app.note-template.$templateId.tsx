@@ -38,7 +38,7 @@ const EditNoteTemplate_: FC = () => {
             )}
             {loaderData.content &&
                 (
-                    <EditNoteTemplate noteTemplate={loaderData.content} error={actionData?.error} onSubmit={(template) => {
+                    <EditNoteTemplate key={loaderData.content.id} noteTemplate={loaderData.content} error={actionData?.error} onSubmit={(template) => {
                         submit(getFormData(template), { method: 'post' })
                     }} />
                 )
