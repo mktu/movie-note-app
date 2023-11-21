@@ -11,11 +11,14 @@ type ContentData = UnboxReturnedPromise<typeof getTemplateById>
 
 export type LorderData = {
     error?: ErrorKey,
-    content?: ContentData
+    content?: ContentData,
+    isNew?: boolean
 }
 
 export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const templateId = params.templateId;
+    const url = new URL(request.url);
+    const isNew = Boolean(url.searchParams.get('created'));
     const dbAdmin = getSupabaseAdmin(context)
 
     if (!templateId) {
@@ -25,6 +28,7 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const content = await getTemplateById(dbAdmin, Number(templateId))
 
     return json<LorderData>({
-        content
+        content,
+        isNew
     })
 }

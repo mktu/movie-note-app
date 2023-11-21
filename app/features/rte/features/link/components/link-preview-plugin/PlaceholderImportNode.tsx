@@ -1,4 +1,4 @@
-import type { DOMConversionMap, DOMConversionOutput, DOMExportOutput, LexicalEditor, Spread } from "lexical";
+import { $applyNodeReplacement, type DOMConversionMap, type DOMConversionOutput, type DOMExportOutput, type LexicalEditor, type Spread } from "lexical";
 import type {
     SerializedDecoratorBlockNode
 } from '@lexical/react/LexicalDecoratorBlockNode';
@@ -10,7 +10,7 @@ import { $createLinkPreviewNode } from "./simple-link-preview/LinkPreviewNode";
 
 
 
-type SerializedYoutubePreviePlaceholderNode = Spread<{
+type SerializedPlaceholderImportNode = Spread<{
     type: 'placeholder-import'
 }, SerializedDecoratorBlockNode>
 
@@ -41,7 +41,7 @@ export class PlaceholderImportNode extends DecoratorBlockNode {
         return <div />
     }
 
-    exportJSON(): SerializedYoutubePreviePlaceholderNode {
+    exportJSON(): SerializedPlaceholderImportNode {
         return {
             ...super.exportJSON(),
             type: 'placeholder-import',
@@ -62,6 +62,17 @@ export class PlaceholderImportNode extends DecoratorBlockNode {
         };
 
     }
+    // never used
+    static importJSON(serializedLinkPreviewNode: SerializedPlaceholderImportNode): PlaceholderImportNode {
+        const node = $createPlaceholderImport();
+        node.setFormat(serializedLinkPreviewNode.format);
+        return node;
+    }
+}
+
+// never used
+export function $createPlaceholderImport(): PlaceholderImportNode {
+    return $applyNodeReplacement(new PlaceholderImportNode());
 }
 
 function convertPreviewElement(domNode: Node): null | DOMConversionOutput {

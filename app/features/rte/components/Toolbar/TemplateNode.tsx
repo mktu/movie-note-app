@@ -11,6 +11,7 @@ import { $isRootOrShadowRoot, $createParagraphNode, type RangeSelection } from '
 import { $wrapNodeInElement } from '@lexical/utils';
 import { $createYoutubePreviewPlaceholderNode } from '../../features/link/components/link-preview-plugin/youtube-preview/YoutubePreviewPlaceholderNode';
 import ClickAwayListener from '~/components/clickaway';
+import { useTranslation } from 'react-i18next';
 
 export type TemplateNodeProps = {
     linkNodes: {
@@ -32,6 +33,7 @@ const TemplateNode: FC<TemplateNodeProps> = ({
     const [showTemplateNodeMenu, setShowTemplateNodeMenu] = useState(false)
     const [referenceElement, setReferenceElement] = useState<HTMLElement>()
     const [popperElement, setPopperElement] = useState<HTMLDivElement | null>()
+    const { t } = useTranslation('common')
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: 'auto'
     });
@@ -69,7 +71,7 @@ const TemplateNode: FC<TemplateNodeProps> = ({
                     setShowTemplateNodeMenu(true)
                 }}>
                 <AddIcon className='h-5 w-5 fill-text-label' />
-                <span>Template Node</span>
+                <span>{t('component')}</span>
             </TextButton>
             {showTemplateNodeMenu && (
                 <FocusTrap>

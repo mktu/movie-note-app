@@ -1,5 +1,5 @@
 import { useMemo, type FC, useState } from 'react'
-import TemplatePopupMenu from './TemplatePopupMenu';
+import TemplatePopupMenu, { MenuItemTypes } from './TemplatePopupMenu';
 import type { Template } from '~/features/rte/components/Toolbar/Templates';
 import { ContainedButton, TextButton } from '~/components/buttons';
 import { useTranslation } from 'react-i18next';
@@ -20,10 +20,11 @@ const TemplatePopup: FC<Props> = ({
     const menus = useMemo(() => {
         const m = templates.reduce((acc, cur) => {
             acc[cur.id] = {
-                label: cur.name
+                label: cur.name,
+                onEdit: cur.onEdit
             }
             return acc
-        }, {} as { [key: string]: { label: string } })
+        }, {} as MenuItemTypes)
         return m
     }, [templates])
     const { t } = useTranslation('common')

@@ -1,8 +1,12 @@
 import { RadioGroup } from '@headlessui/react';
 import type { FC, ReactNode } from 'react'
+import { IconButton } from '~/components/buttons';
+import PenIcon from '~/components/icons/Pen';
 import CheckIcon from '~/components/icons/Check'
 
-type MenuItemTypes = { [key: string]: { label: string } }
+type MenuItemType = { label: string, onEdit?: () => void }
+
+export type MenuItemTypes = { [key: string]: MenuItemType }
 
 type Props = {
     selected?: string,
@@ -19,7 +23,7 @@ const TemplatePopupMenu: FC<Props> = ({
     placeholder
 }) => {
     return (
-        <RadioGroup className='border-collapse' value={selected} onChange={(sel) => {
+        <RadioGroup className='border-collapse' value={selected || ''} onChange={(sel) => {
             onSelect(sel)
         }}>
             <RadioGroup.Label>{placeholder}</RadioGroup.Label>
@@ -35,6 +39,14 @@ const TemplatePopupMenu: FC<Props> = ({
                             <span className=''>
                                 {menuItems[key].label}
                             </span>
+                            {menuItems[key].onEdit && (
+                                <IconButton className='ml-auto' name='edit' onClick={(e) => {
+                                    e.stopPropagation()
+                                    menuItems[key].onEdit!()
+                                }}>
+                                    <PenIcon className='h-4 w-4 fill-text-label hover:fill-text-main' />
+                                </IconButton>
+                            )}
                         </>
                     )}
                 </RadioGroup.Option>

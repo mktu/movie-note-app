@@ -19,12 +19,18 @@ const EditNoteTemplate_: FC = () => {
     const actionData = useActionData<typeof action>()
     const submit = useSubmit()
     const { t } = useTranslation('common')
-    const msg = t('update-succeeded')
+    const updateMsg = t('update-succeeded')
+    const createdMsg = t('add-template')
     useEffect(() => {
         if (actionData?.success) {
-            toast.success(msg)
+            toast.success(updateMsg)
         }
-    }, [actionData?.success, msg])
+    }, [actionData?.success, updateMsg])
+    useEffect(() => {
+        if (loaderData.isNew) {
+            toast.success(createdMsg)
+        }
+    }, [loaderData?.isNew, createdMsg])
     return (
         <>
             {loaderData.error && (
@@ -32,7 +38,7 @@ const EditNoteTemplate_: FC = () => {
             )}
             {loaderData.content &&
                 (
-                    <EditNoteTemplate noteTemplate={loaderData.content} error={actionData?.error} onSubmit={(template) => {
+                    <EditNoteTemplate key={loaderData.content.id} noteTemplate={loaderData.content} error={actionData?.error} onSubmit={(template) => {
                         submit(getFormData(template), { method: 'post' })
                     }} />
                 )
