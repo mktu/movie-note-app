@@ -12,13 +12,16 @@ import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import type { ImdbRate } from '~/features/imdb/types';
 import type { Video } from '~/features/tmdb/utils';
+import { loadMovieNoteIfExists, MovieNoteType } from '../db';
+import { getSupabaseAdmin } from '@utils/supabaseAdmin.server';
 
 type ContentData = {
     tmdbDetail: TmdbDetail,
     tmdbCredits: Credits,
     trailers: Video[],
     imdbRate: ImdbRate | null,
-    performanceData: { [k: string]: number }
+    performanceData: { [k: string]: number },
+    note: MovieNoteType | null
 }
 
 export type LorderData = {
@@ -44,11 +47,13 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     }
     const disableKv = getSearchParamAsBoolean(request, 'disableKv')
     const tmdbData = setTmdbData(context)
+    const dbAdmin = getSupabaseAdmin(context)
     const counter = new PerformanceCounter()
     const t1 = counter.create('tmdbDetail')
     const t2 = counter.create('tmdbCredits')
     const t3 = counter.create('imdbInfoKv')
     const t4 = counter.create('tmdbTrailers')
+    const t5 = counter.create('movieNote')
 
     const tall = counter.start('all')
 
@@ -92,16 +97,29 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
         getTmdbCredits_(movieId, tmdb),
         getImdbRate_(movieId),
         getTrailers_(movieId, tmdb)])
+
+    const getMovieNote = async () => {
+        t5.start()
+        const note = await loadMovieNoteIfExists(dbAdmin, user.id, tmdbDetail.id)
+        t5.stop()
+        return note
+    }
+    const note = await getMovieNote()
+
     const contentData: Omit<ContentData, 'performanceData'> = {
         tmdbDetail,
         tmdbCredits,
         imdbRate,
-        trailers
+        trailers,
+        note
     }
+
 
     t1.finish()
     t2.finish()
     t3.finish()
+    t4.finish()
+    t5.finish()
     tall.finish()
 
     return json<LorderData>({

@@ -1,6 +1,6 @@
 import type { AdminClientType } from '@utils/supabaseAdmin.server'
 import type { AddMovieNote, FilterType, SortType } from '../types'
-import { fromCode } from '../../utils/error';
+import { MovieNoteError, fromCode } from '../../utils/error';
 import type { UnboxReturnedPromise } from '~/types/utils';
 import type { PublishNote } from '../validation/parsePublish';
 
@@ -118,13 +118,25 @@ const listMovieNote = async (supabaseAdmin: AdminClientType, userId: string, opt
     return data! as Merged[]
 }
 
-const loadMovieNote = async (supabaseAdmin: AdminClientType, userId: string, tmdbId: string) => {
+const loadMovieNoteIfExists = async (supabaseAdmin: AdminClientType, userId: string, tmdbId: string) => {
     const { data, error } = await supabaseAdmin.from('movie_note_list_view')
         .select('*').eq('user_id', userId).eq('tmdb_id', tmdbId).limit(1)
-    if (error || !data || data.length === 0) {
-        // // TODO fix it!
+    if (error) {
+        console.error(error)
+        throw fromCode(error.code)
+    }
+    if (!data || data.length === 0) {
+        return null
     }
     return data![0]
+}
+
+const loadMovieNote = async (supabaseAdmin: AdminClientType, userId: string, tmdbId: string) => {
+    const ret = await loadMovieNoteIfExists(supabaseAdmin, userId, tmdbId)
+    if (ret === null) {
+        throw new MovieNoteError('movie-note-not-found')
+    }
+    return ret
 }
 
 export type MovieListType = UnboxReturnedPromise<typeof listMovieNote>
@@ -136,6 +148,7 @@ export {
     updateMovieNote,
     listMovieNote,
     loadMovieNote,
+    loadMovieNoteIfExists,
     deleteNote,
     publishNote
 }

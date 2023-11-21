@@ -11,13 +11,16 @@ import type { FC } from "react";
 import type { AddMovieNote } from "@type-defs/frontend";
 import type { Credits, TmdbDetail } from '~/features/tmdb';
 import type { Video } from '~/features/tmdb/utils';
+import type { MovieNoteType } from '~/features/movie-note/server/db';
+import { useNavigatorContext } from '~/providers/navigator/Context';
 
 type Props = {
     onSubmit: (note: AddMovieNote) => void,
     error?: string,
     tmdbDetail?: TmdbDetail
     tmdbCredits?: Credits,
-    trailers: Video[]
+    trailers: Video[],
+    note: MovieNoteType | null
 }
 
 const Movie: FC<Props> = ({
@@ -25,12 +28,15 @@ const Movie: FC<Props> = ({
     error,
     tmdbDetail: initDetail,
     tmdbCredits: initCredits,
-    trailers
+    trailers,
+    note
 }) => {
     const [selected, setSelectedBase] = useState('')
     const [initialSelected, setInitialSelected] = useState(initDetail?.title || '')
     const { requestDetail, detail: apiDetail, resetDetail } = useTmdbDetail()
     const { requestCredits, credits: apiCredits, resetCredit } = useTmdbCredits()
+    const { useNavigator } = useNavigatorContext()
+    const { navigate } = useNavigator()
     const setSelected = async (id: string) => {
         if (id) {
             setSelectedBase(id)
@@ -47,11 +53,16 @@ const Movie: FC<Props> = ({
     return (
         <MovieLayout
             header={<MovieHeader
+                hasNote={Boolean(note)}
                 initialSelected={initialSelected}
                 error={error}
                 canSave={Boolean(detail)}
                 onReselect={() => { setInitialSelected('') }}
-                onClickSave={() => {
+                onClickSave={(update) => {
+                    if (update) {
+                        detail && navigate(`/app/notes/${detail.id}`)
+                        return
+                    }
                     detail && onSubmit({
                         title: detail.title,
                         thumbnail: detail.poster_path || detail.backdrop_path || '',

@@ -19,6 +19,7 @@
     "delete": "削除",
     "director": "監督",
     "display-text": "表示テキスト",
+    "edit-note": "ノートを編集する",
     "edit-watch-log": "観賞記録を編集",
     "email-not-confirmed": "メール認証が完了していません。メールを確認し、登録処理を完了してください",
     "failed-get-imdb": "取得に失敗",
