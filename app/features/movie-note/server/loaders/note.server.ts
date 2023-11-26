@@ -13,15 +13,15 @@ import type { MovieNoteType } from '~/features/movie-note/server/db';
 import type { Credits, TmdbDetail, TmdbLng } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
-import type { Video } from '~/features/tmdb/utils';
+import { hasPublicNote } from '~/features/public-note/server';
 
 
 type ContentData = {
     movieNoteDetail: MovieNoteType,
     tmdbDetail: TmdbDetail,
     tmdbCredits: Credits,
-    trailers: Video[],
-    performanceData: { [k: string]: number }
+    performanceData: { [k: string]: number },
+    published: boolean
 }
 
 export type LorderData = {
@@ -53,7 +53,7 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const t2 = counter.create('tmdbDetail')
     const t3 = counter.create('tmdbCredits')
     const t4 = counter.create('imdbInfoKv')
-    const t5 = counter.create('tmdbTrailers')
+    const t5 = counter.create('publicNote')
     const tall = counter.start('all')
 
     const loadMovieNote_ = async () => {
@@ -83,27 +83,27 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
         return credits
     }
 
-    const getTrailers_ = async (tmdbId: string, tmdb: Tmdb) => {
+    const getHasPublicNote_ = async () => {
         t5.start()
-        const trailers = await tmdb.getYoutubeTrailers(tmdbId)
+        const note = await hasPublicNote(dbAdmin, user.id, noteId)
         t5.stop()
-        return trailers
+        return note
     }
 
     let contentData: Omit<ContentData, 'performanceData'>;
     if (ids) {
         const lng = ids.lng === 'ja' ? 'ja' : 'en'
         const tmdb = new Tmdb(tmdbData.apiKey, lng)
-        const [note, tmdbDetail, tmdbCredits, trailers] = await Promise.all([
+        const [note, tmdbDetail, tmdbCredits, hasPublicNote] = await Promise.all([
             loadMovieNote_(),
             getTmdbDetail_(ids.tmdbId, lng, tmdb),
             getTmdbCredits_(ids.tmdbId, tmdb),
-            getTrailers_(ids.tmdbId, tmdb)])
+            getHasPublicNote_()])
         contentData = {
             movieNoteDetail: note,
             tmdbDetail,
             tmdbCredits,
-            trailers
+            published: Boolean(hasPublicNote)
         }
     } else {
         const note = await loadMovieNote_()
@@ -112,15 +112,15 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
         if (!note.tmdb_id) {
             throw Error('tmdb id is undefined')
         }
-        const [tmdbDetail, tmdbCredits, trailers] = await Promise.all([
+        const [tmdbDetail, tmdbCredits, hasPublicNote] = await Promise.all([
             getTmdbDetail_(note.tmdb_id, lng, tmdb),
             getTmdbCredits_(note.tmdb_id, tmdb),
-            getTrailers_(note.tmdb_id, tmdb)])
+            getHasPublicNote_()])
         contentData = {
             movieNoteDetail: note,
             tmdbDetail,
             tmdbCredits,
-            trailers
+            published: Boolean(hasPublicNote)
         }
 
     }

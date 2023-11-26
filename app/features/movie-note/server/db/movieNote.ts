@@ -107,7 +107,11 @@ const listMovieNote = async (supabaseAdmin: AdminClientType, userId: string, opt
         query.eq('watch_state', filterType)
     }
     const { data, error } = await query.order(sortBy, { ascending: asc })
-    if (error || !data) {
+    if (error) {
+        console.error(error)
+        throw fromCode(error.code)
+    }
+    if (!data) {
         return []
     }
     type DataType = typeof data

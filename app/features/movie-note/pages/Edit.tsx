@@ -13,32 +13,31 @@ import WatchLogDialog from '../components/watch-log/WatchLogDialog';
 import { useMovieNote } from '../hooks/useMovieNote';
 import { MovieNoteContext } from '../context/movie-note';
 import { useTranslation } from 'react-i18next';
-import type { Video } from '~/features/tmdb/utils';
 
 type Props = {
     onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void,
+    published: boolean,
     error?: string,
     movieNoteDetail?: MovieNoteType,
     tmdbDetail?: TmdbDetail
     tmdbCredits?: Credits,
-    trailers?: Video[]
 }
 
 const Edit: FC<Props> = ({
     onSubmit,
+    published,
     error,
     movieNoteDetail,
     tmdbDetail,
     tmdbCredits,
-    trailers
 }) => {
     const contextValue = useMovieNote({
+        published,
         error,
         movieNoteDetail,
         tmdbDetail,
         tmdbCredits,
-        onSubmit,
-        trailers
+        onSubmit
     })
     const {
         detail,

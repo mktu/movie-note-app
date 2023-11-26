@@ -50,8 +50,8 @@ const Note: FC = () => {
                 />
                 <EditMovieNote
                     key={content.movieNoteDetail.tmdb_id || ''}
+                    published={content.published}
                     movieNoteDetail={content.movieNoteDetail}
-                    trailers={content.trailers}
                     tmdbDetail={content.tmdbDetail}
                     tmdbCredits={content.tmdbCredits}
                     onSubmit={onSubmit} error={actionData?.error} />

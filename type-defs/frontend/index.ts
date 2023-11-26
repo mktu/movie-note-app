@@ -26,4 +26,10 @@ export type NoteTemplate = {
     html: string | null
 }
 
+export type PublicNote = {
+    summary: string,
+    note: string,
+    public: boolean
+}
+
 export type UpdateMovieNote = AddMovieNote

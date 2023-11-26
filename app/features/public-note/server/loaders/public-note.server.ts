@@ -6,13 +6,17 @@ import { json, redirect } from '@remix-run/cloudflare';
 import { getSearchParamAsBoolean } from '@utils/searchparam.server';
 
 import type { TmdbDetail, TmdbLng } from '~/features/tmdb';
-import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
+import type { ErrorKey } from '../../utils/error';
+import type { PublicNoteType } from '../db';
+import { loadPublicNote } from '../db';
+import { getSupabaseAdmin } from '@utils/server/db';
 
 
 type ContentData = {
     tmdbDetail: TmdbDetail,
-    isUpdate: boolean
+    isUpdate: boolean,
+    publicNote: PublicNoteType | null
 }
 
 export type LorderData = {
@@ -30,10 +34,12 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
         return redirect('/login')
     }
     if (!noteId) {
-        return json<LorderData>({ error: 'movie-id-not-found' })
+        return json<LorderData>({ error: 'public-note-id-not-found' })
     }
     const disableKv = getSearchParamAsBoolean(request, 'disableKv')
     const tmdbData = setTmdbData(context)
+    const dbAdmin = getSupabaseAdmin(context)
+    const publicNote = await loadPublicNote(dbAdmin, noteId, user.id, false)
 
     const getTmdbDetail_ = async (tmdbId: string, lng: TmdbLng, tmdb: Tmdb) => {
         const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(context.TmdbInfo as KVNamespace, tmdbId, lng)
@@ -50,7 +56,8 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
         getTmdbDetail_(noteId, lng as TmdbLng, tmdb)])
     const contentData: Omit<ContentData, 'performanceData'> = {
         tmdbDetail,
-        isUpdate
+        isUpdate,
+        publicNote
     }
 
 

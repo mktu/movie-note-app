@@ -1,5 +1,6 @@
 {
     "add-note": "ノートに追加",
+    "add-note-summary": "ノートのサマリをここに書きましょう！",
     "add-template": "テンプレートを追加しました",
     "all": "全て",
     "back": "戻る",
@@ -9,7 +10,7 @@
     "casts": "キャスト",
     "change-image": "画像を変更",
     "close": "閉じる",
-    "comfirm-publish": "{{title}}のノートを公開します。よろしいですか？",
+    "comfirm-publish": "{{title}}のノートを公開します✨",
     "comment": "コメント",
     "component": "コンポーネント",
     "confirm-update-published": "公開中のノート\"{{title}}\"を更新します。よろしいですか？",

@@ -1,14 +1,16 @@
-import { useCallback, type FC } from "react";
+import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { GeneralError } from '~/components/error';
-import { loader } from '~/features/movie-note/server/loaders/preview.server';
-import { action } from '~/features/movie-note/server/actions/preview.server';
-import { MovieNotePreview } from "~/features/movie-note/pages";
-import { useLoaderData, useSubmit } from "@remix-run/react";
-import type { PublishNote } from "~/features/movie-note/server/validation/parsePublish";
-import { getFormData } from "@utils/form";
-import { useNavigatorContext } from "~/providers/navigator/Context";
-import { useTranslation } from "react-i18next";
+import { MovieNotePreview } from '~/features/public-note/pages';
+import { action } from '~/features/public-note/server/actions/public-note.server';
+import { loader } from '~/features/public-note/server/loaders/public-note.server';
+import { useNavigatorContext } from '~/providers/navigator/Context';
 
+import { useLoaderData, useSubmit } from '@remix-run/react';
+import { getFormData } from '@utils/form';
+
+import type { AddPublicNote } from "~/features/public-note/server/validation/addPublicNote";
+import type { FC } from 'react';
 export {
     loader,
     action
@@ -21,7 +23,7 @@ const NotePreview: FC = () => {
     const { i18n } = useTranslation()
     // const actionData = useActionData<typeof action>()
     const submit = useSubmit()
-    const onSubmit = useCallback((updateMovieNote: PublishNote) => {
+    const onSubmit = useCallback((updateMovieNote: AddPublicNote) => {
         submit(getFormData(updateMovieNote), { method: 'post' })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -32,13 +34,13 @@ const NotePreview: FC = () => {
             )}
             {loaderData.content?.tmdbDetail.id && (
                 <MovieNotePreview
+                    init={loaderData.content.publicNote || undefined}
                     isUpdate={loaderData.content.isUpdate}
                     tmdbDetail={loaderData.content?.tmdbDetail}
-                    onPublish={(html) => {
+                    onPublish={(content) => {
                         onSubmit({
                             tmdbId: loaderData.content!.tmdbDetail.id,
-                            html,
-                            published: 'true'
+                            ...content
                         })
                     }}
                     onBack={() => {
