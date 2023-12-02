@@ -30,7 +30,10 @@ export const listMyTemplate = async (supabaseAdmin: AdminClientType, userId: str
     if (!data) {
         return []
     }
-    return data
+    return data.map(v => ({
+        ...v,
+        editable: v.user_id === userId
+    }))
 }
 
 export const registerTemplate = async (supabaseAdmin: AdminClientType, template: AddTemplate, userId: string) => {

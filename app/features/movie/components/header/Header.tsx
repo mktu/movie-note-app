@@ -2,22 +2,22 @@ import clsx from 'clsx';
 import { forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { OutlinedButton } from '~/components/buttons';
+import AddFill from '~/components/icons/AddFill';
+import PenIcon from '~/components/icons/Pen';
 import useFloatingHeader from '~/hooks/useFloatingHeader';
 
 import Search, { Reselect } from '../search-title';
 import Error from './Error';
 
 import type { ComponentProps } from 'react'
-import type { WatchState } from '@type-defs/frontend';
-import AddFill from '~/components/icons/AddFill';
-
 type Props = {
-    onClickSave: (state: WatchState) => void,
+    onClickSave: (update: boolean) => void,
     className?: string,
     canSave?: boolean
     error?: string,
     initialSelected?: string,
-    onReselect?: () => void
+    onReselect?: () => void,
+    hasNote: boolean
 } & ComponentProps<typeof Search>
 
 const Header = forwardRef<HTMLDivElement, Props>(({
@@ -28,7 +28,8 @@ const Header = forwardRef<HTMLDivElement, Props>(({
     canSave,
     error,
     initialSelected,
-    onReselect
+    onReselect,
+    hasNote
 }, ref) => {
     const { t } = useTranslation('common')
     const { setObserverElm, ref: inViewRef, inView } = useFloatingHeader()
@@ -54,15 +55,22 @@ const Header = forwardRef<HTMLDivElement, Props>(({
                         <Search {...{ selected, setSelected }} />
                     )}
                 </div>
-                <OutlinedButton border='border-2 border-text-main group-hover:border-text-main' disabled={!canSave} className='group ml-auto flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave('lookforward') }}>
-                    <AddFill className='h-5 w-5 fill-text-main group-hover:fill-text-dark' />
-                    <span className='text-text-main group-hover:text-text-dark'>{t('add-note')}</span>
-                </OutlinedButton>
-            </div>
-
+                {hasNote ? (
+                    <OutlinedButton border='border-2 border-text-main group-hover:border-text-main' disabled={!canSave} className='group ml-auto flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave(true) }}>
+                        <PenIcon className='h-5 w-5 fill-text-main group-hover:fill-text-dark' />
+                        <span className='text-text-main group-hover:text-text-dark'>{t('edit-note')}</span>
+                    </OutlinedButton>
+                ) : (
+                    <OutlinedButton border='border-2 border-text-main group-hover:border-text-main' disabled={!canSave} className='group ml-auto flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave(false) }}>
+                        <AddFill className='h-5 w-5 fill-text-main group-hover:fill-text-dark' />
+                        <span className='text-text-main group-hover:text-text-dark'>{t('add-note')}</span>
+                    </OutlinedButton>
+                )}
+            </div >
             {error && (
                 <Error error={t(error)} />
-            )}
+            )
+            }
         </>
     );
 });

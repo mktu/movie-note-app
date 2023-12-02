@@ -126,6 +126,33 @@ export interface Database {
         }
         Relationships: []
       }
+      "public-note": {
+        Row: {
+          created_at: string
+          note: string
+          public: boolean
+          summary: string
+          tmdb_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          note: string
+          public: boolean
+          summary: string
+          tmdb_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          note?: string
+          public?: boolean
+          summary?: string
+          tmdb_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_settings: {
         Row: {
           created_at: string | null

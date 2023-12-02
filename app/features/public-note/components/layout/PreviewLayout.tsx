@@ -10,8 +10,8 @@ const PreviewLayout: FC<Props> = ({
     children
 }) => {
     return (
-        <div className='relative flex w-full flex-col gap-2 py-5'>
-            <div className='px-10'>{header}</div>
+        <div className='relative flex w-full flex-col gap-4 py-5'>
+            <div className='w-full px-10'>{header}</div>
             <div className='rounded-lg border-t border-dashed border-border-dark p-6'>
                 <div className='min-h-[512px]'>
                     {children}

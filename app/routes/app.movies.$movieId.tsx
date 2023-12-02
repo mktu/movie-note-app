@@ -30,6 +30,7 @@ const Note: FC = () => {
                     customSetting={<Settings />}
                 />
                 <Movie
+                    note={content.note}
                     tmdbDetail={content.tmdbDetail}
                     tmdbCredits={content.tmdbCredits}
                     trailers={content.trailers}

@@ -16,6 +16,7 @@ type Props = {
     tmdbCredits?: Credits,
     trailers?: Video[],
     error?: string,
+    published: boolean,
     onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void
 }
 
@@ -23,8 +24,8 @@ export const useMovieNote = ({
     movieNoteDetail,
     tmdbCredits,
     tmdbDetail,
-    trailers,
     error,
+    published,
     onSubmit,
 }: Props) => {
     const { i18n } = useTranslation()
@@ -54,9 +55,8 @@ export const useMovieNote = ({
     }, [movieNoteDetail?.tmdb_id, navigate])
     const title = movieNoteDetail?.title || ''
     const detail = tmdbDetail
-    const published = Boolean(movieNoteDetail?.published)
     const detailPath = `/app/movies/${detail?.id}?lng=${i18n.language}`
-    const previewPath = `/app/note-preview/${detail?.id}?lng=${i18n.language}&update=${published}`
+    const previewPath = `/app/note-public/${detail?.id}?lng=${i18n.language}&update=${published}`
     const credits = tmdbCredits || null
     const stars = movieNoteDetail?.stars || 0
     const formattedWatchDate = movieNoteDetail?.admiration_date || ''
