@@ -6,11 +6,12 @@ import { action } from '~/features/public-note/server/actions/public-note.server
 import { loader } from '~/features/public-note/server/loaders/public-note.server';
 import { useNavigatorContext } from '~/providers/navigator/Context';
 
-import { useLoaderData, useSubmit } from '@remix-run/react';
+import { useActionData, useLoaderData, useSubmit } from '@remix-run/react';
 import { getFormData } from '@utils/form';
 
 import type { AddPublicNote } from "~/features/public-note/server/validation/addPublicNote";
 import type { FC } from 'react';
+import { useSuccessMessage } from '~/hooks/useToast';
 export {
     loader,
     action
@@ -21,12 +22,15 @@ const NotePreview: FC = () => {
     const { useNavigator } = useNavigatorContext()
     const { navigate } = useNavigator()
     const { i18n } = useTranslation()
-    // const actionData = useActionData<typeof action>()
+    const actionData = useActionData<typeof action>()
     const submit = useSubmit()
     const onSubmit = useCallback((updateMovieNote: AddPublicNote) => {
         submit(getFormData(updateMovieNote), { method: 'post' })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+    const { t } = useTranslation('common')
+    useSuccessMessage(t('update-succeeded'), !!(actionData?.success) && !!loaderData.content?.isUpdate)
+    useSuccessMessage(t('publish-succeeded'), !!(actionData?.success) && !(loaderData.content?.isUpdate))
     return (
         <>
             {loaderData.error && (
@@ -34,6 +38,7 @@ const NotePreview: FC = () => {
             )}
             {loaderData.content?.tmdbDetail.id && (
                 <MovieNotePreview
+                    key={loaderData.content.isUpdate ? 'update' : 'publish'}
                     init={loaderData.content.publicNote || undefined}
                     isUpdate={loaderData.content.isUpdate}
                     tmdbDetail={loaderData.content?.tmdbDetail}

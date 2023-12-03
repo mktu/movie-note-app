@@ -7,6 +7,7 @@ import { GeneralError } from "~/components/error";
 import { EditNoteTemplate } from "~/features/note-template";
 import { action } from '~/features/note-template/server/actions/edit-template.server';
 import { loader } from '~/features/note-template/server/loader/edit-template.server';
+import { useSuccessMessage } from "~/hooks/useToast";
 
 export {
     action,
@@ -19,18 +20,8 @@ const EditNoteTemplate_: FC = () => {
     const actionData = useActionData<typeof action>()
     const submit = useSubmit()
     const { t } = useTranslation('common')
-    const updateMsg = t('update-succeeded')
-    const createdMsg = t('add-template')
-    useEffect(() => {
-        if (actionData?.success) {
-            toast.success(updateMsg)
-        }
-    }, [actionData?.success, updateMsg])
-    useEffect(() => {
-        if (loaderData.isNew) {
-            toast.success(createdMsg)
-        }
-    }, [loaderData?.isNew, createdMsg])
+    useSuccessMessage(t('update-succeeded'), !!(actionData?.success))
+    useSuccessMessage(t('add-template'), !!(loaderData?.isNew))
     return (
         <>
             {loaderData.error && (

@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { EditHeader } from '../components/header';
 import { MovieLayout } from '../components/layout';
-import { Meta } from '~/features/movie';
 import Note from '~/features/rte';
 
 import type { FC } from "react";
@@ -37,14 +36,14 @@ const Edit: FC<Props> = ({
         movieNoteDetail,
         tmdbDetail,
         tmdbCredits,
-        onSubmit
+        onSubmit,
     })
     const {
         detail,
         setHtmlConverter,
         setContentGetter,
         getTemplates,
-        submitNote
+        submitNote,
     } = contextValue
     const [openWatchLog, setOpenWatchLog] = useState(false)
     const { t } = useTranslation('common')
@@ -54,9 +53,6 @@ const Edit: FC<Props> = ({
                 header={<EditHeader
                     onOpenWatchLogDialog={() => { setOpenWatchLog(true) }}
                 />}
-                movieInfo={detail && {
-                    metaInfo: <Meta genres={detail?.genres || []} />,
-                }}
                 note={detail && <Note
                     setContentGetter={setContentGetter}
                     setHtmlConverter={setHtmlConverter}

@@ -7,12 +7,10 @@ type MovieInfo = {
 type Props = {
     header: ReactNode,
     note?: ReactNode,
-    movieInfo?: MovieInfo | null
 }
 
 const MovieLayout: FC<Props> = ({
     header,
-    movieInfo,
     note,
 }) => {
     return (
@@ -25,9 +23,6 @@ const MovieLayout: FC<Props> = ({
                     </div>
                 </div>
             )}
-            <div className='flex w-full items-center'>
-                {movieInfo?.metaInfo}
-            </div>
         </div>
     );
 };

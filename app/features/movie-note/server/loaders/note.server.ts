@@ -85,7 +85,7 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
 
     const getHasPublicNote_ = async () => {
         t5.start()
-        const note = await hasPublicNote(dbAdmin, user.id, noteId)
+        const note = await hasPublicNote(dbAdmin, noteId, user.id)
         t5.stop()
         return note
     }

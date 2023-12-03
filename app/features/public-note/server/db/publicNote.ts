@@ -34,11 +34,8 @@ export const loadPublicNote = async (supabaseAdmin: AdminClientType, tmdbId: str
 }
 
 export const hasPublicNote = async (supabaseAdmin: AdminClientType, tmdbId: string, userId: string) => {
-    const { data, error } = (await supabaseAdmin.from('public-note').select('*').eq('tmdb_id', tmdbId).eq('user_id', userId))
-    if (error || !data || data.length === 0) {
-        return false
-    }
-    return true
+    const data = await loadPublicNote(supabaseAdmin, tmdbId, userId, false)
+    return Boolean(data)
 }
 
 export type PublicNoteType = UnboxReturnedPromise<typeof loadPublicNote>
