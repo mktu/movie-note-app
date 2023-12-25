@@ -7,17 +7,17 @@ import { getSupabaseAdmin } from '@utils/server/db';
 import type { ActionFunctionArgs } from "@remix-run/cloudflare";
 import { parseAddPublicNote } from '../validation/addPublicNote';
 import { upsertPublicNote } from '../db';
-import { TmdbLng } from '~/features/tmdb';
+import type { TmdbLng } from '~/features/tmdb';
 
 type ActionData = {
     error?: string,
     success?: boolean
 }
-export async function action({ request, context }: ActionFunctionArgs) {
+export async function action({ request, context, params }: ActionFunctionArgs) {
 
     const user = await authenticator.isAuthenticated(request)
+    const noteId = params.noteId;
     const url = new URL(request.url);
-    const isUpdate = url.searchParams.get('update') === 'true'
     const lng: TmdbLng = url.searchParams.get('lng') as TmdbLng || 'ja';
 
     if (!user) {
@@ -27,12 +27,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
     try {
         const data = parseAddPublicNote(await request.formData())
         await upsertPublicNote(supabaseAdmin, data, user.id)
-        if (!isUpdate) {
-            return redirect(`/app/note-public/${data.tmdbId}?lng=${lng}&update=true`)
-        }
-        return json<ActionData>({
-            success: true
-        }, { status: 200 })
+        return redirect(`/app/note-public/${noteId}/update?lng=${lng}&created=true`)
     } catch (e) {
         if (e instanceof MovieNoteError) {
             return json<ActionData>({

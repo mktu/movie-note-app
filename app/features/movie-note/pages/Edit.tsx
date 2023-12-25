@@ -20,6 +20,7 @@ type Props = {
     movieNoteDetail?: MovieNoteType,
     tmdbDetail?: TmdbDetail
     tmdbCredits?: Credits,
+    onPublish: (previewHtml: string) => void
 }
 
 const Edit: FC<Props> = ({
@@ -29,6 +30,7 @@ const Edit: FC<Props> = ({
     movieNoteDetail,
     tmdbDetail,
     tmdbCredits,
+    onPublish
 }) => {
     const contextValue = useMovieNote({
         published,
@@ -51,6 +53,7 @@ const Edit: FC<Props> = ({
         <MovieNoteContext.Provider value={contextValue}>
             <MovieLayout
                 header={<EditHeader
+                    onPublish={onPublish}
                     onOpenWatchLogDialog={() => { setOpenWatchLog(true) }}
                 />}
                 note={detail && <Note

@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { PreviewHeader } from '../components/header';
 import PreviewBody from '../components/preview';
+import Settings from '../components/settings';
 import type { TmdbDetail } from '~/features/tmdb';
 import { PreviewLayout } from '../components/layout';
 import NotePreviewProvider from '../context/public-note';
@@ -30,9 +31,9 @@ const Preview: FC<Props> = ({
                     isUpdate={isUpdate}
                     onBack={onBack}
                     title={tmdbDetail?.title || ''} />}
-            >
-                <PreviewBody />
-            </PreviewLayout>
+                preview={<PreviewBody />}
+                publishSettings={<Settings />}
+            />
         </NotePreviewProvider>
     );
 };

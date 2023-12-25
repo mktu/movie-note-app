@@ -39,6 +39,13 @@ const Note: FC = () => {
         debounceSubmit(getFormData(updateMovieNote), { method: 'post', debounceTimeout })
     }, [debounceSubmit])
 
+    const onPublish = useCallback((previewHtml: string) => {
+        debounceSubmit(getFormData({
+            previewHtml,
+            isPublish: true
+        }), { method: 'post' })
+    }, [])
+
     return (<>
         {loaderData.error && (
             <GeneralError key={loaderData.error} />
@@ -50,6 +57,7 @@ const Note: FC = () => {
                 />
                 <EditMovieNote
                     key={content.movieNoteDetail.tmdb_id || ''}
+                    onPublish={onPublish}
                     published={content.published}
                     movieNoteDetail={content.movieNoteDetail}
                     tmdbDetail={content.tmdbDetail}

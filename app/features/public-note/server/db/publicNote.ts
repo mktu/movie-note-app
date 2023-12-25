@@ -18,7 +18,7 @@ export const upsertPublicNote = async (supabaseAdmin: AdminClientType, publicNot
     }
 }
 
-export const loadPublicNote = async (supabaseAdmin: AdminClientType, tmdbId: string, userId: string, throwable?: boolean) => {
+const loadPublicNoteBase = async (supabaseAdmin: AdminClientType, tmdbId: string, userId: string, throwable?: boolean) => {
     const { data, error } = await supabaseAdmin.from('public-note').select('*').eq('tmdb_id', tmdbId).eq('user_id', userId)
     if (error) {
         console.error(error)
@@ -33,8 +33,13 @@ export const loadPublicNote = async (supabaseAdmin: AdminClientType, tmdbId: str
     return data[0]
 }
 
+export const loadPublicNote = async (supabaseAdmin: AdminClientType, tmdbId: string, userId: string) => {
+    const data = await loadPublicNoteBase(supabaseAdmin, tmdbId, userId, true)
+    return data!
+}
+
 export const hasPublicNote = async (supabaseAdmin: AdminClientType, tmdbId: string, userId: string) => {
-    const data = await loadPublicNote(supabaseAdmin, tmdbId, userId, false)
+    const data = await loadPublicNoteBase(supabaseAdmin, tmdbId, userId, false)
     return Boolean(data)
 }
 

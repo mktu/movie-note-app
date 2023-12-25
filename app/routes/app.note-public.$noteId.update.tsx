@@ -2,8 +2,8 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GeneralError } from '~/components/error';
 import { MovieNotePreview } from '~/features/public-note/pages';
-import { action } from '~/features/public-note/server/actions/public-note.server';
-import { loader } from '~/features/public-note/server/loaders/public-note.server';
+import { action } from '~/features/public-note/server/actions/public-note.update.server';
+import { loader } from '~/features/public-note/server/loaders/public-note.update.server';
 import { useNavigatorContext } from '~/providers/navigator/Context';
 
 import { useActionData, useLoaderData, useSubmit } from '@remix-run/react';
@@ -29,8 +29,8 @@ const NotePreview: FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const { t } = useTranslation('common')
-    useSuccessMessage(t('update-succeeded'), !!(actionData?.success) && !!loaderData.content?.isUpdate)
-    useSuccessMessage(t('publish-succeeded'), !!(actionData?.success) && !(loaderData.content?.isUpdate))
+    useSuccessMessage(t('update-succeeded'), !!(actionData?.success))
+    useSuccessMessage(t('published-succeeded'), !!(loaderData?.content?.created))
     return (
         <>
             {loaderData.error && (
@@ -38,9 +38,8 @@ const NotePreview: FC = () => {
             )}
             {loaderData.content?.tmdbDetail.id && (
                 <MovieNotePreview
-                    key={loaderData.content.isUpdate ? 'update' : 'publish'}
-                    init={loaderData.content.publicNote || undefined}
-                    isUpdate={loaderData.content.isUpdate}
+                    init={loaderData.content.publicNote}
+                    isUpdate
                     tmdbDetail={loaderData.content?.tmdbDetail}
                     onPublish={(content) => {
                         onSubmit({
