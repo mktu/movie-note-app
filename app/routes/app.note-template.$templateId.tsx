@@ -1,13 +1,12 @@
 import { useActionData, useLoaderData, useSubmit } from "@remix-run/react";
 import { getFormData } from "@utils/form";
-import { useEffect, type FC } from "react";
+import { type FC } from "react";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 import { GeneralError } from "~/components/error";
 import { EditNoteTemplate } from "~/features/note-template";
 import { action } from '~/features/note-template/server/actions/edit-template.server';
 import { loader } from '~/features/note-template/server/loader/edit-template.server';
-import { useSuccessMessage } from "~/hooks/useToast";
+import { useSuccessCreateMessage, useSuccessUpdateMessage } from "~/hooks/useToast";
 
 export {
     action,
@@ -20,8 +19,8 @@ const EditNoteTemplate_: FC = () => {
     const actionData = useActionData<typeof action>()
     const submit = useSubmit()
     const { t } = useTranslation('common')
-    useSuccessMessage(t('update-succeeded'), !!(actionData?.success))
-    useSuccessMessage(t('add-template'), !!(loaderData?.isNew))
+    useSuccessUpdateMessage(t('update-succeeded'), !!(actionData?.success), loaderData.content?.updated_at || null)
+    useSuccessCreateMessage(t('add-template'), !!(loaderData?.isNew))
     return (
         <>
             {loaderData.error && (

@@ -104,6 +104,7 @@ export interface Database {
           name: string
           public: boolean | null
           template: string | null
+          updated_at: string | null
           user_id: string | null
         }
         Insert: {
@@ -113,6 +114,7 @@ export interface Database {
           name: string
           public?: boolean | null
           template?: string | null
+          updated_at?: string | null
           user_id?: string | null
         }
         Update: {
@@ -122,6 +124,7 @@ export interface Database {
           name?: string
           public?: boolean | null
           template?: string | null
+          updated_at?: string | null
           user_id?: string | null
         }
         Relationships: []
