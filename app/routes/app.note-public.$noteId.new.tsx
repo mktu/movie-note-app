@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GeneralError } from '~/components/error';
 import { MovieNotePreview } from '~/features/public-note/pages';
-import { action } from '~/features/public-note/server/actions/public-note.update.server';
+import { action } from '~/features/public-note/server/actions/public-note.new.server';
 import { loader } from '~/features/public-note/server/loaders/public-note.new.server';
 import { useNavigatorContext } from '~/providers/navigator/Context';
 
