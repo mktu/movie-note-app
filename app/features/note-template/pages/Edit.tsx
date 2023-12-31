@@ -5,6 +5,7 @@ import { EditHeader } from '../components/header';
 import { useNoteTemplate } from '../hooks/useNoteTemplate';
 import { useTranslation } from 'react-i18next';
 import type { NoteTemplate } from '@type-defs/frontend';
+import { setTemplate } from '../utils/localstorage';
 
 type Props = {
     onSubmit: (template: NoteTemplate) => void,
@@ -22,6 +23,7 @@ const Edit: FC<Props> = ({
     return (
         <NoteTemplateLayout
             header={<EditHeader title={noteTemplate.name} onSave={async (name) => {
+                setTemplate('update')
                 onSubmit({
                     ...noteTemplate,
                     name,

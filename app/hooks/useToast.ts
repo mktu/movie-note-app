@@ -1,12 +1,12 @@
 import { useEffect } from "react"
 import { toast } from "react-toastify"
 
-export const useSuccessUpdateMessage = (message: string, show: boolean, updatedAt: string | null) => {
+export const useSuccessUpdateMessage = (message: string, requestId?: number) => {
     useEffect(() => {
-        if (show && updatedAt) {
+        if (requestId) {
             toast.success(message)
         }
-    }, [show, message, updatedAt])
+    }, [message, requestId])
 }
 
 export const useSuccessCreateMessage = (message: string, show: boolean) => {

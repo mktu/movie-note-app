@@ -15,6 +15,7 @@ type Props = {
     onPublish: OnPublish,
     onBack: () => void,
     init?: PublicNote
+    error?: string
 }
 
 const Preview: FC<Props> = ({
@@ -22,7 +23,8 @@ const Preview: FC<Props> = ({
     isUpdate,
     onPublish,
     onBack,
-    init
+    init,
+    error
 }) => {
     return (
         <NotePreviewProvider onPublish={onPublish} init={init}>
@@ -30,7 +32,9 @@ const Preview: FC<Props> = ({
                 header={<PreviewHeader
                     isUpdate={isUpdate}
                     onBack={onBack}
-                    title={tmdbDetail?.title || ''} />}
+                    title={tmdbDetail?.title || ''}
+                    error={error}
+                />}
                 preview={<PreviewBody />}
                 publishSettings={<Settings />}
             />

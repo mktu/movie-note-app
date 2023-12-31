@@ -20,7 +20,7 @@ const NewPublicNote: FC = () => {
     const loaderData = useLoaderData<typeof loader>()
     const { useNavigator } = useNavigatorContext()
     const { navigate } = useNavigator()
-    const { i18n } = useTranslation()
+    const { i18n } = useTranslation('common')
     const submit = useSubmit()
     const onSubmit = useCallback((updateMovieNote: AddPublicNote) => {
         submit(getFormData(updateMovieNote), { method: 'post' })

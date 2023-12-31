@@ -5,7 +5,7 @@ import useFloatingHeader from '~/hooks/useFloatingHeader';
 import { Error } from '~/components/header'
 import MiniImage from './MiniImage';
 import WatchLog from './WatchLog';
-import { ButtonBase, OutlinedButton } from '~/components/buttons';
+import { ButtonBase } from '~/components/buttons';
 import { useMovieNoteContext } from '../../context/movie-note/Context';
 import Switch from '~/components/switch/Switch';
 import ShowPreviewDialog from '../show-preview-dialog/ShowPreviewDialog';

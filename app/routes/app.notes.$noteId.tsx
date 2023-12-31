@@ -44,7 +44,7 @@ const Note: FC = () => {
             previewHtml,
             isPublish: true
         }), { method: 'post' })
-    }, [])
+    }, [debounceSubmit])
 
     return (<>
         {loaderData.error && (

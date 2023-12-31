@@ -11,7 +11,7 @@ import { getFormData } from '@utils/form';
 
 import type { AddPublicNote } from "~/features/public-note/server/validation/addPublicNote";
 import type { FC } from 'react';
-import { useSuccessCreateMessage, useSuccessUpdateMessage } from '~/hooks/useToast';
+import { useMovieNotePublishMessage } from '~/features/public-note/hooks/useMovieNotePreview';
 export {
     loader,
     action
@@ -19,18 +19,16 @@ export {
 
 const NotePreview: FC = () => {
     const loaderData = useLoaderData<typeof loader>()
+    const actionData = useActionData<typeof action>()
     const { useNavigator } = useNavigatorContext()
     const { navigate } = useNavigator()
     const { i18n } = useTranslation()
-    const actionData = useActionData<typeof action>()
     const submit = useSubmit()
     const onSubmit = useCallback((updateMovieNote: AddPublicNote) => {
         submit(getFormData(updateMovieNote), { method: 'post' })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    const { t } = useTranslation('common')
-    useSuccessUpdateMessage(t('update-succeeded'), !!(actionData?.success), loaderData.content?.publicNote.updated_at || null)
-    useSuccessCreateMessage(t('published-succeeded'), !!(loaderData?.content?.created))
+    useMovieNotePublishMessage()
     return (
         <>
             {loaderData.error && (
@@ -50,6 +48,7 @@ const NotePreview: FC = () => {
                     onBack={() => {
                         navigate(`/app/notes/${loaderData.content!.tmdbDetail.id}?lng=${i18n.language}`)
                     }}
+                    error={actionData?.error}
                 />
             )}
 
