@@ -5,7 +5,7 @@ import useFloatingHeader from '~/hooks/useFloatingHeader';
 import { Error } from '~/components/header'
 import MiniImage from './MiniImage';
 import WatchLog from './WatchLog';
-import { ContainedButton } from '~/components/buttons';
+import { ButtonBase, ContainedButton } from '~/components/buttons';
 import { useMovieNoteContext } from '../../context/movie-note/Context';
 import Switch from '~/components/switch/Switch';
 import ShowPreviewDialog from '../show-preview-dialog/ShowPreviewDialog';
@@ -76,14 +76,24 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                                         setShowDialog(true)
                                     }
                                 }} />
+
                                 <div
                                     className="h-[40px] min-h-[1em] w-0.5 self-stretch bg-border-main"></div>
-                                <ContainedButton
+                                {published ? (
+                                    <div className='inline-flex rounded-md shadow-sm' role='group'>
+                                        <ButtonBase onClick={async () => {
+                                            htmlConvertUtil && showPreview(await htmlConvertUtil?.convert())
+                                        }} className='-mr-px rounded-l-lg border border-border-main bg-surface-main px-4 py-2 font-medium text-text-main hover:bg-surface-hover hover:text-text-dark'>{t('publish-settings')}</ButtonBase>
+                                        <ButtonBase className='-ml-px rounded-r-lg border border-primary-main bg-primary-main px-4 py-2 font-medium text-onprimary-main' >{t('save')}</ButtonBase>
+                                    </div>
+
+                                ) : <ContainedButton
                                     disabled={!editing}
                                     onClick={() => {
                                         submitNote({})
                                     }}
-                                >{t('save')}</ContainedButton>
+                                >{t('save')}</ContainedButton>}
+
                             </div>
                             <div className='text-right text-sm text-text-label'>{t('update-date', { date: lastUpdated })}</div>
                         </div>
