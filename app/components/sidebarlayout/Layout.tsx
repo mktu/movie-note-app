@@ -55,7 +55,7 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
                             updateWidth(WidthClosed)
                         }
                     }}
-                    className='absolute right-1/2 top-2 translate-x-1/2 rounded-full border border-border-dark bg-surface-main p-1' >
+                    className='absolute right-1/2 top-2 z-10 translate-x-1/2 rounded-full border border-border-dark bg-surface-main p-1' >
                     {hideSidebar ? <AnglesRight name="open-sidebar" className='h-5 w-5 fill-border-dark' /> :
                         <AnglesLeft name="close-sidebar" className='h-5 w-5 fill-border-dark' />
                     }

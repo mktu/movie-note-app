@@ -12,6 +12,7 @@ import WatchLogDialog from '../components/watch-log/WatchLogDialog';
 import { useMovieNote } from '../hooks/useMovieNote';
 import { MovieNoteContext } from '../context/movie-note';
 import { useTranslation } from 'react-i18next';
+import { saveMovieNoteIfNotExists } from '../utils/localstorage';
 
 type Props = {
     onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void,
@@ -20,7 +21,6 @@ type Props = {
     movieNoteDetail?: MovieNoteType,
     tmdbDetail?: TmdbDetail
     tmdbCredits?: Credits,
-    onPublish: (previewHtml: string) => void
 }
 
 const Edit: FC<Props> = ({
@@ -29,8 +29,7 @@ const Edit: FC<Props> = ({
     error,
     movieNoteDetail,
     tmdbDetail,
-    tmdbCredits,
-    onPublish
+    tmdbCredits
 }) => {
     const contextValue = useMovieNote({
         published,
@@ -42,10 +41,11 @@ const Edit: FC<Props> = ({
     })
     const {
         detail,
+        initialNote,
         setHtmlConverter,
         setContentGetter,
         getTemplates,
-        submitNote,
+        setEditing
     } = contextValue
     const [openWatchLog, setOpenWatchLog] = useState(false)
     const { t } = useTranslation('common')
@@ -53,7 +53,6 @@ const Edit: FC<Props> = ({
         <MovieNoteContext.Provider value={contextValue}>
             <MovieLayout
                 header={<EditHeader
-                    onPublish={onPublish}
                     onOpenWatchLogDialog={() => { setOpenWatchLog(true) }}
                 />}
                 note={detail && <Note
@@ -61,13 +60,11 @@ const Edit: FC<Props> = ({
                     setHtmlConverter={setHtmlConverter}
                     templateGetter={getTemplates}
                     placeholder={`${t('note-place-holder')}...✍️`}
-                    init={movieNoteDetail?.memo}
-                    onChange={(text) => {
-                        submitNote({
-                            newNote: text,
-                            debounceTimeout: 1000
-                        },)
-                    }}
+                    init={initialNote}
+                    onChange={(note) => {
+                        movieNoteDetail?.tmdb_id && saveMovieNoteIfNotExists(movieNoteDetail?.tmdb_id, note)
+                        setEditing(true)
+                    }} // save note to localstorage
                 />}
             />
             {openWatchLog && (

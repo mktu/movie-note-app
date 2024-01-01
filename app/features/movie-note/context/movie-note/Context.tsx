@@ -22,7 +22,14 @@ const context = React.createContext<MovieNoteContextType>({
     imagePath: '',
     detailPath: '',
     previewPath: '',
-    error: ''
+    error: '',
+    lastUpdated: '',
+    initialNote: undefined,
+    editing: false,
+    setEditing: function (value: React.SetStateAction<boolean>): void {
+        throw new Error("Function not implemented.");
+    },
+    unsavedNoteInfo: null
 });
 
 export const useMovieNoteContext = () => useContext(context)
