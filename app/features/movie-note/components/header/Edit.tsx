@@ -84,7 +84,11 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                                         <ButtonBase onClick={async () => {
                                             htmlConvertUtil && showPreview(await htmlConvertUtil?.convert())
                                         }} className='-mr-px rounded-l-lg border border-border-main bg-surface-main px-4 py-2 font-medium text-text-main hover:bg-surface-hover hover:text-text-dark'>{t('publish-settings')}</ButtonBase>
-                                        <ButtonBase className='-ml-px rounded-r-lg border border-primary-main bg-primary-main px-4 py-2 font-medium text-onprimary-main' >{t('save')}</ButtonBase>
+                                        <ButtonBase className='-ml-px rounded-r-lg border border-primary-main bg-primary-main px-4 py-2 font-medium text-onprimary-main'
+                                            onClick={() => {
+                                                submitNote({})
+                                            }}
+                                        >{t('save')}</ButtonBase>
                                     </div>
 
                                 ) : <ContainedButton
