@@ -9,6 +9,7 @@ import { clearMovieNote, getMovieNote, setMovieNotePreviewHtml } from "../utils/
 import { getTemplates as getTemplatesApi } from "../utils/api"
 import type { ListTemplateItemType } from "../../note-template/server/db/template"
 import type { Video } from "~/features/tmdb/utils"
+import { formatDateTime } from "@utils/time"
 
 type Props = {
     movieNoteDetail?: MovieNoteType,
@@ -63,7 +64,7 @@ export const useMovieNote = ({
     const html = movieNoteDetail?.html || undefined
     const watchState = movieNoteDetail?.watch_state as WatchState
     const imagePath = detail?.poster_path || detail?.backdrop_path || ''
-    const lastUpdated = movieNoteDetail?.updated_at ? format(new Date(movieNoteDetail?.updated_at), 'yyyy-MM-dd hh:mm:ss') : ''
+    const lastUpdated = movieNoteDetail?.updated_at ? formatDateTime(movieNoteDetail?.updated_at) : ''
     const [noteInLocalStorage, setNoteInLocalStorage] = useState(getMovieNote())
     const initialNote = useMemo(() => {
         if (movieNoteDetail?.tmdb_id === noteInLocalStorage?.id) {

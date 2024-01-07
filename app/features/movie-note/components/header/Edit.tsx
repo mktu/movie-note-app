@@ -83,8 +83,8 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                                     <div className='inline-flex rounded-md shadow-sm' role='group'>
                                         <ButtonBase onClick={async () => {
                                             htmlConvertUtil && showPreview(await htmlConvertUtil?.convert())
-                                        }} className='-mr-px rounded-l-lg border border-border-main bg-surface-main px-4 py-2 font-medium text-text-main hover:bg-surface-hover hover:text-text-dark'>{t('publish-settings')}</ButtonBase>
-                                        <ButtonBase className='-ml-px rounded-r-lg border border-primary-main bg-primary-main px-4 py-2 font-medium text-onprimary-main'
+                                        }} className='-mr-px whitespace-nowrap rounded-l-lg border border-border-main bg-surface-main px-4 py-2 font-medium text-text-main hover:bg-surface-hover hover:text-text-dark'>{t('publish-settings')}</ButtonBase>
+                                        <ButtonBase className='-ml-px whitespace-nowrap rounded-r-lg border border-primary-main bg-primary-main px-4 py-2 font-medium text-onprimary-main'
                                             onClick={() => {
                                                 submitNote({})
                                             }}
@@ -92,6 +92,7 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                                     </div>
 
                                 ) : <ContainedButton
+                                    className='whitespace-nowrap'
                                     disabled={!editing}
                                     onClick={() => {
                                         submitNote({})
@@ -99,7 +100,11 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                                 >{t('save')}</ContainedButton>}
 
                             </div>
-                            <div className='text-right text-sm text-text-label'>{t('update-date', { date: lastUpdated })}</div>
+                            <div className='text-right text-sm text-text-label'>{t('update-date', {
+                                date: lastUpdated, interpolation: {
+                                    escapeValue: false
+                                }
+                            })}</div>
                         </div>
                     </div>
                 </div>
