@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.22.20",
-    "@cloudflare/workers-types": "4.20231016.0",
+    "@cloudflare/workers-types": "4.20231218.0",
     "@playwright/test": "1.40.1",
     "@remix-run/dev": "2.1.0",
     "@remix-run/eslint-config": "2.1.0",
