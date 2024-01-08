@@ -12,7 +12,8 @@ import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import type { ImdbRate } from '~/features/imdb/types';
 import type { Video } from '~/features/tmdb/utils';
-import { loadMovieNoteIfExists, MovieNoteType } from '../db';
+import type { MovieNoteType } from '../db';
+import { loadMovieNoteIfExists } from '../db';
 import { getSupabaseAdmin } from '@utils/supabaseAdmin.server';
 
 type ContentData = {

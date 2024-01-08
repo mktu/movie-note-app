@@ -2,18 +2,33 @@ import { Switch as SW } from '@headlessui/react'
 import clsx from 'clsx';
 import type { FC } from 'react'
 
+const colors = {
+    default: {
+        on: 'bg-primary-main',
+        off: 'bg-gray-200'
+    },
+    info: {
+        on: 'bg-info-main',
+        off: 'bg-gray-200'
+    }
+} as const
+
+type ColorType = keyof typeof colors
+
 type Props = {
     enabled: boolean,
     setEnabled: (checked: boolean) => void,
     label?: string,
-    labelClass?: string
+    labelClass?: string,
+    colorType?: ColorType
 }
 
 const Switch: FC<Props> = ({
     enabled,
     setEnabled,
     label,
-    labelClass
+    labelClass,
+    colorType = 'default'
 }) => {
     return (
         <SW.Group>
@@ -22,8 +37,9 @@ const Switch: FC<Props> = ({
                 <SW
                     checked={enabled}
                     onChange={setEnabled}
-                    className={`${enabled ? ' bg-primary-main' : 'bg-gray-200'
-                        } relative inline-flex h-6 w-11 items-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-focus`}
+                    className={clsx('relative inline-flex h-6 w-11 items-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-focus',
+                        enabled ? colors[colorType].on
+                            : colors[colorType].off)}
                 >
 
                     <span

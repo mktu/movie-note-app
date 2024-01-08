@@ -1,46 +1,40 @@
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next';
-import { ContainedButton, TextButton } from '~/components/buttons';
-import { TextArea } from '~/components/inputs';
+import { ContainedButton } from '~/components/buttons';
 import { useNotePreviewContext } from '../../context/public-note/Context';
+import { Error } from '~/components/header'
+
 
 type Props = {
     onBack: () => void,
     isUpdate: boolean,
     title: string,
+    error?: string
 }
 
 const Preview: FC<Props> = ({
     onBack,
     isUpdate,
     title,
+    error
 }) => {
-    const { html, onSubmit, setSummary, summary } = useNotePreviewContext()
+    const { html, onSubmit } = useNotePreviewContext()
     const { t } = useTranslation('common')
     return (
-        <div className='flex w-full items-end'>
-            <div className='flex w-full flex-col gap-2'>
-                <div>
-                    {isUpdate ? t('confirm-update-published', { title }) : t('comfirm-publish', { title })}
-                </div>
-                <div>
-                    <TextArea
-                        value={summary}
-                        onChange={(e) => {
-                            setSummary(e.target.value)
-                        }}
-                        className='max-w-[540px]'
-                        placeholder={t('add-note-summary')}
-                        minRows={2}
-                        maxRows={3}
-                    />
+        <>
+            <div className='flex w-full items-end'>
+                <h3 className='flex-1'>
+                    {title}
+                </h3>
+                <div className='ml-auto flex items-center gap-2 whitespace-nowrap'>
+                    <ContainedButton disabled={!html} onClick={onSubmit}>{isUpdate ? t('update') : t('publish')}</ContainedButton>
                 </div>
             </div>
-            <div className='ml-auto flex items-center gap-2 whitespace-nowrap'>
-                <ContainedButton disabled={!html} onClick={onSubmit}>{isUpdate ? t('update') : t('publish')}</ContainedButton>
-                <TextButton onClick={onBack}>{t('back')}</TextButton>
-            </div>
-        </div>
+            {error && (
+                <Error error={t(error)} />
+            )}
+        </>
+
     );
 };
 

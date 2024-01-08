@@ -2,8 +2,8 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GeneralError } from '~/components/error';
 import { MovieNotePreview } from '~/features/public-note/pages';
-import { action } from '~/features/public-note/server/actions/public-note.server';
-import { loader } from '~/features/public-note/server/loaders/public-note.server';
+import { action } from '~/features/public-note/server/actions/public-note.new.server';
+import { loader } from '~/features/public-note/server/loaders/public-note.new.server';
 import { useNavigatorContext } from '~/providers/navigator/Context';
 
 import { useLoaderData, useSubmit } from '@remix-run/react';
@@ -16,12 +16,11 @@ export {
     action
 }
 
-const NotePreview: FC = () => {
+const NewPublicNote: FC = () => {
     const loaderData = useLoaderData<typeof loader>()
     const { useNavigator } = useNavigatorContext()
     const { navigate } = useNavigator()
-    const { i18n } = useTranslation()
-    // const actionData = useActionData<typeof action>()
+    const { i18n } = useTranslation('common')
     const submit = useSubmit()
     const onSubmit = useCallback((updateMovieNote: AddPublicNote) => {
         submit(getFormData(updateMovieNote), { method: 'post' })
@@ -34,8 +33,7 @@ const NotePreview: FC = () => {
             )}
             {loaderData.content?.tmdbDetail.id && (
                 <MovieNotePreview
-                    init={loaderData.content.publicNote || undefined}
-                    isUpdate={loaderData.content.isUpdate}
+                    isUpdate={false}
                     tmdbDetail={loaderData.content?.tmdbDetail}
                     onPublish={(content) => {
                         onSubmit({
@@ -54,4 +52,4 @@ const NotePreview: FC = () => {
     )
 }
 
-export default NotePreview
+export default NewPublicNote

@@ -8,15 +8,12 @@ import { getSearchParamAsBoolean } from '@utils/searchparam.server';
 import type { TmdbDetail, TmdbLng } from '~/features/tmdb';
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import type { ErrorKey } from '../../utils/error';
-import type { PublicNoteType } from '../db';
-import { loadPublicNote } from '../db';
+import { hasPublicNote } from '../db';
 import { getSupabaseAdmin } from '@utils/server/db';
 
 
 type ContentData = {
-    tmdbDetail: TmdbDetail,
-    isUpdate: boolean,
-    publicNote: PublicNoteType | null
+    tmdbDetail: TmdbDetail
 }
 
 export type LorderData = {
@@ -28,19 +25,21 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const user = await authenticator.isAuthenticated(request)
     const url = new URL(request.url);
     const lng: TmdbLng = url.searchParams.get('lng') as TmdbLng || 'ja';
-    const isUpdate = url.searchParams.get('update') === 'true'
     const noteId = params.noteId;
+
     if (!user) {
         return redirect('/login')
     }
     if (!noteId) {
         return json<LorderData>({ error: 'public-note-id-not-found' })
     }
+
     const disableKv = getSearchParamAsBoolean(request, 'disableKv')
     const tmdbData = setTmdbData(context)
     const dbAdmin = getSupabaseAdmin(context)
-    const publicNote = await loadPublicNote(dbAdmin, noteId, user.id, false)
-
+    if (await hasPublicNote(dbAdmin, noteId, user.id)) {
+        return redirect(`/app/note-public/${noteId}/update?lng=${lng}`)
+    }
     const getTmdbDetail_ = async (tmdbId: string, lng: TmdbLng, tmdb: Tmdb) => {
         const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(context.TmdbInfo as KVNamespace, tmdbId, lng)
         const tmdbDetail = tmdbDetailKv || await tmdb.getDetail(tmdbId)
@@ -55,9 +54,7 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const [tmdbDetail] = await Promise.all([
         getTmdbDetail_(noteId, lng as TmdbLng, tmdb)])
     const contentData: Omit<ContentData, 'performanceData'> = {
-        tmdbDetail,
-        isUpdate,
-        publicNote
+        tmdbDetail
     }
 
 

@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { PreviewHeader } from '../components/header';
 import PreviewBody from '../components/preview';
+import Settings from '../components/settings';
 import type { TmdbDetail } from '~/features/tmdb';
 import { PreviewLayout } from '../components/layout';
 import NotePreviewProvider from '../context/public-note';
@@ -14,6 +15,7 @@ type Props = {
     onPublish: OnPublish,
     onBack: () => void,
     init?: PublicNote
+    error?: string
 }
 
 const Preview: FC<Props> = ({
@@ -21,7 +23,8 @@ const Preview: FC<Props> = ({
     isUpdate,
     onPublish,
     onBack,
-    init
+    init,
+    error
 }) => {
     return (
         <NotePreviewProvider onPublish={onPublish} init={init}>
@@ -29,10 +32,12 @@ const Preview: FC<Props> = ({
                 header={<PreviewHeader
                     isUpdate={isUpdate}
                     onBack={onBack}
-                    title={tmdbDetail?.title || ''} />}
-            >
-                <PreviewBody />
-            </PreviewLayout>
+                    title={tmdbDetail?.title || ''}
+                    error={error}
+                />}
+                preview={<PreviewBody />}
+                publishSettings={<Settings />}
+            />
         </NotePreviewProvider>
     );
 };

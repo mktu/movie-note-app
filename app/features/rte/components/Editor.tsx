@@ -23,6 +23,8 @@ import HTMLConvertPlugin from './HTMLConvertPlugin';
 import Templates from './Toolbar/Templates';
 import type { TemplateNodeProps } from './Toolbar/TemplateNode';
 import TemplateNode from './Toolbar/TemplateNode';
+import ReplacePlugin from './ReplacePlugin';
+import type { GetContentRegister } from '../hooks/useReplacer';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
@@ -36,6 +38,7 @@ type Props = {
         template: 'create' | 'use'
     },
     templateNodeOptions?: TemplateNodeProps
+    getContentRegister?: GetContentRegister
 }
 
 const Editor: FC<Props> = ({
@@ -47,7 +50,8 @@ const Editor: FC<Props> = ({
     init,
     placeholder,
     toolbarOptions,
-    templateNodeOptions
+    templateNodeOptions,
+    getContentRegister
 }) => {
     const { editorStateRef } = useEditorState(setContentGetter, monitorCurrentState)
     return (
@@ -95,6 +99,11 @@ const Editor: FC<Props> = ({
                     }} />
                 <HTMLConvertPlugin
                     getConverter={setHtmlConverter} />
+                <>
+                    {getContentRegister && <ReplacePlugin
+                        getContentRegister={getContentRegister}
+                    />}
+                </>
             </LexicalComposer>
         </div>
     );

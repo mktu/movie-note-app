@@ -1,14 +1,15 @@
 import type { Credits, TmdbDetail } from "~/features/tmdb"
 import type { MovieNoteType } from "../server/db"
-import { useCallback, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import type { UpdateMovieNote, WatchState } from "@type-defs/frontend"
 import format from "date-fns/format"
 import { useTranslation } from "react-i18next"
 import { useNavigatorContext } from "~/providers/navigator/Context"
-import { setMovieNotePreviewHtml } from "../utils/localstorage"
+import { clearMovieNote, getMovieNote, setMovieNotePreviewHtml } from "../utils/localstorage"
 import { getTemplates as getTemplatesApi } from "../utils/api"
 import type { ListTemplateItemType } from "../../note-template/server/db/template"
 import type { Video } from "~/features/tmdb/utils"
+import { formatDateTime } from "@utils/time"
 
 type Props = {
     movieNoteDetail?: MovieNoteType,
@@ -56,13 +57,34 @@ export const useMovieNote = ({
     const title = movieNoteDetail?.title || ''
     const detail = tmdbDetail
     const detailPath = `/app/movies/${detail?.id}?lng=${i18n.language}`
-    const previewPath = `/app/note-public/${detail?.id}?lng=${i18n.language}&update=${published}`
+    const previewPath = published ? `/app/note-public/${detail?.id}/update?lng=${i18n.language}` : `/app/note-public/${detail?.id}/new?lng=${i18n.language}`
     const credits = tmdbCredits || null
     const stars = movieNoteDetail?.stars || 0
     const formattedWatchDate = movieNoteDetail?.admiration_date || ''
     const html = movieNoteDetail?.html || undefined
     const watchState = movieNoteDetail?.watch_state as WatchState
     const imagePath = detail?.poster_path || detail?.backdrop_path || ''
+    const lastUpdated = movieNoteDetail?.updated_at ? formatDateTime(movieNoteDetail?.updated_at) : ''
+    const [noteInLocalStorage, setNoteInLocalStorage] = useState(getMovieNote())
+    const initialNote = useMemo(() => {
+        if (movieNoteDetail?.tmdb_id === noteInLocalStorage?.id) {
+            return noteInLocalStorage?.note
+        }
+        return movieNoteDetail?.memo
+    }, [movieNoteDetail?.memo, movieNoteDetail?.tmdb_id, noteInLocalStorage?.id, noteInLocalStorage?.note])
+    const [editing, setEditing] = useState(initialNote !== movieNoteDetail?.memo)
+    const { t } = useTranslation()
+    const unsavedNoteInfo = noteInLocalStorage && {
+        link: `/app/notes/${noteInLocalStorage.id}`,
+        message: noteInLocalStorage.id === movieNoteDetail?.tmdb_id ? t('unsaved-content-exists') : t('unsaved-note-exists'),
+        isCurrentNote: noteInLocalStorage.id === movieNoteDetail?.tmdb_id,
+        onDestroy: () => {
+            if (noteInLocalStorage?.note) {
+                clearMovieNote()
+                setNoteInLocalStorage(null)
+            }
+        }
+    }
     const submitNote = useCallback(({
         newWatchState,
         newAdmirationDate,
@@ -80,6 +102,8 @@ export const useMovieNote = ({
         newHtml?: string,
         debounceTimeout?: number
     }) => {
+        setEditing(false)
+        clearMovieNote()
         detail && onSubmit({
             title: detail.title,
             thumbnail: detail.poster_path || detail.backdrop_path || '',
@@ -116,6 +140,11 @@ export const useMovieNote = ({
         htmlConvertUtil,
         submitNote,
         showPreview,
-        getTemplates
+        getTemplates,
+        lastUpdated,
+        initialNote,
+        editing,
+        setEditing,
+        unsavedNoteInfo
     }
 }

@@ -5,6 +5,7 @@ import { NewHeader } from '../components/header';
 import { useNoteTemplate } from '../hooks/useNoteTemplate';
 import { useTranslation } from 'react-i18next';
 import type { AddNoteTemplate } from '@type-defs/frontend';
+import { setTemplate } from '../utils/localstorage';
 
 type Props = {
     onSubmit: (template: AddNoteTemplate) => void,
@@ -20,6 +21,7 @@ const New: FC<Props> = ({
     return (
         <NoteTemplateLayout
             header={<NewHeader onSave={async (name) => {
+                setTemplate('create')
                 onSubmit({
                     name,
                     template: content?.get() || '',

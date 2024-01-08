@@ -1,17 +1,16 @@
 import authenticator from '~/features/auth/server/auth.server';
-import { deleteNote } from '~/features/movie-note/server/db';
 import { MovieNoteError } from '~/features/movie-note/utils/error';
 
 import { json, redirect } from '@remix-run/cloudflare';
 import { getSupabaseAdmin } from '@utils/server/db';
 
-import { parseDeleteNote } from '../validation/delete-note';
-
 import type { ActionFunctionArgs } from "@remix-run/cloudflare";
-import { deletePublicNote } from '~/features/public-note/server';
+import { parseAddPublicNote } from '../validation/addPublicNote';
+import { upsertPublicNote } from '../db';
 
 type ActionData = {
-    error?: string
+    error?: string,
+    success?: boolean
 }
 export async function action({ request, context }: ActionFunctionArgs) {
 
@@ -22,10 +21,11 @@ export async function action({ request, context }: ActionFunctionArgs) {
     }
     const supabaseAdmin = getSupabaseAdmin(context)
     try {
-        const data = parseDeleteNote(await request.formData())
-        await deleteNote(supabaseAdmin, data.noteId, user.id)
-        await deletePublicNote(supabaseAdmin, data.noteId)
-        return redirect('/app')
+        const data = parseAddPublicNote(await request.formData())
+        await upsertPublicNote(supabaseAdmin, data, user.id)
+        return json<ActionData>({
+            success: true
+        }, { status: 200 })
     } catch (e) {
         if (e instanceof MovieNoteError) {
             return json<ActionData>({

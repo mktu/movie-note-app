@@ -23,7 +23,7 @@ module.exports = {
           main : '#66BB69'
         },
         info : {
-          main : '#2AB5F6'
+          main : '#0082F6'
         },
         destructive : {
           light : '#ee503b',
