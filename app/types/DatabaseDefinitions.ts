@@ -138,6 +138,7 @@ export interface Database {
           tmdb_id: string
           updated_at: string | null
           user_id: string
+          view_id: string
         }
         Insert: {
           created_at?: string
@@ -147,6 +148,7 @@ export interface Database {
           tmdb_id: string
           updated_at?: string | null
           user_id: string
+          view_id?: string
         }
         Update: {
           created_at?: string
@@ -156,6 +158,7 @@ export interface Database {
           tmdb_id?: string
           updated_at?: string | null
           user_id?: string
+          view_id?: string
         }
         Relationships: []
       }
