@@ -30,7 +30,7 @@
     "@supabase/supabase-js": "2.38.5",
     "@tailwindcss/line-clamp": "0.4.4",
     "@types/uuid": "8.3.4",
-    "clsx": "2.0.1",
+    "clsx": "2.1.0",
     "compressorjs": "1.2.1",
     "cross-env": "7.0.3",
     "date-fns": "2.30.0",
