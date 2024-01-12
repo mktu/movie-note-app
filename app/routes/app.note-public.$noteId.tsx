@@ -2,8 +2,8 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GeneralError } from '~/components/error';
 import { MovieNotePreview } from '~/features/public-note/pages';
-import { action } from '~/features/public-note/server/actions/public-note.update.server';
-import { loader } from '~/features/public-note/server/loaders/public-note.update.server';
+import { action } from '~/features/public-note/server/actions/preview-note.server';
+import { loader } from '~/features/public-note/server/loaders/preview-note.server';
 import { useNavigatorContext } from '~/providers/navigator/Context';
 
 import { useActionData, useLoaderData, useSubmit } from '@remix-run/react';
@@ -17,7 +17,7 @@ export {
     action
 }
 
-const NotePreview: FC = () => {
+const PublicNote: FC = () => {
     const loaderData = useLoaderData<typeof loader>()
     const actionData = useActionData<typeof action>()
     const { useNavigator } = useNavigatorContext()
@@ -57,4 +57,4 @@ const NotePreview: FC = () => {
     )
 }
 
-export default NotePreview
+export default PublicNote 
