@@ -33,6 +33,18 @@ const loadPublicNoteBase = async (supabaseAdmin: AdminClientType, tmdbId: string
     return data[0]
 }
 
+export const loadPublicNoteByViewId = async (supabaseAdmin: AdminClientType, viewId: string) => {
+    const { data, error } = await supabaseAdmin.from('public-note').select('*').eq('view_id', viewId)
+    if (error) {
+        console.error(error)
+        throwPublicNoteError(error.code)
+    }
+    if (!data || data.length === 0) {
+        return null
+    }
+    return data[0]
+}
+
 export const deletePublicNote = async (supabaseAdmin: AdminClientType, tmdbId: string) => {
     const { error } = await supabaseAdmin.from('public-note').delete().eq('tmdb_id', tmdbId)
     if (error) {

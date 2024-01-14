@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from "react"
 import { getMovieNotePreviewHtml } from "../../movie-note/utils/localstorage"
-import type { PublicNote } from "@type-defs/frontend"
+import type { AddPublicNote, PublicNote } from "@type-defs/frontend"
 import { clearPublished, getPublished, setPublished } from "../utils/localstorage"
 import { toast } from "react-toastify"
 import { useTranslation } from "react-i18next"
 
-export type OnPublish = (content: PublicNote) => void
+export type OnPublish = (content: AddPublicNote) => void
 
-export const useMovieNotePreview = (onPublish: OnPublish, init?: PublicNote) => {
+export const useMovieNotePreview = (onPublish: OnPublish, tmdbId: string, init?: PublicNote) => {
     const [html, setHtml] = useState('')
     const [summary, setSummary] = useState(init?.summary || '')
     useEffect(() => {
@@ -18,12 +18,15 @@ export const useMovieNotePreview = (onPublish: OnPublish, init?: PublicNote) => 
         onPublish({
             note: html,
             summary,
-            public: true
+            public: true,
+            tmdbId
         })
-    }, [html, init, onPublish, summary])
+    }, [html, init, onPublish, summary, tmdbId])
+    const viewId = init?.viewId
     return {
         html,
         summary,
+        viewId,
         setSummary,
         onSubmit
     }

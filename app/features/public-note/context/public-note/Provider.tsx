@@ -7,11 +7,12 @@ import type { PublicNote } from '@type-defs/frontend';
 type Props = {
     children: React.ReactNode,
     onPublish: OnPublish,
+    tmdbId: string,
     init?: PublicNote
 }
 
-const DefaultProvider: React.FC<Props> = ({ children, onPublish, init }) => {
-    const contextValue = useMovieNotePreview(onPublish, init)
+const DefaultProvider: React.FC<Props> = ({ children, onPublish, tmdbId, init }) => {
+    const contextValue = useMovieNotePreview(onPublish, tmdbId, init)
     return (
         <Context.Provider value={contextValue}>
             {children}

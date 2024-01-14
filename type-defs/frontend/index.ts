@@ -29,7 +29,16 @@ export type NoteTemplate = {
 export type PublicNote = {
     summary: string,
     note: string,
-    public: boolean
+    public: boolean,
+    tmdbId: string,
+    viewId: string
+}
+
+export type AddPublicNote = {
+    summary: string,
+    note: string,
+    public: boolean,
+    tmdbId: string
 }
 
 export type UpdateMovieNote = AddMovieNote
