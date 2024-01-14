@@ -22,7 +22,7 @@
     "@headlessui/react": "1.7.18",
     "@lexical/headless": "0.12.2",
     "@lexical/react": "0.12.2",
-    "@microlink/mql": "0.12.2",
+    "@microlink/mql": "0.10.33",
     "@popperjs/core": "2.11.8",
     "@remix-run/cloudflare": "2.1.0",
     "@remix-run/cloudflare-pages": "2.1.0",
