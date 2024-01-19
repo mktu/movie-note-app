@@ -7,8 +7,10 @@ type Props = {
 
 const Note: FC<Props> = ({ html }) => {
     return (
-        <div className='p-4'>
-            {Parser(html)}
+        <div className='flex w-full justify-center p-4'>
+            <div>
+                {Parser(html)}
+            </div>
         </div>
     )
 };

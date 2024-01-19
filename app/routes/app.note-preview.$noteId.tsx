@@ -10,6 +10,7 @@ import { getFormData } from '@utils/form';
 import type { AddPublicNote } from "~/features/public-note/server/validation/addPublicNote";
 import type { FC } from 'react';
 import { useMovieNotePublishMessage } from '~/features/public-note/hooks/useMovieNotePreview';
+import { convertPublicNote } from '~/features/public-note/utils/convertType';
 export {
     loader,
     action
@@ -31,11 +32,7 @@ const NotePreview: FC = () => {
             )}
             {loaderData.content?.tmdbDetail.id && (
                 <MovieNotePreview
-                    init={loaderData.content.publicNote ? {
-                        ...loaderData.content.publicNote,
-                        tmdbId: loaderData.content?.tmdbDetail.id,
-                        viewId: loaderData.content?.publicNote.view_id
-                    } : undefined}
+                    init={loaderData.content.publicNote ? convertPublicNote(loaderData.content.publicNote) : undefined}
                     isUpdate={!!loaderData.content.publicNote}
                     tmdbDetail={loaderData.content.tmdbDetail}
                     onPublish={onSubmit}

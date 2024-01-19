@@ -8,7 +8,7 @@ const DashboardSearchbar: FC = () => {
     const { useNavigator } = useNavigatorContext()
     const { navigate } = useNavigator()
     const { i18n } = useTranslation()
-    const { name } = useUserContext()
+    const { name } = useUserContext() || {}
     return (
         <div className='flex flex-col gap-4'>
             <h1 className='flex w-full items-center border-b border-border-main text-2xl'>
