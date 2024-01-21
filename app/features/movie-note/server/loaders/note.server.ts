@@ -13,7 +13,7 @@ import type { MovieNoteType } from '~/features/movie-note/server/db';
 import type { Credits, TmdbDetail, TmdbLng } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
-import { hasPublicNote } from '~/features/public-note/server';
+import { loadPublicNoteIfExists } from '~/features/public-note/server';
 
 
 type ContentData = {
@@ -21,6 +21,7 @@ type ContentData = {
     tmdbDetail: TmdbDetail,
     tmdbCredits: Credits,
     performanceData: { [k: string]: number },
+    hasPublicNote: boolean,
     published: boolean
 }
 
@@ -85,9 +86,20 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
 
     const getHasPublicNote_ = async () => {
         t5.start()
-        const note = await hasPublicNote(dbAdmin, noteId, user.id)
+        const note = await loadPublicNoteIfExists(dbAdmin, noteId, user.id)
         t5.stop()
-        return note
+        if (note) {
+            return {
+                hasPublicNote: true,
+                published: note.public
+            }
+        }
+        else {
+            return {
+                hasPublicNote: false,
+                published: false
+            }
+        }
     }
 
     let contentData: Omit<ContentData, 'performanceData'>;
@@ -103,7 +115,7 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
             movieNoteDetail: note,
             tmdbDetail,
             tmdbCredits,
-            published: Boolean(hasPublicNote)
+            ...hasPublicNote
         }
     } else {
         const note = await loadMovieNote_()
@@ -120,7 +132,7 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
             movieNoteDetail: note,
             tmdbDetail,
             tmdbCredits,
-            published: Boolean(hasPublicNote)
+            ...hasPublicNote
         }
 
     }

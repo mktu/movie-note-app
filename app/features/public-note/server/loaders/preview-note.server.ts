@@ -37,8 +37,7 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const disableKv = getSearchParamAsBoolean(request, 'disableKv')
     const tmdbData = setTmdbData(context)
     const dbAdmin = getSupabaseAdmin(context)
-    const hasPublished = await hasPublicNote(dbAdmin, noteId, user.id)
-    const publicNote = hasPublished ? await loadPublicNote(dbAdmin, noteId, user.id) : undefined
+    const publicNote = await hasPublicNote(dbAdmin, noteId, user.id) ? await loadPublicNote(dbAdmin, noteId, user.id) : undefined
 
     const getTmdbDetail_ = async (tmdbId: string, lng: TmdbLng, tmdb: Tmdb) => {
         const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(context.TmdbInfo as KVNamespace, tmdbId, lng)

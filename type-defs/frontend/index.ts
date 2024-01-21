@@ -9,6 +9,7 @@ export type AddMovieNote = {
     imdbId?: string,
     admirationDate: string,
     watchState?: WatchState,
+    hasPublicNote?: boolean,
     published?: boolean,
     html?: string
 }

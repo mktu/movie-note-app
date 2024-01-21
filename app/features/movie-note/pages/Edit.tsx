@@ -16,6 +16,7 @@ import { saveMovieNoteIfNotExists } from '../utils/localstorage';
 
 type Props = {
     onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void,
+    hasPublicNote: boolean,
     published: boolean,
     error?: string,
     movieNoteDetail?: MovieNoteType,
@@ -25,6 +26,7 @@ type Props = {
 
 const Edit: FC<Props> = ({
     onSubmit,
+    hasPublicNote,
     published,
     error,
     movieNoteDetail,
@@ -32,6 +34,7 @@ const Edit: FC<Props> = ({
     tmdbCredits
 }) => {
     const contextValue = useMovieNote({
+        hasPublicNote,
         published,
         error,
         movieNoteDetail,

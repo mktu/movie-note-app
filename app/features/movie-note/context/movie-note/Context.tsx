@@ -8,6 +8,7 @@ const context = React.createContext<MovieNoteContextType>({
     credits: null,
     stars: 0,
     formattedWatchDate: '',
+    hasPublicNote: false,
     published: false,
     watchState: 'lookforward',
     setHtmlConverter: () => { },
@@ -15,7 +16,7 @@ const context = React.createContext<MovieNoteContextType>({
     htmlConvertUtil: {
         convert: async () => '',
     },
-    submitNote: () => { },
+    submitNote: async () => { },
     showPreview: () => { },
     getTemplates: async () => [],
     title: '',

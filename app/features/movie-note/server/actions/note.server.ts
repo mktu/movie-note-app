@@ -8,6 +8,7 @@ import { getSupabaseAdmin } from '@utils/server/db';
 
 import type { ActionFunctionArgs } from "@remix-run/cloudflare";
 import { putMovieNoteIds } from '../kv/tmdb';
+import { updatePublicNoteOnly } from '~/features/public-note/server';
 
 type ActionData = {
     error?: string
@@ -28,6 +29,15 @@ export async function action({ request, context }: ActionFunctionArgs) {
             imdbId: data.imdbId || null,
             lng: data.lng
         }, user.id)
+
+        if (data.hasPublicNote) {
+            await updatePublicNoteOnly(supabaseAdmin, {
+                tmdbId: data.tmdbId,
+                note: data.html || '',
+                public: data.published
+            }, user.id)
+        }
+
         return json<ActionData>({
         }, { status: 200 })
     } catch (e) {

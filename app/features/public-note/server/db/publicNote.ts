@@ -18,6 +18,20 @@ export const upsertPublicNote = async (supabaseAdmin: AdminClientType, publicNot
     }
 }
 
+export const updatePublicNoteOnly = async (supabaseAdmin: AdminClientType, publicNote: Pick<AddPublicNote, 'tmdbId' | 'note' | 'public'>, userId: string) => {
+
+    const { error } = await supabaseAdmin.from('public-note').update({
+        tmdb_id: publicNote.tmdbId,
+        note: publicNote.note,
+        user_id: userId,
+        public: publicNote.public
+    }).eq('tmdb_id', publicNote.tmdbId).eq('user_id', userId)
+    if (error) {
+        console.error(error)
+        throwPublicNoteError(error.code)
+    }
+}
+
 const loadPublicNoteBase = async (supabaseAdmin: AdminClientType, tmdbId: string, userId: string, throwable?: boolean) => {
     const { data, error } = await supabaseAdmin.from('public-note').select('*').eq('tmdb_id', tmdbId).eq('user_id', userId)
     if (error) {
@@ -54,6 +68,11 @@ export const deletePublicNote = async (supabaseAdmin: AdminClientType, tmdbId: s
 
 export const loadPublicNote = async (supabaseAdmin: AdminClientType, tmdbId: string, userId: string) => {
     const data = await loadPublicNoteBase(supabaseAdmin, tmdbId, userId, true)
+    return data!
+}
+
+export const loadPublicNoteIfExists = async (supabaseAdmin: AdminClientType, tmdbId: string, userId: string) => {
+    const data = await loadPublicNoteBase(supabaseAdmin, tmdbId, userId, false)
     return data!
 }
 
