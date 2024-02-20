@@ -17,6 +17,7 @@ type Props = {
     tmdbCredits?: Credits,
     trailers?: Video[],
     error?: string,
+    hasPublicNote: boolean,
     published: boolean,
     onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void
 }
@@ -26,6 +27,7 @@ export const useMovieNote = ({
     tmdbCredits,
     tmdbDetail,
     error,
+    hasPublicNote,
     published,
     onSubmit,
 }: Props) => {
@@ -85,22 +87,18 @@ export const useMovieNote = ({
             }
         }
     }
-    const submitNote = useCallback(({
+    const submitNote = useCallback(async ({
         newWatchState,
         newAdmirationDate,
         newStars,
         newPublished,
-        newNote,
-        newHtml,
-        debounceTimeout
+        updatePublicNote
     }: {
         newWatchState?: WatchState,
         newAdmirationDate?: string,
-        newNote?: string,
         newStars?: number,
-        newPublished?: boolean
-        newHtml?: string,
-        debounceTimeout?: number
+        newPublished?: boolean,
+        updatePublicNote?: boolean
     }) => {
         setEditing(false)
         clearMovieNote()
@@ -109,15 +107,16 @@ export const useMovieNote = ({
             thumbnail: detail.poster_path || detail.backdrop_path || '',
             tmdbId: detail.id,
             imdbId: detail.imdb_id,
-            movieMemo: newNote !== undefined ? newNote : content?.get() || '',
+            movieMemo: content?.get() || '',
             admirationDate: newAdmirationDate !== undefined ? format(new Date(newAdmirationDate), 'yyyy-MM-dd') : formattedWatchDate,
             stars: newStars !== undefined ? newStars : stars,
             lng: detail.lng,
             watchState: newWatchState || watchState,
-            published: newPublished !== undefined ? newPublished : published || false,
-            html: newHtml !== undefined ? newHtml : html || ''
-        }, debounceTimeout)
-    }, [content, detail, formattedWatchDate, html, onSubmit, published, stars, watchState])
+            published: hasPublicNote ? newPublished !== undefined ? newPublished : published : false,
+            hasPublicNote: hasPublicNote || false,
+            html: (updatePublicNote && hasPublicNote) ? (await htmlConvertUtil?.convert() || '') : html || ''
+        })
+    }, [detail, onSubmit, content, formattedWatchDate, stars, watchState, published, hasPublicNote, htmlConvertUtil, html])
     const showPreview = useCallback((previewHtml: string) => {
         setMovieNotePreviewHtml(previewHtml)
         navigate(previewPath)
@@ -130,6 +129,7 @@ export const useMovieNote = ({
         watchState,
         imagePath,
         formattedWatchDate,
+        hasPublicNote,
         published,
         detailPath,
         previewPath,

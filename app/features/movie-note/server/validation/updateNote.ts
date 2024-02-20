@@ -22,8 +22,8 @@ const schema = zfd.formData({
         .text(z.string().min(1, { message: "lng-validation-error" })),
     watchState: zfd
         .text(z.string().optional()),
-    published: zfd
-        .text(z.string().optional()),
+    hasPublicNote: z.preprocess((input) => JSON.parse(`${input}`), z.boolean()),
+    published: z.preprocess((input) => JSON.parse(`${input}`), z.boolean()),
     html: zfd
         .text(z.string().optional())
 })

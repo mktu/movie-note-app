@@ -31,10 +31,11 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
         error,
         showPreview,
         previewPath,
-        published,
+        hasPublicNote,
         submitNote,
         lastUpdated,
-        editing
+        editing,
+        published
     } = useMovieNoteContext()
     const [showDialog, setShowDialog] = useState(false)
 
@@ -72,21 +73,24 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                         <div className='ml-auto flex flex-col gap-2'>
                             <div className='flex items-center gap-4'>
                                 <Switch colorType='info' label={published ? t('published-note') : t('unpublished-note')} enabled={published} setEnabled={async (checked) => {
-                                    if (checked) {
+                                    if (checked && !hasPublicNote) {
                                         setShowDialog(true)
+                                    }
+                                    if (hasPublicNote) {
+                                        submitNote({ newPublished: checked })
                                     }
                                 }} />
 
                                 <div
                                     className="h-[40px] min-h-[1em] w-0.5 self-stretch bg-border-main"></div>
-                                {published ? (
+                                {hasPublicNote ? (
                                     <div className='inline-flex rounded-md shadow-sm' role='group'>
                                         <ButtonBase onClick={async () => {
                                             htmlConvertUtil && showPreview(await htmlConvertUtil?.convert())
                                         }} className='-mr-px whitespace-nowrap rounded-l-lg border border-border-main bg-surface-main px-4 py-2 font-medium text-text-main hover:bg-surface-hover hover:text-text-dark'>{t('publish-settings')}</ButtonBase>
                                         <ButtonBase className='-ml-px whitespace-nowrap rounded-r-lg border border-primary-main bg-primary-main px-4 py-2 font-medium text-onprimary-main'
                                             onClick={() => {
-                                                submitNote({})
+                                                submitNote({ updatePublicNote: true })
                                             }}
                                         >{t('save')}</ButtonBase>
                                     </div>
@@ -95,7 +99,7 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                                     className='whitespace-nowrap'
                                     disabled={!editing}
                                     onClick={() => {
-                                        submitNote({})
+                                        submitNote({ updatePublicNote: true })
                                     }}
                                 >{t('save')}</ContainedButton>}
 
