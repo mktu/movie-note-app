@@ -15,6 +15,7 @@
     "component": "コンポーネント",
     "confirm-update-published": "公開中のノート\"{{title}}\"を更新します。よろしいですか？",
     "content": "内容",
+    "copy-url-to-clipboard": "クリップボードにURLをコピーしました",
     "create-template": "テンプレートを作成する",
     "created-at-asc": "作成が古い順",
     "created-at-desc": "作成が新しい順",

@@ -8,12 +8,14 @@ import { getSearchParamAsBoolean } from '@utils/searchparam.server';
 import type { TmdbDetail, TmdbLng } from '~/features/tmdb';
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import type { ErrorKey } from '../../utils/error';
-import { hasPublicNote } from '../db';
+import type { PublicNoteType } from '../db';
+import { hasPublicNote, loadPublicNote } from '../db';
 import { getSupabaseAdmin } from '@utils/server/db';
 
 
 type ContentData = {
-    tmdbDetail: TmdbDetail
+    tmdbDetail: TmdbDetail,
+    publicNote?: PublicNoteType,
 }
 
 export type LorderData = {
@@ -26,20 +28,18 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const url = new URL(request.url);
     const lng: TmdbLng = url.searchParams.get('lng') as TmdbLng || 'ja';
     const noteId = params.noteId;
-
     if (!user) {
         return redirect('/login')
     }
     if (!noteId) {
         return json<LorderData>({ error: 'public-note-id-not-found' })
     }
-
     const disableKv = getSearchParamAsBoolean(request, 'disableKv')
     const tmdbData = setTmdbData(context)
     const dbAdmin = getSupabaseAdmin(context)
-    if (await hasPublicNote(dbAdmin, noteId, user.id)) {
-        return redirect(`/app/note-public/${noteId}/update?lng=${lng}`)
-    }
+    const hasPublished = await hasPublicNote(dbAdmin, noteId, user.id)
+    const publicNote = hasPublished ? await loadPublicNote(dbAdmin, noteId, user.id) : undefined
+
     const getTmdbDetail_ = async (tmdbId: string, lng: TmdbLng, tmdb: Tmdb) => {
         const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(context.TmdbInfo as KVNamespace, tmdbId, lng)
         const tmdbDetail = tmdbDetailKv || await tmdb.getDetail(tmdbId)
@@ -54,7 +54,8 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const [tmdbDetail] = await Promise.all([
         getTmdbDetail_(noteId, lng as TmdbLng, tmdb)])
     const contentData: Omit<ContentData, 'performanceData'> = {
-        tmdbDetail
+        tmdbDetail,
+        publicNote
     }
 
 

@@ -26,10 +26,31 @@ export type NoteTemplate = {
     html: string | null
 }
 
+export type User = {
+    authId: string;
+    comment: string | null;
+    createdAt: string;
+    id: string;
+    image: string | null;
+    name: string;
+}
+
 export type PublicNote = {
+    createdAt: string,
+    note: string;
+    public: boolean;
+    summary: string;
+    tmdbId: string;
+    updatedAt: string | null;
+    userId: string;
+    viewId: string;
+}
+
+export type AddPublicNote = {
     summary: string,
     note: string,
-    public: boolean
+    public: boolean,
+    tmdbId: string
 }
 
 export type UpdateMovieNote = AddMovieNote

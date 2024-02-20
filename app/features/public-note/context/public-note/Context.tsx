@@ -6,6 +6,7 @@ export type NotePreviewContextType = ReturnType<typeof useMovieNotePreview>
 const context = React.createContext<NotePreviewContextType>({
     html: '',
     summary: '',
+    viewId: '',
     setSummary: () => { },
     onSubmit: () => { }
 });

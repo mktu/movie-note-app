@@ -57,7 +57,7 @@ export const useMovieNote = ({
     const title = movieNoteDetail?.title || ''
     const detail = tmdbDetail
     const detailPath = `/app/movies/${detail?.id}?lng=${i18n.language}`
-    const previewPath = published ? `/app/note-public/${detail?.id}/update?lng=${i18n.language}` : `/app/note-public/${detail?.id}/new?lng=${i18n.language}`
+    const previewPath = `/app/note-preview/${detail?.id}?lng=${i18n.language}`
     const credits = tmdbCredits || null
     const stars = movieNoteDetail?.stars || 0
     const formattedWatchDate = movieNoteDetail?.admiration_date || ''

@@ -4,7 +4,7 @@ import type { UserType } from '~/features/profile/server/db/user.server'
 
 type Props = {
     children: React.ReactNode,
-    user: UserType
+    user: UserType | null
 }
 
 const DefaultProvider: React.FC<Props> = ({ children, user }) => {
