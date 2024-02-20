@@ -10,7 +10,7 @@ export const scrape = async (id: string) => {
     }
     const body = await res.text()
     const root = parse(body)
-    const text = root.querySelector('[aria-label="View User Ratings"]')?.firstChild.innerText
+    const text = root.querySelector('[aria-label="View User Ratings"]')?.firstChild?.innerText
     if (!text) {
         throw new ScrapeError(`cannnot scrape ${id}`, 500)
     }
