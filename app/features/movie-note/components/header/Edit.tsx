@@ -5,9 +5,8 @@ import useFloatingHeader from '~/hooks/useFloatingHeader';
 import { Error } from '~/components/header'
 import MiniImage from './MiniImage';
 import WatchLog from './WatchLog';
-import { ButtonBase, ContainedButton } from '~/components/buttons';
+import { ButtonBase } from '~/components/buttons';
 import { useMovieNoteContext } from '../../context/movie-note/Context';
-import Switch from '~/components/switch/Switch';
 import ShowPreviewDialog from '../show-preview-dialog/ShowPreviewDialog';
 import UnsavedNote from './UnsavedNote';
 import PaddingTop from './PaddingTop';
@@ -31,12 +30,8 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
         error,
         showPreview,
         previewPath,
-        hasPublicNote,
         submitNote,
-        lastUpdated,
-        editing,
-        published
-    } = useMovieNoteContext()
+        lastUpdated } = useMovieNoteContext()
     const [showDialog, setShowDialog] = useState(false)
 
 
@@ -64,44 +59,24 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                     />
                     <div className='flex w-full flex-1 items-center'>
                         <div>
-                            <div className='text-lg font-semibold text-text-main'>{title}</div>
+                            <div className='px-2 text-lg font-semibold text-text-main'>{title}</div>
                             <WatchLog
                                 onOpenWatchLogDialog={onOpenWatchLogDialog}
                             />
                         </div>
 
                         <div className='ml-auto flex flex-col gap-2'>
-                            <div className='flex items-center gap-4'>
-                                <Switch colorType='info' label={published ? t('published-note') : t('unpublished-note')} enabled={published} setEnabled={async (checked) => {
-                                    if (checked && !hasPublicNote) {
-                                        setShowDialog(true)
-                                    }
-                                    if (hasPublicNote) {
-                                        submitNote({ newPublished: checked })
-                                    }
-                                }} />
-
-                                <div
-                                    className="h-[40px] min-h-[1em] w-0.5 self-stretch bg-border-main"></div>
-                                {hasPublicNote ? (
-                                    <div className='inline-flex rounded-md shadow-sm' role='group'>
-                                        <ButtonBase onClick={async () => {
-                                            htmlConvertUtil && showPreview(await htmlConvertUtil?.convert())
-                                        }} className='-mr-px whitespace-nowrap rounded-l-lg border border-border-main bg-surface-main px-4 py-2 font-medium text-text-main hover:bg-surface-hover hover:text-text-dark'>{t('publish-settings')}</ButtonBase>
-                                        <ButtonBase className='-ml-px whitespace-nowrap rounded-r-lg border border-primary-main bg-primary-main px-4 py-2 font-medium text-onprimary-main'
-                                            onClick={() => {
-                                                submitNote({ updatePublicNote: true })
-                                            }}
-                                        >{t('save')}</ButtonBase>
-                                    </div>
-
-                                ) : <ContainedButton
-                                    className='whitespace-nowrap'
-                                    disabled={!editing}
-                                    onClick={() => {
-                                        submitNote({ updatePublicNote: true })
-                                    }}
-                                >{t('save')}</ContainedButton>}
+                            <div className='flex items-center justify-end gap-4'>
+                                <div className='inline-flex rounded-md shadow-sm' role='group'>
+                                    <ButtonBase onClick={async () => {
+                                        htmlConvertUtil && showPreview(await htmlConvertUtil?.convert())
+                                    }} className='-mr-px whitespace-nowrap rounded-l-lg border border-border-main bg-surface-main px-4 py-2 font-medium text-text-main hover:bg-surface-hover hover:text-text-dark'>{t('publish-settings')}</ButtonBase>
+                                    <ButtonBase className='-ml-px whitespace-nowrap rounded-r-lg border border-primary-main bg-primary-main px-4 py-2 font-medium text-onprimary-main'
+                                        onClick={() => {
+                                            submitNote({ updatePublicNote: true })
+                                        }}
+                                    >{t('save')}</ButtonBase>
+                                </div>
 
                             </div>
                             <div className='text-right text-sm text-text-label'>{t('update-date', {

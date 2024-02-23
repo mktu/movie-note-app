@@ -70,6 +70,8 @@ const Movie: FC<Props> = ({
                         movieMemo: '',
                         admirationDate: '',
                         stars: 0,
+                        published: false,
+                        hasPublicNote: false,
                         imdbId: detail.imdb_id,
                         lng: detail.lng
                     })
