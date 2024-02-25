@@ -10,7 +10,6 @@ module.exports = {
   serverModuleFormat: "esm", // default value in 2.x, can be removed once upgraded
   serverPlatform: "neutral",
   server: "./server.ts",
-  devServerBroadcastDelay: 1000,
   ignoredRouteFiles: ["**/.*"],
   browserNodeBuiltinsPolyfill: { modules: { events: true, util: true } },
   // appDirectory: "app",
