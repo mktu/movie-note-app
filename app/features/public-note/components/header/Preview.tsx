@@ -6,26 +6,25 @@ import { Error } from '~/components/header'
 
 
 type Props = {
-    isUpdate: boolean,
     title: string,
     error?: string
 }
 
 const Preview: FC<Props> = ({
-    isUpdate,
     title,
     error
 }) => {
-    const { html, onSubmit } = useNotePreviewContext()
+    const { onSubmit } = useNotePreviewContext()
     const { t } = useTranslation('common')
     return (
         <>
-            <div className='flex w-full items-end'>
+            <div className='flex w-full items-center'>
+                <p>TBD: back to link</p>
                 <h3 className='flex-1'>
                     {title}
                 </h3>
-                <div className='ml-auto flex items-center gap-2 whitespace-nowrap'>
-                    <ContainedButton disabled={!html} onClick={onSubmit}>{isUpdate ? t('update') : t('publish')}</ContainedButton>
+                <div className='ml-auto flex flex-col justify-center gap-2 whitespace-nowrap'>
+                    <ContainedButton className='w-auto' onClick={onSubmit}>{t('save')}</ContainedButton>
                 </div>
             </div>
             {error && (

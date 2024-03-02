@@ -11,7 +11,6 @@ import type { PublicNote } from '@type-defs/frontend';
 
 type Props = {
     tmdbDetail: TmdbDetail,
-    isUpdate: boolean,
     onPublish: OnPublish,
     init?: PublicNote
     error?: string
@@ -19,7 +18,6 @@ type Props = {
 
 const Preview: FC<Props> = ({
     tmdbDetail,
-    isUpdate,
     onPublish,
     init,
     error
@@ -28,7 +26,6 @@ const Preview: FC<Props> = ({
         <NotePreviewProvider onPublish={onPublish} init={init} tmdbId={tmdbDetail.id}>
             <PreviewLayout
                 header={<PreviewHeader
-                    isUpdate={isUpdate}
                     title={tmdbDetail?.title || ''}
                     error={error}
                 />}

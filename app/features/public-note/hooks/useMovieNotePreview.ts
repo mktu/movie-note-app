@@ -10,6 +10,7 @@ export type OnPublish = (content: AddPublicNote) => void
 export const useMovieNotePreview = (onPublish: OnPublish, tmdbId: string, init?: PublicNote) => {
     const [html, setHtml] = useState('')
     const [summary, setSummary] = useState(init?.summary || '')
+    const [isPublic, setIsPublic] = useState(init?.public || false)
     useEffect(() => {
         setHtml(getMovieNotePreviewHtml() || '')
     }, [])
@@ -18,17 +19,21 @@ export const useMovieNotePreview = (onPublish: OnPublish, tmdbId: string, init?:
         onPublish({
             note: html,
             summary,
-            public: true,
+            public: isPublic,
             tmdbId
         })
-    }, [html, init, onPublish, summary, tmdbId])
+    }, [html, init, isPublic, onPublish, summary, tmdbId])
     const viewId = init?.viewId
+    const hasPublicNote = Boolean(init)
     return {
         html,
         summary,
         viewId,
         setSummary,
-        onSubmit
+        onSubmit,
+        isPublic,
+        hasPublicNote,
+        setIsPublic
     }
 }
 

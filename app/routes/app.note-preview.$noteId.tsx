@@ -33,7 +33,6 @@ const NotePreview: FC = () => {
             {loaderData.content?.tmdbDetail.id && (
                 <MovieNotePreview
                     init={loaderData.content.publicNote ? convertPublicNote(loaderData.content.publicNote) : undefined}
-                    isUpdate={!!loaderData.content.publicNote}
                     tmdbDetail={loaderData.content.tmdbDetail}
                     onPublish={onSubmit}
                     error={actionData?.error}

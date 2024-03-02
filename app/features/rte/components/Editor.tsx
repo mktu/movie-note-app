@@ -8,7 +8,6 @@ import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LinkPlugin as LexicalLinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
-import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 
 import { DragDropPastePlugin, ImagesPlugin } from '../features/images';
@@ -25,6 +24,7 @@ import type { TemplateNodeProps } from './Toolbar/TemplateNode';
 import TemplateNode from './Toolbar/TemplateNode';
 import ReplacePlugin from './ReplacePlugin';
 import type { GetContentRegister } from '../hooks/useReplacer';
+import { OnChangePlugin } from './OnChangePlugin';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
