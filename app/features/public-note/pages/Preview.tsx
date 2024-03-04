@@ -7,6 +7,7 @@ import { PreviewLayout } from '../components/layout';
 import NotePreviewProvider from '../context/public-note';
 import type { OnPublish } from '../hooks/useMovieNotePreview';
 import type { PublicNote } from '@type-defs/frontend';
+import { useNavigatorContext } from '~/providers/navigator/Context';
 
 
 type Props = {
@@ -22,12 +23,17 @@ const Preview: FC<Props> = ({
     init,
     error
 }) => {
+    const { useNavigator } = useNavigatorContext()
+    const { navigate } = useNavigator()
     return (
         <NotePreviewProvider onPublish={onPublish} init={init} tmdbId={tmdbDetail.id}>
             <PreviewLayout
                 header={<PreviewHeader
                     title={tmdbDetail?.title || ''}
                     error={error}
+                    onClickBack={() => {
+                        navigate(`/app/notes/${tmdbDetail.id}`)
+                    }}
                 />}
                 preview={<PreviewBody />}
                 publishSettings={<Settings />}

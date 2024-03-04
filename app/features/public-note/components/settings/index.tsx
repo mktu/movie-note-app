@@ -1,21 +1,34 @@
-import type { FC } from "react"
+import { useEffect, type FC, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { TextArea } from "~/components/inputs"
 import InfoIcon from "~/components/icons/Info"
 import { useNotePreviewContext } from "../../context/public-note/Context"
-import { useNavigatorContext } from "~/providers/navigator/Context"
 import Switch from "~/components/switch/Switch"
+import CopyLink from "./CopyLink"
 
-type Props = {
 
+
+function replaceUrl(oldUrl: string, newPath: string): string {
+    // Parses URLs into protocol, host, port, path, and query
+    const urlParts = oldUrl.match(/^(.*?:\/\/)?([^:/]+)(:\d+)?(\/.*?)?(\?.*)?$/) || [];
+
+    // replace path
+    const newUrl = `${urlParts[1] || 'http://'}${urlParts[2] || ''}${newPath}`;
+
+    return newUrl;
 }
 
-const Settings: FC<Props> = () => {
+const Settings: FC = () => {
     const { t } = useTranslation()
+    const [publicLink, setPublicLink] = useState('')
     const { setSummary, summary, viewId, isPublic, setIsPublic, html } = useNotePreviewContext()
-    const { navigator: Navigator } = useNavigatorContext()
-    const publicLink = `/note-public/${viewId}`
     const isEmpty = !html
+    useEffect(() => {
+        const currentUrl = window.location.href;
+        if (viewId) {
+            setPublicLink(replaceUrl(currentUrl, `/note-public/${viewId}`))
+        }
+    }, [viewId])
     return (
         <div className="p-4">
             <div className='flex flex-col gap-2 px-4'>
@@ -39,13 +52,9 @@ const Settings: FC<Props> = () => {
                 <TextArea id='preview-summary' className='text-text-main' minRows={2} value={summary} onChange={(e) => {
                     setSummary(e.target.value)
                 }} />
-                <div>
-                    公開リンク: TBD
-                </div>
                 {viewId && (
-                    <div className='mt-2 flex items-center gap-2'>
-                        <span>👉</span>
-                        <Navigator to={publicLink} className='text-sm'>{t('public-page')}</Navigator>
+                    <div>
+                        <CopyLink url={publicLink} />
                     </div>
                 )}
             </div>
