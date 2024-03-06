@@ -8,7 +8,7 @@ const schema = zfd.formData({
     note: zfd
         .text(),
     summary: zfd
-        .text(),
+        .text(z.string().optional()),
     public: z.preprocess((input) => JSON.parse(`${input}`), z.boolean()),
 })
 

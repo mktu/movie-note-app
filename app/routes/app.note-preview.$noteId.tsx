@@ -9,7 +9,7 @@ import { getFormData } from '@utils/form';
 
 import type { AddPublicNote } from "~/features/public-note/server/validation/addPublicNote";
 import type { FC } from 'react';
-import { useMovieNotePublishMessage } from '~/features/public-note/hooks/useMovieNotePreview';
+import { useMovieNoteActionResult } from '~/features/public-note/hooks/useMovieNotePreview';
 import { convertPublicNote } from '~/features/public-note/utils/convertType';
 export {
     loader,
@@ -24,7 +24,7 @@ const NotePreview: FC = () => {
         submit(getFormData(updateMovieNote), { method: 'post' })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    useMovieNotePublishMessage()
+    useMovieNoteActionResult(loaderData.actionResult, actionData?.error)
     return (
         <>
             {loaderData.error && (

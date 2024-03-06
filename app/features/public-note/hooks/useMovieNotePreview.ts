@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 import { getMovieNotePreviewHtml } from "../../movie-note/utils/localstorage"
 import type { AddPublicNote, PublicNote } from "@type-defs/frontend"
-import { clearPublished, getPublished, setPublished } from "../utils/localstorage"
 import { toast } from "react-toastify"
 import { useTranslation } from "react-i18next"
 
@@ -15,14 +14,13 @@ export const useMovieNotePreview = (onPublish: OnPublish, tmdbId: string, init?:
         setHtml(getMovieNotePreviewHtml() || '')
     }, [])
     const onSubmit = useCallback(() => {
-        setPublished(init ? 'update' : 'create')
         onPublish({
             note: html,
             summary,
             public: isPublic,
             tmdbId
         })
-    }, [html, init, isPublic, onPublish, summary, tmdbId])
+    }, [html, isPublic, onPublish, summary, tmdbId])
     const viewId = init?.viewId
     const hasPublicNote = Boolean(init)
     return {
@@ -37,17 +35,15 @@ export const useMovieNotePreview = (onPublish: OnPublish, tmdbId: string, init?:
     }
 }
 
-export const useMovieNotePublishMessage = () => {
+export const useMovieNoteActionResult = (success?: boolean, error?: string) => {
     const { t } = useTranslation()
     useEffect(() => {
-        const state = getPublished()
-        if (state === 'create') {
-            toast.info(t('published-succeeded'))
-            clearPublished()
-        } else if (state === 'update') {
-            toast.info(t('update-succeeded'))
-            clearPublished()
+        if (error) {
+            return
         }
-    })
+        if (success) {
+            toast.info(t('update-succeeded'))
+        }
+    }, [error, success, t])
 }
 

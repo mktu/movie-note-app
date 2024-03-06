@@ -9,7 +9,7 @@ export const upsertPublicNote = async (supabaseAdmin: AdminClientType, publicNot
         tmdb_id: publicNote.tmdbId,
         note: publicNote.note,
         public: publicNote.public,
-        summary: publicNote.summary,
+        summary: publicNote.summary || '',
         user_id: userId
     })
     if (error) {

@@ -11,6 +11,7 @@ import type { ErrorKey } from '../../utils/error';
 import type { PublicNoteType } from '../db';
 import { hasPublicNote, loadPublicNote } from '../db';
 import { getSupabaseAdmin } from '@utils/server/db';
+import { commitSession, getSession } from '~/features/auth/server/session';
 
 
 type ContentData = {
@@ -20,7 +21,8 @@ type ContentData = {
 
 export type LorderData = {
     error?: ErrorKey,
-    content?: ContentData
+    content?: ContentData,
+    actionResult?: boolean
 }
 
 export async function loader({ request, context, params }: LoaderFunctionArgs) {
@@ -38,6 +40,11 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const tmdbData = setTmdbData(context)
     const dbAdmin = getSupabaseAdmin(context)
     const publicNote = await hasPublicNote(dbAdmin, noteId, user.id) ? await loadPublicNote(dbAdmin, noteId, user.id) : undefined
+
+    const session = await getSession(
+        request.headers.get("Cookie")
+    );
+    const message: boolean | null = session.get("preview-note-action-result") || null;
 
     const getTmdbDetail_ = async (tmdbId: string, lng: TmdbLng, tmdb: Tmdb) => {
         const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(context.TmdbInfo as KVNamespace, tmdbId, lng)
@@ -61,6 +68,12 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     return json<LorderData>({
         content: {
             ...contentData,
-        }
+        },
+        actionResult: !!message
+    }, {
+        headers: {
+            // only necessary with cookieSessionStorage
+            "Set-Cookie": await commitSession(session),
+        },
     })
 }
