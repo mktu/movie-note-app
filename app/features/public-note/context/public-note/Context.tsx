@@ -7,8 +7,11 @@ const context = React.createContext<NotePreviewContextType>({
     html: '',
     summary: '',
     viewId: '',
+    isPublic: false,
+    hasPublicNote: false,
     setSummary: () => { },
-    onSubmit: () => { }
+    onSubmit: () => { },
+    setIsPublic: () => { },
 });
 
 export const useNotePreviewContext = () => useContext(context)

@@ -28,6 +28,7 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
         imagePath,
         title,
         error,
+        published,
         showPreview,
         previewPath,
         submitNote,
@@ -59,7 +60,14 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                     />
                     <div className='flex w-full flex-1 items-center'>
                         <div>
-                            <div className='px-2 text-lg font-semibold text-text-main'>{title}</div>
+                            <div className='flex items-center gap-2 px-2 text-lg font-semibold text-text-main'>
+                                <span>{title}</span>
+                                {published ? (
+                                    <span className='rounded bg-blue-100 px-3 py-1 text-sm text-blue-500'>{t('published-note')}</span>
+                                ) : (
+                                    <span className='rounded bg-gray-100 px-3 py-1 text-sm text-text-label'>{t('unpublished-note')}</span>
+                                )}
+                            </div>
                             <WatchLog
                                 onOpenWatchLogDialog={onOpenWatchLogDialog}
                             />

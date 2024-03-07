@@ -8,8 +8,8 @@ const schema = zfd.formData({
     note: zfd
         .text(),
     summary: zfd
-        .text(),
-    public: zfd.checkbox({ trueValue: 'true' })
+        .text(z.string().optional()),
+    public: z.preprocess((input) => JSON.parse(`${input}`), z.boolean()),
 })
 
 export const addPublicNoteSchema = schema

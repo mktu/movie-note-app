@@ -54,14 +54,6 @@ const PublicNote: FC<Props> = ({
                         <div className='mt-2'>{summary}</div>
                     </div>
                 </div>
-                {/* <div className='flex items-center gap-2'>
-                    <OutlinedButton onClick={() => {
-                        copyToClipBoard(window.location.href, () => {
-                            toast.success(t('copy-url-to-clipboard'))
-                        })
-                    }}>Copy URL</OutlinedButton>
-
-                </div> */}
             </div>
             {error && (
                 <Error error={t(error)} />

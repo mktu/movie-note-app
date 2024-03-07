@@ -7,6 +7,7 @@ const Base = forwardRef<HTMLInputElement, Props>(({ className, disabled, ...prop
     <input disabled={disabled}
         type='text'
         className={clsx(
+            'bg-transparent',
             className,
             'outline-none focus:outline-none',
             disabled && 'cursor-default opacity-25')} {...props} ref={ref} />

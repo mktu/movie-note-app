@@ -21,6 +21,7 @@ type Props = {
     label?: string,
     labelClass?: string,
     colorType?: ColorType
+    disabled?: boolean
 }
 
 const Switch: FC<Props> = ({
@@ -28,6 +29,7 @@ const Switch: FC<Props> = ({
     setEnabled,
     label,
     labelClass,
+    disabled,
     colorType = 'default'
 }) => {
     return (
@@ -35,6 +37,7 @@ const Switch: FC<Props> = ({
             <div className="flex items-center">
                 <SW.Label className={clsx('mr-2', labelClass)} passive>{label}</SW.Label>
                 <SW
+                    disabled={disabled}
                     checked={enabled}
                     onChange={setEnabled}
                     className={clsx('relative inline-flex h-6 w-11 items-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-focus',

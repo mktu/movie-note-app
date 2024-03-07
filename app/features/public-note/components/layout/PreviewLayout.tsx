@@ -19,12 +19,14 @@ const PreviewLayout: FC<Props> = ({
             <Tab.Group>
                 <Tab.List className='flex items-center gap-5 border-b border-border-main px-2 text-lg text-text-label'>
                     {['公開設定', 'プレビュー'].map(v => (
-                        <Tab key={v} className={({ selected }) => clsx('rounded-t p-2 hover:bg-surface-hover hover:text-text-main focus:outline-none', selected && 'border-b-2 border-blue-300')}>{v}</Tab>
+                        <Tab key={v} className={({ selected }) => clsx(
+                            'rounded-t p-2 ring-offset-focus hover:bg-surface-hover hover:text-text-main focus:outline-none focus:ring',
+                            selected && 'border-b-2 border-focus focus:border-none')}>{v}</Tab>
                     ))}
                 </Tab.List>
                 <Tab.Panels>
-                    <Tab.Panel>{publishSettings}</Tab.Panel>
-                    <Tab.Panel>{preview}</Tab.Panel>
+                    <Tab.Panel tabIndex={-1}>{publishSettings}</Tab.Panel>
+                    <Tab.Panel tabIndex={-1}>{preview}</Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>
         </div>

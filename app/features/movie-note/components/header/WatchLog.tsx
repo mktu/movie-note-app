@@ -21,7 +21,6 @@ const WatchLog: FC<Props> = ({
     const { navigator: Navigator } = useNavigatorContext()
     const {
         stars,
-        published,
         watchState,
         submitNote,
         formattedWatchDate,
@@ -62,10 +61,6 @@ const WatchLog: FC<Props> = ({
                 <div className='flex items-center gap-1'>
                     <Star className='h-4 w-4 fill-yellow-400' />
                     <span>{stars || '-'}</span>
-                </div>
-                <span className='text-text-label'>|</span>
-                <div className='text-text-label'>
-                    {published ? t('published-note') : t('unpublished-note')}
                 </div>
                 <span className='text-text-label'>|</span>
                 <Navigator to={detailPath} className='text-text-main underline'>{t('show-detail')}</Navigator>
