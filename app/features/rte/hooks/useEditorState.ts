@@ -1,5 +1,5 @@
 import type { EditorState } from "lexical";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 const useEditorState = (setContentGetter: (fun: () => string) => void,
     monitorCurrentState?: (data: string) => void) => {
@@ -21,8 +21,12 @@ const useEditorState = (setContentGetter: (fun: () => string) => void,
             clearInterval(id)
         }
     }, [monitorCurrentState])
+    const onInitState = useCallback((state: EditorState) => {
+        editorStateRef.current = state
+    }, [])
     return {
-        editorStateRef
+        editorStateRef,
+        onInitState
     }
 }
 
