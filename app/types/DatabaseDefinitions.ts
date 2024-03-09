@@ -6,7 +6,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export interface Database {
+export type Database = {
   public: {
     Tables: {
       auth: {
@@ -62,6 +62,7 @@ export interface Database {
           lng: string
           memo: string | null
           published: boolean | null
+          sort_index: number | null
           stars: number | null
           tmdb_id: string
           updated_at: string | null
@@ -75,6 +76,7 @@ export interface Database {
           lng: string
           memo?: string | null
           published?: boolean | null
+          sort_index?: number | null
           stars?: number | null
           tmdb_id: string
           updated_at?: string | null
@@ -88,6 +90,7 @@ export interface Database {
           lng?: string
           memo?: string | null
           published?: boolean | null
+          sort_index?: number | null
           stars?: number | null
           tmdb_id?: string
           updated_at?: string | null
@@ -218,6 +221,7 @@ export interface Database {
           lng: string | null
           memo: string | null
           published: boolean | null
+          sort_index: number | null
           stars: number | null
           thumbnail: string | null
           title: string | null
