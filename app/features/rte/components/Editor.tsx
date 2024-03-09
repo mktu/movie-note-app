@@ -25,6 +25,7 @@ import TemplateNode from './Toolbar/TemplateNode';
 import ReplacePlugin from './ReplacePlugin';
 import type { GetContentRegister } from '../hooks/useReplacer';
 import { OnChangePlugin } from './OnChangePlugin';
+import InitEditorState from './InitEditorState';
 
 type Props = {
     setContentGetter: (fun: () => string) => void,
@@ -53,7 +54,7 @@ const Editor: FC<Props> = ({
     templateNodeOptions,
     getContentRegister
 }) => {
-    const { editorStateRef } = useEditorState(setContentGetter, monitorCurrentState)
+    const { editorStateRef, onInitState } = useEditorState(setContentGetter, monitorCurrentState)
     return (
         <div >
             <LexicalComposer initialConfig={{
@@ -88,6 +89,7 @@ const Editor: FC<Props> = ({
                 <DragDropPastePlugin />
                 <ImagesPlugin />
                 <CheckListPlugin />
+                <InitEditorState onInit={onInitState} />
                 <OnChangePlugin
                     ignoreSelectionChange
                     onChange={(editorState) => {

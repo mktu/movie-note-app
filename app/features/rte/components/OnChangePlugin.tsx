@@ -23,7 +23,7 @@ export function OnChangePlugin({
     useLayoutEffect(() => {
         if (onChange) {
             return editor.registerUpdateListener(
-                ({ editorState, dirtyElements, dirtyLeaves, prevEditorState, tags }) => {
+                ({ editorState, dirtyElements, dirtyLeaves, tags }) => {
                     if (
                         (ignoreSelectionChange &&
                             dirtyElements.size === 0 &&
