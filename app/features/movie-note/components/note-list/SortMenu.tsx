@@ -3,18 +3,16 @@ import clsx from 'clsx';
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next';
 import { TextButton } from '~/components/buttons';
-import Check from '~/components/icons/Check';
 import Sort from '~/components/icons/Sort';
 import type { SortType } from '../../type-defs';
 
 type Props = {
-    sortType?: SortType,
     onSort: (sortType: SortType) => void
 }
 
 
 
-const SortMenu: FC<Props> = ({ onSort, sortType }) => {
+const SortMenu: FC<Props> = ({ onSort }) => {
     const { t } = useTranslation('common')
     const targets: { [key: string]: string } = {
         'created-at-desc': t('created-at-desc'),
@@ -28,15 +26,13 @@ const SortMenu: FC<Props> = ({ onSort, sortType }) => {
             </Menu.Button>
             <Menu.Items className={'absolute z-20 mt-2 w-[256px] rounded border border-border-dark bg-white py-2 text-sm'}>
                 {Object.keys(targets).map(v => (
-                    <Menu.Item key={v}>{({ active }) => (
-                        <TextButton className={clsx('group flex w-full items-center gap-2 hover:bg-surface-hover',
-                            sortType === v ? 'text-text-dark' : '')} onClick={async () => {
-                                onSort(v as SortType)
-                            }}>
-                            <Check className={clsx('h-4 w-4 fill-text-main group-hover:opacity-100', sortType === v ? 'opacity-100' : 'opacity-10')} />
-                            <span>{targets[v]}</span>
+                    <Menu.Item key={v}>
+                        <TextButton className={clsx('group flex w-full items-center gap-2 hover:bg-surface-hover')} onClick={async () => {
+                            onSort(v as SortType)
+                        }}>
+                            {targets[v]}
                         </TextButton>
-                    )}</Menu.Item>
+                    </Menu.Item>
                 ))}
             </Menu.Items>
         </Menu>

@@ -2,7 +2,7 @@ import { json } from "@remix-run/cloudflare"
 import authenticator from "~/features/auth/server/auth.server"
 import { initSessionStorage } from "~/features/auth/server/session"
 import { listMovieNote } from "~/features/movie-note/server/db"
-import type { FilterType, SortType } from "~/features/movie-note/server/types"
+import type { FilterType } from "~/features/movie-note/server/types"
 import { getSupabaseAdmin } from "~/features/profile/server/db"
 
 export const onRequestGet: PagesFunction<{
@@ -16,7 +16,6 @@ export const onRequestGet: PagesFunction<{
             status: 400
         })
     }
-    const sortType = url.searchParams.get('sortType') as SortType
     const filterType = url.searchParams.get('filterType') as FilterType
     initSessionStorage(env)
     const authUser = await authenticator.isAuthenticated(request)
@@ -26,7 +25,7 @@ export const onRequestGet: PagesFunction<{
         })
     }
     const dbAdmin = getSupabaseAdmin(env)
-    const movieNoteList = await listMovieNote(dbAdmin, authUser.id, { sortType, filterType })
+    const movieNoteList = await listMovieNote(dbAdmin, authUser.id, filterType)
 
     return json({
         movieNoteList

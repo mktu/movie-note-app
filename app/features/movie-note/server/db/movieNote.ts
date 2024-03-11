@@ -77,21 +77,38 @@ const deleteNote = async (supabaseAdmin: AdminClientType, tmdbId: string, userId
     }
 }
 
-const listMovieNote = async (supabaseAdmin: AdminClientType, userId: string, options?:
-    {
-        sortType?: SortType,
-        filterType?: FilterType
-    }) => {
-    const { sortType, filterType } = options || {}
-    const sortBy = sortType?.includes('updated-at') ? 'created_at' : 'updated_at'
+const sortMovieNoteList = async (supabaseAdmin: AdminClientType, userId: string, sortType: SortType) => {
     const asc = sortType?.includes('asc') ? true : false
+    const query = supabaseAdmin.from('movie_note')
+        .select('tmdb_id,user_id,sort_index, lng')
+        .eq('user_id', userId)
+    const { data, error } = await query.order('sort_index', { ascending: asc })
+    if (error) {
+        console.error(error)
+        throw fromCode(error.code)
+    }
+    const updated = data?.map((v, idx) => ({
+        ...v,
+        sort_index: idx,
+    }))
+    if (!updated || updated.length === 0) {
+        return
+    }
+    const { error: upsertError } = await supabaseAdmin.from('movie_note').upsert(updated)
+    if (upsertError) {
+        console.error(upsertError)
+        throw fromCode(upsertError.code)
+    }
+}
+
+const listMovieNote = async (supabaseAdmin: AdminClientType, userId: string, filterType?: FilterType) => {
     const query = supabaseAdmin.from('movie_note_list_view')
-        .select('tmdb_id,user_id,stars,title,admiration_date,thumbnail,watch_state')
+        .select('tmdb_id,user_id,stars,title,admiration_date,thumbnail,watch_state, sort_index')
         .eq('user_id', userId)
     if (filterType && filterType !== 'all') {
         query.eq('watch_state', filterType)
     }
-    const { data, error } = await query.order(sortBy, { ascending: asc })
+    const { data, error } = await query.order('sort_index')
     if (error) {
         console.error(error)
         throw fromCode(error.code)
@@ -138,5 +155,6 @@ export {
     listMovieNote,
     loadMovieNote,
     loadMovieNoteIfExists,
-    deleteNote
+    deleteNote,
+    sortMovieNoteList
 }

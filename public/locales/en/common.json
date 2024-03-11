@@ -105,7 +105,7 @@
     "update-date": "{{date}} 更新",
     "update-publish": "公開ノートを更新する",
     "update-succeeded": "更新しました",
-    "updated-at-desc": "更新が新しい順（初期値）",
+    "updated-at-desc": "更新が新しい順",
     "url-validation": "URL形式が必要です",
     "user-already-registered": "既に登録されているユーザです",
     "user-not-found": "ユーザが存在しません",

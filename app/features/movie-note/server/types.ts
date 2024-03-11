@@ -3,7 +3,7 @@ export type SortType =
     'updated-at-asc' |
     'updated-at-desc' |
     'created-at-asc' |
-    'created=at-desc'
+    'created-at-desc'
 
 export type FilterType =
     'watched' |
