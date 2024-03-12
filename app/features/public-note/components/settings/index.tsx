@@ -13,7 +13,7 @@ function replaceUrl(oldUrl: string, newPath: string): string {
     const urlParts = oldUrl.match(/^(.*?:\/\/)?([^:/]+)(:\d+)?(\/.*?)?(\?.*)?$/) || [];
 
     // replace path
-    const newUrl = `${urlParts[1] || 'http://'}${urlParts[2] || ''}${newPath}`;
+    const newUrl = `${urlParts[1] || 'http://'}${urlParts[2] || ''}${urlParts[3] || ''}${newPath}`;
 
     return newUrl;
 }
