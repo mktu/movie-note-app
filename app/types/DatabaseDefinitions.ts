@@ -61,7 +61,6 @@ export type Database = {
           html: string | null
           lng: string
           memo: string | null
-          published: boolean | null
           sort_index: number | null
           stars: number | null
           tmdb_id: string
@@ -75,7 +74,6 @@ export type Database = {
           html?: string | null
           lng: string
           memo?: string | null
-          published?: boolean | null
           sort_index?: number | null
           stars?: number | null
           tmdb_id: string
@@ -89,7 +87,6 @@ export type Database = {
           html?: string | null
           lng?: string
           memo?: string | null
-          published?: boolean | null
           sort_index?: number | null
           stars?: number | null
           tmdb_id?: string
@@ -220,7 +217,6 @@ export type Database = {
           imdb_id: string | null
           lng: string | null
           memo: string | null
-          published: boolean | null
           sort_index: number | null
           stars: number | null
           thumbnail: string | null
