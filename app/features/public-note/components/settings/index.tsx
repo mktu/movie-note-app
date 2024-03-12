@@ -52,7 +52,7 @@ const Settings: FC = () => {
                 <TextArea id='preview-summary' className='text-text-main' minRows={2} value={summary} onChange={(e) => {
                     setSummary(e.target.value)
                 }} />
-                {viewId && (
+                {viewId && isPublic && (
                     <div>
                         <CopyLink url={publicLink} />
                     </div>
