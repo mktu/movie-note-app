@@ -14,7 +14,6 @@ export const movieNoteFilterType = atom<FilterType>({
 });
 
 export const useUserSettings = () => {
-    const [sortType, setSortType] = useRecoilState(movieNoteSortType)
     const [filterType, setFilterType] = useRecoilState(movieNoteFilterType)
     const setFilterTypeAndSave = useCallback((filterType: FilterType) => {
         let oldData: FilterType;
@@ -29,21 +28,9 @@ export const useUserSettings = () => {
             oldData && setFilterType(oldData)
         })
     }, [setFilterType])
-    const setSortTypeAndSave = useCallback((sortType: SortType) => {
-        let oldData: SortType;
-        setSortType(sortType)
-        putUserSetting({
-            key: "sortType",
-            value: sortType,
-        }).catch(() => {
-            oldData && setSortType(oldData)
-        })
-    }, [setSortType])
 
     return {
-        sortType,
         filterType,
         setFilterTypeAndSave,
-        setSortTypeAndSave
     }
 }
