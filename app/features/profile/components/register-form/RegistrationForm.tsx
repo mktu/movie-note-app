@@ -16,11 +16,11 @@ const RegistrationForm: React.FC<Props> = ({ error, handleCancel, singleColumn, 
     const { useTransitionState } = useFormContext();
     const transitionState = useTransitionState()
     const { nickname, isSubmittable, errors, comment } = useProfileRegister(params)
-    const { handleChangeFile, fileUrl } = useImageInput()
+    const { handleChangeFile, fileUrl, imgError } = useImageInput()
     return (
         <Layout
             singleColumn={singleColumn}
-            error={error}
+            error={error || imgError}
             imageProps={{
                 src: fileUrl || params.image || '',
                 handleChangeFile

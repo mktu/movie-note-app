@@ -13,22 +13,23 @@ interface ActionData {
 }
 
 export async function action({ request, context }: ActionFunctionArgs) {
-    const uploadHandler = unstable_createMemoryUploadHandler({
-        maxPartSize: 500_000,
-    });
-    const formData = await unstable_parseMultipartFormData(
-        request,
-        uploadHandler
-    );
-    const adminDb = getSupabaseAdmin(context)
-    const name = formData.get("nickname") as string || ''
-    const comment = formData.get("comment") as string || ''
-    const file = formData.get("profile-image") as File;
-    const user = await authenticator.isAuthenticated(request)
-    if (!user) {
-        return redirect('/login')
-    }
     try {
+        const uploadHandler = unstable_createMemoryUploadHandler({
+            maxPartSize: 5_000_000,
+        });
+        const formData = await unstable_parseMultipartFormData(
+            request,
+            uploadHandler
+        );
+        const adminDb = getSupabaseAdmin(context)
+        const name = formData.get("nickname") as string || ''
+        const comment = formData.get("comment") as string || ''
+        const file = formData.get("profile-image") as File;
+        const user = await authenticator.isAuthenticated(request)
+        if (!user) {
+            return redirect('/login')
+        }
+
         let image = ''
         if (file) {
             const imageId = `profile-${user!.id}`

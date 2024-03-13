@@ -50,7 +50,7 @@ const Layout: FC<Props> = ({
     }
     return (
         <Form method='post' encType='multipart/form-data' className='flex h-full w-full flex-col items-center'>
-            {errorComponent}
+            <div className='flex justify-center pt-4'>{errorComponent}</div>
             <div className='flex h-full w-full items-center justify-center gap-6 p-8'>
                 <div>
                     <Image {...imageProps} width={192} height={192} />
