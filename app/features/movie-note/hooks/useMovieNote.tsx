@@ -91,13 +91,11 @@ export const useMovieNote = ({
         newWatchState,
         newAdmirationDate,
         newStars,
-        newPublished,
         updatePublicNote
     }: {
         newWatchState?: WatchState,
         newAdmirationDate?: string,
         newStars?: number,
-        newPublished?: boolean,
         updatePublicNote?: boolean
     }) => {
         setEditing(false)
@@ -112,7 +110,6 @@ export const useMovieNote = ({
             stars: newStars !== undefined ? newStars : stars,
             lng: detail.lng,
             watchState: newWatchState || watchState,
-            published: hasPublicNote ? newPublished !== undefined ? newPublished : published : false,
             hasPublicNote: hasPublicNote || false,
             html: (updatePublicNote && hasPublicNote) ? (await htmlConvertUtil?.convert() || '') : html || ''
         })

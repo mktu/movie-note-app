@@ -33,8 +33,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
         if (data.hasPublicNote) {
             await updatePublicNoteOnly(supabaseAdmin, {
                 tmdbId: data.tmdbId,
-                note: data.html || '',
-                public: data.published
+                note: data.html || ''
             }, user.id)
         }
 

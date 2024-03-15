@@ -18,13 +18,12 @@ export const upsertPublicNote = async (supabaseAdmin: AdminClientType, publicNot
     }
 }
 
-export const updatePublicNoteOnly = async (supabaseAdmin: AdminClientType, publicNote: Pick<AddPublicNote, 'tmdbId' | 'note' | 'public'>, userId: string) => {
+export const updatePublicNoteOnly = async (supabaseAdmin: AdminClientType, publicNote: Pick<AddPublicNote, 'tmdbId' | 'note'>, userId: string) => {
 
     const { error } = await supabaseAdmin.from('public-note').update({
         tmdb_id: publicNote.tmdbId,
         note: publicNote.note,
-        user_id: userId,
-        public: publicNote.public
+        user_id: userId
     }).eq('tmdb_id', publicNote.tmdbId).eq('user_id', userId)
     if (error) {
         console.error(error)

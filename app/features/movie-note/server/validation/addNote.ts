@@ -23,7 +23,6 @@ const schema = zfd.formData({
     watchState: zfd
         .text(z.string().optional()),
     hasPublicNote: z.preprocess((input) => JSON.parse(`${input}`), z.boolean()),
-    published: z.preprocess((input) => JSON.parse(`${input}`), z.boolean()),
     html: zfd
         .text(z.string().optional())
 })
