@@ -1,0 +1,1 @@
+export const PreviewNoteActionResultSessionKey = "preview-note-action-result"

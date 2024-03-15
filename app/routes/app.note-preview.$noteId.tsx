@@ -9,8 +9,8 @@ import { getFormData } from '@utils/form';
 
 import type { AddPublicNote } from "~/features/public-note/server/validation/addPublicNote";
 import type { FC } from 'react';
-import { useMovieNoteActionResult } from '~/features/public-note/hooks/useMovieNotePreview';
 import { convertPublicNote } from '~/features/public-note/utils/convertType';
+import { useUpdateNotification } from '~/hooks/useUpdateNotification';
 export {
     loader,
     action
@@ -24,7 +24,7 @@ const NotePreview: FC = () => {
         submit(getFormData(updateMovieNote), { method: 'post' })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    useMovieNoteActionResult(loaderData.actionResult, actionData?.error)
+    useUpdateNotification(loaderData.actionResult, actionData?.error)
     return (
         <>
             {loaderData.error && (

@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 import { getMovieNotePreviewHtml } from "../../movie-note/utils/localstorage"
 import type { AddPublicNote, PublicNote } from "@type-defs/frontend"
-import { toast } from "react-toastify"
-import { useTranslation } from "react-i18next"
 
 export type OnPublish = (content: AddPublicNote) => void
 
@@ -34,16 +32,3 @@ export const useMovieNotePreview = (onPublish: OnPublish, tmdbId: string, init?:
         setIsPublic
     }
 }
-
-export const useMovieNoteActionResult = (success?: boolean, error?: string) => {
-    const { t } = useTranslation()
-    useEffect(() => {
-        if (error) {
-            return
-        }
-        if (success) {
-            toast.info(t('update-succeeded'))
-        }
-    }, [error, success, t])
-}
-

@@ -9,6 +9,8 @@ import { getSupabaseAdmin } from '@utils/server/db';
 import type { ActionFunctionArgs } from "@remix-run/cloudflare";
 import { putMovieNoteIds } from '../kv/tmdb';
 import { updatePublicNoteOnly } from '~/features/public-note/server';
+import { commitSession, getSession } from '~/features/auth/server/session';
+import { NoteActionResultSessionKey } from '../constants';
 
 type ActionData = {
     error?: string
@@ -37,8 +39,21 @@ export async function action({ request, context }: ActionFunctionArgs) {
             }, user.id)
         }
 
+        const session = await getSession(
+            request.headers.get("Cookie")
+        );
+
+        session.flash(
+            NoteActionResultSessionKey,
+            Date.now()
+        );
+
         return json<ActionData>({
-        }, { status: 200 })
+        }, {
+            status: 200, headers: {
+                "Set-Cookie": await commitSession(session)
+            }
+        })
     } catch (e) {
         if (e instanceof MovieNoteError) {
             return json<ActionData>({

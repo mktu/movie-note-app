@@ -8,6 +8,7 @@ import type { ActionFunctionArgs } from "@remix-run/cloudflare";
 import { parseAddPublicNote } from '../validation/addPublicNote';
 import { upsertPublicNote } from '../db';
 import { commitSession, getSession } from '~/features/auth/server/session';
+import { PreviewNoteActionResultSessionKey } from '../constants';
 
 type ActionData = {
     error?: string,
@@ -30,8 +31,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
         );
 
         session.flash(
-            "preview-note-action-result",
-            true
+            PreviewNoteActionResultSessionKey,
+            Date.now()
         );
         return json<ActionData>({
             success: true
