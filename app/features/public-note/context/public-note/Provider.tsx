@@ -3,16 +3,17 @@ import Context from './Context'
 import type { OnPublish } from '../../hooks/useMovieNotePreview';
 import { useMovieNotePreview } from '../../hooks/useMovieNotePreview';
 import type { PublicNote } from '@type-defs/frontend';
+import type { TmdbDetail } from '~/features/tmdb';
 
 type Props = {
     children: React.ReactNode,
     onPublish: OnPublish,
-    tmdbId: string,
+    tmdbDetail: TmdbDetail,
     init?: PublicNote
 }
 
-const DefaultProvider: React.FC<Props> = ({ children, onPublish, tmdbId, init }) => {
-    const contextValue = useMovieNotePreview(onPublish, tmdbId, init)
+const DefaultProvider: React.FC<Props> = ({ children, onPublish, tmdbDetail, init }) => {
+    const contextValue = useMovieNotePreview(onPublish, tmdbDetail, init)
     return (
         <Context.Provider value={contextValue}>
             {children}

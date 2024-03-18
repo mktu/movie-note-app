@@ -131,6 +131,7 @@ export type Database = {
       }
       "public-note": {
         Row: {
+          cover_image: string | null
           created_at: string
           note: string
           public: boolean
@@ -141,6 +142,7 @@ export type Database = {
           view_id: string
         }
         Insert: {
+          cover_image?: string | null
           created_at?: string
           note: string
           public: boolean
@@ -151,6 +153,7 @@ export type Database = {
           view_id?: string
         }
         Update: {
+          cover_image?: string | null
           created_at?: string
           note?: string
           public?: boolean

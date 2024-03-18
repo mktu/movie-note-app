@@ -12,6 +12,11 @@ const context = React.createContext<NotePreviewContextType>({
     setSummary: () => { },
     onSubmit: () => { },
     setIsPublic: () => { },
+    tmdbImageUrl: undefined,
+    coverImage: null,
+    onSelectDefaultImage: () => { },
+    onChangeCoverImage: () => { },
+    imgError: ""
 });
 
 export const useNotePreviewContext = () => useContext(context)

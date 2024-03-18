@@ -62,6 +62,7 @@ export const App: React.FC = () => {
                             <ToastContainer
                                 hideProgressBar
                                 pauseOnHover
+                                position='bottom-right'
                             />
                         </TmdbProvider>
                     </CookiesProvider>

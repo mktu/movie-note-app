@@ -7,10 +7,10 @@ import { loader } from '~/features/public-note/server/loaders/preview-note.serve
 import { useActionData, useLoaderData, useSubmit } from '@remix-run/react';
 import { getFormData } from '@utils/form';
 
-import type { AddPublicNote } from "~/features/public-note/server/validation/addPublicNote";
 import type { FC } from 'react';
 import { convertPublicNote } from '~/features/public-note/utils/convertType';
 import { useUpdateNotification } from '~/hooks/useUpdateNotification';
+import type { AddPublicNote } from '@type-defs/frontend';
 export {
     loader,
     action
@@ -21,7 +21,9 @@ const NotePreview: FC = () => {
     const actionData = useActionData<typeof action>()
     const submit = useSubmit()
     const onSubmit = useCallback((updateMovieNote: AddPublicNote) => {
-        submit(getFormData(updateMovieNote), { method: 'post' })
+        submit(getFormData(updateMovieNote), {
+            method: 'post', encType: 'multipart/form-data',
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     useUpdateNotification(loaderData.actionResult, actionData?.error)

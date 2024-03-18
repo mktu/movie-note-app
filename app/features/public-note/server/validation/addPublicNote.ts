@@ -10,6 +10,9 @@ const schema = zfd.formData({
     summary: zfd
         .text(z.string().optional()),
     public: z.preprocess((input) => JSON.parse(`${input}`), z.boolean()),
+    coverImageFile: zfd.file().optional(),
+    coverImage: zfd.text().optional(),
+    useDefaultTopImage: z.preprocess((input) => JSON.parse(`${input}`), z.boolean()),
 })
 
 export const addPublicNoteSchema = schema

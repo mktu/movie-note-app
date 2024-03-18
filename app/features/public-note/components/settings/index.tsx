@@ -5,6 +5,7 @@ import InfoIcon from "~/components/icons/Info"
 import { useNotePreviewContext } from "../../context/public-note/Context"
 import Switch from "~/components/switch/Switch"
 import CopyLink from "./CopyLink"
+import CoverImage from "./CoverImage"
 
 
 
@@ -21,7 +22,19 @@ function replaceUrl(oldUrl: string, newPath: string): string {
 const Settings: FC = () => {
     const { t } = useTranslation()
     const [publicLink, setPublicLink] = useState('')
-    const { setSummary, summary, viewId, isPublic, setIsPublic, html } = useNotePreviewContext()
+    const {
+        setSummary,
+        summary,
+        viewId,
+        isPublic,
+        setIsPublic,
+        html,
+        tmdbImageUrl,
+        coverImage,
+        imgError,
+        onChangeCoverImage,
+        onSelectDefaultImage
+    } = useNotePreviewContext()
     const isEmpty = !html
     useEffect(() => {
         const currentUrl = window.location.href;
@@ -48,6 +61,13 @@ const Settings: FC = () => {
                     <InfoIcon className='h-4 w-4 fill-text-label' />
                     <span>{t('publish-note-information')}</span>
                 </p>
+                <CoverImage
+                    image={coverImage}
+                    defaultImage={tmdbImageUrl}
+                    imgError={imgError}
+                    onChangeImage={onChangeCoverImage}
+                    onClickDefaultImage={onSelectDefaultImage} />
+
                 <label htmlFor='preview-summary'>{t('summary')}</label>
                 <TextArea id='preview-summary' className='text-text-main' minRows={2} value={summary} onChange={(e) => {
                     setSummary(e.target.value)
