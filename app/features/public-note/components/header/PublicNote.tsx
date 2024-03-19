@@ -16,6 +16,7 @@ type Props = {
     creator: User,
     lastUpdated?: string,
     posterImage?: string,
+    coverImage: string | null,
     summary?: string
 }
 
@@ -25,6 +26,7 @@ const PublicNote: FC<Props> = ({
     creator,
     lastUpdated,
     posterImage,
+    coverImage,
     summary
 }) => {
     const { t } = useTranslation('common')
@@ -35,7 +37,7 @@ const PublicNote: FC<Props> = ({
             <div className='flex w-full justify-center'>
                 <div className='flex items-center gap-10'>
                     <Image className='overflow-hidden rounded' width={150} height={225}
-                        src={imagePath} alt={title || ''} />
+                        src={coverImage || imagePath} alt={title || ''} />
                     <div>
                         <h3>{title}</h3>
                         <div className='mt-5 flex items-center gap-4'>
