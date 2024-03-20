@@ -19,5 +19,6 @@ export const convertPublicNote = (note: PublicNoteType): PublicNote => ({
     summary: note.summary,
     updatedAt: note.updated_at,
     userId: note.user_id,
-    createdAt: note.created_at
+    createdAt: note.created_at,
+    coverImage: note.cover_image
 })

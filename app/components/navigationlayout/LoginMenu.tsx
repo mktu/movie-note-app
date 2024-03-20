@@ -12,11 +12,11 @@ const LoginMenu: FC = () => {
     }, [navigate])
     return (
         <div className='flex items-center gap-2'>
-            <OutlinedButton className='flex items-center gap-2 text-onprimary-main' onClick={onLogin}>
+            <OutlinedButton className='flex items-center gap-2 text-sm text-onprimary-main' onClick={onLogin}>
                 <LoginIcon className='h-5 w-5 fill-onprimary-main' />
                 LogIn
             </OutlinedButton>
-            <OutlinedButton className='flex items-center gap-2 text-onprimary-main' onClick={onLogin}>
+            <OutlinedButton className='flex items-center gap-2 text-sm text-onprimary-main' onClick={onLogin}>
                 <UserPlusIcon className='h-5 w-5 fill-onprimary-main' />
                 SignUp
             </OutlinedButton>

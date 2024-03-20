@@ -27,6 +27,7 @@ const PublicNotePage: FC<Props> = ({
                 creator={creator}
                 lastUpdated={publicNote.updatedAt || publicNote.createdAt}
                 posterImage={tmdbDetail?.poster_path || tmdbDetail?.backdrop_path}
+                coverImage={publicNote.coverImage}
                 summary={publicNote.summary}
             />}
             note={<Note html={publicNote.note} />}

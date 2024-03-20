@@ -32,7 +32,7 @@ const UserMenu: FC = () => {
                     ) : <UserPlaceholder className='h-5 w-5 fill-onprimary-main' />}
                     <div className='ml-2 text-onprimary-main'>{name}</div>
                 </Menu.Button>
-                <Menu.Items className="absolute rounded border border-border-dark bg-white py-2 px-4">
+                <Menu.Items className="absolute rounded border border-border-dark bg-white px-4 py-2">
                     <Menu.Item>
                         {() => (
                             <button className='flex items-center gap-2' onClick={onLogout}>

@@ -45,13 +45,16 @@ export type PublicNote = {
     updatedAt: string | null;
     userId: string;
     viewId: string;
+    coverImage: string | null;
 }
 
 export type AddPublicNote = {
     summary: string,
     note: string,
     public: boolean,
-    tmdbId: string
+    tmdbId: string,
+    coverImageFile?: File,
+    useDefaultTopImage?: boolean
 }
 
 export type UpdateMovieNote = AddMovieNote

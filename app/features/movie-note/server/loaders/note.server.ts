@@ -14,6 +14,8 @@ import type { Credits, TmdbDetail, TmdbLng } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { loadPublicNoteIfExists } from '~/features/public-note/server';
+import { commitSession, getSession } from '~/features/auth/server/session';
+import { NoteActionResultSessionKey } from '../constants';
 
 
 type ContentData = {
@@ -27,7 +29,8 @@ type ContentData = {
 
 export type LorderData = {
     error?: ErrorKey,
-    content?: ContentData
+    content?: ContentData,
+    actionResult?: number | null
 }
 
 export async function loader({ request, context, params }: LoaderFunctionArgs) {
@@ -143,10 +146,21 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     t4.finish()
     tall.finish()
 
+    const session = await getSession(
+        request.headers.get("Cookie")
+    );
+    const message: number | null = session.get(NoteActionResultSessionKey) || null;
+
     return json<LorderData>({
         content: {
             ...contentData,
             performanceData: counter.getResults()
-        }
+        },
+        actionResult: message
+    }, {
+        headers: {
+            // only necessary with cookieSessionStorage
+            "Set-Cookie": await commitSession(session),
+        },
     })
 }

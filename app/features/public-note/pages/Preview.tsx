@@ -26,7 +26,7 @@ const Preview: FC<Props> = ({
     const { useNavigator } = useNavigatorContext()
     const { navigate } = useNavigator()
     return (
-        <NotePreviewProvider onPublish={onPublish} init={init} tmdbId={tmdbDetail.id}>
+        <NotePreviewProvider onPublish={onPublish} init={init} tmdbDetail={tmdbDetail}>
             <PreviewLayout
                 header={<PreviewHeader
                     title={tmdbDetail?.title || ''}

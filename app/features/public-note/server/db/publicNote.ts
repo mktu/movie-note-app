@@ -3,14 +3,19 @@ import type { AddPublicNote } from '../validation/addPublicNote';
 import { throwPublicNoteError } from '../../utils/error';
 import type { UnboxReturnedPromise } from '~/types/utils';
 
-export const upsertPublicNote = async (supabaseAdmin: AdminClientType, publicNote: AddPublicNote, userId: string) => {
+export type UpsertNote = Omit<AddPublicNote, 'useDefaultTopImage' | 'coverImage' | 'coverImageFile'>
+    & {
+        coverImage?: string | null
+    }
+export const upsertPublicNote = async (supabaseAdmin: AdminClientType, publicNote: UpsertNote, userId: string) => {
 
     const { error } = await supabaseAdmin.from('public-note').upsert({
         tmdb_id: publicNote.tmdbId,
         note: publicNote.note,
         public: publicNote.public,
         summary: publicNote.summary || '',
-        user_id: userId
+        user_id: userId,
+        cover_image: publicNote.coverImage
     })
     if (error) {
         console.error(error)
