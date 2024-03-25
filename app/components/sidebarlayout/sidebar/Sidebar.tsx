@@ -1,5 +1,8 @@
 import type { FC, ReactNode } from "react";
 import StaticLinks from './StaticLinks'
+import { IconButton } from "~/components/buttons";
+import AnglesLeft from "~/components/icons/AnglesLeft";
+import { useAppLayoutContext } from "~/providers/app-layout";
 
 type Props = {
     noteList: ReactNode,
@@ -14,8 +17,14 @@ const Sidebar: FC<Props> = ({
     searchMenu,
     templateList
 }) => {
+    const { setOpenMobileMenu } = useAppLayoutContext()
     return (
-        <div className='flex w-full flex-col divide-y divide-border-main'>
+        <div className='relative flex w-full flex-col divide-y divide-border-main'>
+            <IconButton name='close' className='absolute right-2 top-2 lg:hidden' onClick={() => {
+                setOpenMobileMenu(false)
+            }}>
+                <AnglesLeft className='h-6 w-6 fill-text-placeholder' />
+            </IconButton>
             <div>
                 {userMenu}
             </div>

@@ -17,7 +17,7 @@ export const MovieLayout: FC<Props> = ({
     movieInfo,
 }) => {
     return (
-        <div className='relative w-full py-5 px-10'>
+        <div className='relative w-full px-10 py-5'>
             {header}
             <Transition
                 className='flex w-full flex-col gap-2'

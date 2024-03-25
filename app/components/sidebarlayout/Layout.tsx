@@ -5,6 +5,11 @@ import AnglesRight from "~/components/icons/AnglesRight";
 import AnglesLeft from "~/components/icons/AnglesLeft";
 import useSplit from './useSplit'
 import LocalStorageContext from '~/providers/localstorage/Context';
+import Bars from "../icons/Bars";
+import { useInView } from "react-intersection-observer";
+import clsx from "clsx";
+import { useAppLayoutContext } from "~/providers/app-layout";
+import { Transition } from "@headlessui/react";
 
 type Props = {
     sidebar: ReactNode,
@@ -17,6 +22,7 @@ const WidthClosed = 50
 
 
 const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
+    const { ref: headerRef, inView } = useInView({ initialInView: true })
     const { getSidebarWidth, getLastSidebarWidth: getVisibleSidebarWidth, saveSidebarWidth, saveLastSidebarWidth: saveVisibleSidebarWidth, localstorageLoaded } = useContext(LocalStorageContext)
     const savedWidth = localstorageLoaded ? getSidebarWidth() : initialSidebarWidth
     const hideSidebar = savedWidth === WidthClosed
@@ -37,13 +43,14 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
     }, [updateWidth])
 
     const { setGutter, setRoot, moving } = useSplit({ onDragEnd, minWidth: MinWidth, widthClosed: WidthClosed })
-
+    const { openMobileMenu, setOpenMobileMenu } = useAppLayoutContext()
     return (
         <div ref={setRoot} className='flex h-full w-screen overflow-x-hidden'>
-            <div className={`min-h-screen bg-sidebar-main ${(!moving) && 'transition-all ease-in-out'} overflow-x-hidden`} style={{ width: savedWidth }}>
+
+            <div className={`min-h-screen bg-sidebar-main ${(!moving) && 'transition-all ease-in-out'} hidden overflow-x-hidden lg:block`} style={{ width: savedWidth }}>
                 {!hideSidebar && sidebar}
             </div>
-            <div className={`relative min-h-screen w-1 cursor-move bg-sidebar-main transition-all ease-in-out hover:bg-border-main`}
+            <div className={`relative hidden min-h-screen w-1 cursor-move bg-sidebar-main transition-all ease-in-out hover:bg-border-main lg:block`}
                 ref={setGutter} >
                 <IconButton name='toggle-sidebar'
                     onClick={(e) => {
@@ -61,7 +68,33 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
                     }
                 </IconButton>
             </div>
-            <div className={`h-full min-h-screen w-full flex-1 overflow-x-hidden border-border-main`}>{children}</div>
+            <div className={clsx('fixed left-0 top-0 z-50 w-full p-2 lg:hidden',
+                !inView && 'bg-white/80 shadow',
+                openMobileMenu && 'hidden'
+            )}>
+                <IconButton name='menu' className='opacity-100' onClick={() => {
+                    setOpenMobileMenu(true)
+                }}>
+                    <Bars className='h-8 w-8 fill-text-label' />
+                </IconButton>
+            </div>
+            <Transition
+                className={'fixed left-0 top-0 z-50 min-h-full w-[90%] bg-white shadow lg:hidden'}
+                show={openMobileMenu}
+                enter="transition ease-out duration-300 transform"
+                enterFrom="-translate-x-full opacity-0"
+                enterTo="translate-x-0 opacity-100"
+                leave="transition ease-in duration-300 transform"
+                leaveFrom="translate-x-0 opacity-100"
+                leaveTo="-translate-x-full opacity-0"
+            >
+                {sidebar}
+            </Transition>
+
+            <div className={`mt-[64px] h-full min-h-screen w-full flex-1 overflow-x-hidden border-border-main lg:mt-0`}>
+                <div ref={headerRef} />
+                {children}
+            </div>
         </div>
     )
 }
