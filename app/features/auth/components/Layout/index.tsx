@@ -12,7 +12,7 @@ const WebLayout: FC<Props> = ({ children,
 }) => {
     const { t } = useTranslation('common')
     return (
-        <div className='w-screen lg:flex lg:h-screen'>
+        <div className='w-screen md:flex md:h-screen'>
             <div className='flex-1 bg-primary-main'>
                 <div className='p-12 text-onprimary-main'>
                     <div className='flex items-center'>
@@ -24,7 +24,7 @@ const WebLayout: FC<Props> = ({ children,
                     </div>
                 </div>
             </div>
-            <div className='min-w-[40%] pt-20 lg:pt-0'>{children}</div>
+            <div className='min-w-[40%] pt-20 md:pt-0'>{children}</div>
         </div>
     )
 }

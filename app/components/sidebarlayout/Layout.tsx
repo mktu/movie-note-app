@@ -47,10 +47,10 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
     return (
         <div ref={setRoot} className='flex h-full w-screen overflow-x-hidden'>
 
-            <div className={`min-h-screen bg-sidebar-main ${(!moving) && 'transition-all ease-in-out'} hidden overflow-x-hidden lg:block`} style={{ width: savedWidth }}>
+            <div className={`min-h-screen bg-sidebar-main ${(!moving) && 'transition-all ease-in-out'} hidden overflow-x-hidden md:block`} style={{ width: savedWidth }}>
                 {!hideSidebar && sidebar}
             </div>
-            <div className={`relative hidden min-h-screen w-1 cursor-move bg-sidebar-main transition-all ease-in-out hover:bg-border-main lg:block`}
+            <div className={`relative hidden min-h-screen w-1 cursor-move bg-sidebar-main transition-all ease-in-out hover:bg-border-main md:block`}
                 ref={setGutter} >
                 <IconButton name='toggle-sidebar'
                     onClick={(e) => {
@@ -68,7 +68,7 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
                     }
                 </IconButton>
             </div>
-            <div className={clsx('fixed left-0 top-0 z-50 w-full p-2 lg:hidden',
+            <div className={clsx('fixed left-0 top-0 z-50 w-full p-2 md:hidden',
                 !inView && 'bg-white/80 shadow',
                 openMobileMenu && 'hidden'
             )}>
@@ -79,7 +79,7 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
                 </IconButton>
             </div>
             <Transition
-                className={'fixed left-0 top-0 z-50 min-h-full w-[90%] bg-white shadow lg:hidden'}
+                className={'fixed left-0 top-0 z-50 min-h-full w-[90%] bg-white shadow md:hidden'}
                 show={openMobileMenu}
                 enter="transition ease-out duration-300 transform"
                 enterFrom="-translate-x-full opacity-0"
@@ -91,7 +91,7 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
                 {sidebar}
             </Transition>
 
-            <div className={`mt-[64px] h-full min-h-screen w-full flex-1 overflow-x-hidden border-border-main lg:mt-0`}>
+            <div className={`mt-[64px] h-full min-h-screen w-full flex-1 overflow-x-hidden border-border-main md:mt-0`}>
                 <div ref={headerRef} />
                 {children}
             </div>
