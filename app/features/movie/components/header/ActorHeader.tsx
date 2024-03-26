@@ -31,7 +31,7 @@ const ActorHeader = forwardRef<HTMLDivElement, Props>(({
                 }
                 setObserverElm(elm)
             }} className={clsx(className, 'flex w-full items-center gap-2 py-4',
-                !inView && 'fixed top-0 right-0 z-20 bg-white/80 px-10 shadow')}>
+                !inView && 'fixed right-0 top-0 z-20 bg-white/80 px-10 shadow')}>
                 <div className='flex w-full flex-1 items-center text-lg font-semibold text-text-main'>
                     {actorName}
                 </div>
