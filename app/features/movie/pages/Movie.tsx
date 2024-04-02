@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import Imdb from '~/features/imdb';
 import { useTmdbCredits, useTmdbDetail } from '~/features/tmdb';
@@ -13,6 +13,7 @@ import type { Credits, TmdbDetail } from '~/features/tmdb';
 import type { Video } from '~/features/tmdb/utils';
 import type { MovieNoteType } from '~/features/movie-note/server/db';
 import { useNavigatorContext } from '~/providers/navigator/Context';
+import Footer from '../components/footer';
 
 type Props = {
     onSubmit: (note: AddMovieNote) => void,
@@ -48,8 +49,27 @@ const Movie: FC<Props> = ({
             resetCredit()
         }
     }
+
     const detail = apiDetail || initDetail || null
     const credits = apiCredits || initCredits || null
+    const onNavigateNote = useCallback(() => {
+        if (note) {
+            detail && navigate(`/app/notes/${detail.id}`)
+            return
+        }
+        detail && onSubmit({
+            title: detail.title,
+            thumbnail: detail.poster_path || detail.backdrop_path || '',
+            tmdbId: detail.id,
+            movieMemo: '',
+            admirationDate: '',
+            stars: 0,
+            published: false,
+            hasPublicNote: false,
+            imdbId: detail.imdb_id,
+            lng: detail.lng
+        })
+    }, [detail, navigate, note, onSubmit])
     return (
         <MovieLayout
             header={<MovieHeader
@@ -58,24 +78,7 @@ const Movie: FC<Props> = ({
                 error={error}
                 canSave={Boolean(detail)}
                 onReselect={() => { setInitialSelected('') }}
-                onClickSave={(update) => {
-                    if (update) {
-                        detail && navigate(`/app/notes/${detail.id}`)
-                        return
-                    }
-                    detail && onSubmit({
-                        title: detail.title,
-                        thumbnail: detail.poster_path || detail.backdrop_path || '',
-                        tmdbId: detail.id,
-                        movieMemo: '',
-                        admirationDate: '',
-                        stars: 0,
-                        published: false,
-                        hasPublicNote: false,
-                        imdbId: detail.imdb_id,
-                        lng: detail.lng
-                    })
-                }} {...{ selected, setSelected }} />}
+                onNavigateNote={onNavigateNote} {...{ selected, setSelected }} />}
             movieInfo={detail && {
                 detail: <Detail
                     detail={detail}
@@ -85,6 +88,10 @@ const Movie: FC<Props> = ({
                 metaInfo: <Meta genres={detail?.genres || []} />,
                 imdb: <Imdb imdbId={detail?.imdb_id} />
             }}
+            footer={<Footer
+                onNavigateNote={onNavigateNote}
+                hasNote={!!note}
+            />}
         />
     )
 }

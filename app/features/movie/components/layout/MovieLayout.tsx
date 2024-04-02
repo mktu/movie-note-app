@@ -10,17 +10,19 @@ type MovieInfo = {
 type Props = {
     header: ReactNode,
     movieInfo?: MovieInfo | null
+    footer: ReactNode
 }
 
 export const MovieLayout: FC<Props> = ({
     header,
     movieInfo,
+    footer
 }) => {
     return (
-        <div className='relative w-full px-10 py-5'>
+        <div className='relative w-full px-5 md:px-10'>
             {header}
             <Transition
-                className='flex w-full flex-col gap-2'
+                className='flex w-full flex-col gap-2 overflow-hidden'
                 show={Boolean(movieInfo)}
                 enter="transition-opacity duration-75"
                 enterFrom="opacity-0"
@@ -29,14 +31,15 @@ export const MovieLayout: FC<Props> = ({
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
             >
-                <div className='flex w-full items-center'>
+                <div className='flex w-full flex-wrap items-center gap-1'>
                     {movieInfo?.metaInfo}
-                    <div className='ml-auto'>{movieInfo?.imdb}</div>
+                    <div className='md:ml-auto'>{movieInfo?.imdb}</div>
                 </div>
                 <div className='flex w-full items-center'>
                     {movieInfo?.detail}
                 </div>
             </Transition>
+            {footer}
         </div>
     );
 };

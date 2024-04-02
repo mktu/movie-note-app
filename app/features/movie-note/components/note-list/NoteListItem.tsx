@@ -14,6 +14,7 @@ import RemoveNoteDialog from './RemoveNoteDialog';
 
 import type { MovieListItemType } from '../../server/db';
 import type { WatchState } from '@type-defs/frontend';
+import { useAppLayoutContext } from '~/providers/app-layout';
 const imageBasePath = `${TmdbmageBasePath}/w200`
 
 type Props = {
@@ -29,6 +30,7 @@ const NoteListItem: FC<Props> = ({
     const path = movieNoteListViewItem.thumbnail ? `${imageBasePath}${movieNoteListViewItem.thumbnail}` : undefined
     const [deleting, setDeleting] = useState(false)
     const { isMovieNoteKvDisabled } = useMovieNoteKvDisabled()
+    const { setOpenMobileMenu } = useAppLayoutContext()
     const { t } = useTranslation('common')
     const to = isMovieNoteKvDisabled ? `/app/notes/${movieNoteListViewItem.tmdb_id}?disableKv=true` : `/app/notes/${movieNoteListViewItem.tmdb_id}`
     const watchedState = movieNoteListViewItem.watch_state as WatchState
@@ -40,7 +42,9 @@ const NoteListItem: FC<Props> = ({
                 onRemoveNote(movieNoteListViewItem.tmdb_id)
             }} />)}
             <div className='flex w-full items-center'>
-                <Navigator className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' to={to} >
+                <Navigator className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' to={to} onClick={() => [
+                    setOpenMobileMenu(false)
+                ]}>
                     <Image className='overflow-hidden rounded' width={32} height={48}
                         src={path} alt={movieNoteListViewItem.title || ''} />
                     <div className='flex w-full flex-1 items-center overflow-hidden'>

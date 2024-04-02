@@ -37,9 +37,8 @@ const Detail: FC<Props> = ({ detail, credits, trailers }) => {
         <div className='flex w-full flex-col justify-center gap-4'>
             {trailers.length > 0 && (
                 <YoutubeContainer trailers={trailers} />
-
             )}
-            <div className='flex w-full'>
+            <div className='w-full md:flex'>
                 {trailers.length === 0 && (
                     <div>
                         <Image
@@ -52,7 +51,7 @@ const Detail: FC<Props> = ({ detail, credits, trailers }) => {
                             height={450} />
                     </div>
                 )}
-                <div className='ml-4 flex w-full flex-1 flex-col gap-4 overflow-hidden text-text-label'>
+                <div className='mt-4 flex w-full flex-1 flex-col gap-4 overflow-hidden text-text-label md:ml-4 md:mt-0'>
                     <div>
                         <h3 className='mb-2 text-lg'>{t('over-view')}</h3>
                         <p id='detail' className='overflow-y-auto'>

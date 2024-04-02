@@ -11,7 +11,7 @@ import Error from './Error';
 
 import type { ComponentProps } from 'react'
 type Props = {
-    onClickSave: (update: boolean) => void,
+    onNavigateNote: () => void,
     className?: string,
     canSave?: boolean
     error?: string,
@@ -21,7 +21,7 @@ type Props = {
 } & ComponentProps<typeof Search>
 
 const Header = forwardRef<HTMLDivElement, Props>(({
-    onClickSave,
+    onNavigateNote,
     className,
     selected,
     setSelected,
@@ -37,7 +37,7 @@ const Header = forwardRef<HTMLDivElement, Props>(({
         <>
             <div ref={inViewRef} />
             {!inView && (
-                <div className='h-[64px]' /> // for layout sfift
+                <div className='md:h-[64px]' /> // for layout sfift
             )}
             <div ref={(elm) => {
                 if (typeof ref === 'function') {
@@ -46,8 +46,8 @@ const Header = forwardRef<HTMLDivElement, Props>(({
                     ref.current = elm;
                 }
                 setObserverElm(elm)
-            }} className={clsx(className, 'flex w-full items-center gap-2 py-4',
-                !inView && 'fixed top-0 right-0 z-20 bg-white/80 px-10 shadow')}>
+            }} className={clsx(className, 'flex w-full items-center gap-2 pb-4 md:py-4',
+                !inView && 'right-0 top-0 md:fixed md:z-20 md:bg-white/80 md:px-10 md:shadow')}>
                 <div className='flex w-full flex-1 items-center'>
                     {initialSelected ? (
                         <Reselect floating={!inView} selected={initialSelected} onReselect={onReselect} />
@@ -56,12 +56,12 @@ const Header = forwardRef<HTMLDivElement, Props>(({
                     )}
                 </div>
                 {hasNote ? (
-                    <OutlinedButton border='border-2 border-text-main group-hover:border-text-main' disabled={!canSave} className='group ml-auto flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave(true) }}>
+                    <OutlinedButton border='border-2 border-text-main group-hover:border-text-main' disabled={!canSave} className='group ml-auto hidden items-center gap-1 bg-surface-main md:flex' onClick={onNavigateNote}>
                         <PenIcon className='h-5 w-5 fill-text-main group-hover:fill-text-dark' />
                         <span className='text-text-main group-hover:text-text-dark'>{t('edit-note')}</span>
                     </OutlinedButton>
                 ) : (
-                    <OutlinedButton border='border-2 border-text-main group-hover:border-text-main' disabled={!canSave} className='group ml-auto flex items-center gap-1 bg-surface-main' onClick={() => { onClickSave(false) }}>
+                    <OutlinedButton border='border-2 border-text-main group-hover:border-text-main' disabled={!canSave} className='group ml-auto hidden items-center gap-1 bg-surface-main md:flex' onClick={onNavigateNote}>
                         <AddFill className='h-5 w-5 fill-text-main group-hover:fill-text-dark' />
                         <span className='text-text-main group-hover:text-text-dark'>{t('add-note')}</span>
                     </OutlinedButton>
