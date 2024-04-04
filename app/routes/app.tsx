@@ -14,6 +14,7 @@ import { UserMenu } from '~/features/profile/components/user-menu';
 import { AppOutletProvider } from '~/providers/outlets';
 import TmdbProvider from '~/providers/tmdb';
 import UserProvider from '~/providers/user';
+import AppLayoutProvider from '~/providers/app-layout'
 
 import { useLoaderData, useMatches, useSubmit } from '@remix-run/react';
 import { SearchMenu } from '~/features/movie';
@@ -38,33 +39,35 @@ export const App: React.FC = () => {
             <UserProvider user={user}>
                 <LocalStorageProvider>
                     <CookiesProvider>
-                        <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey, i18n.language === 'ja' ? 'ja' : 'en')}>
-                            <SidebarLayout
-                                initialSidebarWidth={sidebarSettings.sidebarWidth}
-                                searchMenu={<SearchMenu />}
-                                userMenu={<UserMenu user={user} onLogout={() => {
-                                    submit(null, { action: '/logout', method: 'post' })
-                                }} />}
-                                noteList={<NoteList
-                                    onRemoveNote={(noteId) => {
-                                        submit({ noteId }, { action: '/app/delete-note', method: 'post' })
-                                    }}
-                                    movieNoteList={movieNoteList} />}
-                                templateList={<TemplateList
-                                    templateList={templateList}
-                                    onRemoveNote={(templateId) => {
-                                        submit({ templateId, redirectTo: currentPath.includes(String(templateId)) ? '/app' : currentPath }, { action: '/app/note-template/delete', method: 'post' })
-                                    }}
-                                />}
-                            >
-                                <AppOutletProvider />
-                            </SidebarLayout>
-                            <ToastContainer
-                                hideProgressBar
-                                pauseOnHover
-                                position='bottom-right'
-                            />
-                        </TmdbProvider>
+                        <AppLayoutProvider>
+                            <TmdbProvider tmdb={new Tmdb(tmdbData.apiKey, i18n.language === 'ja' ? 'ja' : 'en')}>
+                                <SidebarLayout
+                                    initialSidebarWidth={sidebarSettings.sidebarWidth}
+                                    searchMenu={<SearchMenu />}
+                                    userMenu={<UserMenu user={user} onLogout={() => {
+                                        submit(null, { action: '/logout', method: 'post' })
+                                    }} />}
+                                    noteList={<NoteList
+                                        onRemoveNote={(noteId) => {
+                                            submit({ noteId }, { action: '/app/delete-note', method: 'post' })
+                                        }}
+                                        movieNoteList={movieNoteList} />}
+                                    templateList={<TemplateList
+                                        templateList={templateList}
+                                        onRemoveNote={(templateId) => {
+                                            submit({ templateId, redirectTo: currentPath.includes(String(templateId)) ? '/app' : currentPath }, { action: '/app/note-template/delete', method: 'post' })
+                                        }}
+                                    />}
+                                >
+                                    <AppOutletProvider />
+                                </SidebarLayout>
+                                <ToastContainer
+                                    hideProgressBar
+                                    pauseOnHover
+                                    position='bottom-right'
+                                />
+                            </TmdbProvider>
+                        </AppLayoutProvider>
                     </CookiesProvider>
                 </LocalStorageProvider>
             </UserProvider>

@@ -7,12 +7,12 @@ type Props = {
     titleMessage?: string
 }
 
-const Layout: FC<Props> = ({ children,
+const WebLayout: FC<Props> = ({ children,
     titleMessage = 'login-title-message'
 }) => {
     const { t } = useTranslation('common')
     return (
-        <div className='flex h-screen w-screen'>
+        <div className='w-screen md:flex md:h-screen'>
             <div className='flex-1 bg-primary-main'>
                 <div className='p-12 text-onprimary-main'>
                     <div className='flex items-center'>
@@ -24,9 +24,9 @@ const Layout: FC<Props> = ({ children,
                     </div>
                 </div>
             </div>
-            <div className='min-w-[40%]'>{children}</div>
+            <div className='min-w-[40%] pt-20 md:pt-0'>{children}</div>
         </div>
     )
 }
 
-export default Layout
+export default WebLayout

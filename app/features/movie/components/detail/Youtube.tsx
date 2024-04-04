@@ -18,7 +18,7 @@ const YoutubeContainer: FC<Props> = ({
     const [current, setCurrent] = useState(0)
     return (
         <div className='flex w-full items-center justify-between gap-4'>
-            <IconButton name='back' className={clsx('h-[250px] rounded-sm p-1',
+            <IconButton name='back' className={clsx('hidden h-[250px] rounded-sm p-1 md:block',
                 'bg-gray-100'
             )} disabled={current === 0} onClick={() => {
                 setCurrent(before => before - 1)
@@ -27,10 +27,10 @@ const YoutubeContainer: FC<Props> = ({
                     current === 0 ? 'fill-gray-300' : 'fill-gray-700'
                 )} />
             </IconButton>
-            <div className='min-h-[360px] w-full'>
+            <div className='w-full md:min-h-[360px]'>
                 <Youtube iframeClassName='w-full' videoId={trailers[current].key} />
             </div>
-            <IconButton name='next' className={clsx('h-[250px] rounded-sm p-1',
+            <IconButton name='next' className={clsx('hidden h-[250px] rounded-sm p-1 md:block',
                 'bg-gray-100'
             )} disabled={current >= trailers.length - 1} onClick={() => {
                 setCurrent(before => before + 1)

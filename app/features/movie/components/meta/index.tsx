@@ -10,10 +10,10 @@ type Props = {
 
 export const Meta: FC<Props> = ({ genres, className }) => {
     return (
-        <div className={clsx('flex min-h-[64px] items-center', className)}>
+        <div className={clsx('flex items-center md:min-h-[64px]', className)}>
             {genres.length > 0 && (
                 <>
-                    <div className='my-1 px-2 text-text-label'>
+                    <div className='text-text-label md:my-1 md:px-2'>
                         <Genres genres={genres.map(v => ({ tmdbId: String(v.id), name: v.name }))} />
                     </div>
                 </>
