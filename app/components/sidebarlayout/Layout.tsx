@@ -90,9 +90,8 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
             >
                 {sidebar}
             </Transition>
-
+            <div className="absolute left-0 top-[32px]" ref={headerRef} />
             <div className={`mt-[64px] h-full min-h-screen w-full flex-1 overflow-x-hidden border-border-main md:mt-0`}>
-                <div ref={headerRef} />
                 {children}
             </div>
         </div>

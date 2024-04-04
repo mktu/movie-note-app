@@ -15,6 +15,7 @@ const Container: FC<Props> = ({
     format,
     nodeKey
 }) => {
+
     return (
         <BlockWithAlignableContents
             format={format}
@@ -24,15 +25,12 @@ const Container: FC<Props> = ({
                 focus: 'relative outline outline-indigo-300'
             }}>
             <iframe
-                width="560"
-                height="315"
+                className='md:h-[315px] md:w-[560px]'
                 src={`https://www.youtube.com/embed/${videoID}`}
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen={true}
                 title="YouTube video"
             />
-
         </BlockWithAlignableContents >
     );
 };

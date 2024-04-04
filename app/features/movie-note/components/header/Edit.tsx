@@ -40,7 +40,7 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
         <>
             <div ref={inViewRef} />
             {!inView && (
-                <div className='h-[64px]' /> // for layout sfift
+                <div className='md:h-[64px]' /> // for layout sfift
             )}
             <div ref={(elm) => {
                 if (typeof ref === 'function') {
@@ -49,16 +49,16 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                     ref.current = elm;
                 }
                 setObserverElm(elm)
-            }} className={clsx(className, 'flex w-full flex-col items-center gap-1',
-                !inView && 'fixed top-0 right-0 z-20 bg-white/80 pb-2 shadow')}>
+            }} className={clsx(className, 'flex w-full flex-col items-center gap-3 md:gap-1',
+                !inView && 'right-0 top-0 md:fixed md:z-20 md:bg-white/80 md:pb-2 md:shadow')}>
                 <PaddingTop />
                 <UnsavedNote />
-                <div className='flex w-full items-center gap-2 px-10'>
+                <div className='flex w-full items-center gap-2 px-2 md:px-10'>
                     <MiniImage
                         src={imagePath}
                         title={title}
                     />
-                    <div className='flex w-full flex-1 items-center'>
+                    <div className='w-full flex-1 items-center md:flex'>
                         <div>
                             <div className='flex items-center gap-2 px-2 text-lg font-semibold text-text-main'>
                                 <span>{title}</span>
@@ -72,8 +72,7 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                                 onOpenWatchLogDialog={onOpenWatchLogDialog}
                             />
                         </div>
-
-                        <div className='ml-auto flex flex-col gap-2'>
+                        <div className='ml-auto hidden flex-col gap-2 md:flex'>
                             <div className='flex items-center justify-end gap-4'>
                                 <div className='inline-flex rounded-md shadow-sm' role='group'>
                                     <ButtonBase onClick={async () => {

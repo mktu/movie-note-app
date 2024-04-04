@@ -1,5 +1,6 @@
 import { useMemo, type FC, useState } from 'react'
-import TemplatePopupMenu, { MenuItemTypes } from './TemplatePopupMenu';
+import type { MenuItemTypes } from './TemplatePopupMenu';
+import TemplatePopupMenu from './TemplatePopupMenu';
 import type { Template } from '~/features/rte/components/Toolbar/Templates';
 import { ContainedButton, TextButton } from '~/components/buttons';
 import { useTranslation } from 'react-i18next';
