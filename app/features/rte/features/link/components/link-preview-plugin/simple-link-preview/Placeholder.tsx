@@ -27,7 +27,7 @@ const Placeholder: FC<Props> = ({
                 base: 'relative',
                 focus: 'relative outline outline-indigo-300'
             }}>
-            <div className='relative flex h-[128px] w-full max-w-[95%] items-center justify-center border border-border-main text-text-label'>
+            <div className='relative flex h-[128px] w-[95%] max-w-[95%] items-center justify-center border border-border-main text-text-label'>
                 <ImdbIcon className='mr-2 h-10 w-10' />
                 <span>{placeholderText}</span>
                 <IconButton name='remove' className='absolute right-2 top-1' onClick={removePlaceholder}>
