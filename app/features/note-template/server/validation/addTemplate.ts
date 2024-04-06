@@ -6,7 +6,9 @@ const schema = zfd.formData({
     name: zfd
         .text(z.string()),
     template: zfd
-        .text(z.string())
+        .text(z.string()),
+    html: zfd
+        .text(z.string()),
 })
 
 export const addTemplateSchema = schema
