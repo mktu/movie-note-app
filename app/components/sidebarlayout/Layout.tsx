@@ -47,7 +47,7 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
     return (
         <div ref={setRoot} className='flex h-full w-screen overflow-x-hidden'>
 
-            <div className={`min-h-screen bg-sidebar-main ${(!moving) && 'transition-all ease-in-out'} hidden overflow-x-hidden md:block`} style={{ width: savedWidth }}>
+            <div className={`min-h-screen bg-sidebar-main ${(!moving) && 'transition-all ease-in-out'} hidden md:block`} style={{ width: savedWidth }}>
                 {!hideSidebar && sidebar}
             </div>
             <div className={`relative hidden min-h-screen w-1 cursor-move bg-sidebar-main transition-all ease-in-out hover:bg-border-main md:block`}
