@@ -11,6 +11,7 @@ import { TextButton } from '~/components/buttons';
 import clsx from 'clsx';
 import { TemplatePopup } from '../../features/templates/components';
 import ClickAwayListener from '~/components/clickaway';
+import TemplateIcon from '../icons/Template'
 import { useTranslation } from 'react-i18next';
 
 export type Template = {
@@ -52,8 +53,9 @@ const Templates: FC<Props> = ({
                 )} onClick={(e) => {
                     setShowTemplateMenu(true)
                 }}>
-                <AddIcon className='h-5 w-5 fill-text-label' />
-                <span>{t('template')}</span>
+                <AddIcon className='hidden h-5 w-5 fill-text-label md:inline' />
+                <span className='hidden md:inline'>{t('template')}</span>
+                <TemplateIcon className='h-5 w-5 fill-text-label md:hidden' />
             </TextButton>
             {showTemplateMenu && (
                 <FocusTrap>

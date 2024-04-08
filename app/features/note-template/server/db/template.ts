@@ -40,6 +40,7 @@ export const registerTemplate = async (supabaseAdmin: AdminClientType, template:
     const { error: infoError } = await supabaseAdmin.from('note_template').insert({
         user_id: userId,
         template: template.template,
+        html: template.html,
         name: template.name
     })
     if (infoError) {

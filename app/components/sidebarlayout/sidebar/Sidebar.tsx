@@ -20,7 +20,7 @@ const Sidebar: FC<Props> = ({
     const { setOpenMobileMenu } = useAppLayoutContext()
     return (
         <div className='relative flex w-full flex-col divide-y divide-border-main'>
-            <IconButton name='close' className='absolute right-2 top-2 lg:hidden' onClick={() => {
+            <IconButton name='close' className='absolute right-2 top-2 md:hidden' onClick={() => {
                 setOpenMobileMenu(false)
             }}>
                 <AnglesLeft className='h-6 w-6 fill-text-placeholder' />

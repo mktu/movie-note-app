@@ -3,6 +3,7 @@ import type { ListTemplateItemType } from '~/features/note-template/server/db/te
 import NavigatorContext from '~/providers/navigator/Context';
 import TemplateListMenu from './TemplateListMenu';
 import RemoveTemplateDialog from './RemoveTemplateDialog';
+import { useAppLayoutContext } from '~/providers/app-layout';
 
 type Props = {
     templateListItem: ListTemplateItemType,
@@ -16,6 +17,7 @@ const TemplateListItem: FC<Props> = ({
     const { navigator: Navigator } = useContext(NavigatorContext)
     const [deleting, setDeleting] = useState(false)
     const to = `/app/note-template/${templateListItem.id}`
+    const { setOpenMobileMenu } = useAppLayoutContext()
     return (
         <>
             {deleting && (<RemoveTemplateDialog title={templateListItem.name || ''} onClose={() => {
@@ -25,7 +27,11 @@ const TemplateListItem: FC<Props> = ({
                 setDeleting(false)
             }} />)}
             <div className='flex w-full items-center'>
-                <Navigator className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' to={to} >
+                <Navigator
+                    onClick={() => {
+                        setOpenMobileMenu(false)
+                    }}
+                    className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' to={to} >
                     <div className='flex w-full flex-1 items-center overflow-hidden'>
                         <div className='ml-2 block w-full overflow-hidden'>
                             <div className='overflow-hidden text-ellipsis whitespace-nowrap'>{templateListItem.name}</div>

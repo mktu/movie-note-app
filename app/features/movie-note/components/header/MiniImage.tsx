@@ -22,7 +22,7 @@ const MiniImage: FC<Props> = ({
     return (
         <Image
             alt={title || 'Error'}
-            className='overflow-hidden rounded'
+            className='hidden overflow-hidden rounded md:inline'
             key={src}
             src={src && `${imageBasePath}/${src}`}
             srcSet={imageBasePaths.map((path, idx) => `${path}/${src} ${idx + 1}x`).join(',')}

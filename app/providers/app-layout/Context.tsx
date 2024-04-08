@@ -4,7 +4,9 @@ import type { useAppLayout } from './useAppLayout';
 export type AppLayoutType = ReturnType<typeof useAppLayout>
 const context = React.createContext<AppLayoutType>({
     setOpenMobileMenu: () => { },
-    openMobileMenu: false
+    openMobileMenu: false,
+    openSearchDialog: false,
+    setOpenSearchDialog: () => { }
 });
 
 export const useAppLayoutContext = () => useContext(context)

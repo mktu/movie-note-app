@@ -4,7 +4,7 @@ import { useMovieNoteContext } from '../../context/movie-note/Context';
 const PaddingTop: FC = () => {
     const { unsavedNoteInfo } = useMovieNoteContext()
     return (
-        <div className='mt-2' style={{ display: (unsavedNoteInfo && !unsavedNoteInfo.isCurrentNote) ? 'none' : 'block' }} />
+        <div className='md:mt-2' style={{ display: (unsavedNoteInfo && !unsavedNoteInfo.isCurrentNote) ? 'none' : 'block' }} />
     );
 };
 

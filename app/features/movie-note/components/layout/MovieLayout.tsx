@@ -11,7 +11,7 @@ const MovieLayout: FC<Props> = ({
 }) => {
     return (
         <div className='relative flex w-full flex-col gap-2'>
-            <div className=''>{header}</div>
+            {header}
             {note && (
                 <div className='rounded-lg border-t border-dashed border-border-dark p-6'>
                     <div className='min-h-[512px]'>

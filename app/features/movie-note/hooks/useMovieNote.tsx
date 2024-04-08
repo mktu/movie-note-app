@@ -113,7 +113,7 @@ export const useMovieNote = ({
             hasPublicNote: hasPublicNote || false,
             html: (updatePublicNote && hasPublicNote) ? (await htmlConvertUtil?.convert() || '') : html || ''
         })
-    }, [detail, onSubmit, content, formattedWatchDate, stars, watchState, published, hasPublicNote, htmlConvertUtil, html])
+    }, [detail, onSubmit, content, formattedWatchDate, stars, watchState, hasPublicNote, htmlConvertUtil, html])
     const showPreview = useCallback((previewHtml: string) => {
         setMovieNotePreviewHtml(previewHtml)
         navigate(previewPath)

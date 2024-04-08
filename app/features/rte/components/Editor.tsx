@@ -78,7 +78,7 @@ const Editor: FC<Props> = ({
                             <ContentEditable
                                 className='text-text-main outline-none' />
                         </div>}
-                        placeholder={<div className='pointer-events-none absolute top-0 left-0 select-none text-text-label'>{placeholder}</div>}
+                        placeholder={<div className='pointer-events-none absolute left-0 top-0 select-none text-text-label'>{placeholder}</div>}
                     />
                 </div>
                 <LinkPlugins />

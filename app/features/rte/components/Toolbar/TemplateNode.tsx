@@ -7,7 +7,7 @@ import AddIcon from '~/components/icons/Add';
 import { TemplateNodePopup } from '../../features/templates/components';
 import { useRangeUpdater } from '../../hooks/useUpdater';
 import { $createLinkPreviewPlaceholderNode } from '../../features/link/components/link-preview-plugin/simple-link-preview/LinkPreviewPlaceholderNode';
-import { $isRootOrShadowRoot, $createParagraphNode, type RangeSelection } from 'lexical';
+import { $isRootOrShadowRoot, $createParagraphNode, type RangeSelection, $createLineBreakNode } from 'lexical';
 import { $wrapNodeInElement } from '@lexical/utils';
 import { $createYoutubePreviewPlaceholderNode } from '../../features/link/components/link-preview-plugin/youtube-preview/YoutubePreviewPlaceholderNode';
 import ClickAwayListener from '~/components/clickaway';
@@ -43,7 +43,7 @@ const TemplateNode: FC<TemplateNodeProps> = ({
             name: v.name,
             createDom: (selection: RangeSelection) => {
                 const node = $createLinkPreviewPlaceholderNode(v.placeholder, v.placeholderText)
-                selection.insertNodes([node])
+                selection.insertNodes([$createLineBreakNode(), node, $createLineBreakNode()])
                 if ($isRootOrShadowRoot(node.getParentOrThrow())) {
                     $wrapNodeInElement(node, $createParagraphNode).selectEnd();
                 }
