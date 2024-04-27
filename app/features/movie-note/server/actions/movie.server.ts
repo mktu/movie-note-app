@@ -1,4 +1,3 @@
-import authenticator from '~/features/auth/server/auth.server';
 import { registerMovieNote } from '~/features/movie-note/server/db';
 import { parseAddNote } from '~/features/movie-note/server/validation';
 import { MovieNoteError } from '~/features/movie-note/utils/error';
@@ -9,13 +8,14 @@ import { getSupabaseAdmin } from '@utils/server/db';
 import { putMovieNoteIds } from '../kv/tmdb';
 
 import type { ActionFunctionArgs } from "@remix-run/cloudflare";
+import { initServerContext } from '~/features/auth/server/init.server';
 
 type ActionData = {
     error?: string
 }
 
 export async function action({ request, context }: ActionFunctionArgs) {
-
+    const { authenticator } = initServerContext(context)
     const user = await authenticator.isAuthenticated(request)
 
     if (!user) {
@@ -25,7 +25,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
     try {
         const data = parseAddNote(await request.formData())
         await registerMovieNote(supabaseAdmin, data, user.id)
-        await putMovieNoteIds(context.MovieNoteIds as KVNamespace, {
+        const { cloudflare: { env: { MovieNoteIds } } } = context
+        await putMovieNoteIds(MovieNoteIds, {
             tmdbId: data.tmdbId,
             imdbId: data.imdbId || null,
             lng: data.lng

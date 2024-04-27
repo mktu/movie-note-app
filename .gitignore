@@ -14,8 +14,12 @@ node_modules
 /app/styles/app.css
 .mf/**
 .wrangler/**
+wrangler.toml
+worker-configuration.d.ts
 functions/metafile.js.json
 functions/metafile.server.json
+/build/client/
+/build/server/
 
 state.json
 .DS_Store

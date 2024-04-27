@@ -1,20 +1,20 @@
 import { createCookieSessionStorage } from "@remix-run/cloudflare";
-import type { SessionStorage } from "@remix-run/cloudflare";
+import type { AppLoadContext, SessionStorage } from "@remix-run/cloudflare";
 
 export const getExpires = () => {
   return new Date(Date.now() + 600_000)
 }
 
-let storage: SessionStorage | null = null
+export const initSessionStorage = (context: AppLoadContext) => {
+  const { cloudflare: { env } } = context
+  return initSessionStorageInFunction(env)
+}
 
-export const initSessionStorage = (context: any) => {
-  if (!context.COOKIE_SECRETS) {
+export const initSessionStorageInFunction = (env: Env) => {
+  if (!env.COOKIE_SECRETS) {
     throw Error('COOKIE_SECRETS is not defined')
   }
-  if (storage) {
-    return
-  }
-  storage = createCookieSessionStorage({
+  const storage = createCookieSessionStorage({
     // a Cookie from `createCookie` or the CookieOptions to create one
     cookie: {
       name: "__movie-note-app-session",
@@ -24,32 +24,32 @@ export const initSessionStorage = (context: any) => {
       maxAge: 600,
       path: "/",
       sameSite: "lax",
-      secrets: [context.COOKIE_SECRETS],
+      secrets: [env.COOKIE_SECRETS],
       secure: process.env.NODE_ENV === 'production',
     },
   });
-}
 
-const commitSession: SessionStorage['commitSession'] = async (arg) => {
-  if (!storage) {
-    throw Error('storage not init')
-  }
-  return await storage.commitSession(arg)
-}
-
-const getSession: SessionStorage['getSession'] =
-  async (arg) => {
+  const commitSession: SessionStorage['commitSession'] = async (arg) => {
     if (!storage) {
-      throw Error('storage not init')
+      throw Error('storage not init(commitSession)')
     }
-    return await storage.getSession(arg)
+    return await storage.commitSession(arg)
   }
 
-const destroySession: SessionStorage['destroySession'] = async (arg) => {
-  if (!storage) {
-    throw Error('storage not init')
+  const getSession: SessionStorage['getSession'] =
+    async (arg) => {
+      if (!storage) {
+        throw Error('storage not init(getSession)')
+      }
+      return await storage.getSession(arg)
+    }
+
+  const destroySession: SessionStorage['destroySession'] = async (arg) => {
+    if (!storage) {
+      throw Error('storage not init(destroySession)')
+    }
+    return await storage.destroySession(arg)
   }
-  return await storage.destroySession(arg)
+
+  return { destroySession, commitSession, getSession };
 }
-
-export { destroySession, commitSession, getSession };

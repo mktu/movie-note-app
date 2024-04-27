@@ -1,4 +1,3 @@
-import authenticator from '~/features/auth/server/auth.server';
 import { deleteNote } from '~/features/movie-note/server/db';
 import { MovieNoteError } from '~/features/movie-note/utils/error';
 
@@ -9,12 +8,13 @@ import { parseDeleteNote } from '../validation/delete-note';
 
 import type { ActionFunctionArgs } from "@remix-run/cloudflare";
 import { deletePublicNote } from '~/features/public-note/server';
+import { initServerContext } from '~/features/auth/server/init.server';
 
 type ActionData = {
     error?: string
 }
 export async function action({ request, context }: ActionFunctionArgs) {
-
+    const { authenticator } = initServerContext(context)
     const user = await authenticator.isAuthenticated(request)
 
     if (!user) {

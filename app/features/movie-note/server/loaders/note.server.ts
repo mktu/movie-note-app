@@ -1,4 +1,3 @@
-import authenticator from '~/features/auth/server/auth.server';
 import { loadMovieNote } from '~/features/movie-note/server/db';
 import { tmdbKv } from '~/features/movie-note/server/kv';
 import { getMovieNoteIds } from '~/features/movie-note/server/kv/tmdb';
@@ -14,8 +13,8 @@ import type { Credits, TmdbDetail, TmdbLng } from '~/features/tmdb';
 import type { ErrorKey } from '~/features/movie-note/utils/error';
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { loadPublicNoteIfExists } from '~/features/public-note/server';
-import { commitSession, getSession } from '~/features/auth/server/session';
 import { NoteActionResultSessionKey } from '../constants';
+import { initServerContext } from '~/features/auth/server/init.server';
 
 
 type ContentData = {
@@ -34,6 +33,7 @@ export type LorderData = {
 }
 
 export async function loader({ request, context, params }: LoaderFunctionArgs) {
+    const { authenticator, sessionStorage } = initServerContext(context)
     const user = await authenticator.isAuthenticated(request)
     const noteId = params.noteId;
     if (!user) {
@@ -49,7 +49,8 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const dbAdmin = getSupabaseAdmin(context)
     const counter = new PerformanceCounter()
     const t0 = counter.start('loadMovieNoteIds')
-    const ids = await getMovieNoteIds(context.MovieNoteIds as KVNamespace, noteId, user.id)
+    const { cloudflare: { env: { MovieNoteIds, TmdbInfo } } } = context
+    const ids = await getMovieNoteIds(MovieNoteIds, noteId, user.id)
     t0.comment(`id-cached=${Boolean(ids)}`)
     t0.stop()
 
@@ -69,11 +70,11 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
 
     const getTmdbDetail_ = async (tmdbId: string, lng: TmdbLng, tmdb: Tmdb) => {
         t2.start()
-        const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(context.TmdbInfo as KVNamespace, tmdbId, lng)
+        const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(TmdbInfo, tmdbId, lng)
         const tmdbDetail = tmdbDetailKv || await tmdb.getDetail(tmdbId)
         const hitKv = Boolean(tmdbDetailKv)
         if (!hitKv) {
-            await tmdbKv.putTmdbInfo(context.TmdbInfo as KVNamespace, tmdbDetail)
+            await tmdbKv.putTmdbInfo(TmdbInfo, tmdbDetail)
         }
         t2.comment(`disableKv=${disableKv},hit=${Boolean(tmdbDetailKv)}`)
         t2.stop()
@@ -146,7 +147,7 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     t4.finish()
     tall.finish()
 
-    const session = await getSession(
+    const session = await sessionStorage.getSession(
         request.headers.get("Cookie")
     );
     const message: number | null = session.get(NoteActionResultSessionKey) || null;
@@ -160,7 +161,7 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     }, {
         headers: {
             // only necessary with cookieSessionStorage
-            "Set-Cookie": await commitSession(session),
+            "Set-Cookie": await sessionStorage.commitSession(session),
         },
     })
 }

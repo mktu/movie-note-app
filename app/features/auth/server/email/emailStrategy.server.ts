@@ -1,18 +1,17 @@
-import { getSession, commitSession, getExpires } from '~/features/auth/server/session'
 import type { AdminClientType } from "@utils/supabaseAdmin.server"
 import SignupStrategy from './signup.server'
 import SigninStrategy from './signin.server'
 
-import __authenticator from '~/features/auth/server/auth.server'
+import type { AuthenticatorType } from '~/features/auth/server/auth.server';
 import { AuthError } from '../error.server'
-
-type AuthenticatorType = typeof __authenticator
+import type { SessionStorage } from '@remix-run/cloudflare'
+import { getExpires } from "../session";
 
 let signupStrategy: SignupStrategy | null = null
 let signinStrategy: SigninStrategy | null = null
 
 
-const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
+const applyEmailStorategy = (supabaseAdmin: AdminClientType, authenticator: AuthenticatorType) => {
 
     if (!signupStrategy) {
         signupStrategy = new SignupStrategy(
@@ -38,7 +37,7 @@ const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
                 }
             }
         );
-        __authenticator.use(signupStrategy);
+        authenticator.use(signupStrategy);
     }
     if (!signinStrategy) {
         signinStrategy = new SigninStrategy(
@@ -64,9 +63,9 @@ const initEmailAuthenticator = (supabaseAdmin: AdminClientType) => {
                 }
             }
         );
-        __authenticator.use(signinStrategy);
+        authenticator.use(signinStrategy);
     }
-    return __authenticator
+    return authenticator
 }
 
 const signup = async (authenticator: AuthenticatorType, request: Parameters<typeof authenticator.authenticate>[1],
@@ -79,13 +78,13 @@ const login = async (authenticator: AuthenticatorType, request: Parameters<typeo
     return await authenticator.authenticate('email-signin', request, options)
 }
 
-const saveSession = async (user: any, authenticator: AuthenticatorType, request: Request) => {
-    let session = await getSession(request.headers.get("Cookie"));
+const saveSession = async (user: any, authenticator: AuthenticatorType, request: Request, sessionStorage: SessionStorage) => {
+    let session = await sessionStorage.getSession(request.headers.get("Cookie"));
     // if we do have a successRedirect, we redirect to it and set the user
     // in the session sessionKey
     session.set(authenticator.sessionKey, user);
     session.set(authenticator.sessionStrategyKey || "strategy", signinStrategy?.name);
-    return await commitSession(session, {
+    return await sessionStorage.commitSession(session, {
         expires: getExpires(),
     })
 }
@@ -94,5 +93,5 @@ export {
     login,
     signup,
     saveSession,
-    initEmailAuthenticator
+    applyEmailStorategy
 } 
