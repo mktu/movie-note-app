@@ -21,7 +21,7 @@ const PreviewCard: FC<Props> = ({
                 <div className='flex items-center gap-1 text-text-main'>
                     <a href={ogp?.url} className='truncate underline'>{ogp?.title}</a>
                 </div>
-                <div id='description' className='text-sm text-text-label line-clamp-2'>
+                <div id='description' className='line-clamp-2 text-sm text-text-label'>
                     {ogp?.description}
                 </div>
                 <div className='mt-2 flex items-center gap-1 text-sm text-text-label'>

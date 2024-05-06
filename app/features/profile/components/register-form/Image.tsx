@@ -23,7 +23,7 @@ const Image: FC<Props> = ({
                 height={height}
                 alt='Not found'
                 src={src || ''} />
-            <label className='cursor-pointer rounded border border-primary-main py-2 px-4 text-primary-main hover:border-text-dark' htmlFor='file-upload'>
+            <label className='cursor-pointer rounded border border-primary-main px-4 py-2 text-primary-main hover:border-text-dark' htmlFor='file-upload'>
                 {t('change-image')}
                 <input name='profile-image' id="file-upload" type='file' className='hidden' onChange={handleChangeFile} />
             </label>

@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import type { FC } from 'react';
 import { useState } from 'react';
-import Youtube from 'react-youtube';
 import { IconButton } from '~/components/buttons';
 import AnglesLeft from '~/components/icons/AnglesLeft';
 import AnglesRight from '~/components/icons/AnglesRight';
