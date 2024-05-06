@@ -1,6 +1,7 @@
 {
   "name": "remix-template-cloudflare-pages",
   "private": true,
+  "type": "module",
   "description": "",
   "license": "",
   "sideEffects": false,
