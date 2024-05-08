@@ -5,12 +5,12 @@ import * as build from "../build/server";
 import { getLoadContext } from "../load-context";
 
 if (process.env.NODE_ENV === "development") {
-    logDevReady(build);
+    logDevReady(build as any);
 }
 
 
 const handleRequest = createPagesFunctionHandler({
-    build,
+    build: build as any,
     mode: build.mode,
     getLoadContext
 });

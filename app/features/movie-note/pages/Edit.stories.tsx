@@ -34,7 +34,9 @@ Default.args = {
         memo: null,
         created_at: '2020-02-02',
         updated_at: '2020-02-02',
-        watch_state: null
+        watch_state: null,
+        sort_index: 0,
+        html: ''
     },
     tmdbDetail: detail,
     tmdbCredits: credits

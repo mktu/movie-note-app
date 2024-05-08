@@ -2,7 +2,7 @@ import { RemixServer } from "@remix-run/react";
 import type { EntryContext } from "@remix-run/server-runtime";
 import { createInstance } from "i18next";
 import { renderToString } from "react-dom/server";
-import { I18nextProvider, initReactI18next } from "react-i18next";
+import { I18nextProvider, I18nextProviderProps, initReactI18next } from "react-i18next";
 import i18next, { lngs } from "./i18next.server";
 import i18n from './i18n'; // your i18n configuration file
 import resourcesToBackend from "i18next-resources-to-backend";
@@ -27,7 +27,7 @@ export default async function handleRequest(
     });
 
   let markup = renderToString(
-    <I18nextProvider i18n={instance}>
+    <I18nextProvider i18n={instance as I18nextProviderProps['i18n']}>
       <RemixServer context={remixContext} url={request.url} />
     </I18nextProvider>
   );

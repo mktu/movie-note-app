@@ -15,7 +15,9 @@
     "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev --compatibility-date=2023-08-14 ./build/client",
     "test:playwright": "playwright test",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "typecheck": "tsc",
+    "typegen": "wrangler types"
   },
   "dependencies": {
     "@headlessui/react": "1.7.18",
