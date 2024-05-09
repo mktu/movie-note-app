@@ -7,7 +7,7 @@ import {
   Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData
 } from '@remix-run/react';
 
-import styles from '~/styles/app.css?url';
+import styles from '../styles/app.css?url';
 
 import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
 import RootProviders from './providers/RootProviders';
