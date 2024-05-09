@@ -1,5 +1,5 @@
+import type { SessionStorage } from "@remix-run/cloudflare";
 import { Authenticator } from "remix-auth";
-import * as sessionStorage from "~/features/auth/server/session";
 
 export type AuthUserType = {
     provider: 'google',
@@ -12,7 +12,8 @@ export type AuthUserType = {
     id: string,
     email: string,
 }
+export const createAuthenticator = (sessionStorage: SessionStorage) => {
+    return new Authenticator<AuthUserType>(sessionStorage)
+}
 
-const authenticator = new Authenticator<AuthUserType>(sessionStorage)
-
-export default authenticator
+export type AuthenticatorType = Authenticator<AuthUserType>

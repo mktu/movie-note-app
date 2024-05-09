@@ -1,11 +1,11 @@
 import type { ActionFunctionArgs } from "@remix-run/cloudflare";
-import authenticator from '~/features/auth/server/auth.server';
 import { userDb } from '~/features/profile/server/db';
 
 import {
     json, redirect, unstable_createMemoryUploadHandler, unstable_parseMultipartFormData
 } from '@remix-run/cloudflare';
 import { getSupabaseAdmin } from '@utils/server/db';
+import { initServerContext } from "~/features/auth/server/init.server";
 
 interface ActionData {
     error?: string,
@@ -14,6 +14,7 @@ interface ActionData {
 
 export async function action({ request, context }: ActionFunctionArgs) {
     try {
+        const { authenticator } = initServerContext(context)
         const uploadHandler = unstable_createMemoryUploadHandler({
             maxPartSize: 5_000_000,
         });
@@ -32,8 +33,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
 
         let image = ''
         if (file) {
+            const { cloudflare: { env: { MovieNoteApp: r2 } } } = context
             const imageId = `profile-${user!.id}`
-            const r2 = context.MovieNoteApp as R2Bucket
             if (!r2) {
                 throw Error('R2 is not bound')
             }

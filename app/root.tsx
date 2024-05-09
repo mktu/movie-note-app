@@ -4,17 +4,19 @@ import i18next from '~/i18next.server';
 
 import { json } from '@remix-run/cloudflare';
 import {
-  Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData
+  Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData
 } from '@remix-run/react';
 
-import styles from '~/styles/app.css';
+import styles from '../styles/app.css?url';
 
 import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
 import RootProviders from './providers/RootProviders';
+import { initSessionStorage } from './features/auth/server/session';
 type LoaderData = { locale: string };
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({ request, context }) => {
   let locale = await i18next.getLocale(request);
+  initSessionStorage(context)
   return json<LoaderData>({ locale });
 };
 
@@ -61,7 +63,6 @@ export default function App() {
         </RootProviders>
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );

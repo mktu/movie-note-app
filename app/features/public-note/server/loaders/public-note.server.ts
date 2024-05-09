@@ -1,4 +1,3 @@
-import authenticator from '~/features/auth/server/auth.server';
 import { tmdbKv } from '~/features/movie-note/server/kv';
 import { setTmdbData, Tmdb } from '~/features/tmdb';
 
@@ -13,6 +12,7 @@ import { loadPublicNoteByViewId } from '../db';
 import { getSupabaseAdmin } from '@utils/server/db';
 import { userDb } from '~/features/profile/server/db';
 import type { UserType } from '~/features/profile/server/db/user.server';
+import { initServerContext } from '~/features/auth/server/init.server';
 
 
 type ContentData = {
@@ -28,6 +28,7 @@ export type LorderData = {
 }
 
 export async function loader({ request, context, params }: LoaderFunctionArgs) {
+    const { authenticator } = initServerContext(context)
     const authUser = await authenticator.isAuthenticated(request)
     const url = new URL(request.url);
     const lng: TmdbLng = url.searchParams.get('lng') as TmdbLng || 'ja';
@@ -44,13 +45,14 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
         return json<LorderData>({ error: 'public-note-not-found' })
     }
     const creator = await userDb.getUser(dbAdmin, publicNote.user_id);
+    const { cloudflare: { env: { TmdbInfo } } } = context
 
     const getTmdbDetail_ = async (tmdbId: string, lng: TmdbLng, tmdb: Tmdb) => {
-        const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(context.TmdbInfo as KVNamespace, tmdbId, lng)
+        const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(TmdbInfo, tmdbId, lng)
         const tmdbDetail = tmdbDetailKv || await tmdb.getDetail(tmdbId)
         const hitKv = Boolean(tmdbDetailKv)
         if (!hitKv) {
-            await tmdbKv.putTmdbInfo(context.TmdbInfo as KVNamespace, tmdbDetail)
+            await tmdbKv.putTmdbInfo(TmdbInfo, tmdbDetail)
         }
         return tmdbDetail
     }

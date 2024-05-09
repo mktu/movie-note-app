@@ -1,4 +1,3 @@
-import authenticator from '~/features/auth/server/auth.server';
 
 import { json, redirect } from '@remix-run/cloudflare';
 import { getSupabaseAdmin } from '@utils/server/db';
@@ -8,13 +7,14 @@ import type { ActionFunctionArgs } from "@remix-run/cloudflare";
 import { parseAddTemplate } from '../validation/addTemplate';
 import { getTemplate, registerTemplate } from '../db/template';
 import { NoteTemplateError } from '../../utils/error';
+import { initServerContext } from '~/features/auth/server/init.server';
 
 type ActionData = {
     error?: string
 }
 
 export async function action({ request, context }: ActionFunctionArgs) {
-
+    const { authenticator } = initServerContext(context)
     const user = await authenticator.isAuthenticated(request)
 
     if (!user) {

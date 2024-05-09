@@ -1,4 +1,3 @@
-import authenticator from '~/features/auth/server/auth.server';
 import { getImdbRateKv } from '~/features/imdb/server/kv';
 import { tmdbKv } from '~/features/movie-note/server/kv';
 import { setTmdbData, Tmdb } from '~/features/tmdb';
@@ -15,6 +14,7 @@ import type { Video } from '~/features/tmdb/utils';
 import type { MovieNoteType } from '../db';
 import { loadMovieNoteIfExists } from '../db';
 import { getSupabaseAdmin } from '@utils/supabaseAdmin.server';
+import { initServerContext } from '~/features/auth/server/init.server';
 
 type ContentData = {
     tmdbDetail: TmdbDetail,
@@ -31,6 +31,7 @@ export type LorderData = {
 }
 
 export async function loader({ request, context, params }: LoaderFunctionArgs) {
+    const { authenticator } = initServerContext(context)
     const user = await authenticator.isAuthenticated(request)
     const url = new URL(request.url);
     const lng = url.searchParams.get('lng');
@@ -58,13 +59,15 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
 
     const tall = counter.start('all')
 
+    const { cloudflare: { env: { TmdbInfo, ImdbInfo } } } = context
+
     const getTmdbDetail_ = async (tmdbId: string, lng: TmdbLng, tmdb: Tmdb) => {
         t1.start()
-        const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(context.TmdbInfo as KVNamespace, tmdbId, lng)
+        const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbKv(TmdbInfo, tmdbId, lng)
         const tmdbDetail = tmdbDetailKv || await tmdb.getDetail(tmdbId)
         const hitKv = Boolean(tmdbDetailKv)
         if (!hitKv) {
-            await tmdbKv.putTmdbInfo(context.TmdbInfo as KVNamespace, tmdbDetail)
+            await tmdbKv.putTmdbInfo(TmdbInfo, tmdbDetail)
         }
         t1.comment(`disableKv=${disableKv},hit=${Boolean(tmdbDetailKv)}`)
         t1.stop()
@@ -80,7 +83,7 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
 
     const getImdbRate_ = async (imdbId: string | null) => {
         t3.start()
-        const imdbRate = imdbId ? await getImdbRateKv(context.ImdbInfo as KVNamespace, imdbId) : null
+        const imdbRate = imdbId ? await getImdbRateKv(ImdbInfo, imdbId) : null
         t3.stop()
         return imdbRate
     }

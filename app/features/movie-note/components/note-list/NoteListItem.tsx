@@ -32,7 +32,7 @@ const NoteListItem: FC<Props> = ({
     const { isMovieNoteKvDisabled } = useMovieNoteKvDisabled()
     const { setOpenMobileMenu } = useAppLayoutContext()
     const { t } = useTranslation('common')
-    const to = isMovieNoteKvDisabled ? `/app/notes/${movieNoteListViewItem.tmdb_id}?disableKv=true` : `/app/notes/${movieNoteListViewItem.tmdb_id}`
+    const to = isMovieNoteKvDisabled() ? `/app/notes/${movieNoteListViewItem.tmdb_id}?disableKv=true` : `/app/notes/${movieNoteListViewItem.tmdb_id}`
     const watchedState = movieNoteListViewItem.watch_state as WatchState
     return (
         <>

@@ -42,7 +42,7 @@ const Summary: FC<Props> = ({
             </div>
             <div className='ml-4 flex w-full flex-1 flex-col gap-1 overflow-hidden text-text-label'>
                 <div>{detail?.title}</div>
-                <p id='detail' className='text-sm line-clamp-2'>
+                <p id='detail' className='line-clamp-2 text-sm'>
                     {detail?.overview}
                 </p>
                 <div className='text-sm' id='release-date'>({release_date} {t('release')})</div>

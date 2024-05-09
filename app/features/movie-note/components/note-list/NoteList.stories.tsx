@@ -24,20 +24,26 @@ Default.args = {
         stars: 5,
         user_id: '1',
         admiration_date: '2020-10-21',
-        thumbnail: '/ghKQ6it5j7KjdYghT5EDthVNXlD.jpg'
+        thumbnail: '/ghKQ6it5j7KjdYghT5EDthVNXlD.jpg',
+        watch_state: 'watched',
+        sort_index: 0
     }, {
         tmdb_id: '2',
         title: 'test2',
         stars: 5,
         user_id: '1',
         admiration_date: '2020-10-21',
-        thumbnail: null
+        thumbnail: null,
+        watch_state: 'watched',
+        sort_index: 1
     }, {
         tmdb_id: '3',
         title: 'すごおおおおおおおおおおおおおおおおおおおおおおく長いタイトル',
         stars: 0,
         user_id: '1',
         admiration_date: '2020-10-21',
-        thumbnail: null
+        thumbnail: null,
+        watch_state: 'watched',
+        sort_index: 2
     }]
 }

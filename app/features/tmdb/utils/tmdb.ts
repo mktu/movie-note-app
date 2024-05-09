@@ -1,3 +1,5 @@
+import { AppLoadContext } from "@remix-run/cloudflare"
+
 const searchBasePath = 'https://api.themoviedb.org/3/search/movie'
 const searchActorPath = 'https://api.themoviedb.org/3/search/person'
 const detailBasePath = 'https://api.themoviedb.org/3/movie'
@@ -218,9 +220,8 @@ export default class Tmdb {
     }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const setTmdbData = (context: any) => {
+export const setTmdbData = (context: AppLoadContext) => {
     return {
-        apiKey: context.TMDB_API_KEY as string
+        apiKey: context.cloudflare.env.TMDB_API_KEY
     }
 }

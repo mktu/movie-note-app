@@ -23,7 +23,7 @@ const SearchActor: FC<Props> = ({
                 onChange={(e) => { setQuery(e.target.value) }} />
             {!searchResult?.results || searchResult.results.length === 0 ?
                 query === '' ? <></> : (
-                    <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
+                    <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
                         {searchResult ? 'Nothing found' : 'Loading...'}
                     </div>
                 ) : (
