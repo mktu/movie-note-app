@@ -1,0 +1,16 @@
+name = "movie-note-app"
+compatibility_date = "2023-08-14"
+
+kv_namespaces = [
+  { binding = "ImdbInfo", id = "ImdbInfo" },
+  { binding = "TmdbInfo", id = "TmdbInfo" },
+  { binding = "MovieNoteIds", id = "MovieNoteIds" },
+  { binding = "OgpInfo", id = "OgpInfo" }
+]
+
+r2_buckets  = [
+  { binding = "MovieNoteApp", bucket_name = "MovieNoteApp"},
+  { binding = "MovieNoteImage", bucket_name = "MovieNoteImage"}
+]
+
+[vars]
