@@ -98,5 +98,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: "movie-note-app"
-          directory: "public"
+          directory: "build/client"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
