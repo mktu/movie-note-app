@@ -58,14 +58,13 @@ jobs:
 
       - run: NODE_ENV=test npm run build
 
-      - name: Create dot env file
+      - name: Create wrangler.toml
         run: |
           mv wrangler.sample.toml wrangler.toml
           echo "APP_SUPABASE_URL='${{ secrets.APP_SUPABASE_URL }}'" >> wrangler.toml
           echo "APP_SUPABASE_SECRET_KEY='${{ secrets.APP_SUPABASE_SECRET_KEY }}'" >> wrangler.toml
           echo "COOKIE_SECRETS='${{ secrets.COOKIE_SECRETS }}'" >> wrangler.toml
           echo "TMDB_API_KEY='${{ secrets.TMDB_API_KEY }}'" >> wrangler.toml
-          cat wrangler.toml
 
       - name: run playwright test
         run: npm run test:playwright
