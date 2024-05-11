@@ -65,6 +65,7 @@ jobs:
           echo "APP_SUPABASE_SECRET_KEY='${{ secrets.APP_SUPABASE_SECRET_KEY }}'" >> wrangler.toml
           echo "COOKIE_SECRETS='${{ secrets.COOKIE_SECRETS }}'" >> wrangler.toml
           echo "TMDB_API_KEY='${{ secrets.TMDB_API_KEY }}'" >> wrangler.toml
+          cat wrangler.toml
 
       - name: run playwright test
         run: npm run test:playwright
