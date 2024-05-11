@@ -1,16 +1,11 @@
 import { json } from "@remix-run/cloudflare"
-import authenticator from "~/features/auth/server/auth.server";
-import { initSessionStorage } from "~/features/auth/server/session";
+import { getSupabaseAdminFunction } from "@utils/supabaseAdmin.server";
+import { initFunctionContext } from "~/features/auth/server/init.server";
 import { updateUserSettings } from "~/features/movie-note/server/db";
 import { parseUserSettings } from "~/features/movie-note/server/validation/parseUserSetting";
-import { getSupabaseAdmin } from "~/features/profile/server/db"
 
-export const onRequestPut: PagesFunction<{
-    COOKIE_SECRETS: string,
-    APP_SUPABASE_URL: string,
-    APP_SUPABASE_SECRET_KEY: string
-}> = async ({ env, request }) => {
-    initSessionStorage(env)
+export const onRequestPut: PagesFunction<Env> = async ({ env, request }) => {
+    const { authenticator } = initFunctionContext(env)
     const authUser = await authenticator.isAuthenticated(request)
     if (!authUser) {
         return new Response(`user is unauthorized`, {
@@ -18,7 +13,7 @@ export const onRequestPut: PagesFunction<{
         })
     }
     const kv = parseUserSettings(await request.json())
-    const dbAdmin = getSupabaseAdmin(env)
+    const dbAdmin = getSupabaseAdminFunction(env)
     await updateUserSettings(dbAdmin, authUser.id, [kv])
 
     return json({

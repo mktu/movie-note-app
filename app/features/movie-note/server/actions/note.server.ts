@@ -1,4 +1,3 @@
-import authenticator from '~/features/auth/server/auth.server';
 import { updateMovieNote } from '~/features/movie-note/server/db';
 import { parseUpdateNote } from '~/features/movie-note/server/validation/updateNote';
 import { MovieNoteError } from '~/features/movie-note/utils/error';
@@ -9,14 +8,14 @@ import { getSupabaseAdmin } from '@utils/server/db';
 import type { ActionFunctionArgs } from "@remix-run/cloudflare";
 import { putMovieNoteIds } from '../kv/tmdb';
 import { updatePublicNoteOnly } from '~/features/public-note/server';
-import { commitSession, getSession } from '~/features/auth/server/session';
 import { NoteActionResultSessionKey } from '../constants';
+import { initServerContext } from '~/features/auth/server/init.server';
 
 type ActionData = {
     error?: string
 }
 export async function action({ request, context }: ActionFunctionArgs) {
-
+    const { authenticator, sessionStorage } = initServerContext(context)
     const user = await authenticator.isAuthenticated(request)
 
     if (!user) {
@@ -26,7 +25,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
     try {
         const data = parseUpdateNote(await request.formData())
         await updateMovieNote(supabaseAdmin, data, user.id)
-        await putMovieNoteIds(context.MovieNoteIds as KVNamespace, {
+        const { cloudflare: { env: { MovieNoteIds } } } = context
+        await putMovieNoteIds(MovieNoteIds, {
             tmdbId: data.tmdbId,
             imdbId: data.imdbId || null,
             lng: data.lng
@@ -39,7 +39,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
             }, user.id)
         }
 
-        const session = await getSession(
+        const session = await sessionStorage.getSession(
             request.headers.get("Cookie")
         );
 
@@ -51,7 +51,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
         return json<ActionData>({
         }, {
             status: 200, headers: {
-                "Set-Cookie": await commitSession(session)
+                "Set-Cookie": await sessionStorage.commitSession(session)
             }
         })
     } catch (e) {

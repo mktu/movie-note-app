@@ -37,11 +37,12 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
     }
     if (!disableKv) {
         const t0 = counter.start('tmdbKv.getTmdbTrends')
-        const trendsFromKv = await tmdbKv.getTmdbTrends(context.TmdbInfo as KVNamespace, tmdb.lng)
+        const { cloudflare: { env: { TmdbInfo } } } = context
+        const trendsFromKv = await tmdbKv.getTmdbTrends(TmdbInfo, tmdb.lng)
         t0.finish()
         if (!trendsFromKv) {
             trends = await getTrendsFromTmdb()
-            tmdbKv.putTmdnTrends(context.TmdbInfo as KVNamespace, tmdb.lng, trends)
+            tmdbKv.putTmdnTrends(TmdbInfo, tmdb.lng, trends)
         } else {
             trends = trendsFromKv
         }

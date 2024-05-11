@@ -1,7 +1,7 @@
 import { GeneralError } from '~/components/error';
 import { PublicNote } from '~/features/public-note/pages';
 import { loader } from '~/features/public-note/server/loaders/public-note.server';
-import toastStyles from 'react-toastify/dist/ReactToastify.css';
+import toastStyles from 'react-toastify/dist/ReactToastify.css?url';
 import UserProvider from '~/providers/user';
 
 import { useLoaderData } from '@remix-run/react';

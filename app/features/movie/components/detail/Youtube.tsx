@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import type { FC } from 'react';
 import { useState } from 'react';
-import Youtube from 'react-youtube';
 import { IconButton } from '~/components/buttons';
 import AnglesLeft from '~/components/icons/AnglesLeft';
 import AnglesRight from '~/components/icons/AnglesRight';
@@ -28,7 +27,13 @@ const YoutubeContainer: FC<Props> = ({
                 )} />
             </IconButton>
             <div className='w-full md:min-h-[360px]'>
-                <Youtube iframeClassName='w-full' videoId={trailers[current].key} />
+                <iframe
+                    className='w-full md:min-h-[360px]'
+                    src={`https://www.youtube.com/embed/${trailers[current].key}`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen={true}
+                    title="YouTube video"
+                />
             </div>
             <IconButton name='next' className={clsx('hidden h-[250px] rounded-sm p-1 md:block',
                 'bg-gray-100'

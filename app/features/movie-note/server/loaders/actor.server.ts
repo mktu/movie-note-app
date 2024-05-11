@@ -1,4 +1,3 @@
-import authenticator from '~/features/auth/server/auth.server';
 import { redirect, type LoaderFunctionArgs, json } from "@remix-run/cloudflare";
 import type { TmdbLng, MovieCredits, Actor } from '~/features/tmdb';
 import { setTmdbData, Tmdb } from '~/features/tmdb';
@@ -6,6 +5,7 @@ import type { ErrorKey } from '../../utils/error';
 import { getSearchParamAsBoolean } from '@utils/searchparam.server';
 import { PerformanceCounter } from '@utils/performance';
 import { tmdbKv } from '../kv';
+import { initServerContext } from "~/features/auth/server/init.server";
 
 type ContentData = {
     actor: Actor,
@@ -19,6 +19,7 @@ export type LorderData = {
 }
 
 export async function loader({ request, context, params }: LoaderFunctionArgs) {
+    const { authenticator } = initServerContext(context)
     const user = await authenticator.isAuthenticated(request)
 
     const url = new URL(request.url);
@@ -40,14 +41,15 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const tmdb = new Tmdb(tmdbData.apiKey, lng === 'ja' ? 'ja' : 'en')
     const t1 = counter.create('tmdbActor')
     const t2 = counter.create('tmdbMovieCredits')
+    const { cloudflare: { env: { TmdbInfo } } } = context
 
     const getTmdbActor_ = async (actorId: string, lng: TmdbLng, tmdb: Tmdb) => {
         t1.start()
-        const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbActor(context.TmdbInfo as KVNamespace, actorId, lng)
+        const tmdbDetailKv = disableKv ? null : await tmdbKv.getTmdbActor(TmdbInfo, actorId, lng)
         const tmdbActor = tmdbDetailKv || await tmdb.getActor(actorId)
         const hitKv = Boolean(tmdbDetailKv)
         if (!hitKv) {
-            await tmdbKv.putTmdbActor(context.TmdbInfo as KVNamespace, tmdbActor, lng)
+            await tmdbKv.putTmdbActor(TmdbInfo, tmdbActor, lng)
         }
         t1.comment(`disableKv=${disableKv},hit=${Boolean(tmdbDetailKv)}`)
         t1.stop()
@@ -56,11 +58,11 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
 
     const getTmdbMovieCredits_ = async (actorId: string, lng: TmdbLng, tmdb: Tmdb) => {
         t2.start()
-        const tmdbMovieCreditsKv = disableKv ? null : await tmdbKv.getTmdbMovieCredits(context.TmdbInfo as KVNamespace, actorId, lng)
+        const tmdbMovieCreditsKv = disableKv ? null : await tmdbKv.getTmdbMovieCredits(TmdbInfo, actorId, lng)
         const tmdbMovieCredits = tmdbMovieCreditsKv || await tmdb.getMovieCredit(actorId)
         const hitKv = Boolean(tmdbMovieCreditsKv)
         if (!hitKv) {
-            await tmdbKv.putTmdbMovieCredits(context.TmdbInfo as KVNamespace, tmdbMovieCredits, lng)
+            await tmdbKv.putTmdbMovieCredits(TmdbInfo, tmdbMovieCredits, lng)
         }
         t2.comment(`disableKv=${disableKv},hit=${Boolean(tmdbMovieCreditsKv)}`)
         t2.stop()

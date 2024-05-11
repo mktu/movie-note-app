@@ -1,16 +1,17 @@
 
 import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { redirect, json } from "@remix-run/cloudflare";
-import authenticator from '~/features/auth/server/auth.server'
-import { login, initEmailAuthenticator, saveSession } from "~/features/auth/server/email";
+import { applyEmailSigninStorategy, login, saveSession } from "~/features/auth/server/email";
 import { getSupabaseAdmin } from "@utils/supabaseAdmin.server";
 import { hasAuth } from "~/features/auth/server/db";
 import Login from '~/features/auth/components/login'
 import Layout from '~/features/auth/components/Layout'
 import type { FC } from "react";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
+import { initServerContext } from "~/features/auth/server/init.server";
 
 export const loader: LoaderFunction = async ({ request, context }) => {
+  const { authenticator } = initServerContext(context)
   const user = await authenticator.isAuthenticated(request)
   if (!user) {
     return json({})
@@ -24,10 +25,11 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 };
 
 export const action: ActionFunction = async ({ request, context }) => {
+  const { sessionStorage, authenticator } = initServerContext(context)
   const adminDb = getSupabaseAdmin(context)
-  const auth = initEmailAuthenticator(adminDb)
-  const user = await login(auth, request)
-  const cookie = await saveSession(user, auth, request)
+  applyEmailSigninStorategy(adminDb, authenticator)
+  const user = await login(authenticator, request)
+  const cookie = await saveSession(user, authenticator, request, sessionStorage, true)
   const redirextOption = {
     headers: { "Set-Cookie": cookie },
   }

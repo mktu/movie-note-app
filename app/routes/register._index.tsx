@@ -1,6 +1,5 @@
 import type { ActionFunctionArgs, LoaderFunction } from "@remix-run/cloudflare";
 import Layout from '~/features/auth/components/Layout';
-import authenticator from '~/features/auth/server/auth.server';
 import { hasAuth } from '~/features/auth/server/db';
 import { Register } from '~/features/profile/pages';
 import { userDb } from '~/features/profile/server/db';
@@ -8,6 +7,7 @@ import { userDb } from '~/features/profile/server/db';
 import { json, redirect } from '@remix-run/cloudflare';
 import { useActionData, useLoaderData, useSubmit } from '@remix-run/react';
 import { getSupabaseAdmin } from '@utils/server/db';
+import { initServerContext } from "~/features/auth/server/init.server";
 
 interface ActionData {
     error?: string
@@ -18,6 +18,7 @@ interface LorderData {
 }
 
 export const loader: LoaderFunction = async ({ request, context }) => {
+    const { authenticator } = initServerContext(context)
     const user = await authenticator.isAuthenticated(request)
     if (!user) {
         return redirect('/login')
@@ -39,6 +40,7 @@ export const loader: LoaderFunction = async ({ request, context }) => {
 }
 
 export async function action({ request, context }: ActionFunctionArgs) {
+    const { authenticator } = initServerContext(context)
     const formData = await request.formData()
     const adminDb = getSupabaseAdmin(context)
     const name = formData.get("nickname") as string || ''

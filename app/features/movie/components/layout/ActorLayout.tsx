@@ -13,7 +13,7 @@ export const ActorLayout: FC<Props> = ({
     movieCredits
 }) => {
     return (
-        <div className='relative flex w-full flex-col gap-2 py-5 px-10'>
+        <div className='relative flex w-full flex-col gap-2 px-10 py-5'>
             {header}
             <div className='flex w-full items-center'>
                 {actor}

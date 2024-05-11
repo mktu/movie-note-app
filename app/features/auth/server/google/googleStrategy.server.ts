@@ -1,25 +1,22 @@
-import { GoogleStrategy } from "remix-auth-google";
-import { getSession, commitSession, getExpires } from '~/features/auth/server/session'
-import __authenticator from '~/features/auth/server/auth.server'
-import type { AuthUserType } from '~/features/auth/server/auth.server'
+import { GoogleStrategy, GoogleStrategyDefaultName } from "remix-auth-google";
+import { getExpires } from '~/features/auth/server/session'
+import type { AuthUserType, AuthenticatorType } from '~/features/auth/server/auth.server'
+import type { AppLoadContext, SessionStorage } from "@remix-run/cloudflare";
 
-let googleStrategy: GoogleStrategy<AuthUserType> | null = null
-type AuthenticatorType = typeof __authenticator
 
-const getAuthenticator = ({
+const applyAuthenticator = ({
   clientID,
   clientSecret,
-  callbackURL
+  callbackURL,
+  authenticator
 }: {
   clientID: string,
   clientSecret: string,
-  callbackURL: string
+  callbackURL: string,
+  authenticator: AuthenticatorType
 }) => {
 
-  if (googleStrategy) {
-    return __authenticator
-  }
-  googleStrategy = new GoogleStrategy<AuthUserType>(
+  const googleStrategy = new GoogleStrategy<AuthUserType>(
     {
       clientID,
       clientSecret,
@@ -36,20 +33,26 @@ const getAuthenticator = ({
       }
     }
   );
-  __authenticator.use(googleStrategy);
-  return __authenticator
+  authenticator.use(googleStrategy);
+  return authenticator
 }
 
-const initGoogleAuthenticator = (context: any) => {
+const initGoogleAuthenticator = (context: AppLoadContext, authenticator: AuthenticatorType) => {
+
   const {
-    GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET,
-    GOOGLE_CALLBACK_URL
+    cloudflare: {
+      env: {
+        GOOGLE_CLIENT_ID,
+        GOOGLE_CLIENT_SECRET,
+        GOOGLE_CALLBACK_URL
+      }
+    }
   } = context
-  return getAuthenticator({
+  return applyAuthenticator({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: GOOGLE_CALLBACK_URL
+    callbackURL: GOOGLE_CALLBACK_URL,
+    authenticator
   })
 }
 
@@ -58,19 +61,19 @@ const authenticate = async (authenticator: AuthenticatorType, request: Parameter
   return await authenticator.authenticate('google', request, options)
 }
 
-const saveSession = async (user: any, authenticator: AuthenticatorType, request: Request) => {
-  let session = await getSession(request.headers.get("Cookie"));
+const saveGoogleSession = async (user: any, authenticator: AuthenticatorType, request: Request, sessionStorage: SessionStorage) => {
+  let session = await sessionStorage.getSession(request.headers.get("Cookie"));
   // if we do have a successRedirect, we redirect to it and set the user
   // in the session sessionKey
   session.set(authenticator.sessionKey, user);
-  session.set(authenticator.sessionStrategyKey || "strategy", googleStrategy?.name);
-  return await commitSession(session, {
+  session.set(authenticator.sessionStrategyKey || "strategy", GoogleStrategyDefaultName);
+  return await sessionStorage.commitSession(session, {
     expires: getExpires(),
   })
 }
 
 export {
   authenticate,
-  saveSession,
+  saveGoogleSession,
   initGoogleAuthenticator
 } 

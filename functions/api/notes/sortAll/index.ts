@@ -1,17 +1,12 @@
 import { json } from "@remix-run/cloudflare"
-import authenticator from "~/features/auth/server/auth.server";
-import { initSessionStorage } from "~/features/auth/server/session";
+import { getSupabaseAdminFunction } from "@utils/supabaseAdmin.server";
+import { initFunctionContext } from "~/features/auth/server/init.server";
 import { sortMovieNoteList } from "~/features/movie-note/server/db";
 import { parseSortAll } from "~/features/movie-note/server/validation/parseSortAll";
 import type { SortType } from "~/features/movie-note/type-defs";
-import { getSupabaseAdmin } from "~/features/profile/server/db"
 
-export const onRequestPut: PagesFunction<{
-    COOKIE_SECRETS: string,
-    APP_SUPABASE_URL: string,
-    APP_SUPABASE_SECRET_KEY: string
-}> = async ({ env, request }) => {
-    initSessionStorage(env)
+export const onRequestPut: PagesFunction<Env> = async ({ env, request }) => {
+    const { authenticator } = initFunctionContext(env)
     const authUser = await authenticator.isAuthenticated(request)
     if (!authUser) {
         return new Response(`user is unauthorized`, {
@@ -19,7 +14,7 @@ export const onRequestPut: PagesFunction<{
         })
     }
     const { sortType } = parseSortAll(await request.json())
-    const dbAdmin = getSupabaseAdmin(env)
+    const dbAdmin = getSupabaseAdminFunction(env)
     await sortMovieNoteList(dbAdmin, authUser.id, sortType as SortType)
 
     return json({
