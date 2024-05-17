@@ -20,7 +20,7 @@
     "typegen": "wrangler types"
   },
   "dependencies": {
-    "@headlessui/react": "1.7.18",
+    "@headlessui/react": "1.7.19",
     "@lexical/headless": "0.13.1",
     "@lexical/react": "0.13.1",
     "@microlink/mql": "0.10.33",
