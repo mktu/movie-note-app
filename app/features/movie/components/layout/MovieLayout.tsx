@@ -22,6 +22,7 @@ export const MovieLayout: FC<Props> = ({
         <div className='relative w-full px-5 md:px-10'>
             {header}
             <Transition
+                as={'div'}
                 className='flex w-full flex-col gap-2 overflow-hidden'
                 show={Boolean(movieInfo)}
                 enter="transition-opacity duration-75"
