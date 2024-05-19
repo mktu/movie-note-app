@@ -23,7 +23,7 @@ const LinkPreview: FC<Props> = ({
         <div className='w-full overflow-hidden'>
             {!loading && (
                 <IconButton name='remove' className='absolute right-2 top-1' onClick={onClickRemove}>
-                    <X className='h-5 w-5 fill-text-label' />
+                    <X className='size-5 fill-text-label' />
                 </IconButton>)}
             {loading ? (
                 <PictureAndLines width={500} height={50} picW={100} picH={50} lineCount={4} />

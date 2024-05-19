@@ -41,7 +41,7 @@ const New = forwardRef<HTMLDivElement, Props>(({
                     <TextInput
                         onChange={(e) => { setTitle(e.target.value) }}
                         addonLeft={
-                            <PenIcon className='h-5 w-5 fill-text-label' />
+                            <PenIcon className='size-5 fill-text-label' />
                         }
                         placeholder='テンプレートのタイトルを入力'
                         className='group w-full'
@@ -50,7 +50,7 @@ const New = forwardRef<HTMLDivElement, Props>(({
                 </div>
                 <OutlinedButton border='border-2 border-text-main group-hover:border-text-main' className='group ml-auto flex items-center gap-1 bg-surface-main'
                     onClick={() => { onSave(title) }}>
-                    <AddFill className='h-5 w-5 fill-text-main group-hover:fill-text-dark' />
+                    <AddFill className='size-5 fill-text-main group-hover:fill-text-dark' />
                     <span className='text-text-main group-hover:text-text-dark'>{t('save')}</span>
                 </OutlinedButton>
             </div>

@@ -44,7 +44,7 @@ const ImageComponent: FC<Props> = ({
                     setIsError(true)
                 }}
             />
-            <span onPointerDown={(e) => { startDrag(e, 'right') }} className={`absolute top-1/2 right-4 h-20 w-2 translate-x-1/2 -translate-y-1/2 
+            <span onPointerDown={(e) => { startDrag(e, 'right') }} className={`absolute right-4 top-1/2 h-20 w-2 -translate-y-1/2 translate-x-1/2 
                 cursor-e-resize rounded border border-border-main bg-text-main opacity-0 
                 transition-opacity duration-300 ${(!isResizing && !isError) && 'group-hover:opacity-100'}`} />
         </span>

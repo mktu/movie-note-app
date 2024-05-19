@@ -22,7 +22,7 @@ const YoutubeContainer: FC<Props> = ({
             )} disabled={current === 0} onClick={() => {
                 setCurrent(before => before - 1)
             }}>
-                <AnglesLeft className={clsx('h-5 w-5',
+                <AnglesLeft className={clsx('size-5',
                     current === 0 ? 'fill-gray-300' : 'fill-gray-700'
                 )} />
             </IconButton>
@@ -40,7 +40,7 @@ const YoutubeContainer: FC<Props> = ({
             )} disabled={current >= trailers.length - 1} onClick={() => {
                 setCurrent(before => before + 1)
             }}>
-                <AnglesRight className={clsx('h-5 w-5',
+                <AnglesRight className={clsx('size-5',
                     current >= trailers.length - 1 ? 'fill-gray-300' : 'fill-gray-700'
                 )} />
             </IconButton>

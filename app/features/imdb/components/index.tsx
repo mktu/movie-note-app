@@ -17,7 +17,7 @@ const Imdb: FC<Props> = ({
 }) => {
     return (
         <a className={clsx('flex items-center', className)} href={`https://www.imdb.com/title/${imdbId}`} target='_blank' rel='noopener noreferrer'>
-            <ImdbIcon className='mr-2 h-10 w-10' />
+            <ImdbIcon className='mr-2 size-10' />
             <div className='flex items-center text-text-label'>
                 <span role='img' aria-label='star' className='mr-1'>⭐️</span>
                 <span>{rate}</span>

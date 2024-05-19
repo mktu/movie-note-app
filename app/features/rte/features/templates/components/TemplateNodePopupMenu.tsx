@@ -29,7 +29,7 @@ const TemplateNodePopupMenu: FC<Props> = ({
                 >
                     {({ checked }) => (
                         <>
-                            <CheckIcon className={`h-5 w-5 ${checked ? 'fill-green-400' : 'fill-text-placeholder'}`} />
+                            <CheckIcon className={`size-5 ${checked ? 'fill-green-400' : 'fill-text-placeholder'}`} />
                             <span className=''>
                                 {item}
                             </span>

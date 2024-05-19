@@ -22,7 +22,7 @@ const FilterMenu: FC<Props> = ({ onFilter, filterType }) => {
     return (
         <Menu as='div'>
             <Menu.Button>
-                <Filter className={clsx('h-5 w-5 hover:fill-text-main',
+                <Filter className={clsx('size-5 hover:fill-text-main',
                     filterType && filterType !== 'all' ? 'fill-text-main' : 'fill-text-label')} />
             </Menu.Button>
             <Menu.Items className={'absolute z-20 mt-2 w-[128px] rounded border border-border-dark bg-white py-2 text-sm'}>
@@ -32,7 +32,7 @@ const FilterMenu: FC<Props> = ({ onFilter, filterType }) => {
                             filterType === v ? 'text-text-dark' : '')} onClick={async () => {
                                 onFilter(v as FilterType)
                             }}>
-                            <Check className={clsx('h-4 w-4 fill-text-main group-hover:opacity-100', filterType === v ? 'opacity-100' : 'opacity-10')} />
+                            <Check className={clsx('size-4 fill-text-main group-hover:opacity-100', filterType === v ? 'opacity-100' : 'opacity-10')} />
                             <span>{targets[v]}</span>
                         </TextButton>
                     )}</Menu.Item>

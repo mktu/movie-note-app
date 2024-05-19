@@ -23,7 +23,7 @@ const Dropdown: FC<Props> = ({
         <Menu as='div'>
             <Menu.Button className='flex w-full items-center p-2 text-text-label hover:bg-surface-hover focus:outline-none'>
                 <span className='mr-1'>{label ? label : selected ? menuItems[selected].label : defaultSelected ? menuItems[defaultSelected].label : ''}</span>
-                <AngleDown className='h-4 w-4 fill-text-label' />
+                <AngleDown className='size-4 fill-text-label' />
             </Menu.Button>
             <Menu.Items className="absolute z-20 mx-2 flex w-[128px] flex-col gap-1 rounded border-border-dark bg-white p-2 text-text-label shadow focus:outline-none">
                 {Object.keys(menuItems).map((key) => (

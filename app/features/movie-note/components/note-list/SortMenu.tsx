@@ -22,7 +22,7 @@ const SortMenu: FC<Props> = ({ onSort }) => {
     return (
         <Menu as='div'>
             <Menu.Button>
-                <Sort className={clsx('h-5 w-5 fill-text-label hover:fill-text-main')} />
+                <Sort className={clsx('size-5 fill-text-label hover:fill-text-main')} />
             </Menu.Button>
             <Menu.Items className={'absolute z-20 mt-2 w-[256px] rounded border border-border-dark bg-white py-2 text-sm'}>
                 {Object.keys(targets).map(v => (

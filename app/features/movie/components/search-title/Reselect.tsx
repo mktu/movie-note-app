@@ -28,7 +28,7 @@ const Search: FC<Props> = ({
                         className='flex items-center rounded border-none bg-surface-selected py-2 pl-3 pr-10 ring-inset'
                         onClick={onReselect}>
                         {selected}
-                        <XIcon className='ml-2 h-5 w-5 stroke-text-main' aria-label='clear' />
+                        <XIcon className='ml-2 size-5 stroke-text-main' aria-label='clear' />
                     </ButtonBase>
                 </div>
             </div>

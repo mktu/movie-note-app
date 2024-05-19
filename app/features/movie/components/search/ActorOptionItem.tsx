@@ -20,7 +20,7 @@ const ActorOptionItem: FC<Props> = ({ result, onSelected }) => {
         <div className='relative flex items-center' >
             <div className='mr-2 h-[48px] w-[32px] overflow-hidden rounded-sm bg-image-placeholder'>
                 {result.profile_path ? <img width={32} height={48} src={`${imageBasePath}/${result.profile_path}`} alt={result.name} /> : (
-                    <svg className='h-full w-full border border-border-dark stroke-border-dark'>
+                    <svg className='size-full border border-border-dark stroke-border-dark'>
                         <line stroke="4, 4" x1="0" y1="100%" x2="100%" y2="0" strokeWidth={1} />
                     </svg>
                 )}

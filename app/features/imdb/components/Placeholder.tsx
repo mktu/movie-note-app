@@ -17,7 +17,7 @@ const Placeholder: FC<Props> = ({
         <div className={clsx('flex items-center', className)}>
             {(loading || error) && (
                 <>
-                    <ImdbIcon className='mr-2 h-10 w-10' />
+                    <ImdbIcon className='mr-2 size-10' />
                     <div className='flex items-center text-text-label'>
                         {loading ? 'loading...' : error}
                     </div>

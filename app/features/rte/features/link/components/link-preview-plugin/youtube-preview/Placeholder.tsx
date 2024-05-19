@@ -28,10 +28,10 @@ const Placeholder: FC<Props> = ({
                 focus: 'relative outline outline-indigo-300'
             }}>
             <div className='relative flex h-[128px] w-full max-w-[95%] items-center justify-center border border-border-main text-text-label'>
-                <YoutubeIcon className='mr-2 h-10 w-10' />
+                <YoutubeIcon className='mr-2 size-10' />
                 <span>{placeholderText}</span>
                 <IconButton name='remove' className='absolute right-2 top-1' onClick={removePlaceholder}>
-                    <X className='h-5 w-5 fill-text-label' />
+                    <X className='size-5 fill-text-label' />
                 </IconButton>
             </div>
         </BlockWithAlignableContents >

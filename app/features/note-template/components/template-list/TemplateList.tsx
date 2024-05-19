@@ -20,7 +20,7 @@ const TemplateList: FC<Props> = ({
                 <div className='text-text-main'>Templates</div>
                 <div className='ml-auto'>
                     <Navigator className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' to={'/app/note-template/new'} >
-                        <AddFill className='h-5 w-5 fill-text-label hover:fill-text-main' />
+                        <AddFill className='size-5 fill-text-label hover:fill-text-main' />
                     </Navigator>
                 </div>
             </div>

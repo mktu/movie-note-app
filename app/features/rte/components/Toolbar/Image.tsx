@@ -10,7 +10,7 @@ const Image: FC = () => {
     const [editor] = useLexicalComposerContext()
     return (
         <label className='cursor-pointer p-1 hover:bg-surface-hover' htmlFor='file-upload' aria-label='image upload'>
-            <ImageIcon className='h-5 w-5 fill-text-label' />
+            <ImageIcon className='size-5 fill-text-label' />
             <input id="file-upload" type='file' className='hidden' onChange={async (e) => {
                 if (!e.target.files || e.target.files.length === 0 || !e.target.files[0]) {
                     return

@@ -57,12 +57,12 @@ const Header = forwardRef<HTMLDivElement, Props>(({
                 </div>
                 {hasNote ? (
                     <OutlinedButton border='border-2 border-text-main group-hover:border-text-main' disabled={!canSave} className='group ml-auto hidden items-center gap-1 bg-surface-main md:flex' onClick={onNavigateNote}>
-                        <PenIcon className='h-5 w-5 fill-text-main group-hover:fill-text-dark' />
+                        <PenIcon className='size-5 fill-text-main group-hover:fill-text-dark' />
                         <span className='text-text-main group-hover:text-text-dark'>{t('edit-note')}</span>
                     </OutlinedButton>
                 ) : (
                     <OutlinedButton border='border-2 border-text-main group-hover:border-text-main' disabled={!canSave} className='group ml-auto hidden items-center gap-1 bg-surface-main md:flex' onClick={onNavigateNote}>
-                        <AddFill className='h-5 w-5 fill-text-main group-hover:fill-text-dark' />
+                        <AddFill className='size-5 fill-text-main group-hover:fill-text-dark' />
                         <span className='text-text-main group-hover:text-text-dark'>{t('add-note')}</span>
                     </OutlinedButton>
                 )}

@@ -43,7 +43,7 @@ const WatchLog: FC<Props> = ({
                     <TextButton paddings='px-2 py-2' className='group flex items-center gap-1' onClick={() => {
                         onClickWatchState('watched')
                     }}>
-                        <Check className={clsx('h-5 w-5 group-hover:fill-green-500',
+                        <Check className={clsx('size-5 group-hover:fill-green-500',
                             watchState === 'watched' ? ' fill-green-500' : 'fill-text-disabled'
                         )} />
                         <span className={clsx('whitespace-nowrap group-hover:text-green-500',
@@ -52,14 +52,14 @@ const WatchLog: FC<Props> = ({
                         </span>
                     </TextButton>
                     <TextButton paddings='px-2 py-2' className='group flex items-center gap-1' onClick={() => { onClickWatchState('lookforward') }}>
-                        <Stars className={clsx('h-5 w-5 group-hover:fill-yellow-500',
+                        <Stars className={clsx('size-5 group-hover:fill-yellow-500',
                             watchState === 'lookforward' ? 'fill-yellow-500' : 'fill-text-disabled')} />
                         <span className={clsx('whitespace-nowrap group-hover:text-yellow-500',
                             watchState === 'lookforward' ? 'text-yellow-500' : 'text-text-disabled')}>{t('lookforward')}</span>
                     </TextButton>
                 </div>
                 <div className='flex items-center gap-1'>
-                    <Star className='h-4 w-4 fill-yellow-400' />
+                    <Star className='size-4 fill-yellow-400' />
                     <span>{stars || '-'}</span>
                 </div>
                 <span className='text-text-label'>|</span>

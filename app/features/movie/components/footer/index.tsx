@@ -19,12 +19,12 @@ const Footer: FC<Props> = ({
             <div className='fixed bottom-0 left-0 flex w-full items-center justify-center border-t border-border-main bg-white/90 p-2 md:hidden'>
                 {hasNote ? (
                     <ContainedButton className="flex w-full items-center justify-center gap-3" onClick={onNavigateNote}>
-                        <PenIcon className='h-5 w-5 fill-onprimary-main' />
+                        <PenIcon className='size-5 fill-onprimary-main' />
                         <span className='text-onprimary-main'>{t('edit-note')}</span>
                     </ContainedButton>
                 ) : (
                     <ContainedButton className="flex w-full items-center justify-center gap-3" onClick={onNavigateNote}>
-                        <PenIcon className='h-5 w-5 fill-onprimary-main' />
+                        <PenIcon className='size-5 fill-onprimary-main' />
                         <span className='text-onprimary-main'>{t('edit-note')}</span>
                     </ContainedButton>
                 )}

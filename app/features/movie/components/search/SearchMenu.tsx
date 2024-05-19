@@ -12,7 +12,7 @@ const SearchMenu: FC = () => {
                 setOpenSearchDialog(true)
                 setOpenMobileMenu(false)
             }} paddings='' className='flex w-full items-center gap-2 p-2 text-text-main hover:bg-surface-hover'>
-                <SearchIcon className='h-5 w-5' />
+                <SearchIcon className='size-5' />
                 <span>SEARCH</span>
             </TextButton>
             <SearchDialog open={openSearchDialog} onClose={() => { setOpenSearchDialog(false) }} />

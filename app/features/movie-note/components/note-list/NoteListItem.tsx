@@ -49,17 +49,17 @@ const NoteListItem: FC<Props> = ({
                         src={path} alt={movieNoteListViewItem.title || ''} />
                     <div className='flex w-full flex-1 items-center overflow-hidden'>
                         <div className='ml-2 block w-full overflow-hidden'>
-                            <div className='overflow-hidden text-ellipsis whitespace-nowrap text-sm'>{movieNoteListViewItem.title}</div>
+                            <div className='truncate text-sm'>{movieNoteListViewItem.title}</div>
                             <div className='flex w-full items-center text-xs'>
                                 <div className='flex items-center gap-2'>
                                     {watchedState === 'watched' ? (
                                         <>
-                                            <Check className='h-5 w-5 fill-green-500' />
+                                            <Check className='size-5 fill-green-500' />
                                             <span className='text-green-600'>{t('watched')}</span>
                                         </>
                                     ) : watchedState === 'lookforward' ? (
                                         <>
-                                            <Stars className='h-5 w-5 fill-yellow-500' />
+                                            <Stars className='size-5 fill-yellow-500' />
                                             <span className='text-yellow-600'>{t('lookforward')}</span>
                                         </>
                                     ) : (

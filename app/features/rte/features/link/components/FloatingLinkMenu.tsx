@@ -50,7 +50,7 @@ const FloatingLinkMenu: FC = () => {
                 e && setPopperElement(e)
             }}>
             <div className='flex max-w-[312px] items-center gap-1 overflow-hidden rounded bg-bg-main p-1 text-sm shadow-md'>
-                <LinkSlash className='block h-3 w-3 fill-text-label' />
+                <LinkSlash className='block size-3 fill-text-label' />
                 <a href={url} target="_blank" rel="noopener noreferrer" className='block w-full truncate underline'>{url}</a>
             </div>
         </div>
