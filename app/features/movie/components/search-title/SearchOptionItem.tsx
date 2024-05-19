@@ -1,4 +1,4 @@
-import { Combobox } from '@headlessui/react';
+import { ComboboxOption } from '@headlessui/react';
 import { TmdbmageBasePath } from '@utils/constants';
 import type { FC } from 'react'
 import type { SearchMovieResult } from '~/features/tmdb';
@@ -15,19 +15,16 @@ const SearchOptionItem: FC<Props> = ({
     idx
 }) => {
     return (
-        <Combobox.Option
-
-            className={({ active }) =>
-                `relative cursor-default select-none py-2 px-2 ${active ? 'bg-surface-hover' : 'bg-surface-main'
-                }`
-            }
+        <ComboboxOption
+            as='li'
+            className='relative cursor-default select-none bg-surface-main p-2 data-[active]:bg-surface-hover'
             value={result.id}
         >
             {() => (
                 <div className='flex items-center' data-testid={`option-${idx}`}>
                     <span className='mr-2 h-[48px] w-[32px] overflow-hidden rounded-sm bg-image-placeholder'>
                         {result.poster_path ? <img width={32} height={48} src={`${imageBasePath}/${result.poster_path}`} alt={result.title} /> : (
-                            <svg className='h-full w-full border border-border-dark stroke-border-dark'>
+                            <svg className='size-full border border-border-dark stroke-border-dark'>
                                 <line stroke="4, 4" x1="0" y1="100%" x2="100%" y2="0" strokeWidth={1} />
                             </svg>
                         )}
@@ -37,7 +34,7 @@ const SearchOptionItem: FC<Props> = ({
                     </span>
                 </div>
             )}
-        </Combobox.Option>
+        </ComboboxOption>
     );
 };
 
