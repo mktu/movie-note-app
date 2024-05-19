@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { getSearchResultMockData } from './searchResult';
 
 test.use({ locale: 'ja' });
 
@@ -29,6 +30,10 @@ test('top page test', async ({ browser }) => {
 test('new note test', async ({ browser }) => {
   const context = await browser.newContext({ storageState: 'state.json' })
   const page = await context.newPage()
+  const urlPattern = /https:\/\/api\.themoviedb\.org\/3\/search\/movie\?api_key=[^&]+&query=terminator&page=1&language=ja/;
+  page.route(urlPattern, async (route) => {
+    await route.fulfill({ json: getSearchResultMockData() })
+  })
   const res = await page.goto('http://localhost:8788/app');
   expect(res?.ok).toBeTruthy()
   await page.fill('[name="search-title"]', 'terminator')

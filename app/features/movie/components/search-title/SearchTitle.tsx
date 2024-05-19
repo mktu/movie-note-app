@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import ButtonBase from '~/components/buttons/Base';
 import XIcon from '~/components/icons/X';
 
-import { Combobox, Transition } from '@headlessui/react';
+import { Combobox, ComboboxInput, Transition, ComboboxOptions } from '@headlessui/react';
 
 import { useMovieSearch } from '~/features/tmdb/hooks';
 import SearchOptionItem from './SearchOptionItem';
@@ -41,9 +41,9 @@ const Search: FC<Props> = ({
                             setQuery('')
                         }}>
                         {selectedText}
-                        <XIcon className='ml-2 h-5 w-5 stroke-text-main' aria-label='clear' />
+                        <XIcon className='ml-2 size-5 stroke-text-main' aria-label='clear' />
                     </ButtonBase>) : (
-                        <Combobox.Input
+                        <ComboboxInput
                             data-testid='search-title'
                             autoComplete='off'
                             name='search-title'
@@ -59,7 +59,7 @@ const Search: FC<Props> = ({
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <Combobox.Options className="absolute mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none ">
+                    <ComboboxOptions as='ul' className="absolute mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none ">
                         {!searchResult?.results || searchResult.results.length === 0 ?
                             query === '' ? <></> : (
                                 <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
@@ -70,7 +70,7 @@ const Search: FC<Props> = ({
                                     <SearchOptionItem idx={idx} key={result.id} result={result} />
                                 ))
                             )}
-                    </Combobox.Options>
+                    </ComboboxOptions>
                 </Transition>
             </div>
         </Combobox>

@@ -47,10 +47,10 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
     return (
         <div ref={setRoot} className='flex h-full w-screen overflow-x-hidden'>
 
-            <div className={`min-h-screen bg-sidebar-main ${(!moving) && 'transition-all ease-in-out'} hidden md:block`} style={{ width: savedWidth }}>
+            <div className={`bg-sidebar-main min-h-screen ${(!moving) && 'transition-all ease-in-out'} hidden md:block`} style={{ width: savedWidth }}>
                 {!hideSidebar && sidebar}
             </div>
-            <div className={`relative hidden min-h-screen w-1 cursor-move bg-sidebar-main transition-all ease-in-out hover:bg-border-main md:block`}
+            <div className={`bg-sidebar-main hover:bg-border-main relative hidden min-h-screen w-1 cursor-move transition-all ease-in-out md:block`}
                 ref={setGutter} >
                 <IconButton name='toggle-sidebar'
                     onClick={(e) => {
@@ -62,9 +62,9 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
                             updateWidth(WidthClosed)
                         }
                     }}
-                    className='absolute right-1/2 top-2 z-10 translate-x-1/2 rounded-full border border-border-dark bg-surface-main p-1' >
-                    {hideSidebar ? <AnglesRight name="open-sidebar" className='h-5 w-5 fill-border-dark' /> :
-                        <AnglesLeft name="close-sidebar" className='h-5 w-5 fill-border-dark' />
+                    className='border-border-dark bg-surface-main absolute right-1/2 top-2 z-10 translate-x-1/2 rounded-full border p-1' >
+                    {hideSidebar ? <AnglesRight name="open-sidebar" className='fill-border-dark h-5 w-5' /> :
+                        <AnglesLeft name="close-sidebar" className='fill-border-dark h-5 w-5' />
                     }
                 </IconButton>
             </div>
@@ -75,10 +75,11 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
                 <IconButton name='menu' className='opacity-100' onClick={() => {
                     setOpenMobileMenu(true)
                 }}>
-                    <Bars className='h-8 w-8 fill-text-label' />
+                    <Bars className='fill-text-label h-8 w-8' />
                 </IconButton>
             </div>
             <Transition
+                as={'div'}
                 className={'fixed left-0 top-0 z-50 min-h-full w-[90%] bg-white shadow md:hidden'}
                 show={openMobileMenu}
                 enter="transition ease-out duration-300 transform"
@@ -91,7 +92,7 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
                 {sidebar}
             </Transition>
             <div className="absolute left-0 top-[32px]" ref={headerRef} />
-            <div className={`mt-[64px] h-full min-h-screen w-full flex-1 overflow-x-hidden border-border-main md:mt-0`}>
+            <div className={`border-border-main mt-[64px] h-full min-h-screen w-full flex-1 overflow-x-hidden md:mt-0`}>
                 {children}
             </div>
         </div>
