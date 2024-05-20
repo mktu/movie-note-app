@@ -70,7 +70,7 @@ const TemplateNode: FC<TemplateNodeProps> = ({
                 )} onClick={(e) => {
                     setShowTemplateNodeMenu(true)
                 }}>
-                <AddIcon className='h-5 w-5 fill-text-label' />
+                <AddIcon className='size-5 fill-text-label' />
                 <span>{t('component')}</span>
             </TextButton>
             {showTemplateNodeMenu && (

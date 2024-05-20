@@ -1,4 +1,4 @@
-import { AppLoadContext } from "@remix-run/cloudflare"
+import type { AppLoadContext } from "@remix-run/cloudflare"
 
 const searchBasePath = 'https://api.themoviedb.org/3/search/movie'
 const searchActorPath = 'https://api.themoviedb.org/3/search/person'

@@ -16,7 +16,7 @@ const WebLayout: FC<Props> = ({ children,
             <div className='flex-1 bg-primary-main'>
                 <div className='p-12 text-onprimary-main'>
                     <div className='flex items-center'>
-                        <Stars className='h-16 w-16 fill-white' />
+                        <Stars className='size-16 fill-white' />
                         <div className=' text-4xl font-bold'>Movie Note App</div>
                     </div>
                     <div className='mt-5 px-2'>

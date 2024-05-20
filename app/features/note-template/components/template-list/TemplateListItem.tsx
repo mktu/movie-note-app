@@ -34,7 +34,7 @@ const TemplateListItem: FC<Props> = ({
                     className='flex w-full items-center overflow-x-hidden text-text-main hover:bg-surface-hover' to={to} >
                     <div className='flex w-full flex-1 items-center overflow-hidden'>
                         <div className='ml-2 block w-full overflow-hidden'>
-                            <div className='overflow-hidden text-ellipsis whitespace-nowrap'>{templateListItem.name}</div>
+                            <div className='truncate'>{templateListItem.name}</div>
                         </div>
                     </div>
                 </Navigator >

@@ -8,6 +8,7 @@
   "scripts": {
     "build": "remix vite:build",
     "lint": "eslint app/features/** --ext .ts,.tsx",
+    "lint-fix": "npm run lint -- --fix",
     "test": "vitest run",
     "dev:remix": "remix vite:dev",
     "dev": "npm run dev:remix",

@@ -13,16 +13,16 @@ const Login: FC<{ errorKey?: string }> = ({ errorKey }) => {
     const { email, password, errors, valid } = useRegisterForm()
     const navigation = useNavigation()
     return (
-        <div className='flex h-full w-full flex-col items-center justify-center'>
+        <div className='flex size-full flex-col items-center justify-center'>
             <h1 className='text-text-main'>Sign Up</h1>
             <div className='my-4' />
-            <Form className='flex w-[50%] flex-col items-center' method='post'>
+            <Form className='flex w-1/2 flex-col items-center' method='post'>
                 <ValidationTransition className='mt-2 w-full text-sm text-error-main' show={Boolean(errorKey)}>
                     {errorKey && t(errorKey)}
                 </ValidationTransition>
                 <TextInput
                     title="must be alphanumeric in 6-12 chars"
-                    addonLeft={<UserIcon className='h-4 w-4 fill-text-label' />}
+                    addonLeft={<UserIcon className='size-4 fill-text-label' />}
                     className='mt-5 w-full' aria-label={email.name} id={email.name} placeholder={t('register-email')}
                     {...email}
                 />
@@ -30,7 +30,7 @@ const Login: FC<{ errorKey?: string }> = ({ errorKey }) => {
                     {errors[email.name]?.message?.toString()}
                 </ValidationTransition>
                 <TextInput
-                    addonLeft={<LockIcon className='h-4 w-4 fill-text-label' />}
+                    addonLeft={<LockIcon className='size-4 fill-text-label' />}
                     className='mt-5 w-full' aria-label={password.name} id={password.name} placeholder={t('register-password')}
                     {...password}
                 />

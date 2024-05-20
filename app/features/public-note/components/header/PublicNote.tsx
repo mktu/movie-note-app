@@ -43,7 +43,7 @@ const PublicNote: FC<Props> = ({
                         <div className='mt-5 flex items-center gap-4'>
                             {image ? (
                                 <UserIcon width={48} height={48} src={image} alt={'user'} />
-                            ) : <UserPlaceholder className='h-5 w-5 fill-text-main' />}
+                            ) : <UserPlaceholder className='size-5 fill-text-main' />}
                             <div className='flex flex-col gap-1'>
                                 <span className='font-semibold text-text-main'>{name}</span>
                                 <span className='text-sm text-text-label'>{lastUpdated && t('update-date', {

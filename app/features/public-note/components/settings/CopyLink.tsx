@@ -26,7 +26,7 @@ const CopyLink: FC<Props> = ({
                     copyToClipBoard(url, () => {
                         toast.success(t('copy-url-to-clipboard'))
                     })
-                }} name='copy' className='h-5 w-5 rounded border fill-text-main stroke-text-main'>
+                }} name='copy' className='size-5 rounded border fill-text-main stroke-text-main'>
                     <NoteIcon />
                 </IconButton>
             </div>

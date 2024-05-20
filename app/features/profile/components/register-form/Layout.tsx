@@ -30,14 +30,14 @@ const Layout: FC<Props> = ({
     const errorComponent = error && <Error error={error} />
     if (singleColumn) {
         return (
-            <Form method='post' encType='multipart/form-data' className='flex h-full w-full flex-col items-center justify-center gap-2'>
+            <Form method='post' encType='multipart/form-data' className='flex size-full flex-col items-center justify-center gap-2'>
                 <h1 className='my-4 text-text-main'>{t('registration')}</h1>
                 {errorComponent}
                 <div className='flex  w-full flex-col items-center gap-6'>
                     <div>
                         <Image {...imageProps} width={256} height={256} />
                     </div>
-                    <div className='w-[50%]'>
+                    <div className='w-1/2'>
                         <Inputs inputProps={inputProps} />
                     </div>
                 </div>
@@ -49,13 +49,13 @@ const Layout: FC<Props> = ({
         )
     }
     return (
-        <Form method='post' encType='multipart/form-data' className='flex h-full w-full flex-col items-center'>
+        <Form method='post' encType='multipart/form-data' className='flex size-full flex-col items-center'>
             <div className='flex justify-center pt-4'>{errorComponent}</div>
-            <div className='flex h-full w-full items-center justify-center gap-6 p-8'>
+            <div className='flex size-full items-center justify-center gap-6 p-8'>
                 <div>
                     <Image {...imageProps} width={192} height={192} />
                 </div>
-                <div className='flex w-[50%] flex-col gap-2'>
+                <div className='flex w-1/2 flex-col gap-2'>
                     <Inputs inputProps={inputProps} />
                     <ContainedButton disabled={disabled} className='mt-5 w-full' type='submit'>{
                         update ? t('update') : t('register')}

@@ -20,7 +20,7 @@ const MovieOptionItem: FC<Props> = ({ result, onSelected }) => {
         <Navigator onClick={onSelected} className='flex items-center' to={`/app/movies/${result.id}?lng=${i18n.language}`}>
             <span className='mr-2 h-[48px] w-[32px] overflow-hidden rounded-sm bg-image-placeholder'>
                 {result.poster_path ? <img width={32} height={48} src={`${imageBasePath}/${result.poster_path}`} alt={result.title} /> : (
-                    <svg className='h-full w-full border border-border-dark stroke-border-dark'>
+                    <svg className='size-full border border-border-dark stroke-border-dark'>
                         <line stroke="4, 4" x1="0" y1="100%" x2="100%" y2="0" strokeWidth={1} />
                     </svg>
                 )}

@@ -17,7 +17,7 @@ const Trends: FC<Porps> = ({
     return (
         <div className='flex flex-col gap-2'>
             <h2 className='flex w-full items-center border-b border-border-main text-xl'>
-                <TrendIcon className='mr-2 h-5 w-5 fill-text-main' />
+                <TrendIcon className='mr-2 size-5 fill-text-main' />
                 <span>話題の映画のノートを書く</span>
             </h2>
             <div className='grid w-full grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-2 overflow-auto'>

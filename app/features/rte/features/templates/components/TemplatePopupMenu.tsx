@@ -35,7 +35,7 @@ const TemplatePopupMenu: FC<Props> = ({
                 >
                     {({ checked }) => (
                         <>
-                            <CheckIcon className={`h-5 w-5 ${checked ? 'fill-green-400' : 'fill-text-placeholder'}`} />
+                            <CheckIcon className={`size-5 ${checked ? 'fill-green-400' : 'fill-text-placeholder'}`} />
                             <span className=''>
                                 {menuItems[key].label}
                             </span>
@@ -44,7 +44,7 @@ const TemplatePopupMenu: FC<Props> = ({
                                     e.stopPropagation()
                                     menuItems[key].onEdit!()
                                 }}>
-                                    <PenIcon className='h-4 w-4 fill-text-label hover:fill-text-main' />
+                                    <PenIcon className='size-4 fill-text-label hover:fill-text-main' />
                                 </IconButton>
                             )}
                         </>

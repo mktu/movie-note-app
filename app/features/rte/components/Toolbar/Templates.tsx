@@ -53,9 +53,9 @@ const Templates: FC<Props> = ({
                 )} onClick={(e) => {
                     setShowTemplateMenu(true)
                 }}>
-                <AddIcon className='hidden h-5 w-5 fill-text-label md:inline' />
+                <AddIcon className='hidden size-5 fill-text-label md:inline' />
                 <span className='hidden md:inline'>{t('template')}</span>
-                <TemplateIcon className='h-5 w-5 fill-text-label md:hidden' />
+                <TemplateIcon className='size-5 fill-text-label md:hidden' />
             </TextButton>
             {showTemplateMenu && (
                 <FocusTrap>
