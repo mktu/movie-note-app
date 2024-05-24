@@ -1,17 +1,17 @@
-import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import Contained from '.';
+import Contained from ".";
 
 export default {
-    title: 'Common/Button/Contained',
-    component: Contained,
-} as ComponentMeta<typeof Contained>;
+  title: "Common/Button/Contained",
+  component: Contained,
+} as Meta<typeof Contained>;
 
-const Template: ComponentStory<typeof Contained> = (args) => <Contained {...args} />;
+type Story = StoryObj<typeof Contained>
 
-export const Primary = Template.bind({});
-
-Primary.args = {
-    children: 'Button',
-    paddings: 'px-4 py-2'
-};
+export const Primary: Story = {
+  args: {
+    children: "Button",
+    paddings: "px-4 py-2",
+  }
+}
