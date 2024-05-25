@@ -36,7 +36,10 @@ test('new note test', async ({ browser }) => {
   })
   const res = await page.goto('http://localhost:8788/app');
   expect(res?.ok).toBeTruthy()
-  await page.fill('[name="search-title"]', 'terminator')
+
+  await page.locator('[name="search-title"]').fill('terminator');
+  await expect(page.locator('[name="search-title"]')).toHaveValue('terminator');
+  await page.locator('li', { hasText: 'ターミネーター4' }).waitFor()
   await page.locator('li:has-text("ターミネーター4")').click()
   expect(await page.textContent('#release-date')).toContain('2009-05-20')
   //await page.waitForTimeout(500) // wait for webkit i18n render

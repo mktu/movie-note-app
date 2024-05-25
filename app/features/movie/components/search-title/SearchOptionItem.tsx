@@ -20,20 +20,18 @@ const SearchOptionItem: FC<Props> = ({
             className='relative cursor-default select-none bg-surface-main p-2 data-[active]:bg-surface-hover'
             value={result.id}
         >
-            {() => (
-                <div className='flex items-center' data-testid={`option-${idx}`}>
-                    <span className='mr-2 h-[48px] w-[32px] overflow-hidden rounded-sm bg-image-placeholder'>
-                        {result.poster_path ? <img width={32} height={48} src={`${imageBasePath}/${result.poster_path}`} alt={result.title} /> : (
-                            <svg className='size-full border border-border-dark stroke-border-dark'>
-                                <line stroke="4, 4" x1="0" y1="100%" x2="100%" y2="0" strokeWidth={1} />
-                            </svg>
-                        )}
-                    </span>
-                    <span className='block truncate font-normal'  >
-                        {result.title} ({result.release_date})
-                    </span>
-                </div>
-            )}
+            <div className='flex items-center' data-testid={`option-${idx}`}>
+                <span className='mr-2 h-[48px] w-[32px] overflow-hidden rounded-sm bg-image-placeholder'>
+                    {result.poster_path ? <img width={32} height={48} src={`${imageBasePath}/${result.poster_path}`} alt={result.title} /> : (
+                        <svg className='size-full border border-border-dark stroke-border-dark'>
+                            <line stroke="4, 4" x1="0" y1="100%" x2="100%" y2="0" strokeWidth={1} />
+                        </svg>
+                    )}
+                </span>
+                <span className='block truncate font-normal'  >
+                    {result.title} ({result.release_date})
+                </span>
+            </div>
         </ComboboxOption>
     );
 };
