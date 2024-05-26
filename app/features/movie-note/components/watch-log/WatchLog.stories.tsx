@@ -1,18 +1,17 @@
-import { action } from '@storybook/addon-actions';
-import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import { action } from "@storybook/addon-actions";
+import type { Meta, StoryObj } from "@storybook/react";
 
-import WatchLog from './WatchLog';
+import WatchLog from "./WatchLog";
 
 export default {
-    title: 'app/movie-note/Review',
-    component: WatchLog,
-} as ComponentMeta<typeof WatchLog>;
+  title: "app/movie-note/Review",
+  component: WatchLog,
+} as Meta<typeof WatchLog>;
 
-const Template: ComponentStory<typeof WatchLog> = (args) => <WatchLog {...args} />;
 
-export const Default = Template.bind({});
-
-Default.args = {
-    setAdmirationDate: action('admirationDate'),
-    setStars: action('stars')
+export const Default: StoryObj<typeof WatchLog> = {
+  args: {
+    setAdmirationDate: action("admirationDate"),
+    setStars: action("stars"),
+  }
 }

@@ -1,12 +1,16 @@
 import React from 'react'
+import { RecoilRoot } from 'recoil'
 import NavigatorProvider from '../app/providers/navigator/Provider'
 import FormProvider from '../app/providers/form/Provider'
+import { StoryFn } from '@storybook/react'
 
-const providerDecorator = (StoryFn: Function) => {
+const providerDecorator = (StoryFn: StoryFn) => {
     return (
         <NavigatorProvider>
             <FormProvider>
-                <StoryFn />
+                <RecoilRoot>
+                    <StoryFn />
+                </RecoilRoot>
             </FormProvider>
         </NavigatorProvider>
     )
