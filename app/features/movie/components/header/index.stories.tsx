@@ -1,19 +1,13 @@
-import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { MovieHeader } from './';
+import { MovieHeader } from "./";
 
 export default {
-    title: 'app/movie/Header',
-    component: MovieHeader,
-} as ComponentMeta<typeof MovieHeader>;
+  title: "app/movie/Header",
+  component: MovieHeader,
+} as Meta<typeof MovieHeader>;
 
-const Template: ComponentStory<typeof MovieHeader> = (args) => <MovieHeader {...args} />;
+export const Enabled: StoryObj<typeof MovieHeader> = {};
 
-export const Enabled = Template.bind({});
-Enabled.args = {
-}
+export const Disabled: StoryObj<typeof MovieHeader> = {};
 
-export const Disabled = Template.bind({});
-
-Disabled.args = {
-}

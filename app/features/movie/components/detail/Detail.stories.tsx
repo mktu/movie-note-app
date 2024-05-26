@@ -1,29 +1,28 @@
-import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import Detail from './Detail';
-import { detail, credits } from './mocks'
+import Detail from "./Detail";
+import { detail, credits } from "./mocks";
 
 export default {
-    title: 'app/movie/Detail',
-    component: Detail,
-} as ComponentMeta<typeof Detail>;
+  title: "app/movie/Detail",
+  component: Detail,
+} as Meta<typeof Detail>;
 
-const Template: ComponentStory<typeof Detail> = (args) => <Detail {...args} />;
 
-export const Default = Template.bind({});
-
-Default.args = {
+export const Default: StoryObj<typeof Detail> = {
+  args: {
     detail,
-    credits
+    credits,
+  }
 };
 
-export const NoImage = Template.bind({});
-
-NoImage.args = {
+export const NoImage: StoryObj<typeof Detail> = {
+  args: {
     detail: {
-        ...detail,
-        poster_path: '',
-        backdrop_path: ''
+      ...detail,
+      poster_path: "",
+      backdrop_path: "",
     },
-    credits
+    credits,
+  }
 };

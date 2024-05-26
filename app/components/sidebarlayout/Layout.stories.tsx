@@ -1,21 +1,18 @@
-import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import Layout from './Container';
+import Layout from "./Container";
 
 export default {
-    title: 'Common/SidebarLayout',
-    component: Layout,
-} as ComponentMeta<typeof Layout>;
+  title: "Common/SidebarLayout",
+  component: Layout,
+} as Meta<typeof Layout>;
 
-const Template: ComponentStory<typeof Layout> = (args) => <Layout {...args} />;
 
-export const Default = Template.bind({});
-
-Default.args = {
-    children: (
-        <div>content</div>
-    ),
+export const Default: StoryObj<typeof Layout> = {
+  args: {
+    children: <div>content</div>,
     initialSidebarWidth: 250,
-    userMenu: (<div>usermenu</div>),
-    noteList: []
+    userMenu: <div>usermenu</div>,
+    noteList: [],
+  }
 };
