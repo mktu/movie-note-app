@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import Img from 'public/ImgPlaceholder.svg';
+import Img from '/ImgPlaceholder.svg?url';
 
 import type { FC } from 'react'
 

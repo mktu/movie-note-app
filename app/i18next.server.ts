@@ -1,14 +1,14 @@
 import { RemixI18Next } from 'remix-i18next';
 import i18n from '~/i18n'; // your i18n configuration file
-import enCommon from '@public/locales/en/common.json'
-import jaCommon from '@public/locales/ja/common.json'
+import enCommon from '/locales/en/common.json?url'
+import jaCommon from '/locales/ja/common.json?url'
 
-export const lngs  = { 
-  en : {
-    common : enCommon
+export const lngs = {
+  en: {
+    common: enCommon
   },
-  ja : {
-    common : jaCommon
+  ja: {
+    common: jaCommon
   }
 }
 

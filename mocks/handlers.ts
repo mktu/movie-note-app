@@ -1,10 +1,10 @@
 // src/mocks/handlers.js
-import { rest } from 'msw'
+import { HttpResponse, http } from 'msw'
 import type { SearchMovieResult } from '~/features/tmdb'
 import details from './details'
 // handle for e2e (not for storybook)
 export const handlers = [
-    rest.get('https://api.themoviedb.org/3/search/movie', (req, res, ctx) => {
+    http.get('https://api.themoviedb.org/3/search/movie', () => {
         const result: SearchMovieResult = {
             page: 1,
             results: [{
@@ -20,16 +20,10 @@ export const handlers = [
                 poster_path: '/ghKQ6it5j7KjdYghT5EDthVNXlD.jpg'
             }]
         }
-        return res(
-            ctx.status(200),
-            ctx.json(result),
-        )
+        return HttpResponse.json(result)
     }),
-    rest.get('https://api.themoviedb.org/3/movie/:detail', (req, res, ctx) => {
-        const detail = req.params.detail as string
-        return res(
-            ctx.status(200),
-            ctx.json(details[detail]),
-        )
+    http.get('https://api.themoviedb.org/3/movie/:detail', ({ params }) => {
+        const detail = params.detail as string
+        return HttpResponse.json(details[detail])
     }),
 ]
