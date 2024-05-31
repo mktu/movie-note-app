@@ -21,7 +21,7 @@
     "typegen": "wrangler types"
   },
   "dependencies": {
-    "@headlessui/react": "2.0.3",
+    "@headlessui/react": "2.0.4",
     "@lexical/headless": "0.15.0",
     "@lexical/react": "0.15.0",
     "@microlink/mql": "0.10.33",
