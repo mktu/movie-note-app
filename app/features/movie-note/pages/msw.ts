@@ -1,11 +1,11 @@
-import { rest } from 'msw';
+import { HttpResponse, http } from 'msw';
 import { credits, detail } from '~/features/movie/components/detail/mocks';
 
 import type { ImdbRate } from "../../imdb/types"
 import type { SearchMovieResult } from "~/features/tmdb"
 export { detail, credits }
 export const handlers = [
-    rest.get('https://api.themoviedb.org/3/search/movie', (req, res, ctx) => {
+    http.get('https://api.themoviedb.org/3/search/movie', () => {
         const result: SearchMovieResult = {
             page: 1,
             results: [{
@@ -21,32 +21,20 @@ export const handlers = [
                 poster_path: '/ghKQ6it5j7KjdYghT5EDthVNXlD.jpg'
             }]
         }
-        return res(
-            ctx.status(200),
-            ctx.json(result),
-        )
+        return HttpResponse.json(result)
     }),
-    rest.get('https://api.themoviedb.org/3/movie/:detail', (req, res, ctx) => {
-        return res(
-            ctx.status(200),
-            ctx.json(detail),
-        )
+    http.get('https://api.themoviedb.org/3/movie/:detail', () => {
+        return HttpResponse.json(detail)
     }),
-    rest.get('http://localhost:6006/api/imdb/:imdbId', (req, res, ctx) => {
+    http.get('http://localhost:6006/api/imdb/:imdbId', () => {
         const result: ImdbRate = {
             rate: '8.0',
             denominator: '10',
             parameter: '50K'
         }
-        return res(
-            ctx.status(200),
-            ctx.json(result),
-        )
+        return HttpResponse.json(result)
     }),
-    rest.get('https://api.themoviedb.org/3/movie/:movieId/credits', (req, res, ctx) => {
-        return res(
-            ctx.status(200),
-            ctx.json(credits),
-        )
+    http.get('https://api.themoviedb.org/3/movie/:movieId/credits', () => {
+        return HttpResponse.json(credits)
     }),
 ]

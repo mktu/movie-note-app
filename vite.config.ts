@@ -11,6 +11,7 @@ export default defineConfig({
     remix(),
     tsconfigPaths()
   ],
+  publicDir: 'public',
   ssr: {
     noExternal: ["remix-i18next"],// https://github.com/sergiodxa/remix-i18next/issues/161
   },

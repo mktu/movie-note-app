@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { rest } from "msw";
+import { HttpResponse, http } from "msw";
 
 import SearchTitle from ".";
 import type { SearchMovieResult } from "~/features/tmdb";
@@ -13,7 +13,7 @@ export const Default: StoryObj<typeof SearchTitle> = {
   parameters: {
     msw: {
       handlers: [
-        rest.get("https://api.themoviedb.org/3/search/movie", (req, res, ctx) => {
+        http.get("https://api.themoviedb.org/3/search/movie", () => {
           const result: SearchMovieResult = {
             page: 1,
             results: [
@@ -31,7 +31,7 @@ export const Default: StoryObj<typeof SearchTitle> = {
               },
             ],
           };
-          return res(ctx.status(200), ctx.json(result));
+          return HttpResponse.json(result);
         }),
       ],
     },
