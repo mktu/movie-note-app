@@ -69,7 +69,7 @@ const Settings: FC = () => {
                     onClickDefaultImage={onSelectDefaultImage} />
 
                 <label htmlFor='preview-summary'>{t('summary')}</label>
-                <TextArea id='preview-summary' className='text-text-main' minRows={2} value={summary} onChange={(e) => {
+                <TextArea id='preview-summary' className='text-text-main' minRows={2} value={summary || ''} onChange={(e) => {
                     setSummary(e.target.value)
                 }} />
                 {viewId && isPublic && (

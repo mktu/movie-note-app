@@ -48,5 +48,8 @@ export function useDebounceFetcher<T>() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    return debounceSubmit
+    return {
+        debounceSubmit,
+        state: fetcher.state
+    }
 }

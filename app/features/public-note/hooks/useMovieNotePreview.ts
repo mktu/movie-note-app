@@ -16,6 +16,7 @@ export const useMovieNotePreview = (onPublish: OnPublish, tmdbDetail: TmdbDetail
     const [coverImage, setCoverImageUrl] = useState(init?.coverImage || null)
     const tmdbImageUrl = poster_path || backdrop_path
     const [useDefaultImage, setUseDefaultImage] = useState(false)
+    const isEditing = init?.summary !== summary || isPublic !== init?.public || coverImage !== init?.coverImage
     const { t } = useTranslation('common')
     useEffect(() => {
         setHtml(getMovieNotePreviewHtml() || '')
@@ -62,6 +63,7 @@ export const useMovieNotePreview = (onPublish: OnPublish, tmdbDetail: TmdbDetail
         tmdbImageUrl,
         coverImage,
         imgError,
+        isEditing,
         onSelectDefaultImage,
         onChangeCoverImage
     }
