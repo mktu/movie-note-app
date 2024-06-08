@@ -2,11 +2,13 @@ import type { FC, ReactNode } from 'react'
 
 type Props = {
     header: ReactNode,
+    footer?: ReactNode,
     note?: ReactNode,
 }
 
 const MovieLayout: FC<Props> = ({
     header,
+    footer,
     note,
 }) => {
     return (
@@ -19,6 +21,7 @@ const MovieLayout: FC<Props> = ({
                     </div>
                 </div>
             )}
+            {footer}
         </div>
     );
 };

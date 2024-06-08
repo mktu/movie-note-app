@@ -4,12 +4,11 @@ import { MovieNotePreview } from '~/features/public-note/pages';
 import { action } from '~/features/public-note/server/actions/preview-note.server';
 import { loader } from '~/features/public-note/server/loaders/preview-note.server';
 
-import { useActionData, useLoaderData, useSubmit } from '@remix-run/react';
+import { useActionData, useFetcher, useLoaderData } from '@remix-run/react';
 import { getFormData } from '@utils/form';
 
 import type { FC } from 'react';
 import { convertPublicNote } from '~/features/public-note/utils/convertType';
-import { useUpdateNotification } from '~/hooks/useUpdateNotification';
 import type { AddPublicNote } from '@type-defs/frontend';
 export {
     loader,
@@ -19,14 +18,13 @@ export {
 const NotePreview: FC = () => {
     const loaderData = useLoaderData<typeof loader>()
     const actionData = useActionData<typeof action>()
-    const submit = useSubmit()
     const onSubmit = useCallback((updateMovieNote: AddPublicNote) => {
         submit(getFormData(updateMovieNote), {
             method: 'post', encType: 'multipart/form-data',
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    useUpdateNotification(loaderData.actionResult, actionData?.error)
+    const { state, submit } = useFetcher()
     return (
         <>
             {loaderData.error && (
@@ -34,6 +32,7 @@ const NotePreview: FC = () => {
             )}
             {loaderData.content?.tmdbDetail.id && (
                 <MovieNotePreview
+                    state={state}
                     init={loaderData.content.publicNote ? convertPublicNote(loaderData.content.publicNote) : undefined}
                     tmdbDetail={loaderData.content.tmdbDetail}
                     onPublish={onSubmit}
