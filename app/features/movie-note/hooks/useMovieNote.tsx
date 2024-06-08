@@ -10,6 +10,7 @@ import { getTemplates as getTemplatesApi } from "../utils/api"
 import type { ListTemplateItemType } from "../../note-template/server/db/template"
 import type { Video } from "~/features/tmdb/utils"
 import { formatDateTime } from "@utils/time"
+import type { useDebounceFetcher } from "./useDebounceFetcher"
 
 type Props = {
     movieNoteDetail?: MovieNoteType,
@@ -19,7 +20,8 @@ type Props = {
     error?: string,
     hasPublicNote: boolean,
     published: boolean,
-    onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void
+    onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void,
+    submitState: ReturnType<typeof useDebounceFetcher>['state']
 }
 
 export const useMovieNote = ({
@@ -30,6 +32,7 @@ export const useMovieNote = ({
     hasPublicNote,
     published,
     onSubmit,
+    submitState
 }: Props) => {
     const { i18n } = useTranslation()
     const [content, setContent] = useState<{ get: () => string }>()
@@ -142,6 +145,7 @@ export const useMovieNote = ({
         initialNote,
         editing,
         setEditing,
-        unsavedNoteInfo
+        unsavedNoteInfo,
+        submitState
     }
 }

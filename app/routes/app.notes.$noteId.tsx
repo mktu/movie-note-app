@@ -12,7 +12,6 @@ import type { HeadersFunction } from "@remix-run/cloudflare";
 import { useCallback, type FC } from "react";
 import { useDebounceFetcher } from '~/features/movie-note/hooks/useDebounceFetcher';
 import type { AddMovieNote } from '@type-defs/frontend';
-import { useUpdateNotification } from '~/hooks/useUpdateNotification';
 
 // stale-while-revalidateの設定
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
@@ -31,7 +30,7 @@ export {
 }
 
 const Note: FC = () => {
-    const debounceSubmit = useDebounceFetcher()
+    const { debounceSubmit, state } = useDebounceFetcher()
     const actionData = useActionData<typeof action>()
     const loaderData = useLoaderData<typeof loader>()
     const content = loaderData.content
@@ -39,8 +38,6 @@ const Note: FC = () => {
     const onSubmit = useCallback((updateMovieNote: AddMovieNote, debounceTimeout?: number) => {
         debounceSubmit(getFormData(updateMovieNote), { method: 'post', debounceTimeout })
     }, [debounceSubmit])
-
-    useUpdateNotification(loaderData.actionResult, actionData?.error)
 
     return (<>
         {loaderData.error && (
@@ -58,7 +55,9 @@ const Note: FC = () => {
                     movieNoteDetail={content.movieNoteDetail}
                     tmdbDetail={content.tmdbDetail}
                     tmdbCredits={content.tmdbCredits}
-                    onSubmit={onSubmit} error={actionData?.error} />
+                    onSubmit={onSubmit}
+                    submitState={state}
+                    error={actionData?.error} />
             </>
         )}
     </>)

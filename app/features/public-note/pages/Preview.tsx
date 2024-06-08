@@ -8,11 +8,13 @@ import NotePreviewProvider from '../context/public-note';
 import type { OnPublish } from '../hooks/useMovieNotePreview';
 import type { PublicNote } from '@type-defs/frontend';
 import { useNavigatorContext } from '~/providers/navigator/Context';
+import type { useFetcher } from '@remix-run/react';
 
 
 type Props = {
     tmdbDetail: TmdbDetail,
     onPublish: OnPublish,
+    state: ReturnType<typeof useFetcher>['state']
     init?: PublicNote
     error?: string
 }
@@ -20,6 +22,7 @@ type Props = {
 const Preview: FC<Props> = ({
     tmdbDetail,
     onPublish,
+    state,
     init,
     error
 }) => {
@@ -31,6 +34,7 @@ const Preview: FC<Props> = ({
                 header={<PreviewHeader
                     title={tmdbDetail?.title || ''}
                     error={error}
+                    state={state}
                     onClickBack={() => {
                         navigate(`/app/notes/${tmdbDetail.id}`)
                     }}

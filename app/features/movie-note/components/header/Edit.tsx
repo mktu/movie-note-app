@@ -10,6 +10,7 @@ import { useMovieNoteContext } from '../../context/movie-note/Context';
 import ShowPreviewDialog from '../show-preview-dialog/ShowPreviewDialog';
 import UnsavedNote from './UnsavedNote';
 import PaddingTop from './PaddingTop';
+import LoadingIcon from '~/components/icons/Loading'; // Add this line
 
 type Props = {
     className?: string,
@@ -32,6 +33,8 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
         showPreview,
         previewPath,
         submitNote,
+        submitState,
+        editing,
         lastUpdated } = useMovieNoteContext()
     const [showDialog, setShowDialog] = useState(false)
 
@@ -77,12 +80,14 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                                 <div className='inline-flex rounded-md shadow-sm' role='group'>
                                     <ButtonBase onClick={async () => {
                                         htmlConvertUtil && showPreview(await htmlConvertUtil?.convert())
-                                    }} className='-mr-px whitespace-nowrap rounded-l-lg border border-border-main bg-surface-main px-4 py-2 font-medium text-text-main hover:bg-surface-hover hover:text-text-dark'>{t('publish-settings')}</ButtonBase>
-                                    <ButtonBase className='-ml-px whitespace-nowrap rounded-r-lg border border-primary-main bg-primary-main px-4 py-2 font-medium text-onprimary-main'
+                                    }} className='whitespace-nowrap rounded-l-lg border border-border-main bg-surface-main px-4 py-2 font-medium text-text-main hover:bg-surface-hover hover:text-text-dark'>{t('publish-settings')}</ButtonBase>
+                                    <ButtonBase disabled={!editing} className='min-w-[100px] whitespace-nowrap rounded-r-lg border border-primary-main bg-primary-main px-4 py-2 font-medium text-onprimary-main'
                                         onClick={() => {
                                             submitNote({ updatePublicNote: true })
                                         }}
-                                    >{t('save')}</ButtonBase>
+                                    >{
+                                            submitState !== 'idle' ? <LoadingIcon className='mr-2 size-5 stroke-slate-500' strokeWidth={6} /> :
+                                                editing ? t('save') : t('saved')}</ButtonBase>
                                 </div>
 
                             </div>

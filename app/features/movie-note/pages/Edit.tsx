@@ -13,6 +13,7 @@ import { useMovieNote } from '../hooks/useMovieNote';
 import { MovieNoteContext } from '../context/movie-note';
 import { useTranslation } from 'react-i18next';
 import { saveMovieNoteIfNotExists } from '../utils/localstorage';
+import Footer from '../components/footer';
 
 type Props = {
     onSubmit: (note: UpdateMovieNote, debounceTimeout?: number) => void,
@@ -22,6 +23,7 @@ type Props = {
     movieNoteDetail?: MovieNoteType,
     tmdbDetail?: TmdbDetail
     tmdbCredits?: Credits,
+    submitState: Parameters<typeof useMovieNote>[0]['submitState']
 }
 
 const Edit: FC<Props> = ({
@@ -31,7 +33,8 @@ const Edit: FC<Props> = ({
     error,
     movieNoteDetail,
     tmdbDetail,
-    tmdbCredits
+    tmdbCredits,
+    submitState
 }) => {
     const contextValue = useMovieNote({
         hasPublicNote,
@@ -41,6 +44,7 @@ const Edit: FC<Props> = ({
         tmdbDetail,
         tmdbCredits,
         onSubmit,
+        submitState
     })
     const {
         detail,
@@ -69,6 +73,9 @@ const Edit: FC<Props> = ({
                         setEditing(true)
                     }} // save note to localstorage
                 />}
+                footer={
+                    detail && <Footer />
+                }
             />
             {openWatchLog && (
                 <WatchLogDialog
