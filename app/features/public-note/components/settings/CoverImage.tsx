@@ -1,7 +1,8 @@
 import { TmdbmageBasePath } from '@utils/constants';
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next';
-import { OutlinedButton } from '~/components/buttons';
+import { IconButton, TextButton } from '~/components/buttons';
+import XIcon from '~/components/icons/X';
 import { ImagePlaceholder } from '~/components/placeholders';
 
 type Props = {
@@ -19,12 +20,19 @@ const CoverImage: FC<Props> = ({ image, defaultImage, imgError, onChangeImage, o
     const { t } = useTranslation('common')
     const tmdbImagePath = `${imageBasePath}${defaultImage}`
     const targetImage = image || tmdbImagePath
+
+    const changeImageButton = (
+        <label className='cursor-pointer rounded border border-primary-main px-4 py-2 text-primary-main hover:border-text-dark' htmlFor='file-upload'>
+            {t('change-image')}
+            <input name='profile-image' id="file-upload" type='file' className='hidden' onChange={onChangeImage} />
+        </label>
+    )
     return (
         <div className='flex flex-col gap-2'>
             <span className='text-text-label'>{t('cover-image')}</span>
-            <div className='flex items-start gap-2 p-2'>
-                <div className='flex flex-col items-center justify-center gap-2'>
-                    <div className='flex justify-center overflow-hidden rounded' style={{
+            <div className='items-start gap-4 p-2 md:flex'>
+                <div className='flex flex-col items-center justify-center gap-4'>
+                    <div className='relative flex justify-center overflow-hidden rounded' style={{
                         width: ImgWidth,
                         height: ImgHeight
                     }}>
@@ -33,15 +41,17 @@ const CoverImage: FC<Props> = ({ image, defaultImage, imgError, onChangeImage, o
                         ) : (
                             <ImagePlaceholder width={ImgWidth} height={ImgHeight} alt={t('cover-image')} className='text-text-label' />
                         )}
+                        <IconButton className='absolute right-1 top-1 rounded bg-white' onClick={onClickDefaultImage} name='clear'>
+                            <XIcon className='size-5 fill-text-label' />
+                        </IconButton>
                     </div>
-                    <label className='cursor-pointer rounded border border-primary-main px-4 py-2 text-primary-main hover:border-text-dark' htmlFor='file-upload'>
-                        {t('change-image')}
-                        <input name='profile-image' id="file-upload" type='file' className='hidden' onChange={onChangeImage} />
-                    </label>
                 </div>
-                <div className='flex flex-col gap-2 p-2 text-text-label'>
+                <div className='flex flex-col gap-2 p-2 text-sm text-text-label'>
                     <p>{t('cover-image-description')}</p>
-                    <OutlinedButton className='w-fit' onClick={onClickDefaultImage}>{t('back-to-default-image')}</OutlinedButton>
+                    <div className='flex justify-center md:justify-start'>
+                        {changeImageButton}
+                        <TextButton className='hidden w-fit md:inline' theme='text' onClick={onClickDefaultImage}>{t('back-to-default-image')}</TextButton>
+                    </div>
                     <p className='text-destructive-main'>{imgError}</p>
                 </div>
             </div>
