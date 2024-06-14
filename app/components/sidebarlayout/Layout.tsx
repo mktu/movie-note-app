@@ -79,7 +79,7 @@ const Layout: FC<Props> = ({ sidebar, children, initialSidebarWidth }) => {
             </div>
             <Transition
                 as={'div'}
-                className={'fixed left-0 top-0 z-50 min-h-full w-[90%] bg-white shadow md:hidden'}
+                className={'fixed left-0 top-0 z-50 h-full w-[90%] overflow-y-auto bg-white shadow md:hidden'}
                 show={openMobileMenu}
                 enter="transition ease-out duration-300 transform"
                 enterFrom="-translate-x-full opacity-0"
