@@ -58,7 +58,7 @@ const Settings: FC = () => {
                 </div>
 
                 <p className="mb-2 flex items-center gap-2 text-sm text-text-main">
-                    <InfoIcon className='size-4 fill-text-label' />
+                    <InfoIcon className='size-8 fill-text-label md:size-4' />
                     <span>{t('publish-note-information')}</span>
                 </p>
                 <CoverImage

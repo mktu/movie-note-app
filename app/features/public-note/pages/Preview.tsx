@@ -9,6 +9,7 @@ import type { OnPublish } from '../hooks/useMovieNotePreview';
 import type { PublicNote } from '@type-defs/frontend';
 import { useNavigatorContext } from '~/providers/navigator/Context';
 import type { useFetcher } from '@remix-run/react';
+import { Footer } from '../components/footer';
 
 
 type Props = {
@@ -41,6 +42,7 @@ const Preview: FC<Props> = ({
                 />}
                 preview={<PreviewBody />}
                 publishSettings={<Settings />}
+                footer={<Footer state={state} />}
             />
         </NotePreviewProvider>
     );

@@ -11,6 +11,7 @@ import ShowPreviewDialog from '../show-preview-dialog/ShowPreviewDialog';
 import UnsavedNote from './UnsavedNote';
 import PaddingTop from './PaddingTop';
 import LoadingIcon from '~/components/icons/Loading'; // Add this line
+import { Link } from '@remix-run/react';
 
 type Props = {
     className?: string,
@@ -66,9 +67,15 @@ const Edit = forwardRef<HTMLDivElement, Props>(({
                             <div className='flex items-center gap-2 px-2 text-lg font-semibold text-text-main'>
                                 <span>{title}</span>
                                 {published ? (
-                                    <span className='rounded bg-blue-100 px-3 py-1 text-sm text-blue-500'>{t('published-note')}</span>
+                                    <Link to={previewPath} onClick={async (e) => {
+                                        htmlConvertUtil && showPreview(await htmlConvertUtil?.convert())
+                                        e.preventDefault()
+                                    }} className='rounded bg-blue-100 px-3 py-1 text-sm text-blue-500'>{t('published-note')}</Link>
                                 ) : (
-                                    <span className='rounded bg-gray-100 px-3 py-1 text-sm text-text-label'>{t('unpublished-note')}</span>
+                                    <Link to={previewPath} onClick={async (e) => {
+                                        htmlConvertUtil && showPreview(await htmlConvertUtil?.convert())
+                                        e.preventDefault()
+                                    }} className='rounded bg-gray-100 px-3 py-1 text-sm text-text-label'>{t('unpublished-note')}</Link>
                                 )}
                             </div>
                             <WatchLog
