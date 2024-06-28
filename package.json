@@ -86,7 +86,7 @@
     "concurrently": "7.6.0",
     "eslint": "8.57.0",
     "eslint-plugin-jsx-a11y": "6.8.0",
-    "eslint-plugin-tailwindcss": "3.17.3",
+    "eslint-plugin-tailwindcss": "3.17.4",
     "msw": "2.3.1",
     "msw-storybook-addon": "2.0.2",
     "npm-run-all2": "5.0.2",
