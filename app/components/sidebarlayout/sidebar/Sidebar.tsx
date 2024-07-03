@@ -23,7 +23,7 @@ const Sidebar: FC<Props> = ({
             <IconButton name='close' className='absolute right-2 top-2 md:hidden' onClick={() => {
                 setOpenMobileMenu(false)
             }}>
-                <AnglesLeft className='h-6 w-6 fill-text-placeholder' />
+                <AnglesLeft className='size-6 fill-text-placeholder' />
             </IconButton>
             <div>
                 {userMenu}

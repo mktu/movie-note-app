@@ -17,6 +17,7 @@ const context = React.createContext<MovieNoteContextType>({
         convert: async () => '',
     },
     submitNote: async () => { },
+    submitState: 'idle',
     showPreview: () => { },
     getTemplates: async () => [],
     title: '',
@@ -30,7 +31,8 @@ const context = React.createContext<MovieNoteContextType>({
     setEditing: function (value: React.SetStateAction<boolean>): void {
         throw new Error("Function not implemented.");
     },
-    unsavedNoteInfo: null
+    unsavedNoteInfo: null,
+    hasSavedNote: false
 });
 
 export const useMovieNoteContext = () => useContext(context)

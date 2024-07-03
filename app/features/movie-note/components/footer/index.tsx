@@ -9,7 +9,8 @@ const Footer: FC = () => {
     const {
         submitNote,
         editing,
-        submitState
+        submitState,
+        hasSavedNote
     } = useMovieNoteContext()
 
     return (
@@ -22,7 +23,7 @@ const Footer: FC = () => {
                     {submitState !== 'idle' && <LoadingIcon className='mr-2 size-5 stroke-slate-500' strokeWidth={6} />}
                     {submitState !== 'idle' ?
                         t('loading')
-                        : editing ? t('save') : t('saved')}
+                        : editing ? t('save') : !hasSavedNote ? t('unsaved') : t('saved')}
                 </ContainedButton>
             </div >
         </>
