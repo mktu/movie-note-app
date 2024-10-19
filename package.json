@@ -29,7 +29,7 @@
     "@remix-run/cloudflare": "2.9.2",
     "@remix-run/cloudflare-pages": "2.9.2",
     "@remix-run/react": "2.9.2",
-    "@supabase/supabase-js": "2.43.6",
+    "@supabase/supabase-js": "2.45.6",
     "@tailwindcss/line-clamp": "0.4.4",
     "@types/uuid": "8.3.4",
     "clsx": "2.1.1",
