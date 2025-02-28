@@ -25,7 +25,7 @@ const Footer: FC<Props> = ({
                 ) : (
                     <ContainedButton className="flex w-full items-center justify-center gap-3" onClick={onNavigateNote}>
                         <PenIcon className='size-5 fill-onprimary-main' />
-                        <span className='text-onprimary-main'>{t('edit-note')}</span>
+                        <span className='text-onprimary-main'>{t('add-note')}</span>
                     </ContainedButton>
                 )}
 

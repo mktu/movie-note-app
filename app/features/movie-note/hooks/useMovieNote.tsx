@@ -90,6 +90,7 @@ export const useMovieNote = ({
             }
         }
     }
+    const hasSavedNote = Boolean(movieNoteDetail?.memo)
     const submitNote = useCallback(async ({
         newWatchState,
         newAdmirationDate,
@@ -146,6 +147,7 @@ export const useMovieNote = ({
         editing,
         setEditing,
         unsavedNoteInfo,
-        submitState
+        submitState,
+        hasSavedNote
     }
 }
